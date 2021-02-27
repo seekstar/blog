@@ -15,9 +15,9 @@ valine:
     # 阅读量
     enableCounter: true
     # valine appID
-    appID:
+    appID: zLsL74hgrlCBA3xJu74xOken-gzGzoHsz
     # valine appKey
-    appKey:
+    appKey: RwHHvgzlLCMew6ViBVMX2YVO
     placeholder: 请输入评论
     avatar: retro
 
