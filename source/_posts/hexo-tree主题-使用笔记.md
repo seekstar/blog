@@ -6,7 +6,11 @@ tags:
 
 # 先说坑点
 
+- 刷新才可查看最新内容
+
 可能是由于浏览器有缓存，每次打开页面都要刷新才能显示最新内容，浏览器居然不会自动把旧的内容覆盖掉？？？firefox和chrome都是这样。只好每次更新了内容就清理浏览器缓存了。firefox和chrome清理缓存的快捷键是```ctrl+shift+del```，firefox勾选```Cache```即可，chrome勾选```缓存的图片和文件```即可。如果有更方便的方式欢迎评论区发言/狗头
+
+- gitee.io每次部署后都需要手动update才能生效。
 
 # 使用hexo+代码托管平台搭建博客的优劣
 
@@ -68,12 +72,23 @@ deploy:
     gitee: git@gitee.com:searchstar/searchstar.git,master
     github: git@github.com:seekstar/seekstar.github.io.git,master
 ```
+新版本github中master可能要改成main。
 
-然后就可以生成博客网站并推送到代码托管平台了：
+# 部署
+
+先生成博客网站并部署到代码托管平台：
 
 ```shell
 hexo d -g
 ```
+
+会自动推送到gitee和github。
+
+然后到github的网站仓库```用户名.github.io```里开启github pages：进入仓库设置，```Options```里往下划，可以看到```GitHub Pages```，选择branch为master（或main），然后```Save```就好了。进入```https://用户名.github.io```即可查看。
+
+然后到gitee的网站仓库```用户名```里开启gitee pages：进入仓库，点击```Service```，然后点击里面的```Gitee Pages```，同样选择branch为master，并勾选```Enforce HTTPS```，然后点击```Update```，等一段时间即可。进入```https://用户名.gitee.io```即可查看。
+
+```github.io```部署后等一段时间会自动更新，但是```gitee.io```每次部署都必须手动```Update```才能生效，有点恶心。
 
 # 选择主题
 
