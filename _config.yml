@@ -103,5 +103,6 @@ theme: tree
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: 'git'
-  repository: 'git@gitee.com:searchstar/searchstar.git'
-  branch: 'master'
+  repository:
+    gitee: git@gitee.com:searchstar/searchstar.git,master
+    github: git@github.com:seekstar/seekstar.github.io.git,master
