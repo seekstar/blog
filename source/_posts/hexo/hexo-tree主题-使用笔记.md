@@ -23,7 +23,7 @@ tags:
 
 - 代码托管平台（如gitee）可能有容量限制，导致不能随心所欲放图片
 - 手机写博客及其不方便（甚至不可能？）
-- 并非所见即所得，有时在编辑器里写好的markdown文档放到博客上格式就乱掉了。
+- 并非所见即所得，有时在编辑器里写好的markdown文档放到博客上就有点不太一样了。
 
 # 新建代码仓库
 
@@ -242,6 +242,28 @@ valine:
 # 修改底部版权开始年份
 
 ```themes/tree/_config.yml```里的```siteStartYear: 2019```修改成你想要的年份。结束年份会自己计算出来。
+
+# 安装Markdown-it
+
+自带的markdown没有语法高亮，而且有BUG，行内代码有时候会被处理成行间代码，然后全乱了。改成```Markdown-it```就好了。
+
+在项目根目录执行
+
+```shell
+npm install markdown-it --save
+```
+
+然后在```_config.yml```中把默认的highlight关掉：
+
+```yml
+highlight:
+  enable: false
+  line_number: false
+  auto_detect: false
+  tab_replace: ''
+```
+
+注意这里要把之前的预览```ctrl+c```关掉，然后重新```hexo g && hexo s```才能生效。
 
 # 写博客
 
