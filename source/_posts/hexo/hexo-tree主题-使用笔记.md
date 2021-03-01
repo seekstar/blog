@@ -46,7 +46,8 @@ hexo init
 ```
 
 就初始化了目录结构。然后才能```git init```，把gitee上的remote加上去。
-再执行
+
+# 预览
 
 ```shell
 hexo g && hexo s
@@ -60,7 +61,7 @@ INFO  Start processing
 INFO  Hexo is running at http://localhost:4000 . Press Ctrl+C to stop.
 ```
 
-在浏览器地址栏输入```http://localhost:4000```或者在终端```ctrl+左键```这个链接（如果终端支持的话）就可以预览博客了。
+在浏览器地址栏输入```http://localhost:4000```或者在终端```ctrl+左键```这个链接（如果终端支持的话）就可以预览博客了。当本地的文件改变之后，预览的博客会自动更新。
 
 # 修改配置
 
@@ -130,7 +131,7 @@ theme: landscape
 theme: tree
 ```
 
-然后```hexo g && hexo s```预览一下就可以看到主题换了。
+然后预览一下就可以看到主题换了。
 
 主题的配置说明详见```themes/tree/README.md```。下面介绍一些常用的。
 
@@ -161,8 +162,6 @@ theme: tree
 ```
 
 把作者的链接```https://github.com/wujun234```换成自己的github链接。
-
-然后可以```hexo g && hexo s```预览一下。
 
 # 开启标签和分类
 
@@ -210,7 +209,7 @@ type: "categories"
 layout: "categories"
 ```
 
-然后可以```hexo g && hexo s```预览一下，就能看到右上角多了```标签```和```分类```。
+然后预览一下，就能看到右上角多了```标签```和```分类```。
 
 # 开启评论，统计访问量
 
@@ -236,7 +235,7 @@ valine:
     avatar: retro
 ```
 
-然后```hexo g && hexo s```预览一下，可以看到每篇文章下面多出了评论输入框，文章开头多了访问量
+然后预览一下，可以看到每篇文章下面多出了评论输入框，文章开头多了访问量
 
 注意，评论和访问量都是以博客的url作为key的，所以如果博客的url变了（如重命名），那评论和访问量都会清空。要是可以在创建博文的时候生成一个类似uuid的东西，然后以uuid作为key就好了（我为什么这么菜）。
 
@@ -253,7 +252,7 @@ hexo new '博客标题'
 ```
 
 会在```source/_posts```下生成```博客标题.md```。
-用你喜欢的工具编辑之（例如vscode），然后可以```hexo g && hexo s```预览一下，如果没什么问题的话就```hexo d -g```把它部署到gitee和github上。
+用你喜欢的工具编辑之（例如vscode），然后预览一下，如果没什么问题的话就```hexo d -g```把它部署到gitee和github上。
 
 最后记得还要```git push```博客源码到代码仓库里，不然换了一台机器博客源码就丢失了。
 
