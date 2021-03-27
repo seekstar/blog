@@ -60,6 +60,7 @@ struct task_struct *t2 = kthread_run(threadfn, data, "name%d", i);
 
 例子
 ```c
+// test1.c
 #include <linux/module.h>
 #include <linux/kernel.h>
 #include <linux/delay.h>
@@ -117,6 +118,31 @@ static void __exit end_exit(void)
 
 module_init(start_init)
 module_exit(end_exit)
+```
+
+Makefile:
+
+```Makefile
+obj-m += test1.o
+all:
+        $(MAKE) -C /lib/modules/$(shell uname -r)/build M=`pwd`
+clean:
+        $(MAKE) -C /lib/modules/$(shell uname -r)/build M=`pwd` clean
+```
+
+跑一下
+
+```shell
+make
+sudo insmod test1.ko
+```
+
+输出：
+
+```
+[379459.914962] Thread Creating...
+[379459.915181] func t1 return
+[379459.915187] t1 stopped, exit code 0
 ```
 
 # 清理```kthread_create```的线程
