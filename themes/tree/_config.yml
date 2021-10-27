@@ -34,7 +34,7 @@ siteStartYear: 2021
 #   https://www.google.com/search?q=
 # homeHost：要搜索的站点域名，不配置默认取当前页面的域名
 searchEngine: https://www.google.com/search?q=
-homeHost: https://gitee.com/searchstar/
+homeHost:
 
 tags: true
 categories: true
