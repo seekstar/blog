@@ -267,7 +267,9 @@ highlight:
 
 # 支持Latex风格的公式编辑
 
-参考：<https://github.com/wujun234/hexo-theme-tree/issues/14>
+参考：
+<https://github.com/wujun234/hexo-theme-tree/issues/14>
+<https://github.com/niemingzhao/hexo-renderer-markdown>
 
 ```shell
 npm un hexo-renderer-marked --save
@@ -275,6 +277,8 @@ npm i hexo-renderer-markdown --save
 ```
 
 但是hexo-renderer-markdown好像有high severity vulnerabilities。
+
+尝试过这个：<https://zhuanlan.zhihu.com/p/108766968>。但是如果用hexo-renderer-marked，就没有反应，如果用hexo-renderer-kramed，公式就消失了。而且加上```mathjax: true```，且把```markdown-it```卸掉了也没用。
 
 # 写博客
 
