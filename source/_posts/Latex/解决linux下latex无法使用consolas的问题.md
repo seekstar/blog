@@ -41,4 +41,6 @@ sudo apt-get install trash-cli
 \end{document}
 ```
 效果：
-![](https://img-blog.csdnimg.cn/20190925022903920.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxOTYxNDU5,size_16,color_FFFFFF,t_70)这样就可以愉快地使用consolas了。
+![](解决linux下latex无法使用consolas的问题/20190925022903920.png)
+
+这样就可以愉快地使用consolas了。

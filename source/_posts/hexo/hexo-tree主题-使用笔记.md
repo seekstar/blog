@@ -265,21 +265,6 @@ highlight:
 
 注意这里要把之前的预览```ctrl+c```关掉，然后重新```hexo g && hexo s```才能生效。
 
-# 支持Latex风格的公式编辑
-
-参考：
-<https://github.com/wujun234/hexo-theme-tree/issues/14>
-<https://github.com/niemingzhao/hexo-renderer-markdown>
-
-```shell
-npm un hexo-renderer-marked --save
-npm i hexo-renderer-markdown --save
-```
-
-但是hexo-renderer-markdown好像有high severity vulnerabilities。
-
-尝试过这个：<https://zhuanlan.zhihu.com/p/108766968>。但是如果用hexo-renderer-marked，就没有反应，如果用hexo-renderer-kramed，公式就消失了。而且加上```mathjax: true```，且把```markdown-it```卸掉了也没用。
-
 # 写博客
 
 在项目根目录执行
@@ -296,3 +281,46 @@ hexo new '博客标题'
 # 换一台机器写博客
 
 把gitee上的博客源码仓库clone下来，然后```npm install```，然后就可以正常```hexo g && hexo s```预览和```hexo d -g```部署了。
+
+# 支持Latex风格的公式编辑
+
+参考：
+<https://github.com/wujun234/hexo-theme-tree/issues/14>
+<https://github.com/niemingzhao/hexo-renderer-markdown>
+
+```shell
+npm un hexo-renderer-marked --save
+npm i hexo-renderer-markdown --save
+```
+
+但是hexo-renderer-markdown好像有high severity vulnerabilities。
+
+尝试过这个：<https://zhuanlan.zhihu.com/p/108766968>。但是如果用hexo-renderer-marked，就没有反应，如果用hexo-renderer-kramed，公式就消失了。而且加上```mathjax: true```，且把```markdown-it```卸掉了也没用。
+
+# 上传图片
+
+有两种方案，一种是把图片弄到图床上，一种是把图片直接放到博客所在的网站上，然后做一个站内引用。这里主要介绍后者。
+
+先在```_config.yml```里把```post_asset_folder```设置成```true```，这样在建立文件时，Hexo会自动建立一个与文章同名的文件夹；以前的文章也可以自己手动创建同名文件夹。其实也可以不用装，直接每次都手动创建这个文件夹就好了。
+
+如果使用的是vscode，可以看这篇博客：[vscode粘贴图片到Markdown](https://blog.csdn.net/qq_41961459/article/details/103900701)。粘贴之后图片是以时间命名的，存储在跟md同级的目录下，可以手动移动到跟博客同名的目录里。
+
+然后安装hexo-asset-image-fixed：
+
+```shell
+npm i hexo-asset-image-fixed --save
+```
+
+功能是将本地的图片的路径转换成博客网站里的图片的路径。
+
+然后就可以用了。比如在编辑```解决某个问题.md```的时候，在同级目录新建一个文件夹：```解决某个问题```，然后把要插入的图片放到```解决某个问题/20190925022903920.png```，在```解决某个问题.md```里正常引用这个本地图片即可：
+
+```md
+![](解决某个问题/20190925022903920.png)
+```
+
+在```hexo d```的时候，会自动把这个本地路径重定向到博客网站里的图片的路径。
+
+参考文献：
+[hexo博客图片问题](https://www.jianshu.com/p/950f8f13a36c)
+[hexo文章插入本地图片的方法](https://blog.csdn.net/fitnig/article/details/106522811)
