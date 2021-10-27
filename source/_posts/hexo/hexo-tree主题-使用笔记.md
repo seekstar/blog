@@ -265,6 +265,17 @@ highlight:
 
 注意这里要把之前的预览```ctrl+c```关掉，然后重新```hexo g && hexo s```才能生效。
 
+# 支持Latex风格的公式编辑
+
+参考：<https://github.com/wujun234/hexo-theme-tree/issues/14>
+
+```shell
+npm un hexo-renderer-marked --save
+npm i hexo-renderer-markdown --save
+```
+
+但是hexo-renderer-markdown好像有high severity vulnerabilities。
+
 # 写博客
 
 在项目根目录执行
