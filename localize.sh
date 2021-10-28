@@ -13,7 +13,7 @@ mkdir -p "$1"
 cd "$1"
 grep "^\!\[.*\](.*)" ../"$1.md" | sed 's/\!\[.*\](//g' | sed 's/)$//g' | sed 's/?.*$//g' | xargs wget
 cd ..
-# %20 is url-encoded white space: https://stackoverflow.com/questions/41604263/how-do-i-display-local-image-in-markdown
+# %20 is url-encoded white space
 awk -v dirname="$(echo $1 | sed 's/ /%20/g')" '
 {
 	if (/^\!\[.*\](.*)/) {

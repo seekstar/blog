@@ -321,6 +321,15 @@ npm i hexo-asset-image-fixed --save
 
 在```hexo d```的时候，会自动把这个本地路径重定向到博客网站里的图片的路径。
 
+注意，如果博客标题里有空格，比如```解决 某个 问题```，那引用本地图片时应该将空格换成```%20```，这是空格在url里的编码。
+
+```md
+![](解决%20某个%20问题/20190925022903920.png)
+```
+
+但是文件夹的名字仍然是跟标题一样，为```解决 某个 问题```，空格还是空格。
+
 参考文献：
 [hexo博客图片问题](https://www.jianshu.com/p/950f8f13a36c)
 [hexo文章插入本地图片的方法](https://blog.csdn.net/fitnig/article/details/106522811)
+<https://stackoverflow.com/questions/41604263/how-do-i-display-local-image-in-markdown>
