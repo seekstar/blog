@@ -293,7 +293,7 @@ npm un hexo-renderer-marked --save
 npm i hexo-renderer-markdown --save
 ```
 
-但是hexo-renderer-markdown好像有high severity vulnerabilities。
+但是hexo-renderer-markdown好像有high severity vulnerabilities。而且仍然有些Latex公式不能正常显示。比如```\underset{theta}{\bowtie}```。
 
 尝试过这个：<https://zhuanlan.zhihu.com/p/108766968>。但是如果用hexo-renderer-marked，就没有反应，如果用hexo-renderer-kramed，公式就消失了。而且加上```mathjax: true```，且把```markdown-it```卸掉了也没用。
 
