@@ -335,10 +335,6 @@ npm i hexo-asset-image-fixed --save
 
 这就导致更改博客目录之后原先的链接就变成死链了。已经在github上提issue了：<https://github.com/wujun234/hexo-theme-tree/issues/39>
 
-### 文件名作为标题不妥
-
-比如标题里有时候要有```/```，但是文件名里不能有这个。
-
 ## 参考文献
 
 [hexo博客图片问题](https://www.jianshu.com/p/950f8f13a36c)
