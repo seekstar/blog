@@ -4,7 +4,7 @@ date: 2021-02-28 13:59:30
 tags:
 ---
 
-# 先说坑点
+## 先说坑点
 
 - 刷新才可查看最新内容
 
@@ -12,7 +12,7 @@ tags:
 
 - gitee.io每次部署后都需要手动update才能生效。
 
-# 使用hexo+代码托管平台搭建博客的优劣
+## 使用hexo+代码托管平台搭建博客的优劣
 
 优势：
 
@@ -25,19 +25,19 @@ tags:
 - 手机写博客及其不方便（甚至不可能？）
 - 并非所见即所得，有时在编辑器里写好的markdown文档放到博客上就有点不太一样了。
 
-# 新建代码仓库
+## 新建代码仓库
 
 最好建立两个代码仓库，一个存放网站，一个存放生成网站的博客源码。存放网站的代码仓库可以自动同时push到gitee和github上。博客源码的代码仓库只能手动push，所以最好只放到一个代码托管平台上（非得写脚本一起push当我没说）。由于gitee国内访问比较稳定，所以我选择把博客源码放到gitee上。
 
-## gitee
+### gitee
 
 新建一个名字同自己的用户名的仓库用来存放网站。新建一个任意名字（我的叫blog）的代码仓库用来放博客源码。
 
-## github
+### github
 
 新建名字为```自己用户名.github.io```的仓库。
 
-# 初始化博客
+## 初始化博客
 
 在本地新建一个```blog```空文件夹（不要clone），然后执行
 
@@ -47,7 +47,7 @@ hexo init
 
 就初始化了目录结构。然后才能```git init```，把gitee上的remote加上去。
 
-# 预览
+## 预览
 
 ```shell
 hexo g && hexo s
@@ -63,7 +63,7 @@ INFO  Hexo is running at http://localhost:4000 . Press Ctrl+C to stop.
 
 在浏览器地址栏输入```http://localhost:4000```或者在终端```ctrl+左键```这个链接（如果终端支持的话）就可以预览博客了。当本地的文件改变之后，预览的博客会自动更新。
 
-# 修改配置
+## 修改配置
 
 在blog根目录下的```_config.yml```里可以修改title、author等配置，然后在文档的最后更改```Deployment```设置，把之前创建的gitee和github的代码仓库放上去，我的设置如下：
 
@@ -76,7 +76,7 @@ deploy:
 ```
 新版本github中master可能要改成main。
 
-# 部署
+## 部署
 
 先生成博客网站并部署到代码托管平台：
 
@@ -92,7 +92,7 @@ hexo d -g
 
 ```github.io```部署后等一段时间会自动更新，但是```gitee.io```每次部署都必须手动```Update```才能生效，有点恶心。
 
-# 选择主题
+## 选择主题
 
 默认主题不好用。<https://hexo.io/themes/>可以浏览各种主题，点击图片可以预览，点击名字可以进入主题的代码仓库。
 
@@ -108,7 +108,7 @@ hexo d -g
 - 手机版上```标签```和```分类```入口所在的header过短，不能智能收成一个目录，所以header不能放太多东西。
 - 访问量和评论的key是博客url，若url改变则访问量和评论全部会清空。
 
-# 更换主题
+## 更换主题
 
 这里选择tree主题。在```themes```下执行
 
@@ -135,7 +135,7 @@ theme: tree
 
 主题的配置说明详见```themes/tree/README.md```。下面介绍一些常用的。
 
-# 修改header
+## 修改header
 
 默认的header里有一个作者自己的项目```UidGenerator```，并且github的链接也是作者自己的。
 
@@ -163,7 +163,7 @@ theme: tree
 
 把作者的链接```https://github.com/wujun234```换成自己的github链接。
 
-# 开启标签和分类
+## 开启标签和分类
 
 在```themes/tree/_config.yml```的最后把这两行取消注释：
 
@@ -211,7 +211,7 @@ layout: "categories"
 
 然后预览一下，就能看到右上角多了```标签```和```分类```。
 
-# 开启评论，统计访问量
+## 开启评论，统计访问量
 
 已经默认开启了“不蒜子”，可以统计PV(Page View)和UV(Unique Visitor)并在页面下方显示，但是评论和单篇文章访问量却不适合用“不蒜子”。tree主题使用```leancloud```来存储评论以及访问量。
 
@@ -239,11 +239,11 @@ valine:
 
 注意，评论和访问量都是以博客的url作为key的，所以如果博客的url变了（如重命名），那评论和访问量都会清空。要是可以在创建博文的时候生成一个类似uuid的东西，然后以uuid作为key就好了（我为什么这么菜）。
 
-# 修改底部版权开始年份
+## 修改底部版权开始年份
 
 ```themes/tree/_config.yml```里的```siteStartYear: 2019```修改成你想要的年份。结束年份会自己计算出来。
 
-# 安装Markdown-it
+## 安装Markdown-it
 
 自带的markdown没有语法高亮，而且有BUG，行内代码有时候会被处理成行间代码，然后全乱了。改成```Markdown-it```就好了。
 
@@ -265,7 +265,7 @@ highlight:
 
 注意这里要把之前的预览```ctrl+c```关掉，然后重新```hexo g && hexo s```才能生效。
 
-# 写博客
+## 写博客
 
 在项目根目录执行
 
@@ -278,11 +278,11 @@ hexo new '博客标题'
 
 最后记得还要```git push```博客源码到代码仓库里，不然换了一台机器博客源码就丢失了。
 
-# 换一台机器写博客
+## 换一台机器写博客
 
 把gitee上的博客源码仓库clone下来，然后```npm install```，然后就可以正常```hexo g && hexo s```预览和```hexo d -g```部署了。
 
-# 支持Latex风格的公式编辑
+## 支持Latex风格的公式编辑
 
 参考：
 <https://github.com/wujun234/hexo-theme-tree/issues/14>
@@ -297,7 +297,7 @@ npm i hexo-renderer-markdown --save
 
 尝试过这个：<https://zhuanlan.zhihu.com/p/108766968>。但是如果用hexo-renderer-marked，就没有反应，如果用hexo-renderer-kramed，公式就消失了。而且加上```mathjax: true```，且把```markdown-it```卸掉了也没用。
 
-# 上传图片
+## 上传图片
 
 有两种方案，一种是把图片弄到图床上，一种是把图片直接放到博客所在的网站上，然后做一个站内引用。这里主要介绍后者。
 
@@ -329,7 +329,18 @@ npm i hexo-asset-image-fixed --save
 
 但是文件夹的名字仍然是跟标题一样，为```解决 某个 问题```，空格还是空格。
 
-参考文献：
+## 存在的问题
+
+### URL中含目录
+
+这就导致更改博客目录之后原先的链接就变成死链了。已经在github上提issue了：<https://github.com/wujun234/hexo-theme-tree/issues/39>
+
+### 文件名作为标题不妥
+
+比如标题里有时候要有```/```，但是文件名里不能有这个。
+
+## 参考文献
+
 [hexo博客图片问题](https://www.jianshu.com/p/950f8f13a36c)
 [hexo文章插入本地图片的方法](https://blog.csdn.net/fitnig/article/details/106522811)
 <https://stackoverflow.com/questions/41604263/how-do-i-display-local-image-in-markdown>
