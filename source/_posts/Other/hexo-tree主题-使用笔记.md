@@ -329,14 +329,16 @@ npm i hexo-asset-image-fixed --save
 
 但是文件夹的名字仍然是跟标题一样，为```解决 某个 问题```，空格还是空格。
 
-## 存在的问题
-
-### URL中含目录
-
-这就导致更改博客目录之后原先的链接就变成死链了。已经在github上提issue了：<https://github.com/wujun234/hexo-theme-tree/issues/39>
-
-## 参考文献
+参考文献：
 
 [hexo博客图片问题](https://www.jianshu.com/p/950f8f13a36c)
 [hexo文章插入本地图片的方法](https://blog.csdn.net/fitnig/article/details/106522811)
 <https://stackoverflow.com/questions/41604263/how-do-i-display-local-image-in-markdown>
+
+## 让文章的URL中不含目录
+
+默认设置中，文章的URL的格式是```域名/20xx/xx/xx/目录/子目录1/子目录2/文章名```，这样的坏处是修改文章目录的时候，文章的URL会变，如果这个URL已经分享给别人的话，别人就会发现这是一个死链。
+
+要让文章的URL中不含目录，只需要将```_config.yml```里的```permalink```从```:year/:month/:day/:title/```改成```:year/:month/:day/:post_title/```即可。如果还想让URL中不含日期，改成```:post_title/```即可。
+
+```permalink```的官方文档：<https://hexo.io/zh-cn/docs/permalinks>
