@@ -5,7 +5,7 @@ date: 2020-03-30 22:39:47
 
 文档：[Policy-Based Data Structures](https://gcc.gnu.org/onlinedocs/libstdc++/ext/pb_ds/)
 
-相关文章：[pb_ds库实现支持多个相同的值的名次树](https://blog.csdn.net/qq_41961459/article/details/94349408)
+相关文章：[pb_ds库实现支持多个相同的值的名次树](https://seekstar.github.io/2019/06/30/pb-ds%E5%BA%93%E5%AE%9E%E7%8E%B0%E6%94%AF%E6%8C%81%E5%A4%9A%E4%B8%AA%E7%9B%B8%E5%90%8C%E7%9A%84%E5%80%BC%E7%9A%84%E5%90%8D%E6%AC%A1%E6%A0%91/)
 
 建议使用
 ```cpp

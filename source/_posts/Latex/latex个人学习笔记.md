@@ -113,7 +113,7 @@ $$\mathop{\bowtie}\limits_{theta}$$
 
 ## 绕排
 <https://www.zhihu.com/question/26837705>
-[wrapfigure指定行数](https://blog.csdn.net/qq_41961459/article/details/105636748)
+[wrapfigure指定行数](https://seekstar.github.io/2020/04/20/latex-wrapfigure%E6%8C%87%E5%AE%9A%E8%A1%8C%E6%95%B0/)
 
 # 枚举
 ## 编号

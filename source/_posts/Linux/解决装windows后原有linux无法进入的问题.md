@@ -6,7 +6,7 @@ date: 2020-02-26 23:56:31
 参考：
 <https://zhidao.baidu.com/question/2207476336082690428.html?qbl=relate_question_0&word=%B0%B2%D7%B0windows%BA%F3%D4%AD%D3%D0linux%BD%F8%B2%BB%C8%A5>
 
-先进BIOS，然后启动选项里应该有linux的入口，点击之即可进入linux。如果没有linux的入口，转到[这篇文章](https://blog.csdn.net/qq_41961459/article/details/108927627)。
+先进BIOS，然后启动选项里应该有linux的入口，点击之即可进入linux。如果没有linux的入口，看看这篇文章：[解决安装windows后Linux引导被覆盖的问题](https://blog.csdn.net/qq_41961459/article/details/108927627)。
 
 然后更新grub，识别出新增的windows。
 ```shell
