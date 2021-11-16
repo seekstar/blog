@@ -104,3 +104,6 @@ deploy:
   repository:
     gitee: git@gitee.com:searchstar/searchstar.git,master
     github: git@github.com:seekstar/seekstar.github.io.git,master
+
+mathjax:
+  every_page: true
