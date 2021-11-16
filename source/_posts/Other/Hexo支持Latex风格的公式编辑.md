@@ -93,7 +93,7 @@ npm i hexo-math --save
 
 - katex公式
 
-```md
+```
 {% katex %}
 c = \pm\sqrt{a^2 + b^2}
 {% endkatex %}
@@ -103,7 +103,7 @@ $c = \pm\sqrt{a^2 + b^2}$
 
 - mathjax公式
 
-```md
+```
 {% mathjax %}
 \frac{1}{x^2-1}
 {% endmathjax %}
