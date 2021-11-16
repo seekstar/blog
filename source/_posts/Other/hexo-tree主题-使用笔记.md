@@ -393,7 +393,7 @@ $\frac{1}{x^2-1}$
 
 教程：<https://zhuanlan.zhihu.com/p/108766968>。
 
-公式会消失。这可能是因为hexo-renderer-kramed只支持到hexo 3，然后我用的是hexo 4。
+公式会消失。这可能是因为hexo-renderer-kramed只支持到hexo 3，然后我用的是hexo 5。
 
 hexo-renderer-kramed: <https://github.com/sun11/hexo-renderer-kramed>
 
