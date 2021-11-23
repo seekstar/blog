@@ -26,8 +26,18 @@ LCT是一种对有根树进行动态剖分的方法，可以达到全局平衡�
 
 实际上，根据这篇文章：[SPOJ375 QTREE 解法的一些研究](https://jeffswt.org/blog/bzoj2002/qtree.pdf)，如果我们在轻重链剖分中，把维护重链的线段树换成splay，那由于splay会自适应地减少经常被访问的节点的高度，所以也能实现全局平衡的效果，复杂度同样为$O(\log n)$。但是由于splay的常数比线段树大得多，所以实际效果可能还比线段树的$O(\log^2 n)$的版本慢。所以这篇论文里提出了一个静态的可以实现全局平衡的重链维护方案，实现了$O(\log n)$的复杂度，而且常数也小。~~不过我没看懂。~~
 
+如何实现可以看这里：[LCT总结——概念篇+洛谷P3690[模板]Link Cut Tree(动态树)（LCT，Splay）](https://www.cnblogs.com/flashhu/p/8324551.html#!comments)
+
+一些能用LCT做的题：[LCT总结——应用篇（附题单）（LCT）](https://www.cnblogs.com/flashhu/p/9498517.html)
+
+维护原树子树上的信息可以用LCT的升级版——top tree：
+
+[Link-Cut Tree(LCT)&TopTree讲解](https://www.cnblogs.com/Khada-Jhin/p/9743397.html)
+
+[<del>noip退役选手的another扯淡</del>Top tree 相关东西的理论、用法和实现](https://negiizhao.blog.uoj.ac/blog/4912)
+
 参考文献：
 
-[LCT总结——概念篇+洛谷P3690[模板]Link Cut Tree(动态树)（LCT，Splay）](https://www.cnblogs.com/flashhu/p/8324551.html#!comments)
+[Sleator D D, Tarjan R E. A data structure for dynamic trees[J]. Journal of computer and system sciences, 1983, 26(3): 362-391.](https://www.sciencedirect.com/science/article/pii/0022000083900065)
 
 <https://en.wikipedia.org/wiki/Link/cut_tree>
