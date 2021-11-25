@@ -88,9 +88,31 @@ pandoc:
 
 但是感觉这样还是不太优雅。要是可以直接像其他渲染器那样直接传进一个```gfm```就好了。好像pandoc是有这个参数的，但是我在插件里的```index.js```里把```markdown-smart```改成```gfm```，并且改了后面的```register```之后没反应，不知道为什么。
 
-- 默认的代码语法高亮很难看。
+- tree主题和pandoc混用后，默认的代码语法高亮很难看。
 
-好像可以设置高亮风格。以后看看怎么弄。
+代码的基础色是蓝色的，即大部分代码的字是蓝色的，然后代码是黑底的，看起来很难受。我的方法是在tree主题里的```layout/_partial/head.ejs```里把
+
+```js
+	<%- css('https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.17.1/build/styles/darcula.min.css') %>
+```
+
+改成
+
+```js
+	<%- css('https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.17.1/build/styles/github.min.css') %>
+```
+
+然后底就会变成浅灰色，但是代码基础色还是蓝色的。要是能把基础色调成黑色就好了。
+
+此外，我还试过在```_config.yml```里加上
+
+```yml
+pandoc:
+  extra:
+    - highlight-style: kate
+```
+
+然而并没有反应。
 
 参考：
 

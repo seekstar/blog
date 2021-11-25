@@ -120,4 +120,5 @@ pandoc:
     - +intraword_underscores+strikeout+hard_line_breaks+emoji
     - +shortcut_reference_links
   extra:
+    # - highlight-style: kate
     # - css: https://cdn.jsdelivr.net/npm/pygments-css@1.0.0/github.min.css
