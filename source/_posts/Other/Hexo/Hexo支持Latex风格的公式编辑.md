@@ -66,6 +66,40 @@ $\underset{theta}{\bowtie}$
 
 $N^+ = \{x | x\in N \wedge x \ne 0\}$
 
+但是存在几个问题。
+
+- 默认的markdown语法跟github的markdown语法不一样。
+
+这篇文章提供了一个workaround：<https://blog.rule55.com/hexo/>，即在```_config.yml```里加入
+
+```yml
+# Configure pandoc to use all github markdown format extensions
+# extensions as of 2018 is an undocumented feature of hexo-renderer-pandoc
+# Adding all extensions for github so we don't have to change index.js of
+# hexo-renderer-pandoc.
+pandoc:
+  extensions:
+    - +gfm_auto_identifiers+angle_brackets_escapable # Not available in pandoc 1.16
+    - +pipe_tables+raw_html+fenced_code_blocks
+    - -ascii_identifiers+backtick_code_blocks+autolink_bare_uris
+    - +intraword_underscores+strikeout+hard_line_breaks+emoji
+    - +shortcut_reference_links
+```
+
+但是感觉这样还是不太优雅。要是可以直接像其他渲染器那样直接传进一个```gfm```就好了。好像pandoc是有这个参数的，但是我在插件里的```index.js```里把```markdown-smart```改成```gfm```，并且改了后面的```register```之后没反应，不知道为什么。
+
+- 默认的代码语法高亮很难看。
+
+好像可以设置高亮风格。以后看看怎么弄。
+
+参考：
+
+<https://pandoc.org/MANUAL.html>
+
+<https://www.garrickadenbuie.com/blog/pandoc-syntax-highlighting-examples/>
+
+<https://valleylord.github.io/post/201412-hexo-blog/>
+
 ### 方案二：hexo-renderer-markdown
 
 参考：
