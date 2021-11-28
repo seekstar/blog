@@ -25,6 +25,7 @@ SQLRETURN  SQL_API SQLBindCol(SQLHSTMT StatementHandle,
 从1开始。
 ## TargetType
 完整的取值范围可以到<sqlext.h>中找。常用的有
+
 | sql类型 | TargetType | odbc typedef | C类型 |
 | ---- | ---- | ---- | ---- |
 | CHAR | SQL_C_CHAR | SQLCHAR | char |
@@ -32,6 +33,7 @@ SQLRETURN  SQL_API SQLBindCol(SQLHSTMT StatementHandle,
 | BIGINT UNSIGNED | SQL_C_UBIGINT | SQLUBIGINT | uint64_t |
 | BINARY | SQL_C_BINARY | 无 | 随便 |
 | BLOB | SQL_C_BINARY | 无 | 随便 |
+
 ## BufferLength
 用来存数据的缓冲区的长度。odbc将只使用缓冲区的前BufferLength个字节的空间。如果要存入的数据达到或超过了BufferLength，则只把BufferLength字节的数据存入缓冲区。
 
