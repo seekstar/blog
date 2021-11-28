@@ -9,6 +9,10 @@ cd source/_posts
 file=$(find . -name "$1.md")
 dirpath=$(dirname "$file")
 cd "$dirpath"
+if [ $(grep "\!\[.*\](.*).*\!\[.*\](.*)" "$1".md) != "" ]; then
+	echo Two figures in the same line!
+	exit
+fi
 mkdir -p "$1"
 cd "$1"
 grep "^\!\[.*\](.*)" ../"$1.md" | sed 's/\!\[.*\](//g' | sed 's/)$//g' | sed 's/?.*$//g' | xargs wget
