@@ -15,6 +15,8 @@ tags: 学习笔记
 
 [Latex常用数学符号输入方法](https://jingyan.baidu.com/article/4b52d702df537efc5c774bc9.html)
 
+### 杂项
+
 | 名字 | 符号 | 代码 | 备注 |
 | ---- | ---- | ---- | ---- |
 | 自然连接 | $\bowtie$ | \\bowtie | [latex如何输入自然连接 ⋈](https://zhidao.baidu.com/question/616102177995456132.html) |
@@ -23,6 +25,35 @@ tags: 学习笔记
 | 并 | $\cup$ | \\cup | [Latex——交集、并集](https://blog.csdn.net/qq_36825778/article/details/102627703) |
 | 交 | $\cap$ | \\cap | [Latex——交集、并集](https://blog.csdn.net/qq_36825778/article/details/102627703) |
 | 包含于 | $\subseteq$ | \\subseteq | |
+| 积分 | $\int$ | \\int | [latex如何输入积分号](https://jingyan.baidu.com/article/597a06433705da312b524300.html) |
+| 微分 | $\mathrm{d}x$ | \\mathrm{d}x | 更规范的方法：[LaTeX技巧898：在LaTeX中使用微分算子的正确姿势](https://www.latexstudio.net/archives/10115.html) |
+| 组合数 | $\binom{n}{m}$ 或者 $C_n^m$ | \\binom{n}{m} 或者 C_n^m | [LaTex排版技巧：[11]如何输入组合数？](https://jingyan.baidu.com/article/915fc414f5dbe351384b2043.html) |
+| 约等号 | $\approx$ | \\approx | [Latex 约等于](https://blog.csdn.net/qq_42067550/article/details/106868884) |
+
+### 各种箭头
+
+| 符号 | 代码 |
+| ---- | ---- |
+| $\leftarrow$ | \\leftarrow |
+| $\rightarrow$ | \\rightarrow |
+| $\leftrightarrow$ | \\leftrightarrow |
+| $\Leftarrow$ | \\Leftarrow |
+| $\Rightarrow$ | \\Rightarrow |
+| $\Leftrightarrow$ | \\Leftrightarrow |
+
+完整版：[如何用LaTeX打出各种箭头？](https://zhuanlan.zhihu.com/p/263896738)
+
+### 符号上面的横杠等
+
+| 样式 | 效果 | 代码 |
+| ---- | ---- | ---- |
+| 横杠 | $\bar{a}$ | \\bar{a} |
+| 波浪线 | $\tilde{a}$ | \\tilde{a} |
+| 长波浪线 | $\widetilde{aaa}$ | \\widetilde{aaa} |
+| 点 | $\dot{a}$ | \\dot{a} |
+| hat | $\hat{a}$ | \\hat{a} |
+
+完整版：[latex 字母上面加符号](https://blog.csdn.net/dlaicxf/article/details/52680666)
 
 ## 技巧
 
