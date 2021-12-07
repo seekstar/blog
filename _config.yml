@@ -114,6 +114,7 @@ mathjax:
 # hexo-renderer-pandoc.
 pandoc:
   extensions:
+    - -implicit_figures # 防止在图片后面将方括号里的东西作为caption。
     - +gfm_auto_identifiers+angle_brackets_escapable # Not available in pandoc 1.16
     - +pipe_tables+raw_html+fenced_code_blocks
     - -ascii_identifiers+backtick_code_blocks+autolink_bare_uris
