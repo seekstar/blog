@@ -22,6 +22,7 @@ awk -v dirname="$(echo $1 | sed 's/ /%20/g')" '
 {
 	if (/^\!\[.*\](.*)/) {
 		sub(/?.*$/,")");
+		sub(/#.*$/,")");
 		sub(/\(.*\//,"("dirname"/")
 	}
 	print $0

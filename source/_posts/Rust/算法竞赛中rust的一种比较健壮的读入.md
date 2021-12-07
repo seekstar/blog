@@ -32,7 +32,7 @@ fn main() {
 
 这样遇到空行也不会panic。
 
-![在这里插入图片描述](算法竞赛中rust的一种比较健壮的读入/20200825235216969.png#pic_center)
+![在这里插入图片描述](算法竞赛中rust的一种比较健壮的读入/20200825235216969.png)
 注意有一组测试数据是用非空格或者多个空格隔开的，所以要用```split_whitespace```。
 
 ps: 还可以用BufReader加速stdin读取：<https://seekstar.github.io/2021/11/17/rust%E7%94%A8bufreader%E5%8A%A0%E9%80%9Fstdin%E8%AF%BB%E5%8F%96/>

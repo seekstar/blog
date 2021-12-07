@@ -34,7 +34,7 @@ echo c > /proc/sysrq-trigger  # 或者Alt+SysRq+c
 ```
 然后等一段时间（可能有点长，因为要把内存镜像写入到```/var/crash```）
 然后就会自动重启，重启完了之后到```/var/crash```下就可以看到保存下来的dmesg了：
-![在这里插入图片描述](Linux内核panic后查看dmesg/20201016235952642.png#pic_center)
+![在这里插入图片描述](Linux内核panic后查看dmesg/20201016235952642.png)
 
 # 减少dump文件的大小
 参考：<https://blog.csdn.net/dongfei2033/article/details/87095938>
@@ -47,7 +47,7 @@ man makedumpfile
 ```
 MAKEDUMP_ARGS="-c --message-level 1 -d 31"
 ```
-![在这里插入图片描述](Linux内核panic后查看dmesg/2020101716100078.png#pic_center)
+![在这里插入图片描述](Linux内核panic后查看dmesg/2020101716100078.png)
 现在dump文件只有17MB了。
 
 # 禁止生成vmcore
