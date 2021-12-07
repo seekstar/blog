@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 if [ ! "$1" ]; then
 	echo Usage: $0 file_base_name
 	exit
@@ -9,8 +11,8 @@ cd source/_posts
 file=$(find . -name "$1.md")
 dirpath=$(dirname "$file")
 cd "$dirpath"
-if [ $(grep "\!\[.*\](.*).*\!\[.*\](.*)" "$1".md) != "" ]; then
-	echo Two figures in the same line!
+if [ "$(grep "\!\[.*\](.*)." "$1".md)" != "" -o "$(grep ".\!\[.*\](.*)" "$1".md)" != "" ]; then
+	echo There is a figure that does not occupy the whole line!
 	exit
 fi
 mkdir -p "$1"
