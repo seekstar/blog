@@ -14,11 +14,11 @@ LRU要求每次访问某个页的时候都进入trap，由操作系统把这个�
 
 # GCLOCK
 论文：
-[Sequentiality and Prefetching in Database Systems ](https://www-inst.eecs.berkeley.edu//~cs266/sp10/readings/smith78.pdf)
-[ Analysis of the generalized clock buffer replacement scheme for database transaction processing](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.452.9699&rep=rep1&type=pdf)
+[Sequentiality and Prefetching in Database Systems](https://www-inst.eecs.berkeley.edu//~cs266/sp10/readings/smith78.pdf)
+[Analysis of the generalized clock buffer replacement scheme for database transaction processing](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.452.9699&rep=rep1&type=pdf)
 
 给每页一个counter，当hit的时候增加它的值，当指针扫过的时候减这个值，减到0就可以替换掉了。好处是可以保留更多的历史访问信息，更精准地把很少访问的页找出来。
- 
+
 # Two-Handed Clock
 朴素的Clock算法的问题在于，如果访问很多，而过了很久才需要替换某页时，会发现所有的页的访问位都是1，这样就退化到FIFO了。这是保存了太多历史信息导致的。所以思路就是周期性清除历史信息。Two-Handed Clock就是这种算法，它有两个指针，一个fronthand，一个backhand，这两个指针之间的距离（好像）恒定。fronthand负责清除其指向的页的访问位，然后backhand看这个访问位是不是又被置1了，如果是，那说明这个页访问挺频繁的，就跳过它，否则就将这个页free掉。当空闲空间少时，就把指针扫描的速度调快，这样能识别出更多访问不频繁的数据，当空闲空间多时，就把指针扫描速度调慢，只把超级冷的块free掉。当空闲空间超过超过阈值lotsfree后，就停下来不扫描了。
 
