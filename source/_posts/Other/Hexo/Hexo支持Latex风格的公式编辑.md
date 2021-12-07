@@ -87,6 +87,8 @@ pandoc:
     - +shortcut_reference_links
 ```
 
+其中```-implicit_figures```的来源：<https://github.com/wzpan/hexo-renderer-pandoc/issues/34>
+
 但是感觉这样还是不太优雅。要是可以直接像其他渲染器那样直接传进一个```gfm```就好了。好像pandoc是有这个参数的，但是我在插件里的```index.js```里把```markdown-smart```改成```gfm```，并且改了后面的```register```之后没反应，不知道为什么。
 
 - tree主题和pandoc混用后，默认的代码语法高亮很难看。
