@@ -8,7 +8,9 @@ tags:
 参考：<https://blog.csdn.net/u010525694/article/details/80096187>
 
 - 下载并安装windows版本[Xming](https://sourceforge.net/projects/xming/?source=typ_redirect)
-![在这里插入图片描述](wsl使用图形界面/20200409223243460.png)
+
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200409223243460.png)
+
 这时windows桌面成了```:0.0```号桌面
 
 - 在wsl中安装```x11-apps```
@@ -28,7 +30,9 @@ sudo apt install -y gedit
 gedit
 ```
 
-![在这里插入图片描述](wsl使用图形界面/20200409223533172.png)
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200409223533172.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxOTYxNDU5,size_16,color_FFFFFF,t_70)
+
+成功在windows桌面打开。
 
 但是不能输入中文。
 
@@ -51,9 +55,14 @@ export LIBGL_ALWAYS_INDIRECT=1
 
 - windows上打开XLaunch
 使用One Window
-![在这里插入图片描述](wsl使用图形界面/202004101405281.png)
+
+![在这里插入图片描述](https://img-blog.csdnimg.cn/202004101405281.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxOTYxNDU5,size_16,color_FFFFFF,t_70)
+
 - 启动桌面
 ```shell
 startxfce4
 ```
-![在这里插入图片描述](wsl使用图形界面/2020041014093694.png)
+
+![在这里插入图片描述](https://img-blog.csdnimg.cn/2020041014093694.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxOTYxNDU5,size_16,color_FFFFFF,t_70)
+
+但是还是无法输入中文。

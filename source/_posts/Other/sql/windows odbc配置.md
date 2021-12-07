@@ -157,14 +157,22 @@ unix {
 # 其他问题
 ## 查询结果乱码
 把odbc的数据源驱动从unicode版切换成ansi版
-![在这里插入图片描述](windows%20odbc配置/20200409111022529.png)
+
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200409111022529.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxOTYxNDU5,size_16,color_FFFFFF,t_70)
+
 ## 执行sql语句时odbc返回HY000错误
 参考：<https://blog.csdn.net/jiazhangyierzi/article/details/81215831>
 一般是因为数据库的字符集的问题。把数据库中所有的列的字符集都换成utf8即可。
 ### 在workbench中修改列字符集
 在这里把所有列的charset修改成uft8
-![在这里插入图片描述](windows%20odbc配置/20200409111836367.png)
-![在这里插入图片描述](windows%20odbc配置/2020040911264782.png)
+
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200409111836367.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxOTYxNDU5,size_16,color_FFFFFF,t_70)
+
+然后把数据库的默认编码设置成utf8
+
+![在这里插入图片描述](https://img-blog.csdnimg.cn/2020040911264782.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxOTYxNDU5,size_16,color_FFFFFF,t_70)
+
+然后点击下面的apply。
 
 ### 通过命令
 似乎可以一次性把所有字段都设置为utf8（我没试过）
