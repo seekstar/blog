@@ -38,7 +38,7 @@ LRU要求每次访问某个页的时候都进入trap，由操作系统把这个�
 # CLOCK-Pro
 论文：<https://www.usenix.org/legacy/events/usenix05/tech/general/full_papers/jiang/jiang.pdf>
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/693da5f78d5e447ba3e17ecfab615252.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAc2VhcmNoX3N0YXI=,size_17,color_FFFFFF,t_70,g_se,x_16)
+![在这里插入图片描述](各种CLOCK算法/693da5f78d5e447ba3e17ecfab615252.png)
 
 将页分为Hot页，Cold页，所有Hot页都留在内存里，Cold页中，留在内存里的页在图中带有阴影，被换出内存的页在图中没有阴影。图中，打勾表示这个页的访问位为1。令m表示内存中能装下的总页数。为了避免列表过大，我们限制列表中最多有m个不在内存里的cold页。
 

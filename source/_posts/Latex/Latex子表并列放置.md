@@ -44,6 +44,6 @@ date: 2021-04-29 18:45:08
 \end{table}
 ```
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210429184336642.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxOTYxNDU5,size_16,color_FFFFFF,t_70)
+![在这里插入图片描述](Latex子表并列放置/20210429184336642.png)
 参考文献：
 <https://tex.stackexchange.com/questions/2832/how-can-i-have-two-tables-side-by-side>

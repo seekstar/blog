@@ -31,17 +31,17 @@ date: 2021-06-04 15:58:28
 ```
 
 # 啥参数都没有
-![在这里插入图片描述](https://img-blog.csdnimg.cn/2021060415492676.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxOTYxNDU5,size_16,color_FFFFFF,t_70)
+![在这里插入图片描述](algorithm2e包参数/2021060415492676.png)
 
 # linesnumbered
 标上行号。
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210604155025191.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxOTYxNDU5,size_16,color_FFFFFF,t_70)
+![在这里插入图片描述](algorithm2e包参数/20210604155025191.png)
 # ruled
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210604155102628.png)
+![在这里插入图片描述](algorithm2e包参数/20210604155102628.png)
 
 
 # noend
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210604155153346.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxOTYxNDU5,size_16,color_FFFFFF,t_70)
+![在这里插入图片描述](algorithm2e包参数/20210604155153346.png)
 # vlined
 默认使用```\SetAlgoVlined```。
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210604155640722.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxOTYxNDU5,size_16,color_FFFFFF,t_70)
+![在这里插入图片描述](algorithm2e包参数/20210604155640722.png)

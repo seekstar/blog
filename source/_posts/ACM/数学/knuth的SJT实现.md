@@ -3,7 +3,7 @@ title: knuth的SJT实现
 date: 2021-10-08 21:10:33
 ---
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/d00e3bdc482045b385999959c6bbe767.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAc2VhcmNoX3N0YXI=,size_20,color_FFFFFF,t_70,g_se,x_16)
+![在这里插入图片描述](knuth的SJT实现/d00e3bdc482045b385999959c6bbe767.png)
 # 思路
 
 SJT算法就是给每个值一个方向，初始都向左（P1），然后从最大的值开始检查（P3），一直检查到最小的值，直到找到值，使得其方向上的下一个值小于它（P4），然后将其往那边移动一步（P5），然后继续从最大的值开始找（return to P2）。对于每个被检查的值，如果这个值的方向上的下一个值不小于它，就调转它的方向，然后继续检查次小的值。

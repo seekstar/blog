@@ -9,7 +9,7 @@ tags:
 
 - 下载并安装windows版本[Xming](https://sourceforge.net/projects/xming/?source=typ_redirect)
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200409223243460.png)
+![在这里插入图片描述](wsl使用图形界面/20200409223243460.png)
 
 这时windows桌面成了```:0.0```号桌面
 
@@ -30,7 +30,7 @@ sudo apt install -y gedit
 gedit
 ```
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200409223533172.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxOTYxNDU5,size_16,color_FFFFFF,t_70)
+![在这里插入图片描述](wsl使用图形界面/20200409223533172.png)
 
 成功在windows桌面打开。
 
@@ -56,13 +56,13 @@ export LIBGL_ALWAYS_INDIRECT=1
 - windows上打开XLaunch
 使用One Window
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/202004101405281.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxOTYxNDU5,size_16,color_FFFFFF,t_70)
+![在这里插入图片描述](wsl使用图形界面/202004101405281.png)
 
 - 启动桌面
 ```shell
 startxfce4
 ```
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/2020041014093694.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxOTYxNDU5,size_16,color_FFFFFF,t_70)
+![在这里插入图片描述](wsl使用图形界面/2020041014093694.png)
 
 但是还是无法输入中文。

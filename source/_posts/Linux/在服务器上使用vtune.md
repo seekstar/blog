@@ -176,7 +176,7 @@ vtune-gui <结果目录>
 
 或者也可以参考这篇文章：[vnc通过ssh隧道连接到Linux服务器](https://blog.csdn.net/qq_41961459/article/details/112909800)，然后直接用服务器上的```vtune-gui```打开结果文件，并把窗口显示在本地：
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/c6903226a2fc4683bbd2dcd9c347f1df.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAc2VhcmNoX3N0YXI=,size_20,color_FFFFFF,t_70,g_se,x_16)
+![在这里插入图片描述](在服务器上使用vtune/c6903226a2fc4683bbd2dcd9c347f1df.png)
 事实上，通过vnc的方式，可以直接建一个vtune工程来做性能测试：
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/2776c634bdbb457283029ed15eecbc29.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAc2VhcmNoX3N0YXI=,size_20,color_FFFFFF,t_70,g_se,x_16)
+![在这里插入图片描述](在服务器上使用vtune/2776c634bdbb457283029ed15eecbc29.png)

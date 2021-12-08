@@ -28,5 +28,5 @@ Per-set history scheme结合了前两者的优点，但是要达到好的效果�
 
 # 没看懂的地方
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/d6a2d8b0c764498a92755cf1c21b1240.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAc2VhcmNoX3N0YXI=,size_20,color_FFFFFF,t_70,g_se,x_16)
+![在这里插入图片描述](Two-level%20adaptive%20predictor/d6a2d8b0c764498a92755cf1c21b1240.png)
 为什么Per-set history scheme里，好像每个set都有一个自己的pattern history table？那SAs里，第二层的set是怎么定义的？
