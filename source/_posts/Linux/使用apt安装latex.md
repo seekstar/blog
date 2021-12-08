@@ -8,6 +8,7 @@ date: 2020-02-10 15:40:32
 由于xetex对中文的支持较好，为了节约磁盘空间和安装时间，就只安装xetex。
 
 在终端中执行以下命令
+
 ```shell
 sudo apt-get install -y texstudio perl-tk 
 sudo apt-get install -y texlive-xetex
@@ -18,9 +19,11 @@ sudo apt-get install -y texlive-fonts-extra
 #也许可以不要？
 sudo apt-get install -y texlive-lang-english texlive-lang-chinese
 ```
+
 安装时间较长。安装完后就可以使用vim或vscode或texstudio编写latex了。
 
 样例（第一行用于指定编译器）：
+
 ```tex
 % !TEX program = xelatex
 
@@ -89,18 +92,25 @@ Hello world!
 
 \end{document}
 ```
+
 保存为sample.tex
 
 以下三种方法任选一种
+
 - 用texstudio打开，按F5即可编译并查看。
+
 - 用vscode打开，安装插件LaTeX language support，LaTeX Workshop，latex-formatter，然后重启vscode，回到刚刚打开的sample.tex的文本界面，按ctrl+s即可编译，然后点击右上角的这个图标
- ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200210151704584.png)
- 就可以预览编译结果了。
- ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200210151839793.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxOTYxNDU5,size_16,color_FFFFFF,t_70)
- - 使用vim
- 在~/.vim下新建一个tex.vimrc，内容：
- ```vimrc
- set ts=4
+
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200210151704584.png)
+就可以预览编译结果了。
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200210151839793.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxOTYxNDU5,size_16,color_FFFFFF,t_70)
+
+- 使用vim
+
+在~/.vim下新建一个tex.vimrc，内容：
+
+```vimrc
+set ts=4
 set sw=4
 set softtabstop=4
 set smartindent	" next level indent
@@ -124,9 +134,11 @@ map <F5> <F6><F7>
 map <C-F9> :w<CR>:call Compile_xelatex()<CR>
 map <F9> <C-F9><F7>
 ```
+
 其中evince是一种文档查看器，如果没有可以自己安装。
 
 在~/.vimrc中加入：
+
 ```vimrc
 syntax on
 set nu
@@ -135,6 +147,7 @@ set autoindent	" same level indent
 map <C-A> ggvG$"+y
 autocmd FileType tex source ~/.vim/tex.vimrc
 ```
+
 保存退出后重启vim，然后用vim打开sample.tex文件，按F9即可编译并预览。
 
 有时可能需要重启电脑才能使tex.vimrc的配置生效。如果还没有生效，就重启两次（手动狗头）。如果还不行，就把tex.vimrc中的内容直接搬到~/.vimrc里，然后把autocmd那行删掉。

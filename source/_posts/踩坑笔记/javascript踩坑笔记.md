@@ -3,7 +3,8 @@ title: javascript踩坑笔记
 date: 2019-12-05 19:45:20
 ---
 
-# TypeError: _my_lib.default is not a function
+## TypeError: _my_lib.default is not a function
+
 import { gen_index_of } from "./components/lib/my.lib";
 一定要加{}，如果写成
 import  gen_index_of  from "./components/lib/my.lib";
@@ -11,6 +12,7 @@ import  gen_index_of  from "./components/lib/my.lib";
 TypeError: _my_lib.default is not a function
 
 my_lib.js
+
 ```js
 export function shuffle(arr) {
     let i = arr.length;
