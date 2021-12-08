@@ -5,7 +5,7 @@ date: 2021-08-14 19:00:46
 
 ```/etc/network/interfaces```里：
 
-```
+```text
 # enp0s2 是网卡名称
 auto enp0s2
 iface enp0s2 inet static
