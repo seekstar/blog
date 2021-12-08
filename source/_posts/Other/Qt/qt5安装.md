@@ -18,7 +18,7 @@ sudo apt install -y qtcreator valgrind
 根据自己的需求选。
 组件介绍：<https://www.cnblogs.com/lixuejian/p/10903088.html>
 我的选择：
-![在这里插入图片描述](qt5安装/20200402181828261.png)
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200402181828261.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxOTYxNDU5,size_16,color_FFFFFF,t_70)
 ### Qt 5.14.2
 - MinGW 7.3.0 64-bit
 Qt 5.14.2 Prebuilt Components for MinGW 7.3.0 64-bit
@@ -33,4 +33,4 @@ MinGW-builds 7.3.0 64-bit toolchain.
 
 ## 测试
 新建一个项目，直接ctrl+r跑一下
-![在这里插入图片描述](qt5安装/20200402192746949.png)
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200402192746949.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxOTYxNDU5,size_16,color_FFFFFF,t_70)成功
