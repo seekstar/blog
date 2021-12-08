@@ -101,9 +101,9 @@ Hello world!
 
 - 用vscode打开，安装插件LaTeX language support，LaTeX Workshop，latex-formatter，然后重启vscode，回到刚刚打开的sample.tex的文本界面，按ctrl+s即可编译，然后点击右上角的这个图标
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200210151704584.png)
+![在这里插入图片描述](使用apt安装latex/20200210151704584.png)
 就可以预览编译结果了。
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200210151839793.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxOTYxNDU5,size_16,color_FFFFFF,t_70)
+![在这里插入图片描述](使用apt安装latex/20200210151839793.png)
 
 - 使用vim
 
