@@ -47,3 +47,9 @@ DDR的含义是Double Data Rate，也就是说在数据总线的时钟的上升�
 内存颗粒的访问其实是比较慢的(10到30ns)，但是channel bus的带宽可以很高(1到3Gb/s)。CPU读取主存时，是一次性读出64字节的，因此为了充分利用channel bus的带宽，同时减少PCB板上的走线数和芯片的引脚数，我们增加chip内部的访问的宽度，然后通过burst transfer来将这些访问通过有限的高速I/O引脚分批次传输。比如假如数据总线是64bit，有8个chip，一个chip虽然只有8bit的数据引脚，但是它内部是一次读取出64bit的，这些读出来的数据分8次通过总线传输到CPU。这种分8次传输的方式叫做burst-8。
 
 举个例子，假如数据总线的时钟频率是1200MHz，由于是DDR，所以每个时钟周期可以传输两次数据，所以带宽就是2 $\times$ 1200MHz $\times$ 8bits $\times$ 8 chips。内存颗粒的时钟频率只需要2 $\times$ 1200MHz $\times$ 8bits $\times$ 8 chips $\div$ (64bits $\times$ 8chips) = 300MHz。这样，我们就可以在有限的chip内部时钟频率下（因为内存颗粒的访问速度有限），将数据高速传输到数据总线上。
+
+Burst-8的时序图：
+
+![](DRAM层级结构/2021-12-17-13-36-24.png)
+
+注意，burst-8只需要一个READ指令，而不是8个。
