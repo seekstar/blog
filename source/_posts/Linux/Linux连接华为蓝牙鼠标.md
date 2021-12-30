@@ -16,4 +16,6 @@ sudo apt install blueman
 
 至于为什么装了这个就能连上，我也不知道。
 
+Update: 在神舟电脑上成功，但是在MateBook X Pro上失败了。。。
+
 参考：<https://jingyan.baidu.com/article/e5c39bf575b25579d6603309.html>
