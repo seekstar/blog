@@ -17,21 +17,3 @@ sudo flatpak remote-modify flathub --url=https://mirror.sjtu.edu.cn/flathub
 ```shell
 sudo flatpak remote-add flathub https://mirror.sjtu.edu.cn/flathub/flathub.flatpakrepo
 ```
-
-一些可以用flatpak安装的软件：
-
-## Xournal++
-
-PDF编辑软件。
-
-相关：<https://seekstar.github.io/2021/10/10/linux-pdf%E7%BC%96%E8%BE%91%E8%BD%AF%E4%BB%B6/>
-
-## MyPaint
-
-可以当草稿纸用。但是写多了字之后会很卡。
-
-相关：<https://seekstar.github.io/2021/02/04/linux%E8%8D%89%E7%A8%BF%E7%BA%B8%E8%BD%AF%E4%BB%B6mypaint/>
-
-## vscode
-
-运行在容器里，所以不能访问系统里的SDK。而且好像不提供code命令？还是建议去官网下载安装包来安装。
