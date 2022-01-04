@@ -62,10 +62,6 @@ PDF编辑软件。
 
 相关：<https://seekstar.github.io/2021/02/04/linux%E8%8D%89%E7%A8%BF%E7%BA%B8%E8%BD%AF%E4%BB%B6mypaint/>
 
-## vscode
-
-运行在容器里，所以不能访问系统里的SDK。而且好像不提供code命令？还是建议去官网下载安装包来安装。
-
 ## drawio
 
 画图软件。
@@ -81,6 +77,14 @@ PDF编辑软件。
 ## spotify
 
 音乐软件
+
+## Motrix
+
+p2p下载客户端。支持多种p2p链接。
+
+## vscode
+
+运行在容器里，所以不能访问系统里的SDK。而且好像不提供code命令？还是建议去官网下载安装包来安装。
 
 ## Element
 
