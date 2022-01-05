@@ -44,9 +44,10 @@ flatpak search xxx
 flatpak install xxx
 flatpak uninstall xxx
 flatpak list # 列出已安装的包
+flatpak run 包名(比如com.jgraph.drawio.desktop)
 ```
 
-不同于apt，flatpak可以并行安装。安装的软件存放在```~/.var/app/```。
+不同于apt，flatpak可以并行安装。安装的软件存放在```~/.var/app/```和```/var/lib/flatpak/app```里。一般来讲，软件的启动入口一般在```/var/lib/flatpak/app/com.jgraph.drawio.desktop/current/active/export/bin```。
 
 一些可以用flatpak安装的软件：
 
@@ -64,7 +65,25 @@ PDF编辑软件。
 
 ## drawio
 
-画图软件。
+画图软件。装完之后系统的启动器里并找不到drawio，只能这样启动：
+
+```shell
+flatpak run com.jgraph.drawio.desktop
+```
+
+而且如果执行其启动脚本的话：
+
+```shell
+/var/lib/flatpak/app/com.jgraph.drawio.desktop/current/active/export/bin/com.jgraph.drawio.desktop
+```
+
+会报错：
+
+```
+bash: /var/lib/flatpak/app/com.jgraph.drawio.desktop/current/active/export/bin/com.jgraph.drawio.desktop：/bin/sh：解释器错误: 没有那个文件或目录
+```
+
+这是因为这个脚本的后缀名是```.desktop```，然后系统以为它是启动器。
 
 ## WPS
 
