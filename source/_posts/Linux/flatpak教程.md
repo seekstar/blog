@@ -101,6 +101,18 @@ bash: /var/lib/flatpak/app/com.jgraph.drawio.desktop/current/active/export/bin/c
 
 p2p下载客户端。支持多种p2p链接。
 
+## torbrowser-launcher
+
+launcher能打开，但是在系统启动器死活打不开tor browser。。。
+
+通过launcher下载好tor browser之后，其实可以直接在命令行执行这个打开tor browser：
+
+```shell
+~/.var/app/com.github.micahflee.torbrowser-launcher/data/torbrowser/tbb/x86_64/tor-browser_zh-CN/Browser/start-tor-browser
+```
+
+注意如果选择下载的是英文版，那其中的```tor-browser_zh-CN```要换掉。
+
 ## vscode
 
 运行在容器里，所以不能访问系统里的SDK。而且好像不提供code命令？还是建议去官网下载安装包来安装。
@@ -108,7 +120,3 @@ p2p下载客户端。支持多种p2p链接。
 ## Element
 
 包名是im.riot.Riot，但是用flatpak装的话，好像不能使用代理？官网的方法安装的可以用代理。
-
-## torbrowser-launcher
-
-launcher能打开，但是tor browser死活打不开。。。
