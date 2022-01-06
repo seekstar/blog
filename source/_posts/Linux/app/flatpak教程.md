@@ -4,6 +4,8 @@ date: 2021-12-30 22:53:10
 tags:
 ---
 
+## 安装
+
 flatpak是一款跨发行版的包管理器。官网：<https://flatpak.org/>
 
 这里有各个发行版的安装方法：<https://flatpak.org/setup/>
@@ -14,7 +16,9 @@ flatpak是一款跨发行版的包管理器。官网：<https://flatpak.org/>
 sudo apt install flatpak
 ```
 
-接下来是添加源。官方源：
+## 添加源
+
+官方源：
 
 ```shell
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
@@ -22,7 +26,9 @@ flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flat
 
 但是这个太慢了，建议添加国内镜像源，教程：<https://seekstar.github.io/2021/12/30/%E7%BB%99flatpak%E6%B7%BB%E5%8A%A0%E5%9B%BD%E5%86%85%E9%95%9C%E5%83%8F%E6%BA%90/>
 
-然后会有这样一个提示：
+## 重启
+
+会有这样一个提示：
 
 ```shell
 Note that the directories 
@@ -37,7 +43,9 @@ session is restarted.
 
 意思是说，在重启之后，用flatpak安装的软件才能用桌面系统访问到。所以接下来先重启。
 
-重启之后就可以正常使用了。常用的命令：
+重启之后就可以正常使用了。
+
+## 常用的命令
 
 ```shell
 flatpak search xxx
@@ -49,21 +57,47 @@ flatpak run 包名(比如com.jgraph.drawio.desktop)
 
 不同于apt，flatpak可以并行安装。安装的软件存放在```~/.var/app/```和```/var/lib/flatpak/app```里。一般来讲，软件的启动入口一般在```/var/lib/flatpak/app/com.jgraph.drawio.desktop/current/active/export/bin```。
 
-一些可以用flatpak安装的软件：
+## 为应用设置代理
 
-## Xournal++
+由于flatpak的应用是运行在沙箱里的，看不到系统代理，所以如果应用需要使用代理的话，需要手动在沙箱环境里配置系统代理：
+
+<https://seekstar.github.io/2022/01/06/flatpak%E5%BA%94%E7%94%A8%E8%AE%BE%E7%BD%AE%E4%BB%A3%E7%90%86/>
+
+## 一些可以用flatpak安装的软件
+
+### Xournal++
 
 PDF编辑软件。
 
 相关：<https://seekstar.github.io/2021/10/10/linux-pdf%E7%BC%96%E8%BE%91%E8%BD%AF%E4%BB%B6/>
 
-## MyPaint
+### MyPaint
 
 可以当草稿纸用。但是写多了字之后会很卡。
 
 相关：<https://seekstar.github.io/2021/02/04/linux%E8%8D%89%E7%A8%BF%E7%BA%B8%E8%BD%AF%E4%BB%B6mypaint/>
 
-## drawio
+### WPS
+
+国产办公软件。
+
+### Zoom
+
+会议软件。
+
+### spotify
+
+音乐软件
+
+### Motrix
+
+p2p下载客户端。支持多种p2p链接。
+
+### Element
+
+包名是im.riot.Riot。需要配置代理。
+
+### drawio
 
 画图软件。装完之后系统的启动器里并找不到drawio，只能这样启动：
 
@@ -85,23 +119,7 @@ bash: /var/lib/flatpak/app/com.jgraph.drawio.desktop/current/active/export/bin/c
 
 这是因为这个脚本的后缀名是```.desktop```，然后系统以为它是启动器。
 
-## WPS
-
-国产办公软件。
-
-## Zoom
-
-会议软件。
-
-## spotify
-
-音乐软件
-
-## Motrix
-
-p2p下载客户端。支持多种p2p链接。
-
-## torbrowser-launcher
+### torbrowser-launcher
 
 launcher能打开，但是在系统启动器死活打不开tor browser。。。
 
@@ -113,10 +131,6 @@ launcher能打开，但是在系统启动器死活打不开tor browser。。。
 
 注意如果选择下载的是英文版，那其中的```tor-browser_zh-CN```要换掉。
 
-## vscode
+### vscode
 
 运行在容器里，所以不能访问系统里的SDK。而且好像不提供code命令？还是建议去官网下载安装包来安装。
-
-## Element
-
-包名是im.riot.Riot，但是用flatpak装的话，好像不能使用代理？官网的方法安装的可以用代理。
