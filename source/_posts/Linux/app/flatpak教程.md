@@ -93,10 +93,6 @@ PDF编辑软件。
 
 p2p下载客户端。支持多种p2p链接。
 
-### Element
-
-包名是im.riot.Riot。需要配置代理。
-
 ### drawio
 
 画图软件。装完之后系统的启动器里并找不到drawio，只能这样启动：
@@ -118,6 +114,10 @@ bash: /var/lib/flatpak/app/com.jgraph.drawio.desktop/current/active/export/bin/c
 ```
 
 这是因为这个脚本的后缀名是```.desktop```，然后系统以为它是启动器。
+
+### Element
+
+包名是im.riot.Riot。需要配置代理。有一个很大的问题，是flatpak运行在沙箱环境中，所以传文件时不能看到系统里的文件。所以还是建议用官网提供的方式安装。
 
 ### torbrowser-launcher
 
