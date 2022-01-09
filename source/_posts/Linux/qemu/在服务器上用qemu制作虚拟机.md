@@ -5,67 +5,83 @@ date: 2021-01-21 18:55:15
 
 deepin和centos 8测试通过。
 
-# 下载操作系统镜像
+## 下载操作系统镜像
 可以用中科大的源下载镜像：<http://mirrors.ustc.edu.cn/>
 找到要下载的镜像后，右键该链接，点击复制链接，然后到服务器上用wget下载之即可。
 
-# 安装qemu
+## 安装qemu
 
 ```shell
-# debian系
+# debian系(deepin)
 sudo apt install qemu qemu-kvm
 # Centos 8
 sudo yum install qemu-kvm
 ```
 
-# 检查KVM是否可用
+## 检查KVM是否可用
+
 不开KVM的话性能会很低。
+
 ```shell
 grep -E 'vmx|svm' /proc/cpuinfo
 ```
+
 如果有输出则表示硬件有虚拟化支持。其次要检查kvm模块是否已经加载：
+
 ```shell
 lsmod | grep kvm
 ```
+
 ```
 kvm_intel             315392  0
 kvm                   847872  1 kvm_intel
 irqbypass              16384  1 kvm
 ```
+
 如果kvm_intel/kvm_amd、kvm模块被显示出来，则kvm模块已经加载。
 
 如果少了模块，比如```kvm_intel```，那就
+
 ```shell
 modprobe kvm-intel
 ```
+
 如果输出
+
 ```
 modprobe: ERROR: could not insert 'kvm_intel': Operation not supported
 ```
+
 就看一下dmesg里有没有错误信息：
+
 ```shell
 dmesg | less
 ```
+
 按G翻到最后，如果有
+
 ```
 kvm: disabled by bios
 ```
+
 说明要去BIOS里开启一下KVM的支持。
 
-# 启动虚拟机安装操作系统
-## 命令行安装
+## 启动虚拟机安装操作系统
+
+### 命令行安装
 
 ```shell
 # Centos 8
 sudo yum install virt-install
-# Ubuntu 20.04
+# Ubuntu 20.04, deepin 20
 sudo apt install virtinst
 ```
+
 ```shell
 sudo virt-install --name=centos8 --memory=1024 --vcpus=4 --os-type=linux --os-variant=rhel8.4 --location=/home/searchstar/Downloads/CentOS-8.4.2105-x86_64-dvd1.iso --disk path=centos.img,size=100 --graphics=none --console=pty,target_type=serial --extra-args="console=tty0 console=ttyS0"
 ```
 
-其中os-variant的取值范围可以通过```osinfo-query os```查看。
+其中os-variant不填也可以。其取值范围可以通过```osinfo-query os```查看。
 
 注意deepin不支持命令行安装，会报错：
 
@@ -96,11 +112,12 @@ Please make a selection from the above ['b' to begin installation, 'q' to quit,
 要把带```[!]```的都处理完。不过下面写了```(Processing...)```的可以按```r```刷新，等它出结果。
 安装好了之后会自动重启，然后就可以登录了。
 
-## 使用vnc安装
-### 配置vnc viewer
-字符界面配置虚拟机好像有点难，所以还是先用vnc连接服务器：<https://blog.csdn.net/qq_41961459/article/details/112909800>
+### 使用vnc安装
 
-# 创建虚拟机镜像
+#### 创建虚拟机磁盘文件
+
+不使用virt-install的话，要手动创建虚拟机的磁盘文件。
+
 ```shell
 qemu-img create -f qcow2 centos.img 256G
 ```
@@ -116,7 +133,12 @@ raw: 默认格式。裸的磁盘文件。
 
 这些可以通过```man qemu-img```查到。
 
-### debian系
+#### 配置vnc viewer
+
+字符界面配置虚拟机好像有点难，所以还是先用vnc连接服务器：<https://blog.csdn.net/qq_41961459/article/details/112909800>
+
+#### debian系
+
 要先允许弹出root窗口：[vnc root窗口无法弹出](https://blog.csdn.net/qq_41961459/article/details/112916589)
 
 然后安装虚拟机：
@@ -133,7 +155,8 @@ Unable to init server: Could not connect: Connection refused
 gtk initialization failed
 ```
 
-### Centos 8
+#### Centos 8
+
 Centos 8比较特殊:
 
 ```shell
@@ -159,22 +182,26 @@ vncviewer localhost:0
 ![在这里插入图片描述](在服务器上用qemu制作虚拟机/20210120225138249.png)
 ```ctrl+alt+g```可以取消捕获。
 
-# 联网
+## 联网
+
 虚拟机一开始是没有网络的。
 
-## 桥接网卡（使用nmcli+virsh）
+### 桥接网卡（使用nmcli+virsh）
+
 <https://blog.csdn.net/qq_41961459/article/details/119501450>
 
-## 桥接网卡（有概率失败）
+### 桥接网卡（有概率失败）
 
 ```shell
 sudo apt install bridge-utils uml-utilities
 ```
 
 先看自己的机器的网卡编号
+
 ```shell
 ip addr
 ```
+
 ```
 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
@@ -226,6 +253,7 @@ fi
 ```promisc```: 混杂模式（promiscuous mode）是电脑网络中的术语。是指一台机器的网卡能够接收所有经过它的数据流，而不论其目的地址是否是它。
 
 然后运行脚本
+
 ```shell
 sudo bash net.sh eno1
 ```
@@ -233,23 +261,29 @@ sudo bash net.sh eno1
 奇怪的是，在我的服务器上第一次失败了，但是重启之后第二次就成功了。
 
 然后用下面的命令重新启动虚拟机：
+
 ```shell
 sudo qemu-system-x86_64 -m 4096 -enable-kvm centos.img -net nic -net tap,ifname=tap0,script=no,downscript=no
 ```
 
 如果虚拟机是centos的话，还需要在虚拟机中执行一下
+
 ```shell
 dhclient
 ```
+
 才能拿到ip。
 
 这个相当于把虚拟机桥接到外面去了。如果外面的网络要登陆才能上网的话，还需要登陆一下。
 ![在这里插入图片描述](在服务器上用qemu制作虚拟机/20210121113408209.png)
-## NAT（有概率失败）
+
+### NAT（有概率失败）
+
 如果装的虚拟机没有GUI，但是外面的网络又需要在网页上登陆才能使用，那桥接就不太可行了，这时要用NAT模式，使虚拟机直接使用主机的网络。
 
 <https://wiki.qemu.org/Documentation/Networking/NAT>
 把下面的保存为```ifup_nat.sh```
+
 ```shell
 #!/bin/sh
 #
@@ -382,31 +416,41 @@ if test "$1" ; then
     do_brctl addif "$BRIDGE" "$1"
 fi
 ```
+
 并给执行权限：
+
 ```shell
 chmod +x ifup_nat.sh
 ```
+
 如果不给执行权限会报错(exit code 255)。
 
 然后启动虚拟机：
+
 ```shell
 sudo qemu-system-x86_64 -m 4096 -enable-kvm centos.img -net nic -net tap,script=ifup_nat.sh
 ```
+
 ![在这里插入图片描述](在服务器上用qemu制作虚拟机/20210121153720100.png)
 这个方法我在家里的电脑上实验成功，但是在学校的服务器上失败了，不知道为什么。
 
-#  其他
-## nographic启动
+##  其他
+
+### nographic启动
 
 <https://blog.csdn.net/qq_41961459/article/details/119108333>
 
-## 嵌套虚拟化
+### 嵌套虚拟化
+
 就是虚拟机里套虚拟机：
 参数里添加
+
 ```
 -enable-kvm -cpu host
 ```
+
 把所有宿主机CPU的特性都传下去。详情可见：
+
 ```shell
 /usr/libexec/qemu-kvm -cpu help
 ```
@@ -414,17 +458,17 @@ sudo qemu-system-x86_64 -m 4096 -enable-kvm centos.img -net nic -net tap,script=
 参考：<https://www.cnblogs.com/jython/p/4458807.html>
 注：如果只放```-enable-kvm -cpu qemu64,+vmx```，我这```lsmod```里就没有```kvm_intel```。
 
-## centos开机自动联网
+### centos开机自动联网
 
 <https://blog.csdn.net/u012972536/article/details/79827292>
 
-## ttyS0登录时输入用户名后卡住
+### ttyS0登录时输入用户名后卡住
 
 这个在deepin虚拟机里更换内核之后碰到过。解决方案：
 
 <https://blog.csdn.net/qq_41961459/article/details/119701527>
 
-## network disk service卡住
+### network disk service卡住
 
 centos虚拟机中出现过，要好几分钟才能进去，而且最终这几个服务会启动失败：
 
@@ -440,7 +484,7 @@ centos虚拟机中出现过，要好几分钟才能进去，而且最终这几�
 
 <https://blog.csdn.net/qq_41961459/article/details/119701527>
 
-## 设置静态IP
+### 设置静态IP
 
 [deepin设置静态IP](https://blog.csdn.net/qq_41961459/article/details/119704794)
 
@@ -448,7 +492,8 @@ centos虚拟机中出现过，要好几分钟才能进去，而且最终这几�
 
 <https://blog.csdn.net/qq_41961459/article/details/119705167>
 
-# 参考文献
+## 参考文献
+
 [QEMU 1: 使用QEMU创建虚拟机](https://my.oschina.net/kelvinxupt/blog/265108) 其中软件安装的部分不全，要装```qemu-kvm```
 [Can't find tool qemu-system-x86](https://bugzilla.redhat.com/show_bug.cgi?id=1715806)
 [qemu虚拟机与外部网络的通信](https://blog.csdn.net/u014022631/article/details/53411557)
