@@ -3,7 +3,7 @@ title: virsh终端访问虚拟机并联网
 date: 2021-08-08 05:18:41
 ---
 
-# 配置网桥
+## 配置网桥
 
 命令如下，记得把ens3换成自己的网卡号。
 
@@ -14,7 +14,7 @@ nmcli con add type bridge-slave ifname ens3 master bridge-br0
 nmcli connection up bridge-br0
 ```
 
-# 将虚拟机导入virsh
+## 将虚拟机导入virsh
 
 这里假设domain的名字设置成centos8。先写一个```centos8.xml```，定义虚拟机的基本属性：
 
@@ -32,6 +32,7 @@ nmcli connection up bridge-br0
     <type arch='x86_64'>hvm</type>
   </os> 
   <devices>
+    // 这里有的发行版是 /usr/bin/qemu-system-x86_64
     <emulator>/usr/libexec/qemu-kvm</emulator>
     <disk type='file' device='disk'>
       // 这里的type注意不要搞错了。可以用qemu-img info查看镜像的格式
@@ -85,7 +86,7 @@ virsh undefine centos8
 virsh edit centos8
 ```
 
-# 访问虚拟机
+## 访问虚拟机
 
 启动虚拟机：
 
@@ -112,9 +113,10 @@ virsh console centos8
 
 注意，普通用户的virsh域和root的virsh域是不互通的。
 
-# 常见错误
+## 常见错误
 
-## Could not open '/dev/sdb': Permission denied
+### Could not open '/dev/sdb': Permission denied
+
 将```/dev/sdb```的owner和group改成自己：
 
 ```shell
@@ -123,7 +125,8 @@ sudo chown $USER /dev/sdb
 
 理论上把自己加入到disk组也可以，因为/dev/sdb的组是disk，但是我这里没用，不知道为什么。
 
-## error: failed to connect to the hypervisor
+### error: failed to connect to the hypervisor
+
 ```
 error: failed to connect to the hypervisor
 error: Failed to connect socket to '/run/user/1000/libvirt/libvirt-sock': 没有那个文件或目录
@@ -138,10 +141,12 @@ libvirtd -d
 
 来源：<https://www.cnblogs.com/fang888/p/8496562.html>
 
-## qemu-bridge-helper: failed to create tun device: Operation not permitted
+### qemu-bridge-helper: failed to create tun device: Operation not permitted
+
 <https://blog.csdn.net/qq_41961459/article/details/119520468>
 
-## 错误：域管理的保存映像存在时拒绝取消定义
+### 错误：域管理的保存映像存在时拒绝取消定义
+
 我进行如下操作之后就正常undefine了，原因不明。
 
 ```shell
@@ -151,7 +156,35 @@ virsh destroy centos8
 virsh undefine centos8
 ```
 
-# 参考文献
+## 奇怪的是
+
+宿主机是服务器上的centos 8的时候成功了，但是宿主机是MateBook X Pro上的deepin的时候失败了：
+
+```
+error: internal error: /usr/lib/qemu/qemu-bridge-helper --use-vnet --br=br0 --fd=27: failed to communicate with bridge helper: Transport endpoint is not connected
+stderr=failed to parse default acl file `/etc/qemu/bridge.conf'
+```
+
+```shell
+nmcli device show
+```
+
+```
+GENERAL.DEVICE:                         br0
+GENERAL.TYPE:                           bridge
+GENERAL.HWADDR:                         12:94:5E:12:84:F4
+GENERAL.MTU:                            1500
+GENERAL.STATE:                          70（连接中（正在获取 IP 配置））
+GENERAL.CONNECTION:                     bridge-br0
+GENERAL.CON-PATH:                       /org/freedesktop/NetworkManager/ActiveConne
+```
+
+不知道是不是跟WIFI配置和硬件有关。。。
+
+这里的做法好像都没啥用：<https://askubuntu.com/questions/574962/stuck-at-getting-ip-configuration>
+
+## 参考文献
+
 <https://libvirt.org/formatdomain.html>
 [Centos8关于kvm-qemu、libvirt和nmcli创建桥网络的使用和理解](https://blog.csdn.net/Casual_Lei/article/details/115653963)
 [CentOS8创建网桥](https://www.cnblogs.com/chia/p/13496248.html)
