@@ -49,3 +49,7 @@ initrd	/boot/initramfs-linux-lts.img
 教程：<https://askubuntu.com/questions/628206/how-can-i-boot-into-arch-linux-using-initramfs-in-ubuntus-grub>
 
 这个要编辑系统库。感觉风险挺大的，而且可能会对后续系统库升级产生影响？
+
+## 致谢
+
+感谢```#archlinux:archlinux.org```里的各位大佬的帮助。
