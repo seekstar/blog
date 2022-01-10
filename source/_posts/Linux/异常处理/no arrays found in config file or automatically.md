@@ -14,7 +14,7 @@ date: 2021-06-02 13:13:47
 然后重新生成mdadm.conf：
 ```shell
 sudo rm /etc/mdadm/mdadm.conf
-update-initramfs  -u
+sudo update-initramfs  -u
 ```
 这个时候系统（可能）会自动找到swap分区。
 
