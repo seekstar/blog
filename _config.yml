@@ -13,7 +13,7 @@ timezone: ''
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: https://searchstar.gitee.io/
+url: https://seekstar.github.io/
 permalink: :year/:month/:day/:post_title/
 permalink_defaults:
 pretty_urls:
@@ -102,7 +102,6 @@ theme: tree
 deploy:
   type: 'git'
   repository:
-    gitee: git@gitee.com:searchstar/searchstar.git,master
     github: git@github.com:seekstar/seekstar.github.io.git,master
 
 mathjax:
