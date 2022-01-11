@@ -37,6 +37,14 @@ tags:
 
 新建名字为```自己用户名.github.io```的仓库。
 
+## 安装hexo
+
+Linux上可以用npm安装：
+
+```shell
+sudo npm install hexo-cli -g
+```
+
 ## 初始化博客
 
 在本地新建一个```blog```空文件夹（不要clone），然后执行
