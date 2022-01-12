@@ -7,8 +7,10 @@ spinlock的TAS、TTAS、ticket实现详见<https://blog.csdn.net/david_henry/art
 queued spinlock详见<https://blog.csdn.net/y33988979/article/details/102676849>
 
 下面详细介绍一下ticket的汇编实现。
-内嵌汇编基础知识：<https://blog.csdn.net/qq_41961459/article/details/104518801>
-# ticket
+内嵌汇编基础知识：{% post_link C/C语言内嵌汇编学习笔记 %}
+
+## ticket
+
 ![在这里插入图片描述](linux%20kernel%20spinlock%20ticket汇编实现解读/20201201125717472.png)
 
 ```C
@@ -31,5 +33,6 @@ static __always_inline void __ticket_spin_lock(raw_spinlock_t *lock)
                 : "memory", "cc");	// memory表示内存屏障（可是这里为什么要内存屏障呢？）。cc表示修改了标志寄存器。
 } 
 ```
+
 xaddw文档：<https://www.felixcloutier.com/x86/xadd>
 Q在x86中表示寄存器a、b、c或者d：<https://www.cnblogs.com/cposture/p/9029043.html>
