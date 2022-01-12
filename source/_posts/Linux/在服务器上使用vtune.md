@@ -174,7 +174,7 @@ vtune-gui <结果目录>
 
 来查看结果。相关文档：<https://software.intel.com/content/www/us/en/develop/documentation/vtune-help/top/command-line-interface/working-with-results-from-the-command-line/viewing-command-line-results-in-the-gui.html>
 
-或者也可以参考这篇文章：[vnc通过ssh隧道连接到Linux服务器](https://blog.csdn.net/qq_41961459/article/details/112909800)，然后直接用服务器上的```vtune-gui```打开结果文件，并把窗口显示在本地：
+或者也可以参考这篇文章：{% post_link Linux/'vnc通过ssh隧道连接到Linux服务器' %}，然后直接用服务器上的```vtune-gui```打开结果文件，并把窗口显示在本地：
 
 ![在这里插入图片描述](在服务器上使用vtune/c6903226a2fc4683bbd2dcd9c347f1df.png)
 事实上，通过vnc的方式，可以直接建一个vtune工程来做性能测试：
