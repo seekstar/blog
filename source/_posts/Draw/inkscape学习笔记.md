@@ -7,8 +7,8 @@ date: 2021-06-15 22:47:51
 
 # 常用
 
-[插入文字](https://blog.csdn.net/qq_41961459/article/details/106455489)
-[裁剪](https://blog.csdn.net/qq_41961459/article/details/117933637)
+- {% post_link Linux/app/Linux在PDF中插入文字 插入文字 %}
+- {% post_link Draw/inkscape裁剪 裁剪 %}
 
 # P1 界面和基本图
 鼠标左键选择对象，多次选择可以在调整大小模式和旋转模式之间切换。旋转模式中，中间的加号是旋转时的轴，可通过拖动调节。
