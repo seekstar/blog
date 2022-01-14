@@ -4,6 +4,13 @@ date: 2021-05-03 15:45:21
 ---
 
 用```\Statex```使其不占用行号即可。
+
+```tex
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+```
+
 ```tex
 \begin{algorithm}
 \caption{2333}\label{233}
