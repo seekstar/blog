@@ -12,7 +12,52 @@ frp还支持p2p内网穿透，即服务器端只充当牵线搭桥的作用，�
 
 注意，如果服务器端设置了token的话，客户端的token要放到common下面。
 
-可以用supervisor实现开机自启。先安装```supervisor```:
+可以用supervisor实现开机自启。
+
+## CentOS
+
+在CentOS 8 Stream上测试通过。这里以实现开启自启frps为例。
+
+安装```supervisor：
+
+```shell
+sudo yum install supervisor
+```
+
+默认是不激活的，还得手动激活supervisord服务：
+
+```shell
+sudo systemctl enable supervisord
+sudo systemctl start supervisord
+```
+
+然后在```/etc/supervisord.d/frps.ini```里写入：
+
+```
+[program:frps] 
+directory=frp安装目录绝对路径
+command=frp安装目录绝对路径/frps -c frp安装目录绝对路径/frps.ini
+autostart=true 
+autorestart=true
+stderr_logfile=/tmp/frps_stderr.log 
+stdout_logfile=/tmp/frps_stdout.log 
+user = 你的用户名
+```
+
+```shell
+sudo supervisorctl update frps
+sudo supervisorctl status frps
+```
+
+```
+frps                             RUNNING   pid 33557, uptime 0:02:09
+```
+
+## debian系
+
+在Deepin 20上测试通过。这里以实现开机自启frpc为例。
+
+先安装```supervisor```:
 
 ```shell
 sudo apt install supervisor
