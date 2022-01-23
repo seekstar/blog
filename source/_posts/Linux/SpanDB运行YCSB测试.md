@@ -19,7 +19,7 @@ tags: RocksDB
 sudo HUGEMEM=4096 scripts/setup.sh
 ```
 
-官方文档里说这个一定要大于SpanDB的cache的大小，但是没说哪里看SpanDB的cache大小。。
+SpanDB的TopFS的cache是从这里申请的。如果后面出现了内存分配失败，说明这里没有申请够，需要把数值改大，或者减小TopFS的cache大小。
 
 ## 安装依赖
 
@@ -147,6 +147,23 @@ ulimit -n 100000
 ```
 
 其中的```01:00.0```就是这个SSD的PCIe地址。
+
+SpanDB默认分配了90GB的SPDK缓存，如果前面huge page没有申请够，会分配失败：
+
+```
+SPDK memory allocation starts (90.00 GB)
+...0.0%
+already allocated 3.38 GB
+/home/searchstar/git/others/SpanDB/env/io_spdk.h:111: SPDK allocate memory failed
+```
+
+这时要么多申请一些huge page，要么减少TopFS使用的cache，即将```ycsb/src/test.cc```中的```main```函数里的
+
+```C
+options.topfs_cache_size = 90;
+```
+
+改成更小的值，然后重新```make```，再跑就好了。
 
 ## 参考文献
 
