@@ -1,7 +1,7 @@
 ---
 title: 'rocksdb src/tcmalloc.cc:332] Attempt to free invalid pointer 0x556bc8784010'
 date: 2022-01-01 14:04:26
-tags:
+tags: RocksDB
 ---
 
 编译的时候要加```-ltcmalloc```。

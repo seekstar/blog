@@ -3,7 +3,7 @@ title: >-
   rocksdb: /usr/bin/ld: ./memory/concurrent_arena.o: relocation R_X86_64_TPOFF32
   against symbol `_ZN7rocksdb15C
 date: 2022-01-01 12:54:31
-tags:
+tags: RocksDB
 ---
 
 官方的编译教程：<https://github.com/facebook/rocksdb/blob/main/INSTALL.md>

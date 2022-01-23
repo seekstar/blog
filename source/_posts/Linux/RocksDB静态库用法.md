@@ -1,7 +1,7 @@
 ---
 title: RocksDB静态库用法
 date: 2022-01-01 14:29:37
-tags:
+tags: RocksDB
 ---
 
 照抄官方给的实例里的Makefile：<https://github.com/facebook/rocksdb/blob/main/examples/Makefile>

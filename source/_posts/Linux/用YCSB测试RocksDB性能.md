@@ -1,7 +1,7 @@
 ---
 title: 用YCSB测试RocksDB性能
 date: 2022-01-22 23:39:50
-tags:
+tags: RocksDB
 ---
 
 ## 基础用法
