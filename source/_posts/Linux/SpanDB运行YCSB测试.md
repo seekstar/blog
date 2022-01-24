@@ -12,11 +12,38 @@ tags: RocksDB
 
 {% post_link Linux/'Debian-11-安装SPDK' %}
 
+## （可选）把memlock的限制解除
+
+```shell
+sudo bash -c "ulimit -Hl unlimited"
+ulimit -Sl unlimited
+```
+
 ## 申请huge page
 
 ```shell
 # 4GB
 sudo HUGEMEM=4096 scripts/setup.sh
+```
+
+这个时候可能会提示：
+
+```
+Current user memlock limit: 3967 MB
+
+This is the maximum amount of memory you will be
+able to use with DPDK and VFIO if run as current user.
+To change this, please adjust limits.conf memlock limit for current user.
+```
+
+但是查看```/proc/meminfo```的话，又能看到huge page已经分配好了：
+
+```
+HugePages_Total:   2048
+HugePages_Free:    2048
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       2048 kB
 ```
 
 SpanDB的TopFS的cache是从这里申请的。如果后面出现了内存分配失败，说明这里没有申请够，需要把数值改大，或者减小TopFS的cache大小。
@@ -168,5 +195,7 @@ options.topfs_cache_size = 90;
 ## 参考文献
 
 <https://github.com/SpanDB/SpanDB>
+
+<https://wiki.debian.org/Hugepages>
 
 <https://askubuntu.com/questions/654820/how-to-find-pci-address-of-an-ethernet-interface>
