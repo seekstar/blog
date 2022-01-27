@@ -103,6 +103,7 @@ deploy:
   type: 'git'
   repository:
     github: git@github.com:seekstar/seekstar.github.io.git,master
+    blog.seekstar.top: blog:~/searchstar-blog.git
 
 mathjax:
   every_page: true
