@@ -192,6 +192,10 @@ options.topfs_cache_size = 90;
 
 改成更小的值，然后重新```make```，再跑就好了。
 
+## 相关
+
+{% post_link Linux/SPDK回收hugemem %}
+
 ## 参考文献
 
 <https://github.com/SpanDB/SpanDB>
