@@ -141,6 +141,10 @@ usage: <workload_file> <client_num> <data_dir> <log_dir> <is_load> <dbname> <db_
 
 这个时候最后一个参数```db_bak```会被忽略，生成的DB在```data_dir```里。需要手动把```data_dir```移动到```db_bak```。
 
+数据写入完成之后会sleep两个3分钟，可能是为了等待后台任务完成，然后打印一些信息之后才会退出，要耐心等待。
+
+注意，load模式不支持SpanDB，测试SpanDB的时候用的db_bak跟RocksDB是一样的。
+
 ### 测试RocksDB
 
 ```shell
