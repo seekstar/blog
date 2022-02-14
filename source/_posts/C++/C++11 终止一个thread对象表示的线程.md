@@ -3,16 +3,14 @@ title: C++11 终止一个thread对象表示的线程
 date: 2019-12-04 16:32:11
 ---
 
-参考链接：
-www.bo-yang.net/2017/11/19/cpp-kill-detached-thread
-
 “terminate 1 thread + forcefully (target thread doesn’t cooperate) + pure C++11 = No way”.
 ~~233333~~
 
-可以用pthread.h里的pthread_cancel来强行杀死某一线程。
+对于Linux/GCC，可以用pthread.h里的pthread_cancel来强行杀死某一线程。
 注意thread对象的析构函数并不会把线程杀死。
 
 code:
+
 ```cpp
 #include <iostream>
 #include <thread>
@@ -128,3 +126,5 @@ The thread is destructed
 而且自然销毁前必须detach。
 
 2. detach之后native_handle返回的值就不对了，所以要在detach之前把这个值保存起来。
+
+来源：<www.bo-yang.net/2017/11/19/cpp-kill-detached-thread>
