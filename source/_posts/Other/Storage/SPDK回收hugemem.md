@@ -17,3 +17,5 @@ reset             Rebind PCI devices back to their original drivers.
                   Also cleanup any leftover spdk files/resources.
                   Hugepage memory size will remain unchanged.
 ```
+
+但是这个方法貌似对SpanDB不起作用？
