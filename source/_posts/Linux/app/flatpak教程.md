@@ -135,6 +135,10 @@ launcher能打开，但是在系统启动器死活打不开tor browser。。。
 
 注意如果选择下载的是英文版，那其中的```tor-browser_zh-CN```要换掉。
 
+关于tor browser本身能不能进flatpak可以看这个issue:
+
+<https://gitlab.torproject.org/tpo/applications/tor-browser/-/issues/25578>
+
 ### vscode
 
 运行在容器里，所以不能访问系统里的SDK。而且好像不提供code命令？还是建议去官网下载安装包来安装。
