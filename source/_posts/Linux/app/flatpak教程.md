@@ -111,6 +111,12 @@ bash: /var/lib/flatpak/app/com.jgraph.drawio.desktop/current/active/export/bin/c
 
 这是因为这个脚本的后缀名是```.desktop```，然后系统以为它是启动器。
 
+### KeePassXC
+
+密码管理器。要把apt安装的旧版卸载之后，Deepin启动器上的才会变成flatpak的版本。
+
+其实我觉得2.6.6还没有2.3.4好用。新版上创建条目的时候不会要求输入两遍了，而且也不会显示密码强度。
+
 ### Element
 
 包名是im.riot.Riot。需要配置代理。有一个很大的问题，是flatpak运行在沙箱环境中，所以传文件时不能看到系统里的文件。所以还是建议用官网提供的方式安装。
