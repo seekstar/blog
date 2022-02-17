@@ -89,6 +89,12 @@ PDF编辑软件。
 
 p2p下载客户端。支持多种p2p链接。
 
+### Shadowsocks-Qt5
+
+```shell
+flatpak install shadowsocks
+```
+
 ### KeePassXC
 
 密码管理器。要把apt安装的旧版卸载之后，Deepin启动器上的才会变成flatpak的版本。
