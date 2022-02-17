@@ -43,7 +43,7 @@ session is restarted.
 
 意思是说，在重启之后，用flatpak安装的软件才能用桌面系统访问到。所以接下来先重启。
 
-重启之后就可以正常使用了。
+重启之后就可以正常使用了。但是即使之后这两个目录加入到```XDG_DATA_DIRS```了，有些应用可能仍然需要注销并且重新登录才能在启动器找到。
 
 ## 常用的命令
 
@@ -129,7 +129,7 @@ bash: /var/lib/flatpak/app/com.jgraph.drawio.desktop/current/active/export/bin/c
 
 ### Telegram
 
-包名是```org.telegram.desktop```。Deepin系统启动器里没有。需要配置代理，用```flatpak run --command=sh```的方法好像没用，貌似要在应用内设置代理。这个好像就能访问系统里的文件，这说明是Element打包有问题。
+包名是```org.telegram.desktop```。需要注销重新登录才能在deepin启动器里找到。需要配置代理，用```flatpak run --command=sh```的方法好像没用，貌似要在应用内设置代理。这个好像就能访问系统里的文件，这说明是Element打包有问题。
 
 ### torbrowser-launcher
 
