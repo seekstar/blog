@@ -99,6 +99,12 @@ flatpak install shadowsocks
 
 ```com.mojang.Minecraft```
 
+### Clash for Windows
+
+```io.github.Fndroid.clash_for_windows```
+
+别被名字骗了，现在支持Linux了。
+
 ### KeePassXC
 
 密码管理器。要把apt安装的旧版卸载之后，Deepin启动器上的才会变成flatpak的版本。
