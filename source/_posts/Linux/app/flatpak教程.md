@@ -105,6 +105,14 @@ flatpak install shadowsocks
 
 别被名字骗了，现在支持Linux了。
 
+### Firefox国际版
+
+```org.mozilla.firefox```
+
+要先把系统里旧的firefox卸载，不然启动器启动的还是旧版本。
+
+在浏览器里没法把自己设置为默认浏览器了。但是一般可以在系统设置里手动设置。Deepin是在```设置->默认程序->网页```。
+
 ### KeePassXC
 
 密码管理器。要把apt安装的旧版卸载之后，Deepin启动器上的才会变成flatpak的版本。
