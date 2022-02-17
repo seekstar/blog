@@ -95,6 +95,10 @@ p2p下载客户端。支持多种p2p链接。
 flatpak install shadowsocks
 ```
 
+### 国际版Minecraft
+
+```com.mojang.Minecraft```
+
 ### KeePassXC
 
 密码管理器。要把apt安装的旧版卸载之后，Deepin启动器上的才会变成flatpak的版本。
