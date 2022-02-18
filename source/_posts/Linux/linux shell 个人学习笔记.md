@@ -488,62 +488,29 @@ locate name
 
 ### sed
 
-#### 保护链接
-
-参考：<https://www.cnblogs.com/cherryhaha1234/p/10848024.html>
-`sed -i`会破坏符号链接和硬链接。
-`sed --follow-symlinks -i`保护软链接，但是不保护硬链接。
-`sed -i -c`会保护符号链接和硬链接（但是我的sed没有这个选项，可能只有新版本才有）。
-
-#### 把文件中的CRLF替换成LF
+从stdin读入，将修改后的结果写入到stdout：
 
 ```shell
-sed -i 's/\r//g' FileName
+sed 's/源pattern/目的pattern/g'
 ```
 
--i指直接修改文件，而不是把修改结果输出到stdout。
-模式可以分解为
+其中`s`是指替换，`g`是全局替换，`/`是分隔符。然后sed就会逐行去找源pattern，并且替换为目的pattern。
 
-```
-s/  \r  /   /  g
-```
-
-其中s是指替换，g是全局替换，/是分隔符。总体的意思是把\r替换成空字符串，也就是删掉\r（也就是CR）。
-
-#### 把文件中的LF替换成CRLF
+从文件读入，将修改后的结果写入到stdout：
 
 ```shell
-sed -i 's/$/\r/g' FileName
+sed 's/源pattern/目的pattern/g' FileName
 ```
 
-`$`的意思是每行的末尾。在每行的末尾把空字符串替换成\r（CR），也就是插入\r（CR）。在linux中换行是LF，所以相当于在LF前面插入一个CR，变成CRLF。
+源pattern和目的pattern的一些例子见：{% post_link Other/Language/正则表达式学习笔记.md %}
 
-#### 保留每行的最后一个单词
+此外，sed提供了一些选项：
 
-```shell
-sed -i 's/.* //g' FileName
-```
+`-i`: 直接修改文件（默认是输出编辑后的结果到stdout）。
 
-正则表达式里，点`.`几乎可以匹配任何字符，所以`.*`会尽量匹配尽量长的字符串。`.*空格`表示最长的以空格结尾的字符串。`s/.* //g`表示把每行的最长的以空格结尾的字符串删掉。所以每行只留下了最后一个单词了。
+`--follow-symlinks`: `-i`会破坏符号链接和硬链接，加上这个选项之后可以保护软链接不被破坏，但是不保护硬链接。参考：<https://www.cnblogs.com/cherryhaha1234/p/10848024.html>
 
-也可从stdin读取。
-例：获取git版本号
-
-```shell
-git --version | sed 's/.* //g'
-```
-
-#### 在每个单词前插入
-
-参考：<https://blog.csdn.net/lwlfox/article/details/85065026>
-
-```shell
-sed 's/\b\S*\b/test&/g' a.txt
-```
-
-`\b`: 单词边界
-`&`: 前面匹配的字符串
-
+`-c`: 保护符号链接和硬链接（但是我的sed没有这个选项）。
 
 ## 其他
 
