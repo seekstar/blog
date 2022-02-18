@@ -3,7 +3,7 @@ title: deepin设置静态IP
 date: 2021-08-14 19:00:46
 ---
 
-```/etc/network/interfaces```里：
+`/etc/network/interfaces`里：
 
 ```text
 # enp0s2 是网卡名称
@@ -15,11 +15,11 @@ gateway 10.249.40.1
 dns-nameserver 10.248.98.30
 ```
 
-网卡名字和当前子网掩码可以通过```ip addr```看。
+网卡名字和当前子网掩码可以通过`ip addr`看。
 
-当前网关可以通过```route -n```查看。
+当前网关可以通过`route -n`查看。
 
-当前dns服务器的IP在```/etc/resolv.conf```里。
+当前dns服务器的IP在`/etc/resolv.conf`里。
 
 重启网络：
 

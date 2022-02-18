@@ -3,7 +3,7 @@ title: qemu-system-x86_64 nographic
 date: 2021-07-26 14:12:03
 ---
 
-即使把图形界面删掉了，仍然是默认输出到显示器上的，这样nographic选项就没啥用。为了使其产生作用，在虚拟机中将```/etc/default/grub```里的
+即使把图形界面删掉了，仍然是默认输出到显示器上的，这样nographic选项就没啥用。为了使其产生作用，在虚拟机中将`/etc/default/grub`里的
 ```
 GRUB_CMDLINE_LINUX=""
 ```

@@ -5,7 +5,7 @@ date: 2021-01-01 19:21:02
 
 转自：<https://tex.stackexchange.com/questions/167305/how-do-i-get-rid-of-the-extra-blank-line-at-the-end-of-my-listing>
 
-如果在```lstset```里设置了```keepspaces=true```，那代码后面可能会跟一个空行，例如
+如果在`lstset`里设置了`keepspaces=true`，那代码后面可能会跟一个空行，例如
 ```tex
 	\begin{lstlisting}
 	test

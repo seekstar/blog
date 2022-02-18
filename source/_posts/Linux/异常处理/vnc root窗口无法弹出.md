@@ -45,7 +45,7 @@ L1707/unix:10  MIT-MAGIC-COOKIE-1  c4afdb0113ff7caa556f57f65b8a8441
 ```shell
 sudo -s
 ```
-把```:10```相关的行加到```xauth```里
+把`:10`相关的行加到`xauth`里
 ```shell
 xauth add L1707/unix:10  MIT-MAGIC-COOKIE-1  c4afdb0113ff7caa556f57f65b8a8441
 ```

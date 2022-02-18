@@ -3,7 +3,7 @@ title: 0xffffffffc1131d1d in ?? () Cannot find bounds of current function
 date: 2021-01-23 00:38:06
 ---
 
-其实并不是崩了，只是gdb找不到目前在哪一行而已。为了验证，输入```l```命令打印附近的代码
+其实并不是崩了，只是gdb找不到目前在哪一行而已。为了验证，输入`l`命令打印附近的代码
 ```
 (gdb) n
 Cannot find bounds of current function

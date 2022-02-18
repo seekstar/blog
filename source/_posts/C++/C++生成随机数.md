@@ -31,7 +31,7 @@ void genrand(void *dest, size_t n) {
 ```cpp
 typedef RandEngine::result_type res_t;
 ```
-因为标准库里的mt19937是用来生成32bit的伪随机数的，而```RandEngine::result_type```有可能是64bit的。
+因为标准库里的mt19937是用来生成32bit的伪随机数的，而`RandEngine::result_type`有可能是64bit的。
 
 # 参考
 <http://www.cplusplus.com/reference/random/mt19937/>

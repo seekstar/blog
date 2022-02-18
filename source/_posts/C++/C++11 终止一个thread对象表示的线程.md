@@ -120,7 +120,7 @@ The thread is destructed
 20
 ```
 
-1. [一个thread对象在析构前必须要detach或者join](https://www.cnblogs.com/ranson7zop/p/8028799.html)，不然会报错：```terminate called without an active exception```
+1. [一个thread对象在析构前必须要detach或者join](https://www.cnblogs.com/ranson7zop/p/8028799.html)，不然会报错：`terminate called without an active exception`
 
 所以如果没有detach，cancel完了要join一下。
 而且自然销毁前必须detach。

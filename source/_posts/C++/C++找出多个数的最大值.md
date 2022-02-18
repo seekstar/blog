@@ -8,7 +8,7 @@ tags:
 
 # 找出多个变量的最大值
 使用C++11。
-需要```algorithm```标准库
+需要`algorithm`标准库
 ```cpp
 #include <iostream>
 #include <algorithm>

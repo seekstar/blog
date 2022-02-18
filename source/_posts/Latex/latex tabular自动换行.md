@@ -21,7 +21,7 @@ Scenarie:               & At oprette en server med bestemte regler som tillader 
 \end{document} 
 ```
 ![在这里插入图片描述](latex%20tabular自动换行/20210101131812716.png)
-其中```X```表示占满剩下的宽度。
+其中`X`表示占满剩下的宽度。
 
 其实tabularx可以在table环境外使用，像tabular一样。所以上面的代码可以简化为
 ```tex

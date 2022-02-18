@@ -7,7 +7,7 @@ date: 2021-01-20 20:56:41
 
 ## 约定
 
-sshname表示在```.ssh/config```里的名字，可以是IP地址。
+sshname表示在`.ssh/config`里的名字，可以是IP地址。
 注：测试用的服务器的sshname都为L1707
 
 ## 服务器
@@ -80,7 +80,7 @@ vncviewer localhost:1
 ![在这里插入图片描述](vnc通过ssh隧道连接到Linux服务器/20210120205541777.png)
 就是任务栏没了。。。
 
-如果需要在终端中执行GUI程序，先查看```DISPLAY```环境变量是否已经设置了：
+如果需要在终端中执行GUI程序，先查看`DISPLAY`环境变量是否已经设置了：
 
 ```shell
 echo $DISPLAY

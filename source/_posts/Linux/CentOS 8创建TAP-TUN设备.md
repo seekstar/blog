@@ -3,7 +3,7 @@ title: CentOS 8创建TAP/TUN设备
 date: 2021-07-26 14:57:45
 ---
 
-CentOS 7还有nux-misc里的tunctl可以用，CentOS 8连那个都没有了。不过可以用```ip```
+CentOS 7还有nux-misc里的tunctl可以用，CentOS 8连那个都没有了。不过可以用`ip`
 
 创建：
 

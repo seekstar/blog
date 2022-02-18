@@ -4,7 +4,7 @@ date: 2020-04-22 11:49:29
 tags:
 ---
 
-linux上可以使用```endian.h```，但是windows没有。
+linux上可以使用`endian.h`，但是windows没有。
 
 解决方法是使用boost，可移植性强。
 

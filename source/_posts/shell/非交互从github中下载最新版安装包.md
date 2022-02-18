@@ -22,7 +22,7 @@ curl -s https://api.github.com/repos/jgraph/drawio-desktop/releases/latest | gre
 ```shell
 curl -s https://api.github.com/repos/jgraph/drawio-desktop/releases/latest | grep "browser_download_url.*deb" | cut -d '"' -f 4
 ```
-其中```-d '"'```表示以```"```作为分界符，```-f 4```表示显示第4个域。
+其中`-d '"'`表示以`"`作为分界符，`-f 4`表示显示第4个域。
 输出：
 ```
 https://github.com/jgraph/drawio-desktop/releases/download/v13.7.9/draw.io-amd64-13.7.9.deb
@@ -31,7 +31,7 @@ https://github.com/jgraph/drawio-desktop/releases/download/v13.7.9/draw.io-amd64
 ```shell
 curl -s https://api.github.com/repos/jgraph/drawio-desktop/releases/latest | grep "browser_download_url.*deb" | cut -d '"' -f 4 | wget -i -
 ```
-```-i```表示指定url来源，```-```表示url来源为```stdin```。
+`-i`表示指定url来源，`-`表示url来源为`stdin`。
 
 # 参考文献
 <https://gist.github.com/steinwaywhw/a4cd19cda655b8249d908261a62687f8>

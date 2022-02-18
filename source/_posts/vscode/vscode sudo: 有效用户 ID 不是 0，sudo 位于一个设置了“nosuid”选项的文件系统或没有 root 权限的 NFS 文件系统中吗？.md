@@ -4,5 +4,6 @@ date: 2020-07-28 22:38:49
 tags:
 ---
 
-```https://github.com/microsoft/vscode/issues/90725```
+<https://github.com/microsoft/vscode/issues/90725>
+
 重启vscode即可。原因未知。

@@ -13,4 +13,4 @@ let mut cin = BufReader::new(io::stdin());
 // cin.read_line
 ```
 
-注意用了```BufReader```来优化stdin读取之后，一定就不能再用```io::stdin()```来直接读取了，不然会乱套。
+注意用了`BufReader`来优化stdin读取之后，一定就不能再用`io::stdin()`来直接读取了，不然会乱套。

@@ -21,7 +21,7 @@ sudo useradd getip -d /home/getip
 ssh-keygen -f /root/.ssh/id_rsa_getip
 ```
 
-然后在```/root/.ssh/config```里加上
+然后在`/root/.ssh/config`里加上
 
 ```shell
 Host getip
@@ -36,9 +36,9 @@ Host getip
 sudo -s su getip
 ```
 
-centos 8是把公钥放到```~/.ssh/authorized_keys```里。一定要注意server2的```~/.ssh```的权限要设置为```700```，```~/.ssh/authorized_keys```的权限要设置为```644```。
+centos 8是把公钥放到`~/.ssh/authorized_keys`里。一定要注意server2的`~/.ssh`的权限要设置为`700`，`~/.ssh/authorized_keys`的权限要设置为`644`。
 
-然后用server1的root用户试一下能不能登上server2的getip用户，也是为了把server2的IP放到```~/.ssh/known_hosts```里：
+然后用server1的root用户试一下能不能登上server2的getip用户，也是为了把server2的IP放到`~/.ssh/known_hosts`里：
 
 ```shell
 ssh getip
@@ -46,7 +46,7 @@ ssh getip
 
 # 配置重启自动发送IP
 
-方法就是在```/etc/rc.local```里加上
+方法就是在`/etc/rc.local`里加上
 ```shell
 IPfile=$(mktemp)
 nohup bash -c "sleep 10 && ip addr > $IPfile && scp $IPfile getip:~/$(date +%Y%m%d%X).txt && rm $IPfile" &
@@ -54,4 +54,4 @@ nohup bash -c "sleep 10 && ip addr > $IPfile && scp $IPfile getip:~/$(date +%Y%m
 
 延时10秒是为了防止执行rc.local时网络还没有启动。
 
-此外要记得```chmod +x /etc/rc.d/rc.local```来使得其有执行权限（rc.local里应该有提示）。其实```chmod +x /etc/rc.local```也可以，会自动跟随符号链接修改其指向的文件的权限。
+此外要记得`chmod +x /etc/rc.d/rc.local`来使得其有执行权限（rc.local里应该有提示）。其实`chmod +x /etc/rc.local`也可以，会自动跟随符号链接修改其指向的文件的权限。

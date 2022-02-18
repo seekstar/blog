@@ -36,7 +36,7 @@ SELECT insert_sth(233);
 SELECT insert_sth(233);
 SELECT insert_sth(233);
 ```
-如果```SELECT insert_sth(233);```的输出是自增的说明数据库的配置完成了。
+如果`SELECT insert_sth(233);`的输出是自增的说明数据库的配置完成了。
 
 ```cpp
 #include <iostream>
@@ -140,7 +140,7 @@ int main() {
     return 0;
 }
 ```
-里面的数据源名```company```要改成你自己配置的数据源。
+里面的数据源名`company`要改成你自己配置的数据源。
 ```shell
 g++ incid.cpp -lodbc -o incid
 ./incid

@@ -32,7 +32,7 @@ OPTIONS:
     -c, --component <components>...                Component name to also install
     -t, --target <targets>...                      Target name to also install
 ```
-可以看到```-y```就是非交互式模式了。
+可以看到`-y`就是非交互式模式了。
 所以在脚本中写入：
 ```shell
 curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf > rustup.sh

@@ -7,7 +7,7 @@ date: 2021-03-20 09:14:23
 ```shell
 screen
 ```
-detach：```ctrl+a d```
+detach：`ctrl+a d`
 
 重连：
 ```shell
@@ -21,6 +21,6 @@ There is a screen on:
 ```shell
 screen -r 210569
 ```
-或者```screen -r```后按一下tab，会自动帮你补全。
+或者`screen -r`后按一下tab，会自动帮你补全。
 
-上翻：```ctrl+a ESC```进入复制模式(copy mode)，然后就可以按照vim的方式翻页了。
+上翻：`ctrl+a ESC`进入复制模式(copy mode)，然后就可以按照vim的方式翻页了。

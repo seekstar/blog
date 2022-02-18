@@ -5,7 +5,7 @@ date: 2021-10-04 23:04:07
 
 # 问题
 
-```kill -2```就是发送SIGINT信号。我们期望的行为是，进程接收到SIGINT信号后就停止运行。例如：
+`kill -2`就是发送SIGINT信号。我们期望的行为是，进程接收到SIGINT信号后就停止运行。例如：
 
 ```shell
 yes >/dev/null &
@@ -17,7 +17,7 @@ sleep 2
 ps aux | grep yes
 ```
 
-将其保存为```kill.sh```，让其直接在当前交互式shell里执行：
+将其保存为`kill.sh`，让其直接在当前交互式shell里执行：
 
 ```shell
 source kill.sh
@@ -53,7 +53,7 @@ searchs+ 21990  0.0  0.0   9168   892 pts/2    S+   22:14   0:00 grep yes
 
 # 解决方法
 
-在shell脚本的开头加上```set -m```，使其进入monitor mode，这样可以开启job control，从而使得生成的后台子进程默认不忽略SIGINT。
+在shell脚本的开头加上`set -m`，使其进入monitor mode，这样可以开启job control，从而使得生成的后台子进程默认不忽略SIGINT。
 
 # 参考文献
 

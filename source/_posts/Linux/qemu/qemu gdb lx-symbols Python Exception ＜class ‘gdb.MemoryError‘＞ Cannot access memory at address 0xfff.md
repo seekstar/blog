@@ -3,7 +3,7 @@ title: qemu gdb lx-symbols Python Exception ＜class ‘gdb.MemoryError‘＞ Ca
 date: 2021-01-22 13:58:30
 ---
 
-在```/etc/default/grub```里的```GRUB_CMDLINE_LINUX```里加上```nokaslr```，然后更新一下```grub.cfg```：
+在`/etc/default/grub`里的`GRUB_CMDLINE_LINUX`里加上`nokaslr`，然后更新一下`grub.cfg`：
 centos上用
 ```shell
 sudo grub2-mkconfig -o /boot/grub2/grub.cfg

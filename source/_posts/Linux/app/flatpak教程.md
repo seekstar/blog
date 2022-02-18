@@ -43,7 +43,7 @@ session is restarted.
 
 意思是说，在重启之后，用flatpak安装的软件才能用桌面系统访问到。所以接下来先重启。
 
-重启之后就可以正常使用了。但是即使之后这两个目录加入到```XDG_DATA_DIRS```了，有些应用可能仍然需要注销并且重新登录才能在启动器找到。
+重启之后就可以正常使用了。但是即使之后这两个目录加入到`XDG_DATA_DIRS`了，有些应用可能仍然需要注销并且重新登录才能在启动器找到。
 
 ## 常用的命令
 
@@ -55,7 +55,7 @@ flatpak list # 列出已安装的包
 flatpak run 包名(比如com.jgraph.drawio.desktop)
 ```
 
-不同于apt，flatpak可以并行安装。安装的软件存放在```~/.var/app/```和```/var/lib/flatpak/app```里。一般来讲，软件的启动入口一般在```/var/lib/flatpak/app/com.jgraph.drawio.desktop/current/active/export/bin```。
+不同于apt，flatpak可以并行安装。安装的软件存放在`~/.var/app/`和`/var/lib/flatpak/app`里。一般来讲，软件的启动入口一般在`/var/lib/flatpak/app/com.jgraph.drawio.desktop/current/active/export/bin`。
 
 ## 为应用设置代理
 
@@ -97,21 +97,21 @@ flatpak install shadowsocks
 
 ### 国际版Minecraft
 
-```com.mojang.Minecraft```
+`com.mojang.Minecraft`
 
 ### Clash for Windows
 
-```io.github.Fndroid.clash_for_windows```
+`io.github.Fndroid.clash_for_windows`
 
 别被名字骗了，现在支持Linux了。
 
 ### Firefox国际版
 
-```org.mozilla.firefox```
+`org.mozilla.firefox`
 
 要先把系统里旧的firefox卸载，不然启动器启动的还是旧版本。
 
-在浏览器里没法把自己设置为默认浏览器了。但是一般可以在系统设置里手动设置。Deepin是在```设置->默认程序->网页```。
+在浏览器里没法把自己设置为默认浏览器了。但是一般可以在系统设置里手动设置。Deepin是在`设置->默认程序->网页`。
 
 ### KeePassXC
 
@@ -139,7 +139,7 @@ flatpak run com.jgraph.drawio.desktop
 bash: /var/lib/flatpak/app/com.jgraph.drawio.desktop/current/active/export/bin/com.jgraph.drawio.desktop：/bin/sh：解释器错误: 没有那个文件或目录
 ```
 
-这是因为这个脚本的后缀名是```.desktop```，然后系统以为它是启动器。
+这是因为这个脚本的后缀名是`.desktop`，然后系统以为它是启动器。
 
 ### Element
 
@@ -147,7 +147,7 @@ bash: /var/lib/flatpak/app/com.jgraph.drawio.desktop/current/active/export/bin/c
 
 ### Telegram
 
-包名是```org.telegram.desktop```。需要注销重新登录才能在deepin启动器里找到。需要配置代理，用```flatpak run --command=sh```的方法好像没用，貌似要在应用内设置代理。这个好像就能访问系统里的文件，这说明是Element打包有问题。
+包名是`org.telegram.desktop`。需要注销重新登录才能在deepin启动器里找到。需要配置代理，用`flatpak run --command=sh`的方法好像没用，貌似要在应用内设置代理。这个好像就能访问系统里的文件，这说明是Element打包有问题。
 
 ### torbrowser-launcher
 
@@ -159,7 +159,7 @@ launcher能打开，但是在系统启动器死活打不开tor browser。。。
 ~/.var/app/com.github.micahflee.torbrowser-launcher/data/torbrowser/tbb/x86_64/tor-browser_zh-CN/Browser/start-tor-browser
 ```
 
-注意如果选择下载的是英文版，那其中的```tor-browser_zh-CN```要换掉。
+注意如果选择下载的是英文版，那其中的`tor-browser_zh-CN`要换掉。
 
 关于tor browser本身能不能进flatpak可以看这个issue:
 

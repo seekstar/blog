@@ -3,7 +3,7 @@ title: "vscode: You must invoke LaTeX with the -shell-escape flag."
 date: 2021-04-13 23:59:34
 ---
 
-在```.vscode/settings.json```里写入：
+在`.vscode/settings.json`里写入：
 ```json
 {
     "latex-workshop.latex.magic.args": [

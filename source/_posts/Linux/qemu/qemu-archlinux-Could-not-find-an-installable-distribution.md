@@ -4,7 +4,7 @@ date: 2022-01-09 01:24:35
 tags:
 ---
 
-archlinux的ISO是hybrid结构的，要用```--cdrom=xxx.iso```来启动。
+archlinux的ISO是hybrid结构的，要用`--cdrom=xxx.iso`来启动。
 
 例子：
 

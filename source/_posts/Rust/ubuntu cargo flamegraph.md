@@ -52,7 +52,7 @@ cargo flamegraph -c "recor
 d -a -F 1 --call-graph=dwarf" --bin transaction-replayer -- --start-epoch 18000000 --epoch-to-execute 1000000 --commit-interval 10000
 ```
 
-注意用了```-c```时，```-F 1```要放到```-c```后面的perf参数里。
+注意用了`-c`时，`-F 1`要放到`-c`后面的perf参数里。
 
 # 常见错误的处理
 

@@ -37,7 +37,7 @@ sudo apt install pandoc
 npm i hexo-renderer-pandoc --save
 ```
 
-然后在想开启MathJax的博客前面加上```mathjax: true```，比如
+然后在想开启MathJax的博客前面加上`mathjax: true`，比如
 
 ```
 ---
@@ -48,7 +48,7 @@ mathjax: true
 ---
 ```
 
-如果懒得在每篇博客前面加上```mathjax: true```，就在```_config.yml```里加上
+如果懒得在每篇博客前面加上`mathjax: true`，就在`_config.yml`里加上
 
 ```yml
 mathjax:
@@ -70,7 +70,7 @@ $N^+ = \{x | x\in N \wedge x \ne 0\}$
 
 - 默认的markdown语法跟github的markdown语法不一样。
 
-这篇文章提供了一个workaround：<https://blog.rule55.com/hexo/>，即在```_config.yml```里加入
+这篇文章提供了一个workaround：<https://blog.rule55.com/hexo/>，即在`_config.yml`里加入
 
 ```yml
 # Configure pandoc to use all github markdown format extensions
@@ -87,13 +87,13 @@ pandoc:
     - +shortcut_reference_links
 ```
 
-其中```-implicit_figures```的来源：<https://github.com/wzpan/hexo-renderer-pandoc/issues/34>
+其中`-implicit_figures`的来源：<https://github.com/wzpan/hexo-renderer-pandoc/issues/34>
 
-但是感觉这样还是不太优雅。要是可以直接像其他渲染器那样直接传进一个```gfm```就好了。好像pandoc是有这个参数的，但是我在插件里的```index.js```里把```markdown-smart```改成```gfm```，并且改了后面的```register```之后没反应，不知道为什么。
+但是感觉这样还是不太优雅。要是可以直接像其他渲染器那样直接传进一个`gfm`就好了。好像pandoc是有这个参数的，但是我在插件里的`index.js`里把`markdown-smart`改成`gfm`，并且改了后面的`register`之后没反应，不知道为什么。
 
 - tree主题和pandoc混用后，默认的代码语法高亮很难看。
 
-代码的基础色是蓝色的，即大部分代码的字是蓝色的，然后代码是黑底的，看起来很难受。我的方法是在tree主题里的```layout/_partial/head.ejs```里把
+代码的基础色是蓝色的，即大部分代码的字是蓝色的，然后代码是黑底的，看起来很难受。我的方法是在tree主题里的`layout/_partial/head.ejs`里把
 
 ```js
 	<%- css('https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.17.1/build/styles/darcula.min.css') %>
@@ -107,7 +107,7 @@ pandoc:
 
 然后底就会变成浅灰色，但是代码基础色还是蓝色的。要是能把基础色调成黑色就好了。
 
-此外，我还试过在```_config.yml```里加上
+此外，我还试过在`_config.yml`里加上
 
 ```yml
 pandoc:
@@ -137,7 +137,7 @@ npm un hexo-renderer-marked --save
 npm i hexo-renderer-markdown --save
 ```
 
-但是hexo-renderer-markdown好像有high severity vulnerabilities。而且仍然有些Latex公式不能正常显示。比如```\underset{theta}{\bowtie}```。而且单行公式里如果有```\}```的话公式就不能正常显示了。
+但是hexo-renderer-markdown好像有high severity vulnerabilities。而且仍然有些Latex公式不能正常显示。比如`\underset{theta}{\bowtie}`。而且单行公式里如果有`\}`的话公式就不能正常显示了。
 
 ### 方案三：hexo-math + hexo-renderer-marked
 

@@ -9,7 +9,7 @@ date: 2020-03-29 23:53:53
 <https://www.zhihu.com/question/267091656>
 
 # 非模态窗口的内存释放
-使用setAttribute(Qt::WA_DeleteOnClose)。其中WA是```Window Attribute```
+使用setAttribute(Qt::WA_DeleteOnClose)。其中WA是`Window Attribute`
 ```cpp
 HelpWindow *w = new HelpWindow;
 w->setAttribute(Qt::WA_DeleteOnClose);

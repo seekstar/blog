@@ -3,11 +3,11 @@ title: matplotlib中使用latex
 date: 2020-12-10 18:13:06
 ---
 
-比方说要插入一个```千分之```符号。
+比方说要插入一个`千分之`符号。
 参考：<https://stackoverflow.com/questions/44242079/how-do-i-get-a-per-mille-sign-in-my-axis-title-using-latex-in-matplotlib>
-如果使用xelatex，那就```\usepackage{amsmath}```
-如果使用pdflatex，就```\usepackage{textcomb}```
-然后text模式下的```\textperthousand```就是```千分之```符号了。
+如果使用xelatex，那就`\usepackage{amsmath}`
+如果使用pdflatex，就`\usepackage{textcomb}`
+然后text模式下的`\textperthousand`就是`千分之`符号了。
 # import
 ```py
 import pandas as pd

@@ -9,7 +9,7 @@ date: 2021-07-22 12:46:16
 # 逐行读入
 文件：<https://www.cnblogs.com/sysuoyj/archive/2012/03/14/2395789.html>
 
-从stdin中逐行读入只需要把上面中的文件换成```sys.stdin```即可。
+从stdin中逐行读入只需要把上面中的文件换成`sys.stdin`即可。
 例子：
 ```py
 import sys
@@ -21,5 +21,5 @@ for line in sys.stdin:
 参考：<https://stackoverflow.com/questions/1450393/how-do-you-read-from-stdin>
 
 # 读取参数
-```sys.argv```: 参数列表。```sys.argv[0]```一般是当前命令。
-```len(sys.argv)```是参数个数。
+`sys.argv`: 参数列表。`sys.argv[0]`一般是当前命令。
+`len(sys.argv)`是参数个数。

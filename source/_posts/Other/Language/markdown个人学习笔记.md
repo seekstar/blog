@@ -40,7 +40,7 @@ $$
 # 多行公式对齐
 参考：<https://zhidao.baidu.com/question/500652228447668004.html>
 
-跟latex的语法差不多，只是要用一对```$$```包起来。
+跟latex的语法差不多，只是要用一对`$$`包起来。
 ```markdown
 $$
 \begin{aligned}

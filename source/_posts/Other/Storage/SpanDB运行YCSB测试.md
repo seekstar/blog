@@ -36,7 +36,7 @@ able to use with DPDK and VFIO if run as current user.
 To change this, please adjust limits.conf memlock limit for current user.
 ```
 
-但是查看```/proc/meminfo```的话，又能看到huge page已经分配好了：
+但是查看`/proc/meminfo`的话，又能看到huge page已经分配好了：
 
 ```
 HugePages_Total:   2048
@@ -82,7 +82,7 @@ make -j$(nproc)
 db_stress.cc:(.text.startup+0x1): undefined reference to `rocksdb::db_stress_tool(int, char**)'
 ```
 
-但是build文件夹下面```librocksdb```的静态库和动态库都编译好了，所以这条编译报错也许可以不用管？
+但是build文件夹下面`librocksdb`的静态库和动态库都编译好了，所以这条编译报错也许可以不用管？
 
 ## 编译SpanDB目录下面的YCSB测试程序
 
@@ -90,7 +90,7 @@ db_stress.cc:(.text.startup+0x1): undefined reference to `rocksdb::db_stress_too
 cd SpanDB/ycsb
 ```
 
-这下面的```CMakeLists.txt```是错的，要把
+这下面的`CMakeLists.txt`是错的，要把
 
 ```
 INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/../build/include)
@@ -125,13 +125,13 @@ make
 
 ## 运行YCSB测试
 
-使用编译出来的```test```文件来测试，其参数：
+使用编译出来的`test`文件来测试，其参数：
 
 ```
 usage: <workload_file> <client_num> <data_dir> <log_dir> <is_load> <dbname> <db_bak>
 ```
 
-在```ycsb/workloads```下面有一些自带的workload。
+在`ycsb/workloads`下面有一些自带的workload。
 
 ### 生成DB
 
@@ -139,7 +139,7 @@ usage: <workload_file> <client_num> <data_dir> <log_dir> <is_load> <dbname> <db_
 ./test <workload_file> 40 <data_dir> <log_dir> 1 rocksdb <db_bak>
 ```
 
-这个时候最后一个参数```db_bak```会被忽略，生成的DB在```data_dir```里。需要手动把```data_dir```移动到```db_bak```。
+这个时候最后一个参数`db_bak`会被忽略，生成的DB在`data_dir`里。需要手动把`data_dir`移动到`db_bak`。
 
 数据写入完成之后会sleep两个3分钟，可能是为了等待后台任务完成，然后打印一些信息之后才会退出，要耐心等待。
 
@@ -153,9 +153,9 @@ ulimit -n 100000
 ./test <workload_file> 40 <data_dir> <log_dir> 0 rocksdb <db_bak>
 ```
 
-这一步会先把```data_path```给清空，然后把```db_bak```里的内容复制到```data_path```里，然后再跑workload。
+这一步会先把`data_path`给清空，然后把`db_bak`里的内容复制到`data_path`里，然后再跑workload。
 
-官方文档里这一步没有```ulimit -n 100000```，但是```workloada.spec```生成的DB里有1608个文件，而默认最多能同时打开1024个file descriptor：
+官方文档里这一步没有`ulimit -n 100000`，但是`workloada.spec`生成的DB里有1608个文件，而默认最多能同时打开1024个file descriptor：
 
 ```
 $ ulimit -n
@@ -171,13 +171,13 @@ ulimit -n 100000
 ./test <workload_file> 8 <data_dir> $PCIE_ADDR 0 spandb <db_bak>
 ```
 
-其中PCIe地址可以通过```sudo lspci```查找，我的是：
+其中PCIe地址可以通过`sudo lspci`查找，我的是：
 
 ```
 01:00.0 Non-Volatile memory controller: Samsung Electronics Co Ltd NVMe SSD Controller PM9A1/980PRO
 ```
 
-其中的```01:00.0```就是这个SSD的PCIe地址。
+其中的`01:00.0`就是这个SSD的PCIe地址。
 
 SpanDB默认分配了90GB的SPDK缓存，如果前面huge page没有申请够，会分配失败：
 
@@ -188,13 +188,13 @@ already allocated 3.38 GB
 /home/searchstar/git/others/SpanDB/env/io_spdk.h:111: SPDK allocate memory failed
 ```
 
-这时要么多申请一些huge page，要么减少TopFS使用的cache，即将```ycsb/src/test.cc```中的```main```函数里的
+这时要么多申请一些huge page，要么减少TopFS使用的cache，即将`ycsb/src/test.cc`中的`main`函数里的
 
 ```C
 options.topfs_cache_size = 90;
 ```
 
-改成更小的值，然后重新```make```，再跑就好了。
+改成更小的值，然后重新`make`，再跑就好了。
 
 ## 参考文献
 

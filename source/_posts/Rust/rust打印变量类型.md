@@ -3,7 +3,7 @@ title: rust打印变量类型
 date: 2021-09-29 20:30:45
 ---
 
-可以试试```std::any::type_name```。注意，这个是unstable的。
+可以试试`std::any::type_name`。注意，这个是unstable的。
 
 ```rs
 use std::collections::HashSet;

@@ -4,7 +4,7 @@ date: 2022-01-21 22:37:04
 tags:
 ---
 
-```ctrl + shift + p```
+`ctrl + shift + p`
 
 执行命令：
 

@@ -11,9 +11,9 @@ tags:
 
 ![在这里插入图片描述](wsl使用图形界面/20200409223243460.png)
 
-这时windows桌面成了```:0.0```号桌面
+这时windows桌面成了`:0.0`号桌面
 
-- 在wsl中安装```x11-apps```
+- 在wsl中安装`x11-apps`
 ```shell
 sudo apt-get install x11-apps
 ```

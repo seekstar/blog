@@ -59,7 +59,7 @@ tags: 学习笔记
 
 1. 在enumerate中的item后换行用\par，这样与正文之间会有一条缝隙。
 ![在这里插入图片描述](latex个人学习笔记/20200402205824533.png)
-如果使用```\\```换行则标题与正文之间没有缝隙，很难看
+如果使用`\\`换行则标题与正文之间没有缝隙，很难看
 ![在这里插入图片描述](latex个人学习笔记/20200402205909906.png)
 
 ## 公式中插入中文
@@ -72,14 +72,9 @@ tags: 学习笔记
 
 参考：<https://blog.csdn.net/dyzok88/article/details/44222765>
 
-左单引号（键盘上1左边那个）
- ```
- `
- ```
- 左双引号（按两下键盘上1左边的按键）
- ```
- ``
- ```
+左单引号（键盘上1左边那个）`` ` ``
+
+ 左双引号（按两下键盘上1左边的按键）``` `` ```
 
 ## 把下标放到正下方
 
@@ -142,8 +137,8 @@ $$\mathop{\bowtie}\limits_{theta}$$
 \end{figure}
 ```
 
-其中```\center```表示图片位置居中，```width=\textwidth```表示宽度与页面等宽，```img/condition.png```是图片文件的相对位置。
-如果不想让图片乱动，可以加```[H]```选项
+其中`\center`表示图片位置居中，`width=\textwidth`表示宽度与页面等宽，`img/condition.png`是图片文件的相对位置。
+如果不想让图片乱动，可以加`[H]`选项
 
 ```tex
 \begin{figure}[H]
@@ -268,7 +263,7 @@ $$\mathop{\bowtie}\limits_{theta}$$
 \end{tabular}
 ```
 
-- ```|c|```: 居中并且单元格两侧添加竖线。(Centering)
+- `|c|`: 居中并且单元格两侧添加竖线。(Centering)
 - hline: 水平线（Horizontal LINE)
 
 效果
@@ -330,13 +325,13 @@ $$\mathop{\bowtie}\limits_{theta}$$
 \end{table}
 ```
 
-如果不想让它乱跑可以用```\begin{table}[H]```，但是要加上```\usepackage{float}```
+如果不想让它乱跑可以用`\begin{table}[H]`，但是要加上`\usepackage{float}`
 
 ### 设置标题
 
 参考：<https://blog.csdn.net/wkd22775/article/details/51791553>
 
-用```\caption{标题}```
+用`\caption{标题}`
 
 #### 放在表上方
 
@@ -360,7 +355,7 @@ $$\mathop{\bowtie}\limits_{theta}$$
 
 #### 放到表下面
 
-把```\caption{标题}```放到```\end{table}```前面
+把`\caption{标题}`放到`\end{table}`前面
 
 ```tex
 \begin{table}
@@ -407,7 +402,7 @@ $$\mathop{\bowtie}\limits_{theta}$$
 
 ![在这里插入图片描述](latex个人学习笔记/20210101133334334.png)
 
-如果不想要这个缩进，将tabular包裹在一个```table```环境中即可。
+如果不想要这个缩进，将tabular包裹在一个`table`环境中即可。
 
 ```tex
 	\begin{enumerate}
@@ -456,7 +451,7 @@ $$\mathop{\bowtie}\limits_{theta}$$
 
 ### 等式
 
-```equation*```中的```*```表示不要编号。
+`equation*`中的`*`表示不要编号。
 
 ```tex
 \begin{equation*}
@@ -483,7 +478,7 @@ $$\mathop{\bowtie}\limits_{theta}$$
 
 ## 标签
 
-用```\label```创建标签，用```\ref```引用标签
+用`\label`创建标签，用`\ref`引用标签
 
 ```tex
 \begin{equation}\label{t1}
@@ -511,7 +506,7 @@ $$\mathop{\bowtie}\limits_{theta}$$
 \setmonofont[StylisticSet=1]{inconsolata}	%1 or 3??? 让0中间有一个斜线，让l不像1。
 ```
 
-在```\maketitle```后面设定默认的代码样式。下面是适合黑白打印的设定：
+在`\maketitle`后面设定默认的代码样式。下面是适合黑白打印的设定：
 
 ```tex
 	\lstset{ %  

@@ -9,14 +9,14 @@ date: 2020-11-09 12:44:03
 mtcars[mtcars$gear == 3,]
 ```
 # 判断某值是否在某集合中
-用```%in%```
+用`%in%`
 ```
 > 4 %in% 3:5
 [1] TRUE
 ```
 # 将数字list转化为字符串list
 <https://bbs.pinggu.org/thread-4134694-1-1.html>
-用```as.character```
+用`as.character`
 ```
 > as.character(2:4)
 [1] "2" "3" "4"
@@ -26,4 +26,4 @@ mtcars[mtcars$gear == 3,]
 ```R
 ?par
 ```
-里面各种参数都有。比如可以调节大小（比如点的大小）的```cex```。
+里面各种参数都有。比如可以调节大小（比如点的大小）的`cex`。

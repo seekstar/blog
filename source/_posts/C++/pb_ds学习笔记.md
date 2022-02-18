@@ -34,12 +34,12 @@ class __gnu_pbds::tree< Key, Mapped, Cmp_Fn, Tag, Node_Update, _Alloc >
 - Tag
 常用rb_tree_tag, splay_tree_tag
 - Node_Update
-常用```tree_order_statistics_node_update```。
+常用`tree_order_statistics_node_update`。
 它提供了以下成员函数
-1. ```size_type order_of_key(key_const_reference key) const```
-返回比```key```小的元素的个数
-2. ```iterator 	find_by_order (size_type order)```以及其const版本
-返回第```order```大的元素的迭代器
+1. `size_type order_of_key(key_const_reference key) const`
+返回比`key`小的元素的个数
+2. `iterator 	find_by_order (size_type order)`以及其const版本
+返回第`order`大的元素的迭代器
 ## 用法举例
 - 一颗名次红黑树
 ```cpp
@@ -53,9 +53,9 @@ tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update> 
 返回最小的 >= key 的元素的迭代器
 - upper_bound
 返回最小的 > key 的元素的迭代器
-- ```a.join(tree& b)```
+- `a.join(tree& b)`
 b并入a，前提是两棵树的key的取值范围不相交。b会被清空。
-- ```a.split(Key v, tree& b)```
+- `a.split(Key v, tree& b)`
 key小于等于v的元素属于a，其余的属于b。b原有的元素会被清空。
 
 # 堆
@@ -72,10 +72,10 @@ key小于等于v的元素属于a，其余的属于b。b原有的元素会被清�
 template<typename _Tv, typename Cmp_Fn = std::less<_Tv>, typename Tag = pairing_heap_tag, typename _Alloc = std::allocator<char>>
 class __gnu_pbds::priority_queue< _Tv, Cmp_Fn, Tag, _Alloc >
 ```
-使用时必须带上```__gnu_pbds::```，因为它与```std::priority_queue```重名了。
+使用时必须带上`__gnu_pbds::`，因为它与`std::priority_queue`重名了。
 
 ## 迭代器
-它的迭代器叫做```point_iterator```。例如
+它的迭代器叫做`point_iterator`。例如
 ```cpp
 __gnu_pbds::priority_queue<int>::point_iterator it;
 ```
@@ -88,7 +88,7 @@ __gnu_pbds::priority_queue<int>::point_iterator it;
 - thin_heap_tag
 
 ## 常用成员函数
-同```std::priority_queue```的成员函数有
+同`std::priority_queue`的成员函数有
 - top
 - size
 - empty
@@ -98,9 +98,9 @@ __gnu_pbds::priority_queue<int>::point_iterator it;
 不同的有
 - push
 返回迭代器
-- ```join(priority_queue &other)```
+- `join(priority_queue &other)`
 合并两个堆,other会被清空
-- ```split(Pred prd,priority_queue &other)```
+- `split(Pred prd,priority_queue &other)`
 分离出两个堆。其中Pred是predicate（谓词）的缩写，用于判断哪些元素被放入other中。如果prd(key)返回true，key被放入other中。
 
 例如把a中小于３的数放入b中
@@ -114,5 +114,5 @@ struct less_than {
 
 a.split(less_than<int, 3>(), b);
 ```
- - ```modify(point_iterator it,const key)```
- 修改迭代器```it```指向的值为```key```。
+ - `modify(point_iterator it,const key)`
+ 修改迭代器`it`指向的值为`key`。

@@ -9,7 +9,7 @@ date: 2021-07-29 11:27:26
 brew install xquartz
 ```
 
-安装程序会自动在```/etc/ssh/ssh_config```里加上
+安装程序会自动在`/etc/ssh/ssh_config`里加上
 
 ```
 # XAuthLocation added by XQuartz (https://www.xquartz.org)
@@ -17,15 +17,15 @@ Host *
     XAuthLocation /opt/X11/bin/xauth
 ```
 
-然后打开XQuartz，右键任务栏里的XQuartz图标，选择```应用程序->终端```，在里面输入
+然后打开XQuartz，右键任务栏里的XQuartz图标，选择`应用程序->终端`，在里面输入
 
 ```shell
 ssh -AXY username@ip
 ```
 
-```-A```: ForwardAgent yes
-```-X```: ForwardX11 yes
-```-Y```: ForwardX11Trusted yes
+`-A`: ForwardAgent yes
+`-X`: ForwardX11 yes
+`-Y`: ForwardX11Trusted yes
 
 注意，用系统自带的其他终端是不可以的。
 
@@ -34,7 +34,7 @@ ssh -AXY username@ip
 ```shell
 echo $DISPLAY
 ```
-如果有输出代表成功了。比如我这是```localhost:10.0```
+如果有输出代表成功了。比如我这是`localhost:10.0`
 
 试一下简单的GUI应用：
 

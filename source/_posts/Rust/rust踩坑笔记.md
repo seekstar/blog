@@ -11,7 +11,7 @@ date: 2021-09-29 15:54:29
 
 坑：mpsc的channel从不阻塞发送方，它有无限的缓冲。结果读取远远比写入快，导致大量内存被消耗。
 
-解决方案：用```sync_channel```：
+解决方案：用`sync_channel`：
 
 ```rs
 pub fn sync_channel<T>(bound: usize) -> (SyncSender<T>, Receiver<T>)

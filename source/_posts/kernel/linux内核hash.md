@@ -103,7 +103,7 @@ ctx: 空数组的首地址，相当于汇编里的一个标号，指向结构体
 CRYPTO_MINALIGN_ATTR的含义是通过可能的字节填充，使得ctx是以最大的对齐标准对齐的，防止出现对齐错误。例如在我的机器上，CRYPTO_MINALIGN_ATTR的含义是强制以64位对齐。
 
 ## struct sdesc
-加密handler的第二层封装。我个人觉得上一层封装```struct shash_desc```已经可以用了。但是既然官方文档都自定义了一个结构体，就……
+加密handler的第二层封装。我个人觉得上一层封装`struct shash_desc`已经可以用了。但是既然官方文档都自定义了一个结构体，就……
 ```c
 struct sdesc {
     struct shash_desc shash;
@@ -129,7 +129,7 @@ static struct sdesc *init_sdesc(struct crypto_shash *alg)
 ```
 crypto_shash_descsize(alg): 得到这个加密算法需要的buffer大小。
 
-struct shash_desc的大小加上buffer大小就是总共需要申请的内存大小```size```。
+struct shash_desc的大小加上buffer大小就是总共需要申请的内存大小`size`。
 
 kmalloc: 申请小于一页的内存。其中GFP_KERNEL表示申请正常的内核RAM，可以睡眠。参考：<https://www.kernel.org/doc/htmldocs/kernel-api/API-kmalloc.html>
 
@@ -150,7 +150,7 @@ out就是生成的哈希值。
 
 # 非加密哈希
 一种非常快的哈希质量很好的非加密哈希函数为xxHash系列（xxh32和xxh64）
-在```linux/xxhash.h```中xxh32的声明如下：
+在`linux/xxhash.h`中xxh32的声明如下：
 ```c
 uint32_t xxh32(const void *input, size_t length, uint32_t seed);
 ```

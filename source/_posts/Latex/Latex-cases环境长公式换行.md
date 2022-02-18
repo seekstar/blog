@@ -22,7 +22,7 @@ f(x) = \begin{cases}
 \end{cases}
 $$
 
-可以通过插入```matrix```环境来实现换行：
+可以通过插入`matrix`环境来实现换行：
 
 ```tex
 $$

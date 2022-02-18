@@ -13,9 +13,9 @@ make allnoconfig
 make -j4
 ```
 
-其中```make allnoconfig```表示除必须的选项外, 其它选项一律不选。
+其中`make allnoconfig`表示除必须的选项外, 其它选项一律不选。
 
-然后就可以发现```vmlinux```和```arch/x86/boot/bzImage```都是确定性的。需要注意的是其他文件可能仍然是不确定的。关于这两个文件的描述可以看这里：<https://en.wikipedia.org/wiki/Vmlinux>
+然后就可以发现`vmlinux`和`arch/x86/boot/bzImage`都是确定性的。需要注意的是其他文件可能仍然是不确定的。关于这两个文件的描述可以看这里：<https://en.wikipedia.org/wiki/Vmlinux>
 
 参考文献
 <https://blog.abraithwaite.net/2014/08/12/deterministic-kernel-builds/>

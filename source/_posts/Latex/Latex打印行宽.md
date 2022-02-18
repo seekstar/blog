@@ -17,4 +17,4 @@ textwidth: \printinunitsof{in}\prntlen{\textwidth}
 linewidth: \printinunitsof{in}\prntlen{\linewidth}
 ```
 
-然后编译一下，对应的地方就会以英寸为单位打印出```textwidth```和```linewidth```了。
+然后编译一下，对应的地方就会以英寸为单位打印出`textwidth`和`linewidth`了。

@@ -76,7 +76,7 @@ gcc main.o mymath.lib -o main.exe
 gcc main.c mymath.dll -o main
 ```
 ## 运行
-要确保mymath.dll与可执行文件在同一目录或者在```C:\Windows\System32\```
+要确保mymath.dll与可执行文件在同一目录或者在`C:\Windows\System32\`
 ```shell
 .\main.exe
 ```
@@ -109,16 +109,21 @@ gcc -fPIC -shared sub.c add.c -o libmymath.so
 
 ## 生成main
 如果libmymath.so在当前目录，则
+
 ```shell
 gcc -c main.c
 gcc main.o -L. -lmymath -o main
 ```
+
 或者一步到位：
+
 ```shell
 gcc main.c -L. -lmymath -o main
 ```
-```-L.```的作用是让操作系统在当前目录下找libmymath.so。
-如果libmymath.so在共享库目录如```/lib```里，就不需要```-L.```。
+
+`-L.`的作用是让操作系统在当前目录下找libmymath.so。
+如果libmymath.so在共享库目录如`/lib`里，就不需要`-L.`。
+
 ```shell
 gcc main.c -lmymath -o main
 ```
@@ -130,12 +135,16 @@ gcc main.c -lmymath -o main
 
 - 直接把它放到/lib或者/usr/lib里
 - 如果只是需要临时起效，可以这样把环境变量LD_LIBRARY_PATH设置到libmymath.so所在目录，例如
+
 ```shell
 LD_LIBRARY_PATH=~/lib ./main
 ```
+
 或者
+
 ```shell
 export LD_LIBRARY_PATH=~/lib
 ./main
 ```
-- 编辑/etc/ld.so.conf文件，加入libmymath.so所在目录的绝对路径，然后```sudo ldconfig```重建/etc/ld.so.cache
+
+- 编辑/etc/ld.so.conf文件，加入libmymath.so所在目录的绝对路径，然后`sudo ldconfig`重建/etc/ld.so.cache

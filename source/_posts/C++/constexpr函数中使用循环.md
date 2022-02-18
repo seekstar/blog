@@ -17,4 +17,4 @@ constexpr int pow(int a, int b) {
 static_assert(pow(3, 4) == 81);
 ```
 
-感谢```@deepbluev7:neko.dev```告知。
+感谢`@deepbluev7:neko.dev`告知。

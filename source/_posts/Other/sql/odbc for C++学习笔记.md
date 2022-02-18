@@ -38,7 +38,7 @@ SQLRETURN  SQL_API SQLBindCol(SQLHSTMT StatementHandle,
 用来存数据的缓冲区的长度。odbc将只使用缓冲区的前BufferLength个字节的空间。如果要存入的数据达到或超过了BufferLength，则只把BufferLength字节的数据存入缓冲区。
 
 ## 读取字符串示例
-由于C语言中字符串以```'\0'```结尾，所以缓冲区的长度要比数据库中的多1。例如某表第6列为
+由于C语言中字符串以`'\0'`结尾，所以缓冲区的长度要比数据库中的多1。例如某表第6列为
 ```sql
 dno char(10)
 ```
@@ -70,13 +70,13 @@ SQLRETURN SQLBindParameter(
       SQLPOINTER      ParameterValuePtr,  
       SQLLEN          BufferLength,  
       SQLLEN *        StrLen_or_IndPtr);  
- ```
+```
 ## ParameterNumber
 从１开始
 ## InputOutputType
-一般是```SQL_PARAM_INPUT```和```SQL_PARAM_OUTPUT```
+一般是`SQL_PARAM_INPUT`和`SQL_PARAM_OUTPUT`
 ## ValueType
-同```SQLBindCol```
+同`SQLBindCol`
 ## ParameterType
 告诉odbc这一列的数据类型。
 与ValueType的关系：

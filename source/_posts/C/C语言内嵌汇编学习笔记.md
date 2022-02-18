@@ -22,8 +22,9 @@ asm asm-qualifiers ( AssemblerTemplate
 AssemblerTemplate 是汇编模板，可以有多条（一般用"\n\t"隔开）。OutputOperands是输出，InputOperands是输入，Clobbers是受影响的东西。
 
 # Assembler Template
-AssemblerTemplate 里引用C语言变量时可以使用编号，比如```%i```表示OutputOperands和InputOperands里的第i个变量。
+AssemblerTemplate 里引用C语言变量时可以使用编号，比如`%i`表示OutputOperands和InputOperands里的第i个变量。
 例子：
+
 ```c
 uint32_t Mask = 1234;
 uint32_t Index;
@@ -32,12 +33,14 @@ uint32_t Index;
      : "=r" (Index)
      : "r" (Mask)
      : "cc");
- ```
+```
+
 %0就是Index，%1就是Mask。
 所以这段代码的意思是把Mask的最高的"1"位的下标存入Index中。
 参考：<https://blog.csdn.net/zdl1016/article/details/8763803>
 
 也可以使用名字。例子：
+
 ```c
 uint32_t Mask = 1234;
 uint32_t Index;
@@ -46,7 +49,8 @@ uint32_t Index;
      : [aIndex] "=r" (Index)
      : [aMask] "r" (Mask)
      : "cc");
- ```
+```
+
 其中aIndex可以直接换为Index，aMask可以直接换为Mask。
 
 # Output Operands
@@ -57,9 +61,9 @@ uint32_t Index;
 不同的operand之间用逗号隔开。
 
 ## prefix
-Output operands的constraint必须以```=```或```+```开始。
-```=```: 把结果写入
-```+```: 既读又写。此时这个operand不需要在Input Operands里出现。
+Output operands的constraint必须以`=`或`+`开始。
+`=`: 把结果写入
+`+`: 既读又写。此时这个operand不需要在Input Operands里出现。
 
 ## additional constraints
 文档：<https://gcc.gnu.org/onlinedocs/gcc/Constraints.html#Constraints>
@@ -104,7 +108,7 @@ asm ("cmoveq %1, %2, %[result]"
 
 内存屏障有效率问题。所以如果知道会读写哪些内存，就可以在Input operands和Output operands里指定，而不需要使用"memory"。
 例子：
-假设指令```vecmul x, y, z```含义是```*z++ = *x++ * *y++```，那么写成内嵌汇编应该是
+假设指令`vecmul x, y, z`含义是`*z++ = *x++ * *y++`，那么写成内嵌汇编应该是
 ```c
 asm ("vecmul %0, %1, %2"
      : "+r" (z), "+r" (x), "+r" (y), "=m" (*z)
@@ -136,7 +140,7 @@ clflush: cache line flush
 文档：<https://c9x.me/x86/html/file_module_x86_id_30.html>
 博客（中文）：<https://blog.csdn.net/u014800094/article/details/51150718?ops_request_misc=%7B%22request%5Fid%22%3A%22158277765519726867802802%22%2C%22scm%22%3A%2220140713.130056874..%22%7D&request_id=158277765519726867802802&biz_id=0&utm_source=distribute.pc_search_result.none-task>
 
-```clflush(p)```的含义简单来说就是把包含p指向的内存的cache line写入内存，然后将这个cache line无效化，也就是说今后读取这个cache line对应的部分时都要重新从内存中读取。
+`clflush(p)`的含义简单来说就是把包含p指向的内存的cache line写入内存，然后将这个cache line无效化，也就是说今后读取这个cache line对应的部分时都要重新从内存中读取。
 
 "+m"指读写内存。
 <https://stackoverflow.com/questions/36226627/why-does-clflush-needs-m-constant>

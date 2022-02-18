@@ -107,7 +107,7 @@ g++ main.cpp C:\Windows\System32\odbc32.dll -o main.exe
 ```shell
 .\main.exe
 ```
-前面的```.\```千万不能少。
+前面的`.\`千万不能少。
 
 如果正确输出说明配置成功了。
 
@@ -123,7 +123,7 @@ D:\git\small_projects\qt\db\dbap_company\odbc.cpp:35: error: cannot convert 'SQL
                                                                                                              ^
 ```
 说明编译器用了UNICODE。
-修改方法是在```xxxx.pro```文件中加入
+修改方法是在`xxxx.pro`文件中加入
 ```
 DEFINES  -= UNICODE
 ```
@@ -135,14 +135,14 @@ vs里的修改方法：<https://blog.csdn.net/bzkmjczldxl/article/details/520534
 
 ## 链接odbc
 我这里使用的是odbc32
-在```xxxx.pro```中加入
+在`xxxx.pro`中加入
 ```
 LIBS += -lodbc32
 ```
 
 ## 总结
 判断操作系统类型看[我的另一篇文章](https://blog.csdn.net/qq_41961459/article/details/105401011)
-在```xxxx.pro```中加入
+在`xxxx.pro`中加入
 ```
 win32 {
     DEFINES  -= UNICODE

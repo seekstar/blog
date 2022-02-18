@@ -4,7 +4,7 @@ date: 2020-04-23 12:09:08
 tags:
 ---
 
-例如在文件```test.txt```里写入
+例如在文件`test.txt`里写入
 ```
 test
 ```
@@ -39,9 +39,9 @@ stat test.txt
 创建时间：-
 ```
 会发现大小为5字节，说明linux的文件中加上了其他东西。
-用```hexdump```来看看到底加上了什么。
+用`hexdump`来看看到底加上了什么。
 ![在这里插入图片描述](sha256sum文件哈希值和直接哈希字符串的哈希值不一样/20201026125233724.png)
-居然是```0x0a```，也就是```\n```。为了验证，用vscode打开它看看
+居然是`0x0a`，也就是`\n`。为了验证，用vscode打开它看看
 ![在这里插入图片描述](sha256sum文件哈希值和直接哈希字符串的哈希值不一样/20201026125339199.png)
 末尾果然多了个换行符。把它去掉，保存。
 ![在这里插入图片描述](sha256sum文件哈希值和直接哈希字符串的哈希值不一样/20201026125504958.png)
@@ -71,7 +71,7 @@ test<EOF>
 
 # vim中禁用自动加换行
 参考：<https://stackoverflow.com/questions/1050640/vim-disable-automatic-newline-at-end-of-file>
-在```~/.vimrc```中加入
+在`~/.vimrc`中加入
 ```
 set noeol
 set nofixendofline

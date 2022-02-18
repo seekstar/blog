@@ -3,9 +3,9 @@ title: Go语言快速读写
 date: 2021-04-16 11:51:10
 ---
 
-Go语言可以用```fmt.Scan```和```fmt.Println```来读写，但是效率极低，在OJ上可能会TLE。
+Go语言可以用`fmt.Scan`和`fmt.Println`来读写，但是效率极低，在OJ上可能会TLE。
 
-解决方案是使用```bufio```。
+解决方案是使用`bufio`。
 ```go
 func main() {
 	out := bufio.NewWriter(os.Stdout)

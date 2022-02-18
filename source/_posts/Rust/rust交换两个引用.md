@@ -77,7 +77,7 @@ fn foo<'a>(mut x: &'a i32, mut y: &'a i32) {
 2 1
 ```
 
-当然，也可以用```swap```：
+当然，也可以用`swap`：
 
 ```rust
 use std::mem::swap;

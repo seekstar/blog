@@ -4,7 +4,7 @@ date: 2020-04-25 00:29:25
 tags:
 ---
 
-我使用的boost版本是1.62，所以下面的文档都是1.62的。如果想看其他版本的，把url中的```1_62_0```换成你想看的版本即可。
+我使用的boost版本是1.62，所以下面的文档都是1.62的。如果想看其他版本的，把url中的`1_62_0`换成你想看的版本即可。
 
 [官方文档](https://www.boost.org/doc/libs/1_62_0/doc/html/boost_asio/overview/ssl.html)
 
@@ -20,7 +20,7 @@ tags:
 g++ -o server server.cpp -lssl -lcrypto -lboost_system
 g++ -o client client.cpp -pthread -lssl -lcrypto -lboost_system
 ```
-不要用```-mt```（可能没有开启多线程？<https://stackoverflow.com/questions/4596492/usr-bin-ld-cannot-find-lboost-system-mt>）
+不要用`-mt`（可能没有开启多线程？<https://stackoverflow.com/questions/4596492/usr-bin-ld-cannot-find-lboost-system-mt>）
 
 ### 可能出现的错误及解决方案
 1. 
@@ -41,7 +41,7 @@ sudo apt install -y libboost_system-dev
 ```shell
 sudo apt install libboost-all-dev
 ```
-注意只安装```libboost-dev```是没有上面所说的库的。
+注意只安装`libboost-dev`是没有上面所说的库的。
 
 ## 生成证书
 参考：

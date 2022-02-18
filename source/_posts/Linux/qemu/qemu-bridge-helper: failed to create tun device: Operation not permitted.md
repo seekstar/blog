@@ -13,7 +13,7 @@ error: internal error: /usr/lib/qemu/qemu-bridge-helper --use-vnet --br=br0 --fd
 stderr=failed to create tun device: Operation not permitted
 ```
 
-原因：```qemu-bridge-helper```需要set uid，但是deepin的apt没有自动设置这个权限。需要手动设置：
+原因：`qemu-bridge-helper`需要set uid，但是deepin的apt没有自动设置这个权限。需要手动设置：
 
 ```shell
 sudo chmod 4755 /usr/lib/qemu/qemu-bridge-helper

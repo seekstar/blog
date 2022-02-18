@@ -17,7 +17,7 @@ sudo systemctl disable lightdm
 startx
 ```
 # 默认进入GUI
-按理说```sudo systemctl enable lightdm```应该是可以的，但是我这里提示不能用```systemctl```启动lightdm。
+按理说`sudo systemctl enable lightdm`应该是可以的，但是我这里提示不能用`systemctl`启动lightdm。
 
 ## 方法1
 参考：<https://tieba.baidu.com/p/5195178229>
@@ -31,4 +31,4 @@ sudo service lightdm start
 ```
 缺点是开机的时候会短暂进入命令行界面。
 
-如果没有```/etc/rc.local```，自行百度，利用systemctl模拟之。
+如果没有`/etc/rc.local`，自行百度，利用systemctl模拟之。

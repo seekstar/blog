@@ -63,7 +63,7 @@ values ("1"), ("2");
 select DISTINCT id
 from stu
 ```
-这个子查询的复杂度为O(xy)。因为stu中有```xy```行，然后扫一遍，用哈希表除重。
+这个子查询的复杂度为O(xy)。因为stu中有`xy`行，然后扫一遍，用哈希表除重。
 ```sql
 select c
 from stu

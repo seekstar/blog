@@ -3,7 +3,7 @@ title: centos端口转发
 date: 2021-08-14 19:41:48
 ---
 
-比方说监听本地的```23333```端口，将数据都转发到```10.249.40.227```的22端口上，可以这样：
+比方说监听本地的`23333`端口，将数据都转发到`10.249.40.227`的22端口上，可以这样：
 
 ```shell
 sudo yum install nmap-ncat
@@ -16,13 +16,13 @@ ncat --sh-exec "ncat 10.249.40.227 22" -l 23333 --keep-open
 nohup ncat --sh-exec "ncat 10.249.40.227 22" -l 23333 --keep-open &
 ```
 
-然后查看一下```23333```端口是否开放了：
+然后查看一下`23333`端口是否开放了：
 
 ```shell
 sudo firewall-cmd --zone=public --list-ports
 ```
 
-如果里面有```23333/tcp```，就说明开放了，否则需要这样开放端口：
+如果里面有`23333/tcp`，就说明开放了，否则需要这样开放端口：
 
 ```shell
 sudo firewall-cmd --zone=public --add-port=23333/tcp --permanent

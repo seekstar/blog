@@ -8,7 +8,7 @@ date: 2020-12-28 13:58:21
 
 ![在这里插入图片描述](编译安装linux内核/20201228134406637.png)
 
-一般下载tarball，也就是.tar.xz格式的源码包。如果```/```够大，可以直接解压到```/usr/src```，也可以解压到机械盘上。
+一般下载tarball，也就是.tar.xz格式的源码包。如果`/`够大，可以直接解压到`/usr/src`，也可以解压到机械盘上。
 
 # 配置
 ```shell
@@ -28,7 +28,7 @@ make menuconfig
 make -j$(nproc) > /dev/null
 ```
 
-```> /dev/null```是为了防止warning和error被刷掉，比如让我们装```libelf-dev```的警告。
+`> /dev/null`是为了防止warning和error被刷掉，比如让我们装`libelf-dev`的警告。
 
 # 安装内核模块
 如果没有特殊需求，一般可以把内核模块的debug信息给去掉，节约安装空间。
@@ -36,7 +36,7 @@ make -j$(nproc) > /dev/null
 make INSTALL_MOD_STRIP=1 modules_install > /dev/null
 ```
 
-注意对于centos不能```INSTALL_MOD_STRIP=1```，不然启动貌似会出问题。应该
+注意对于centos不能`INSTALL_MOD_STRIP=1`，不然启动貌似会出问题。应该
 
 ```shell
 make modules_install
@@ -53,15 +53,15 @@ make install
 没有规则可制作目标“certs/rhel.pem”，由“certs/x509_certificate_list” 需求。
 ```
 
-那可能要把```.config```里的```CONFIG_SYSTEM_TRUSTED_KEYS```后面引号里的东西删掉。
+那可能要把`.config`里的`CONFIG_SYSTEM_TRUSTED_KEYS`后面引号里的东西删掉。
 
-另外要注意看看有没有要我们安装```console-setup```和```plymouth-themes```的提示。
+另外要注意看看有没有要我们安装`console-setup`和`plymouth-themes`的提示。
 
 
 # 更新grub
-一般```make install```的时候会自动做。但是如果电脑上装了多个linux，那选系统界面的grub可能不是当前系统提供的，这个时候就要去提供grub的那个系统做一次```update-grub```才行。
+一般`make install`的时候会自动做。但是如果电脑上装了多个linux，那选系统界面的grub可能不是当前系统提供的，这个时候就要去提供grub的那个系统做一次`update-grub`才行。
 
-对于centos，```make install```的时候好像不会自动更新grub，需要手动更新：
+对于centos，`make install`的时候好像不会自动更新grub，需要手动更新：
 
 ```shell
 sudo grub2-mkconfig -o /boot/grub2/grub.cfg

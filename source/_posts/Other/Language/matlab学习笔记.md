@@ -7,8 +7,8 @@ tags:
 # 注释
 参考：<https://blog.csdn.net/yyywww666/article/details/48752643>
 
-单行注释用```%```
-多行注释用```%{ ..... %}```
+单行注释用`%`
+多行注释用`%{ ..... %}`
 # 定义符号变量
 ```matlab
 syms f x

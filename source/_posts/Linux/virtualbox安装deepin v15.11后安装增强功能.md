@@ -17,7 +17,7 @@ tags:
 
 打开。
 
-不要运行autorun.sh，会提示出错。以root运行```VBoxLinuxAdditions.run```
+不要运行autorun.sh，会提示出错。以root运行`VBoxLinuxAdditions.run`
 
 ![在这里插入图片描述](virtualbox安装deepin%20v15.11后安装增强功能/2020082217082673.png)
 

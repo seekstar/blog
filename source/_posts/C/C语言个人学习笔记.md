@@ -8,7 +8,7 @@ date: 2020-03-22 14:32:18
 <https://www.cnblogs.com/liuzhanshan/p/6861596.html>
 <https://blog.csdn.net/weixin_40676873/article/details/85239890>
 
-这一系列不带后缀表示参数是unsigned int，例如```__builtin_ctz```，带后缀```l```表示参数是long，例如```__builtin_ctzl```，带后缀```ll```表示参数是long long，例如```__builtin_ctzll```。
+这一系列不带后缀表示参数是unsigned int，例如`__builtin_ctz`，带后缀`l`表示参数是long，例如`__builtin_ctzl`，带后缀`ll`表示参数是long long，例如`__builtin_ctzll`。
 
 | 函数 | 功能 | 备注 |
 | ---- | ---- | ---- |
@@ -27,8 +27,8 @@ date: 2020-03-22 14:32:18
 右移是向下取整。
 
 # float常量
-在小数后面加```f```即可，例如```1.0f```。
-但是不能是```1f```，因为```1```是整型。
+在小数后面加`f`即可，例如`1.0f`。
+但是不能是`1f`，因为`1`是整型。
 
 # 常用库函数
 ## string.h

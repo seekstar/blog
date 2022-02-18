@@ -18,7 +18,7 @@ frp还支持p2p内网穿透，即服务器端只充当牵线搭桥的作用，�
 
 在CentOS 8 Stream上测试通过。这里以实现开启自启frps为例。
 
-安装```supervisor```：
+安装`supervisor`：
 
 ```shell
 sudo yum install supervisor
@@ -31,7 +31,7 @@ sudo systemctl enable supervisord
 sudo systemctl start supervisord
 ```
 
-然后在```/etc/supervisord.d/frps.ini```里写入：
+然后在`/etc/supervisord.d/frps.ini`里写入：
 
 ```
 [program:frps] 
@@ -57,13 +57,13 @@ frps                             RUNNING   pid 33557, uptime 0:02:09
 
 在Deepin 20上测试通过。这里以实现开机自启frpc为例。
 
-先安装```supervisor```:
+先安装`supervisor`:
 
 ```shell
 sudo apt install supervisor
 ```
 
-然后在```/etc/supervisor/conf.d/frpc.conf```里写入：
+然后在`/etc/supervisor/conf.d/frpc.conf`里写入：
 
 ```
 [program:frpc] 
@@ -94,13 +94,13 @@ sudo supervisorctl status frpc
 frpc                             RUNNING   pid 6214, uptime 5:17:13
 ```
 
-更改了```/etc/supervisor/conf.d/frpc.conf```之后，这样重启：
+更改了`/etc/supervisor/conf.d/frpc.conf`之后，这样重启：
 
 ```shell
 sudo supervisorctl restart frpc
 ```
 
-注意，如果当前的连接是通过frpc提供的内网穿透通道提供的，那么重启的过程中当前连接会断掉，然后这个shell就会被杀掉，然后这个重启过程会中断，然后连接就永远丢失了。为了使得重启的过程不会因为连接中断而终止，要用```nohup```使其与当前shell detach：
+注意，如果当前的连接是通过frpc提供的内网穿透通道提供的，那么重启的过程中当前连接会断掉，然后这个shell就会被杀掉，然后这个重启过程会中断，然后连接就永远丢失了。为了使得重启的过程不会因为连接中断而终止，要用`nohup`使其与当前shell detach：
 
 ```shell
 sudo -s

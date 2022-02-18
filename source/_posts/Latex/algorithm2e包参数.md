@@ -43,5 +43,5 @@ date: 2021-06-04 15:58:28
 # noend
 ![在这里插入图片描述](algorithm2e包参数/20210604155153346.png)
 # vlined
-默认使用```\SetAlgoVlined```。
+默认使用`\SetAlgoVlined`。
 ![在这里插入图片描述](algorithm2e包参数/20210604155640722.png)

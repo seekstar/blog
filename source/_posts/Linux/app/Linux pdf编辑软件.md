@@ -9,7 +9,7 @@ File->Annotate PDF->找到要编辑的PDF文件
 
 Tools里选择Pen可以画线，选择Eraser可以擦掉画的线，但是不能擦掉原有内容，选择Highlighter可以当荧光笔用，选择Text可以插入文字，选择Image可以插入图片，选择Select Region可以移动插入的图片。
 
-编辑完之后可以保存为```.xoj```文件。但是一定要注意这个xoj文件不是stand alone的，它是以原PDF文件作为背景的，所以原PDF文件一定要保存好，而且路径不能变。
+编辑完之后可以保存为`.xoj`文件。但是一定要注意这个xoj文件不是stand alone的，它是以原PDF文件作为背景的，所以原PDF文件一定要保存好，而且路径不能变。
 
 但是这个软件好像已经没人维护了：<http://xournal.sourceforge.net/>
 

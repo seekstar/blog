@@ -9,7 +9,7 @@ target remote :1234
 ```
 之后设置的断点。
 
-如果使用了```-enable-kvm```，就必须要设置硬件断点，gdb命令为hbreak，缩写为hb。注意硬件断点需要硬件支持，所以不一定有效。
+如果使用了`-enable-kvm`，就必须要设置硬件断点，gdb命令为hbreak，缩写为hb。注意硬件断点需要硬件支持，所以不一定有效。
 
 如果是在内核模块里的断点，还需要按以下顺序进行操作：
 
@@ -17,11 +17,11 @@ target remote :1234
 ```Makefile
 ccflags-y += -g -DDEBUG -O1
 ```
-不能用```-O0```，可能会报错。
+不能用`-O0`，可能会报错。
 
 2. 让gdb自动加载内核模块的符号
 
-先在```~/.gdbinit```里加上
+先在`~/.gdbinit`里加上
 ```
 add-auto-load-safe-path /full_path_to_kernel_build_dir/scripts/gdb/vmlinux-gdb.py
 ```
@@ -29,7 +29,7 @@ add-auto-load-safe-path /full_path_to_kernel_build_dir/scripts/gdb/vmlinux-gdb.p
 ```
 add-auto-load-safe-path /mnt/hdd/kernel/gdb/linux-nova/scripts/gdb/vmlinux-gdb.py
 ```
-这样gdb里的```lx-symbols```就可以用了。
+这样gdb里的`lx-symbols`就可以用了。
 
 然后在gdb里执行：
 ```gdb

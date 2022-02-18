@@ -58,7 +58,7 @@ m.mean(axis=0) # 将第0维干掉。实际上就是求每列的平均数
 m.mean(axis=1) # 将第1维干掉。实际上就是求每行的平均数
 ```
 
-要求标准差的话，把上面的```mean```换成```std```即可。
+要求标准差的话，把上面的`mean`换成`std`即可。
 
 # 参考文献
 [python中矩阵的用法](https://www.cnblogs.com/abella/p/10207945.html)

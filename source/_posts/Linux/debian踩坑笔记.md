@@ -6,15 +6,15 @@ date: 2021-06-01 23:43:52
 ## 安装
 
 下载镜像：<http://mirrors.ustc.edu.cn/debian-cd/>
-选择对应的版本和CPU类型，然后我选的```iso-dvd```，只下载```DVD-1.iso```就好了，其他的都是额外的软件包。
+选择对应的版本和CPU类型，然后我选的`iso-dvd`，只下载`DVD-1.iso`就好了，其他的都是额外的软件包。
 
-安装前一定要把网线拔了，因为安装过程中，即使选了镜像，```http://security.debian.org/debian-security```仍然会被使用，这特别慢。
+安装前一定要把网线拔了，因为安装过程中，即使选了镜像，`http://security.debian.org/debian-security`仍然会被使用，这特别慢。
 
 如果不能用鼠标的话，不要用Graphical Install，要用字符界面的Install。Graphical Install里的software selection环节必须要用鼠标点击continue。
 
 提示缺少iwlwifi firmware时，先选否，装好系统之后再装wifi驱动。
 
-分区要选择格式化，可启动标志可以保持```关```。
+分区要选择格式化，可启动标志可以保持`关`。
 
 网络镜像那里选否，因为我们已经把网线拔了。
 
@@ -29,7 +29,7 @@ date: 2021-06-01 23:43:52
 ## 换镜像源
 
 这里换成中科大源。
-编辑```/etc/apt/sources.list```，把内容替换成：
+编辑`/etc/apt/sources.list`，把内容替换成：
 
 ```
 deb http://mirrors.ustc.edu.cn/debian stable main contrib non-free
@@ -66,7 +66,7 @@ sudo apt install fcitx-sunpinyin
 fcitx-config-gtk3
 ```
 
-取消```Only Show Current Language```的勾，搜pinyin，点OK。
+取消`Only Show Current Language`的勾，搜pinyin，点OK。
 
 ### rime
 
@@ -76,9 +76,9 @@ sudo apt install fcitx-rime
 fcitx-config-gtk3
 ```
 
-取消```Only Show Current Language```的勾，搜rime，点OK。
+取消`Only Show Current Language`的勾，搜rime，点OK。
 
-然后按ctrl+空格切换到rime输入法，然后右键右上角的rime图标，```Schema List -> xx拼音-简化字```，就可以输入简体中文了。
+然后按ctrl+空格切换到rime输入法，然后右键右上角的rime图标，`Schema List -> xx拼音-简化字`，就可以输入简体中文了。
 
 ## 安装wifi驱动
 
@@ -86,7 +86,7 @@ fcitx-config-gtk3
 <https://www.debian.org/releases/index.zh-cn.html>
 debian10是buster。
 
-然后在```/etc/apt/sources.list```里加上
+然后在`/etc/apt/sources.list`里加上
 
 ```
 deb http://httpredir.debian.org/debian/ debian版本代号 main contrib non-free

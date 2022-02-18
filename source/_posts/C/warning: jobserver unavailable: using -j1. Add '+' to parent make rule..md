@@ -6,7 +6,7 @@ tags:
 
 参考：<https://stackoverflow.com/questions/9147196/makefile-pass-jobs-param-to-sub-makefiles>
 
-把```make```换成```$(MAKE)```
+把`make`换成`$(MAKE)`
 例：
 ```Makefile
 debug: $(OBJS)

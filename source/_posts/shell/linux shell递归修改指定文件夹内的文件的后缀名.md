@@ -5,7 +5,7 @@ tags:
 ---
 
 参考：<https://blog.csdn.net/longxibendi/article/details/6387732>
-上文的方法3在存在带有```.```的子文件夹时会出错。
+上文的方法3在存在带有`.`的子文件夹时会出错。
 本文使用sed去掉文件后缀名，可以解决这个问题。
 ```shell
 #!/bin/bash

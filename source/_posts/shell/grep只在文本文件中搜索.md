@@ -6,7 +6,7 @@ tags:
 
 参考：<https://stackoverflow.com/questions/9806944/grep-only-text-files>
 
-```I```选项表示不搜索binary文件。
+`I`选项表示不搜索binary文件。
 ```shell
 grep -Irn string_to_search
 ```

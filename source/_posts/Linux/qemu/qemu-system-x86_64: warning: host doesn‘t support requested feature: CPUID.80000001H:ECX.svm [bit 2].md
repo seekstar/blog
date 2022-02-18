@@ -3,7 +3,7 @@ title: "qemu-system-x86_64: warning: host doesn‘t support requested feature: C
 date: 2021-08-08 03:14:47
 ---
 
-我在virtualbox里的虚拟机里用qemu创建虚拟机时报这个错。解决方法是在命令里加上```-cpu host```
+我在virtualbox里的虚拟机里用qemu创建虚拟机时报这个错。解决方法是在命令里加上`-cpu host`
 
 ```shell
 sudo qemu-system-x86_64 -cpu host -m 1024 -enable-kvm centos.img -cdrom ~/Downloads/CentOS-8.2.2004-x86_64-minimal.iso

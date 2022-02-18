@@ -4,7 +4,7 @@ date: 2020-06-05 15:13:47
 tags:
 ---
 
-用```realpath```即可。
+用`realpath`即可。
 
 ```shell
 searchstar@searchstar-PC:/tmp/test$ ls

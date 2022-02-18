@@ -37,7 +37,7 @@ ctrl+s就可以自动编译，不需要命令行。
 ```shell
 make all
 ```
-如果要用vscode的话，要把```main.tex```里的
+如果要用vscode的话，要把`main.tex`里的
 ```
 % !TEX program  = XeLaTeX
 ```
@@ -45,7 +45,7 @@ make all
 ```
 % !TEX program  = xelatex
 ```
-否则vscode会报错：```Recipe terminated with fatal error: spawn XeLaTeX ENOENT.```，因为linux是大小写敏感的。
+否则vscode会报错：`Recipe terminated with fatal error: spawn XeLaTeX ENOENT.`，因为linux是大小写敏感的。
 
 # 添加.gitignore
 ```
@@ -86,7 +86,7 @@ main.pdf
 
 ![在这里插入图片描述](hitszthesis%20Linux使用笔记/20210210131815121.png)
 
-复制下来放到项目根目录下的```reference.bib```里
+复制下来放到项目根目录下的`reference.bib`里
 
 ![在这里插入图片描述](hitszthesis%20Linux使用笔记/20210210131918685.png)
 
@@ -94,7 +94,7 @@ main.pdf
 
 ![在这里插入图片描述](hitszthesis%20Linux使用笔记/20210210132013504.png)
 
-注意更改了```reference.bib```之后要
+注意更改了`reference.bib`之后要
 
 ```
 bibtex main
@@ -102,17 +102,17 @@ bibtex main
 
 才会生效。
 
-然后再编译几下```main.tex```就好了。
+然后再编译几下`main.tex`就好了。
 
 ![在这里插入图片描述](hitszthesis%20Linux使用笔记/20210210132152797.png)
 
 ![在这里插入图片描述](hitszthesis%20Linux使用笔记/20210210132211113.png)
 
-引用misc类型的参考文献可能会报错```Unsupported entry type```。参照<https://blog.csdn.net/haifeng_gu/article/details/107342684>，将```misc```改成```Online```即可。
+引用misc类型的参考文献可能会报错`Unsupported entry type`。参照<https://blog.csdn.net/haifeng_gu/article/details/107342684>，将`misc`改成`Online`即可。
 
 # 伪代码
-hitszthesis的伪代码用的是```algorithm2e```包，已经自带了，不需要另外usepackage。
-注意algorithm2e里是用```\;```来结束一条语句，而不是用```\State```来开始一条语句。
+hitszthesis的伪代码用的是`algorithm2e`包，已经自带了，不需要另外usepackage。
+注意algorithm2e里是用`\;`来结束一条语句，而不是用`\State`来开始一条语句。
 algorithm2e教程：
 <https://blog.csdn.net/yq_forever/article/details/89815562>
 <https://wenda.latexstudio.net/article-5052.html>

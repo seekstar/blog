@@ -47,7 +47,7 @@ zero_impl!(i128, 0);
 zero_impl!(f32, 0.0);
 zero_impl!(f64, 0.0);
 ```
-把这段复制一下就可以用```Zero```trait了。
+把这段复制一下就可以用`Zero` trait了。
 示例：
 ```rust
 pub trait Zero {

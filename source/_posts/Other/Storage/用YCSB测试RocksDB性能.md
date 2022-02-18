@@ -21,17 +21,17 @@ sudo apt install -y maven
 mvn -pl site.ycsb:rocksdb-binding -am clean package -T 线程数
 ```
 
-有些老的教程里是用的```com.yahoo.ycsb```，最新版本的YCSB已经换成了```site.ycsb```。
+有些老的教程里是用的`com.yahoo.ycsb`，最新版本的YCSB已经换成了`site.ycsb`。
 
 ### 负载测试
 
-YCSB在```workloads```目录下有一些预定义的workload，这里以workloada为例：
+YCSB在`workloads`目录下有一些预定义的workload，这里以workloada为例：
 
 ```shell
 bin/ycsb.sh load rocksdb -s -P workloads/workloada -p rocksdb.dir=/tmp/rocksdb_test/
 ```
 
-但是直接运行这个会报错，因为默认的```rocksdb/pom.xml```里少了依赖，要把```core/pom.xml```里的这两个依赖加到```rocksdb/pom.xml```里的```dependencies```里：
+但是直接运行这个会报错，因为默认的`rocksdb/pom.xml`里少了依赖，要把`core/pom.xml`里的这两个依赖加到`rocksdb/pom.xml`里的`dependencies`里：
 
 - htrace
 
@@ -71,7 +71,7 @@ Exception in thread "Thread-2" java.lang.NoClassDefFoundError: org/HdrHistogram/
 mvn -pl site.ycsb:rocksdb-binding -am clean package -T 线程数
 ```
 
-再跑```workloada```：
+再跑`workloada`：
 
 ```shell
 rm -r /tmp/rocksdb_test/
@@ -109,7 +109,7 @@ sudo apt install -y cmake
 
 #### 跨平台相关包（未验证）
 
-如果不安装这些依赖，就要改```Makefile```来取消跨平台，教程：[rocksdb在YCSB中的运行教程](https://blog.csdn.net/a993096281/article/details/87864340)。注意，用```#```注释掉可能不太行，最好直接删掉。
+如果不安装这些依赖，就要改`Makefile`来取消跨平台，教程：[rocksdb在YCSB中的运行教程](https://blog.csdn.net/a993096281/article/details/87864340)。注意，用`#`注释掉可能不太行，最好直接删掉。
 
 简单起见，这里就装一下这些依赖。
 
@@ -135,9 +135,9 @@ The character device /dev/vboxdrv does not exist
 make rocksdbjavastaticrelease
 ```
 
-编译出来的文件在```java/target/rocksdbjni-6.27.3.jar```。
+编译出来的文件在`java/target/rocksdbjni-6.27.3.jar`。
 
-把这个文件复制到YCSB的```rocksdb/target/dependency/```下面，然后更改```rocksdb/pom.xml```，找到```rocksdbjni```的部分，把它的```version```从默认的
+把这个文件复制到YCSB的`rocksdb/target/dependency/`下面，然后更改`rocksdb/pom.xml`，找到`rocksdbjni`的部分，把它的`version`从默认的
 
 ```
 <version>${rocksdb.version}</version>
@@ -161,7 +161,7 @@ mvn -pl site.ycsb:rocksdb-binding -am clean package
 bin/ycsb.sh load rocksdb -s -P workloads/workloada -p rocksdb.dir=/tmp/rocksdb_test/
 ```
 
-从输出可以看到已经用上了```rocksdbjni-6.27.3.jar```：
+从输出可以看到已经用上了`rocksdbjni-6.27.3.jar`：
 
 ```
 /usr/lib/jvm/default-java/bin/java  -classpath /home/searchstar/git/YCSB/conf:/home/searchstar/git/YCSB/core/target/core-0.18.0-SNAPSHOT.jar:/home/searchstar/git/YCSB/rocksdb/target/rocksdb-binding-0.18.0-SNAPSHOT.jar:/home/searchstar/git/YCSB/rocksdb/target/dependency/HdrHistogram-2.1.4.jar:/home/searchstar/git/YCSB/rocksdb/target/dependency/htrace-core4-4.1.0-incubating.jar:/home/searchstar/git/YCSB/rocksdb/target/dependency/jcip-annotations-1.0.jar:/home/searchstar/git/YCSB/rocksdb/target/dependency/rocksdbjni-6.27.3.jar:/home/searchstar/git/YCSB/rocksdb/target/dependency/slf4j-api-1.7.25.jar:/home/searchstar/git/YCSB/rocksdb/target/dependency/slf4j-simple-1.7.25.jar site.ycsb.Client -load -db site.ycsb.db.rocksdb.RocksDBClient -s -P workloads/workloada -p rocksdb.dir=/tmp/rocksdb_test/

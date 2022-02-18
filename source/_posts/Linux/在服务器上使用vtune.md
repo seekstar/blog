@@ -7,7 +7,7 @@ date: 2021-09-19 15:57:05
 
 在这里选择合适的下载方式：<https://software.intel.com/content/www/cn/zh/develop/tools/oneapi/base-toolkit/download.html>
 
-如果没有GUI，就用```Command Line Installation```里的命令来下载安装。我的是这样的：
+如果没有GUI，就用`Command Line Installation`里的命令来下载安装。我的是这样的：
 
 ```shell
 wget https://registrationcenter-download.intel.com/akdlm/irc_nas/17769/l_BaseKit_p_2021.2.0.2883.sh
@@ -22,15 +22,15 @@ sudo bash l_BaseKit_p_2021.2.0.2883.sh
 
 下面简单介绍一下基础用法。
 
-首先安装两个插件：```Sample Browser for Intel oneAPI Toolkits```和```Environment Configurator for Intel oneAPI Toolkits```
+首先安装两个插件：`Sample Browser for Intel oneAPI Toolkits`和`Environment Configurator for Intel oneAPI Toolkits`
 
-然后按```Ctrl+Shift+P```，输入```Intel oneAPI```，点击```Intel oneAPI: Initialize environment variables```，一般可以自动发现安装目录（如果安装在默认的```/opt/intel/oneapi```下的话）。
+然后按`Ctrl+Shift+P`，输入`Intel oneAPI`，点击`Intel oneAPI: Initialize environment variables`，一般可以自动发现安装目录（如果安装在默认的`/opt/intel/oneapi`下的话）。
 
-然后点击最左边导航栏里的oneapi图标，会提示```oneapi-cli```找不到，问你是否下载，点击```Yes```即可。但是可能会下载失败。这时可能要在<https://github.com/intel/oneapi-cli>手动下载下来上传到服务器，然后更名为```oneapi-cli```放到```/usr/local/bin```里，记得要给执行权限。
+然后点击最左边导航栏里的oneapi图标，会提示`oneapi-cli`找不到，问你是否下载，点击`Yes`即可。但是可能会下载失败。这时可能要在<https://github.com/intel/oneapi-cli>手动下载下来上传到服务器，然后更名为`oneapi-cli`放到`/usr/local/bin`里，记得要给执行权限。
 
-然后选择```cpp->Get Started->Base: Vector Add```，点击右边的加号，编辑路径后，vscode会新建一个样例工程并且在新窗口打开。可以查看```README.md```，里面有这个样例工程的介绍以及运行流程。对于Vector Add这个样例，流程是：
+然后选择`cpp->Get Started->Base: Vector Add`，点击右边的加号，编辑路径后，vscode会新建一个样例工程并且在新窗口打开。可以查看`README.md`，里面有这个样例工程的介绍以及运行流程。对于Vector Add这个样例，流程是：
 
-先```Ctrl+Shift+P```跑```Intel oneAPI: Initialize environment variables```，然后新建终端，执行：
+先`Ctrl+Shift+P`跑`Intel oneAPI: Initialize environment variables`，然后新建终端，执行：
 
 ```shell
 make all
@@ -60,7 +60,7 @@ vtune的教程：<https://software.intel.com/content/www/us/en/develop/documenta
 source /opt/intel/oneapi/setvars.sh
 ```
 
-可以运行```vtune --help```查看基本用法，运行```vtune -help collect```查看可以搜集的性能数据。
+可以运行`vtune --help`查看基本用法，运行`vtune -help collect`查看可以搜集的性能数据。
 
 例子：
 
@@ -68,7 +68,7 @@ source /opt/intel/oneapi/setvars.sh
 vtune -collect hotspots -result-dir hotspots -quiet ./vector-add-buffers
 ```
 
-注意这个```./```不能省略。```-collect```可以缩写为```-c```，```-result-dir```可以缩写为```-r```，```-quiet```可以缩写为```-q```。
+注意这个`./`不能省略。`-collect`可以缩写为`-c`，`-result-dir`可以缩写为`-r`，`-quiet`可以缩写为`-q`。
 
 输出：
 
@@ -154,7 +154,7 @@ Alternatively, you may view the report in the csv format: vtune -report
 
 # 查看结果
 
-运行```vtune -help report```来查看如何生成报告。最简单的例子：
+运行`vtune -help report`来查看如何生成报告。最简单的例子：
 
 ```shell
 vtune -report hotspots -r <结果目录>
@@ -174,7 +174,7 @@ vtune-gui <结果目录>
 
 来查看结果。相关文档：<https://software.intel.com/content/www/us/en/develop/documentation/vtune-help/top/command-line-interface/working-with-results-from-the-command-line/viewing-command-line-results-in-the-gui.html>
 
-或者也可以参考这篇文章：{% post_link Linux/'vnc通过ssh隧道连接到Linux服务器' %}，然后直接用服务器上的```vtune-gui```打开结果文件，并把窗口显示在本地：
+或者也可以参考这篇文章：{% post_link Linux/'vnc通过ssh隧道连接到Linux服务器' %}，然后直接用服务器上的`vtune-gui`打开结果文件，并把窗口显示在本地：
 
 ![在这里插入图片描述](在服务器上使用vtune/c6903226a2fc4683bbd2dcd9c347f1df.png)
 事实上，通过vnc的方式，可以直接建一个vtune工程来做性能测试：

@@ -11,7 +11,7 @@ tags:
 ```shell
 sudo apt install redshift
 ```
-在```~/.config/autostart```里创建文件```redshift.desktop```，内容：
+在`~/.config/autostart`里创建文件`redshift.desktop`，内容：
 ```
 [Desktop Entry]
 Version=1.0

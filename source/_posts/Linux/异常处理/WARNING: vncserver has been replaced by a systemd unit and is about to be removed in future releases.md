@@ -3,7 +3,7 @@ title: "WARNING: vncserver has been replaced by a systemd unit and is about to b
 date: 2021-08-12 21:00:46
 ---
 
-```/usr/share/doc/tigervnc/HOWTO.md```里有新版本的使用方法。这里放一下简单的用法。
+`/usr/share/doc/tigervnc/HOWTO.md`里有新版本的使用方法。这里放一下简单的用法。
 
 ```shell
 sudo vim /etc/tigervnc/vncserver.users

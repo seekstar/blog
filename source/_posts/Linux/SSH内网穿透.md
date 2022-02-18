@@ -16,21 +16,21 @@ ssh -R 6100:localhost:8789 服务器IP
 ssh localhost 6100
 ```
 
-要允许所有IP都能通过服务器的6100端口连接上这台机器，需要在服务器上的```/etc/ssh/sshd_config```里加上
+要允许所有IP都能通过服务器的6100端口连接上这台机器，需要在服务器上的`/etc/ssh/sshd_config`里加上
 
 ```
 GatewayPorts yes
 ```
 
-然后重启```sshd```:
+然后重启`sshd`:
 
 ```shell
 sudo systemctl restart sshd
 ```
 
-（没试过```systemctl reload```可不可以）
+（没试过`systemctl reload`可不可以）
 
-改这个配置的原因见```man ssh```:
+改这个配置的原因见`man ssh`:
 
 ```text
      -R [bind_address:]port:host:hostport
@@ -51,7 +51,7 @@ sudo systemctl restart sshd
 
 ## autossh
 
-直接用ssh的话，断开连接之后并不会重连。所以使用autossh，在连接断开后重连。网上的教程通常是使用monitor port监测连接是否正常的，但是这样要在服务器上额外占用一个端口。其实```man autossh```已经提示我们可以用SSH自带的```ServerAliveInterval```和```ServerAliveCountMax```来检测连接是否正常，而且这可能是更好的方法：
+直接用ssh的话，断开连接之后并不会重连。所以使用autossh，在连接断开后重连。网上的教程通常是使用monitor port监测连接是否正常的，但是这样要在服务器上额外占用一个端口。其实`man autossh`已经提示我们可以用SSH自带的`ServerAliveInterval`和`ServerAliveCountMax`来检测连接是否正常，而且这可能是更好的方法：
 
 ```text
      -M port[:echo_port]
@@ -64,20 +64,20 @@ sudo systemctl restart sshd
              this may be a better solution than the monitoring port.
 ```
 
-所以在内网机器上配置```~/.ssh/config```，例如：
+所以在内网机器上配置`~/.ssh/config`，例如：
 
 ```text
 Host 服务器IP
         ServerAliveInterval 60
 ```
 
-然后启动```autossh```:
+然后启动`autossh`:
 
 ```shell
 autossh -M 0 -R 6100:localhost:8789 服务器IP
 ```
 
-有些发行版比如Debian可以省略掉```-M 0```。
+有些发行版比如Debian可以省略掉`-M 0`。
 
 可以在服务器端查一下有没有额外的monitor port:
 
@@ -87,9 +87,9 @@ sudo lsof -i
 
 ## 后台静默运行
 
-```-f```: 要求 ssh 在执行命令前退至后台。
+`-f`: 要求 ssh 在执行命令前退至后台。
 
-```-N```: 不执行远程命令. 用于转发端口. (仅限协议第二版)。
+`-N`: 不执行远程命令. 用于转发端口. (仅限协议第二版)。
 
 所以可以：
 
@@ -115,7 +115,7 @@ stdout_logfile=/tmp/autossh_stdout.log
 user = searchstar
 ```
 
-注意这里没有```-f```。
+注意这里没有`-f`。
 
 ## 参考
 

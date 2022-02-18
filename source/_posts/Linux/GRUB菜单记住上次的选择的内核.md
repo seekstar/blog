@@ -4,7 +4,7 @@ date: 2022-01-11 18:17:27
 tags:
 ---
 
-在```/etc/default/grub```里加上：
+在`/etc/default/grub`里加上：
 
 ```shell
 # 原先要到advanced submenu选内核，把submenu禁用之后，选内核的menu entry就暴露在顶层menu了。

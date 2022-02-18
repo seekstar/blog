@@ -10,23 +10,23 @@ tags:
 No filesystem could mount root
 ```
 
-检查了```/etc/fstab```和生成的```/boot/grub/grub.cfg```，都是对的。
+检查了`/etc/fstab`和生成的`/boot/grub/grub.cfg`，都是对的。
 
-但是在grub的GUI界面在archlinux的项按```e```，进入grub编辑器之后，却发现```initrd```那行只有这个：
+但是在grub的GUI界面在archlinux的项按`e`，进入grub编辑器之后，却发现`initrd`那行只有这个：
 
 ```
 initrd /boot/intel-ucode.img
 ```
 
-但是```/boot/grub/grub.cfg```里这行是这个：
+但是`/boot/grub/grub.cfg`里这行是这个：
 
 ```
 initrd	/boot/intel-ucode.img /boot/initramfs-linux-lts.img
 ```
 
-在grub编辑器里手动加上```/boot/initramfs-linux-lts.img```之后，就能进系统了。
+在grub编辑器里手动加上`/boot/initramfs-linux-lts.img`之后，就能进系统了。
 
-所以问题的原因是GRUB GUI的界面是debian 11提供的，但是debian 11的GRUB有BUG，在读取arch的```/boot/grub/grub.cfg```时在```initrd```这行少读了一项，生成了错误的GRUB菜单。
+所以问题的原因是GRUB GUI的界面是debian 11提供的，但是debian 11的GRUB有BUG，在读取arch的`/boot/grub/grub.cfg`时在`initrd`这行少读了一项，生成了错误的GRUB菜单。
 
 解决方法有如下几个：
 
@@ -42,7 +42,7 @@ initrd	/boot/initramfs-linux-lts.img
 
 教程：<https://arcolinux.com/fix-for-kernel-panic-when-dualbooting-with-intel-ucode-or-amd-ucode/>
 
-但是这个更改不是永久的，下次```update-grub```的时候更改就会被覆盖掉。
+但是这个更改不是永久的，下次`update-grub`的时候更改就会被覆盖掉。
 
 - 手动给GRUB打补丁
 
@@ -52,4 +52,4 @@ initrd	/boot/initramfs-linux-lts.img
 
 ## 致谢
 
-感谢```#archlinux:archlinux.org```里的各位大佬的帮助。
+感谢`#archlinux:archlinux.org`里的各位大佬的帮助。

@@ -22,7 +22,7 @@ retcode = SQLDriverConnect(hdbc, NULL, (SQLCHAR*)connStr, sizeof(connStr), outCo
 ```
 # 坑
 - 注意如果第二个参数为NULL的话，最后一个参数不能为SQL_DRIVER_PROMPT，否则会连接失败。
-- 连接串的Driver不能写成```SQLite3 ODBC Driver```。猜测是因为```/etc/odbcinst.ini```里只有```SQLite3```。
+- 连接串的Driver不能写成`SQLite3 ODBC Driver`。猜测是因为`/etc/odbcinst.ini`里只有`SQLite3`。
 
 # 完整代码
 ```cpp

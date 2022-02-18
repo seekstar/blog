@@ -27,7 +27,7 @@ fn main() {
 }
 ```
 
-目前的1.53.0版本的rustc还不支持```struct ModVal<T, const P: T>```这种，不然会报错：
+目前的1.53.0版本的rustc还不支持`struct ModVal<T, const P: T>`这种，不然会报错：
 ```
 the type must not depend on the parameter `T`
 ```

@@ -29,7 +29,7 @@ mysql
 UPDATE mysql.user SET plugin = 'mysql_native_password', Password = PASSWORD('a') WHERE User = 'root';
 FLUSH PRIVILEGES;
 ```
-这里密码设置成了```a```
+这里密码设置成了`a`
 
 以后就可以使用
 ```shell
@@ -159,13 +159,13 @@ SQL>
 ```shell
 sudo apt install -y unixodbc-dev
 ```
-之后相关头文件就在```/usr/include/```下了。编译的时候不需要用```-I```选项。
+之后相关头文件就在`/usr/include/`下了。编译的时候不需要用`-I`选项。
 
 如果还需要mysql的头文件
 ```shell
 sudo apt install -y default-libmysqlclient-dev
 ```
-之后相关头文件就在```/usr/include/mysql```下了。编译的时候需要用```-I"/usr/include/mysql"```，或者代码里头文件前加```mysql/```，例如```#include <mysql/mysql.h>```
+之后相关头文件就在`/usr/include/mysql`下了。编译的时候需要用`-I"/usr/include/mysql"`，或者代码里头文件前加`mysql/`，例如`#include <mysql/mysql.h>`
 
 建议使用纯odbc，以保证可移植性。
 

@@ -124,7 +124,7 @@ release: $(TARGETS_EXE_RELEASE)
 ```shell
 make debug
 ```
-可以把target文件夹里的```.c```文件都编译成可执行文件。
+可以把target文件夹里的`.c`文件都编译成可执行文件。
 
 # 参考：
 <https://www.cnblogs.com/lidabo/p/4928956.html>
@@ -158,12 +158,12 @@ DEPS		:= $(patsubst $(SRC)/%.cpp,$(DEP)/%.d,$(SRCS))
 
 ## 2
 <https://blog.csdn.net/iosxiaoming/article/details/47669529>
-在makefile中有一个dir命令和一个basename命令，然后在shell中也有basename函数和dirname函数，两个是不相同的，在makefile中，```$(basename  NAMES)```函数功能是取出各个文件的前缀部分，dir命令```$(dir NAMES)```指的是取出各个文件名的目录部分，文件名的目录部分就是包含在文件名中的最后一个斜线之前的部分,而在shell中，basename命令能从路径中分离出文件名，及取出文件名部分，dirname的作用则和basename正好相反，它返回路径部分。
+在makefile中有一个dir命令和一个basename命令，然后在shell中也有basename函数和dirname函数，两个是不相同的，在makefile中，`$(basename  NAMES)`函数功能是取出各个文件的前缀部分，dir命令`$(dir NAMES)`指的是取出各个文件名的目录部分，文件名的目录部分就是包含在文件名中的最后一个斜线之前的部分,而在shell中，basename命令能从路径中分离出文件名，及取出文件名部分，dirname的作用则和basename正好相反，它返回路径部分。
 
 ## 3
 patsubst中的空格是有含义的，例如在逗号后面加空格，那个空格是算在后面那个字符串的。
 例如
-```$(patsubst a, b,g)```
+`$(patsubst a, b,g)`
 （注：b前面有一个空格）
 会把a替换为 <空格>b，这样有时会出问题。因此建议不要乱加空格。
 

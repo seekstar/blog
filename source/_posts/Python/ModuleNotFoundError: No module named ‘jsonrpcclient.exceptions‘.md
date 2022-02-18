@@ -3,7 +3,7 @@ title: "ModuleNotFoundError: No module named ‘jsonrpcclient.exceptions‘"
 date: 2021-09-25 21:29:37
 ---
 
-jsonrpcclient当前的最新版本4.0.0好像已经没有```jsonrpcclient.exceptions```了。所以解决方案是回退到3.3.6版本：
+jsonrpcclient当前的最新版本4.0.0好像已经没有`jsonrpcclient.exceptions`了。所以解决方案是回退到3.3.6版本：
 
 ```shell
 pip3 install jsonrpcclient==3.3.6

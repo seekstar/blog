@@ -140,7 +140,7 @@ char *dirname(char *path);
 char *basename(char *path);
 ```
 
-一般情况下的规则是先把末尾的```/```去掉，然后最后一个```/```后面的就是basename，前面的就是dirname。
+一般情况下的规则是先把末尾的`/`去掉，然后最后一个`/`后面的就是basename，前面的就是dirname。
 
 特殊情况如下：
 

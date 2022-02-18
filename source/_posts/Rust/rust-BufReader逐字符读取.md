@@ -4,7 +4,7 @@ date: 2021-12-03 20:05:20
 tags:
 ---
 
-BufReader有一个```fill_buf```的方法：
+BufReader有一个`fill_buf`的方法：
 
 ```rs
 fn fill_buf(&mut self) -> Result<&[u8]>
@@ -12,15 +12,15 @@ fn fill_buf(&mut self) -> Result<&[u8]>
 
 它可以返回它的内部buffer，如果buffer是空的，就填入更多数据再返回。这样我们就可以逐个读取其内部buffer的字符，且不需要额外申请空间了。
 
-通过```fill_buf```返回的buffer处理完了一些数据之后，可以通过```consume```来告诉BufReader这些数据已经处理完了：
+通过`fill_buf`返回的buffer处理完了一些数据之后，可以通过`consume`来告诉BufReader这些数据已经处理完了：
 
 ```rs
 fn consume(&mut self, amt: usize)
 ```
 
-它将前```amt```个字节从BufReader的buffer里删掉。
+它将前`amt`个字节从BufReader的buffer里删掉。
 
-把```fill_buf```和```consume```结合起来，就可以逐字节读取了：
+把`fill_buf`和`consume`结合起来，就可以逐字节读取了：
 
 ```rs
 use std::io::{self, BufRead, BufReader};
@@ -61,7 +61,7 @@ abc
 10
 ```
 
-最后的```10```是换行符```LF```。
+最后的`10`是换行符`LF`。
 
 可以用闭包做一个wrapper：
 
@@ -85,7 +85,7 @@ fn main() {
 }
 ```
 
-也可以写一个迭代器来实现类似于```getchar```和```peek```的效果：
+也可以写一个迭代器来实现类似于`getchar`和`peek`的效果：
 
 ```rs
 use std::io::{self, Read, BufRead, BufReader};
@@ -155,7 +155,7 @@ abc
 10
 ```
 
-或者复杂一点的，减少调用```consume```的次数（不知道会不会变快）：
+或者复杂一点的，减少调用`consume`的次数（不知道会不会变快）：
 
 ```rs
 use std::io::{self, Read, BufRead, BufReader};

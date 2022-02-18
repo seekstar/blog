@@ -4,7 +4,7 @@ date: 2022-01-09 01:35:51
 tags:
 ---
 
-加上```--boot uefi```参数即可。检验：
+加上`--boot uefi`参数即可。检验：
 
 ```shell
 ls /sys/firmware/efi/efivars

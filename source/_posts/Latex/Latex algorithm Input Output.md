@@ -3,7 +3,7 @@ title: Latex algorithm Input Output
 date: 2021-05-03 15:45:21
 ---
 
-用```\Statex```使其不占用行号即可。
+用`\Statex`使其不占用行号即可。
 
 ```tex
 \usepackage{algorithm}

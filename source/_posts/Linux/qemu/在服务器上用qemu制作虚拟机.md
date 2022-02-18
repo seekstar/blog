@@ -40,7 +40,7 @@ irqbypass              16384  1 kvm
 
 如果kvm_intel/kvm_amd、kvm模块被显示出来，则kvm模块已经加载。
 
-如果少了模块，比如```kvm_intel```，那就
+如果少了模块，比如`kvm_intel`，那就
 
 ```shell
 modprobe kvm-intel
@@ -81,7 +81,7 @@ sudo apt install virtinst
 sudo virt-install --name=centos8 --memory=1024 --vcpus=4 --os-type=linux --os-variant=rhel8.4 --location=/home/searchstar/Downloads/CentOS-8.4.2105-x86_64-dvd1.iso --disk path=centos.img,size=100 --graphics=none --console=pty,target_type=serial --extra-args="console=tty0 console=ttyS0"
 ```
 
-其中os-variant不填也可以。其取值范围可以通过```osinfo-query os```查看。
+其中os-variant不填也可以。其取值范围可以通过`osinfo-query os`查看。
 
 注意deepin不支持命令行安装，会报错：
 
@@ -109,7 +109,7 @@ Please make a selection from the above ['b' to begin installation, 'q' to quit,
 'r' to refresh]:
 ```
 
-要把带```[!]```的都处理完。不过下面写了```(Processing...)```的可以按```r```刷新，等它出结果。
+要把带`[!]`的都处理完。不过下面写了`(Processing...)`的可以按`r`刷新，等它出结果。
 安装好了之后会自动重启，然后就可以登录了。
 
 ### 使用vnc安装
@@ -126,12 +126,12 @@ qemu-img create -f qcow2 centos.img 256G
 Formatting 'centos.img', fmt=qcow2 size=274877906944 cluster_size=65536 lazy_refcounts=off refcount_bits=16
 ```
 
-```-f```后面跟虚拟机镜像格式，支持的有：
+`-f`后面跟虚拟机镜像格式，支持的有：
 raw: 默认格式。裸的磁盘文件。
 [qcow2](https://blog.csdn.net/bemind1/article/details/99678172): 最常用。支持稀疏文件、快照等。
 其他：qemu还兼容其他的格式，比如VMDK, VDI, VHD(vpc), VHDX, qcow1 and QED。
 
-这些可以通过```man qemu-img```查到。
+这些可以通过`man qemu-img`查到。
 
 #### 配置vnc viewer
 
@@ -180,7 +180,7 @@ vncviewer localhost:0
 ```
 
 ![在这里插入图片描述](在服务器上用qemu制作虚拟机/20210120225138249.png)
-```ctrl+alt+g```可以取消捕获。
+`ctrl+alt+g`可以取消捕获。
 
 ## 联网
 
@@ -217,8 +217,8 @@ ip addr
        valid_lft forever preferred_lft forever
 ```
 
-可以看到我的编号是```eno1```。
-由于操作网卡有可能导致连不上网，而连不上网的话服务器就失控了，所以最好是先设置一个定时重启，完成配置之后检测一下有没有网，有网则取消重启，否则就立即重启。由于操作过程有一段时间连不上网，所以需要把下面的保存为```net.sh```：
+可以看到我的编号是`eno1`。
+由于操作网卡有可能导致连不上网，而连不上网的话服务器就失控了，所以最好是先设置一个定时重启，完成配置之后检测一下有没有网，有网则取消重启，否则就立即重启。由于操作过程有一段时间连不上网，所以需要把下面的保存为`net.sh`：
 
 ```shell
 set -e
@@ -250,7 +250,7 @@ else
 fi
 ```
 
-```promisc```: 混杂模式（promiscuous mode）是电脑网络中的术语。是指一台机器的网卡能够接收所有经过它的数据流，而不论其目的地址是否是它。
+`promisc`: 混杂模式（promiscuous mode）是电脑网络中的术语。是指一台机器的网卡能够接收所有经过它的数据流，而不论其目的地址是否是它。
 
 然后运行脚本
 
@@ -282,7 +282,7 @@ dhclient
 如果装的虚拟机没有GUI，但是外面的网络又需要在网页上登陆才能使用，那桥接就不太可行了，这时要用NAT模式，使虚拟机直接使用主机的网络。
 
 <https://wiki.qemu.org/Documentation/Networking/NAT>
-把下面的保存为```ifup_nat.sh```
+把下面的保存为`ifup_nat.sh`
 
 ```shell
 #!/bin/sh
@@ -456,7 +456,7 @@ sudo qemu-system-x86_64 -m 4096 -enable-kvm centos.img -net nic -net tap,script=
 ```
 
 参考：<https://www.cnblogs.com/jython/p/4458807.html>
-注：如果只放```-enable-kvm -cpu qemu64,+vmx```，我这```lsmod```里就没有```kvm_intel```。
+注：如果只放`-enable-kvm -cpu qemu64,+vmx`，我这`lsmod`里就没有`kvm_intel`。
 
 ### centos开机自动联网
 
@@ -494,7 +494,7 @@ centos虚拟机中出现过，要好几分钟才能进去，而且最终这几�
 
 ## 参考文献
 
-[QEMU 1: 使用QEMU创建虚拟机](https://my.oschina.net/kelvinxupt/blog/265108) 其中软件安装的部分不全，要装```qemu-kvm```
+[QEMU 1: 使用QEMU创建虚拟机](https://my.oschina.net/kelvinxupt/blog/265108) 其中软件安装的部分不全，要装`qemu-kvm`
 [Can't find tool qemu-system-x86](https://bugzilla.redhat.com/show_bug.cgi?id=1715806)
 [qemu虚拟机与外部网络的通信](https://blog.csdn.net/u014022631/article/details/53411557)
 [kvm 命令行安装虚拟机方法](https://jingyan.baidu.com/article/c910274bdcee218c371d2d36.html)

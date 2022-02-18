@@ -15,7 +15,7 @@ CentOS Linux release 8.3.2011
 sudo dnf install https://zfsonlinux.org/epel/zfs-release.<dist>.noarch.rpm
 gpg --import --import-options show-only /etc/pki/rpm-gpg/RPM-GPG-KEY-zfsonlinux
 ```
-其中```<dist>```换成版本号，比如我这个就是```el8_3```。
+其中`<dist>`换成版本号，比如我这个就是`el8_3`。
 
 # DKMS
 ```shell

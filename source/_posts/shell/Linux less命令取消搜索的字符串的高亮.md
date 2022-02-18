@@ -5,4 +5,4 @@ tags:
 ---
 
 按Esc，然后按u。
-来源：```:h```，搜highlight
+来源：`:h`，搜highlight

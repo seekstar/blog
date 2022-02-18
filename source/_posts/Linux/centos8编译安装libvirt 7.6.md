@@ -19,7 +19,7 @@ yum install libtirpc-devel
 meson configure --includedir /usr/include/tirpc/rpc/
 ```
 
-libtirpc的rpc.h在```/usr/include/tirpc/rpc/rpc.h```，必须要手动告诉meson其目录位置，不然后面```ninja -C build```的时候会报错：rpc/rpc.h：没有那个文件或目录。
+libtirpc的rpc.h在`/usr/include/tirpc/rpc/rpc.h`，必须要手动告诉meson其目录位置，不然后面`ninja -C build`的时候会报错：rpc/rpc.h：没有那个文件或目录。
 
 # 编译
 
@@ -64,7 +64,7 @@ yum install python3-docutils
 yum install glib2-devel
 ```
 
-我这里如果是用普通用户跑的```meson build```就仍然报这个错，换成root用户就好了。
+我这里如果是用普通用户跑的`meson build`就仍然报这个错，换成root用户就好了。
 
 ## Dependency "gnutls" not found
 ```shell

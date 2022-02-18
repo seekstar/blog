@@ -3,7 +3,7 @@ title: Linux内核获取当前CPU id
 date: 2021-07-19 00:48:31
 ---
 
-CPU id是[percpu变量](https://zhuanlan.zhihu.com/p/260986194)，调用```smp_processor_id()```可以取出。内核里对它的注释如下：
+CPU id是[percpu变量](https://zhuanlan.zhihu.com/p/260986194)，调用`smp_processor_id()`可以取出。内核里对它的注释如下：
 
 ```
 smp_processor_id() is safe if it's used in a preemption-off critical section, or in a thread that is bound to the current CPU.

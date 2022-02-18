@@ -16,7 +16,7 @@ nmcli connection up bridge-br0
 
 ## 将虚拟机导入virsh
 
-这里假设domain的名字设置成centos8。先写一个```centos8.xml```，定义虚拟机的基本属性：
+这里假设domain的名字设置成centos8。先写一个`centos8.xml`，定义虚拟机的基本属性：
 
 ```xml
 <domain type='kvm'>
@@ -109,7 +109,7 @@ virsh console centos8
 
 如果没有反应，说明虚拟机里没有配置console，要看这篇文章进行配置：<https://blog.csdn.net/qq_41961459/article/details/119108333>
 
-奇怪的是有时候console里shutdown之后不会自动destroy。这时要```ctrl+]```退出console，然后手动```virsh destroy```一下。
+奇怪的是有时候console里shutdown之后不会自动destroy。这时要`ctrl+]`退出console，然后手动`virsh destroy`一下。
 
 注意，普通用户的virsh域和root的virsh域是不互通的。
 
@@ -117,7 +117,7 @@ virsh console centos8
 
 ### Could not open '/dev/sdb': Permission denied
 
-将```/dev/sdb```的owner和group改成自己：
+将`/dev/sdb`的owner和group改成自己：
 
 ```shell
 sudo chown $USER /dev/sdb
