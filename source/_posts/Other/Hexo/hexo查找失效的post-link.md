@@ -4,13 +4,7 @@ date: 2022-02-18 15:34:14
 tags:
 ---
 
-把部署的网站clone下来，比如我的是：
-
-```shell
-git clone https://github.com/seekstar/seekstar.github.io
-```
-
-然后直接在这里面字符串查找```Post Not Fount```，就能发现失效的post_link了。
+先`hexo d -g`，然后新的网站就会生成在`.deploy_git`下面，进去这个目录，在这里面用`grep`之类的查找`Post Not Fount`，就能发现失效的post_link了。
 
 例如我的：
 
