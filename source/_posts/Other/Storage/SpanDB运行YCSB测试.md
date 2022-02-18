@@ -10,7 +10,7 @@ tags: RocksDB
 
 ## 安装SPDK
 
-{% post_link Linux/'Debian-11-安装SPDK' %}
+{% post_link Other/Storage/'Debian-11-安装SPDK' %}
 
 ## （可选）把memlock的限制解除
 

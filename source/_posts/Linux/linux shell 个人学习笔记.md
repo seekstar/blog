@@ -502,7 +502,7 @@ sed 's/源pattern/目的pattern/g'
 sed 's/源pattern/目的pattern/g' FileName
 ```
 
-源pattern和目的pattern的一些例子见：{% post_link Other/Language/正则表达式学习笔记.md %}
+源pattern和目的pattern的一些例子见：{% post_link Other/Language/正则表达式学习笔记 %}
 
 此外，sed提供了一些选项：
 
