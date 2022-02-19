@@ -105,14 +105,6 @@ flatpak install shadowsocks
 
 别被名字骗了，现在支持Linux了。
 
-### Firefox国际版
-
-`org.mozilla.firefox`
-
-要先把系统里旧的firefox卸载，不然启动器启动的还是旧版本。
-
-在浏览器里没法把自己设置为默认浏览器了。但是一般可以在系统设置里手动设置。Deepin是在`设置->默认程序->网页`。
-
 ### KeePassXC
 
 密码管理器。要把apt安装的旧版卸载之后，Deepin启动器上的才会变成flatpak的版本。
@@ -168,6 +160,16 @@ launcher能打开，但是在系统启动器死活打不开tor browser。。。
 ### vscode
 
 运行在容器里，所以不能访问系统里的SDK。而且好像不提供code命令？还是建议去官网下载安装包来安装。
+
+### Firefox国际版
+
+`org.mozilla.firefox`
+
+要先把系统里旧的firefox卸载，不然启动器启动的还是旧版本。
+
+在浏览器里没法把自己设置为默认浏览器了。但是一般可以在系统设置里手动设置。Deepin是在`设置->默认程序->网页`。
+
+我这里一开始是正常的，但是过了几天之后显示就出问题了。
 
 ### WPS
 
