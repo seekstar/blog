@@ -105,6 +105,12 @@ flatpak install shadowsocks
 
 别被名字骗了，现在支持Linux了。
 
+### LibreOffice
+
+`org.libreoffice.LibreOffice`
+
+里面的`LibreOffice Draw`是很棒的PDF编辑工具。
+
 ### KeePassXC
 
 密码管理器。要把apt安装的旧版卸载之后，Deepin启动器上的才会变成flatpak的版本。
