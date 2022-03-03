@@ -31,7 +31,7 @@ Status DBImpl::Put(const WriteOptions& o, ColumnFamilyHandle* column_family,
 
   `DBImpl::SchedulePendingFlush`中，将传进来的`flush_req`加入到`DBImpl::flush_queue_`里。
 
-  接下来的flush流程看这里：{% post_link Storage/"RocksDB代码分析——写入流程" %}
+  接下来的flush流程看这里：{% post_link Storage/"RocksDB代码分析——Flush流程" %}
 
 `WriteBatchInternal::InsertInto`中先构造了`MemTableInserter inserter`，然后执行`writer->batch->Iterate(&inserter)`，即执行`WriteBatch::Iterate(Handler* handler)`，其中handler其实是`MemTableInserter*`类型的。`WriteBatch::Iterate`中调用了`WriteBatchInternal::Iterate`，
 
