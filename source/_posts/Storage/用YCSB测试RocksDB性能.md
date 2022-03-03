@@ -107,32 +107,16 @@ export JAVA_HOME=/usr/lib/jvm/default-java
 sudo apt install -y cmake
 ```
 
-#### 跨平台相关包（未验证）
+#### 更改`Makefile`取消跨平台
 
-如果不安装这些依赖，就要改`Makefile`来取消跨平台，教程：[rocksdb在YCSB中的运行教程](https://blog.csdn.net/a993096281/article/details/87864340)。注意，用`#`注释掉可能不太行，最好直接删掉。
-
-简单起见，这里就装一下这些依赖。
-
-```shell
-sudo apt install -y vagrant
-```
-
-再安装virtualbox，debian用户可以看这里：<https://wiki.debian.org/VirtualBox>
-
-但是我安装virtualbox的时候报错了：
-
-```
-The character device /dev/vboxdrv does not exist
-```
-
-可能要把secure boot关掉才行：<https://stackoverflow.com/questions/60350358/how-do-i-resolve-the-character-device-dev-vboxdrv-does-not-exist-error-in-ubu>
+教程：[rocksdb在YCSB中的运行教程](https://blog.csdn.net/a993096281/article/details/87864340)。注意，用`#`注释掉可能不太行，最好直接删掉。
 
 ### 构建并使用rocksdb java包
 
 因为YCSB是用java写的，所以要构建rocksdb的java包来测试。
 
 ```shell
-make rocksdbjavastaticrelease
+make rocksdbjavastaticrelease DEBUG_LEVEL=0
 ```
 
 编译出来的文件在`java/target/rocksdbjni-6.27.3.jar`。
