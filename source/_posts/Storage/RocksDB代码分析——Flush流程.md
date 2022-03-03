@@ -12,7 +12,7 @@ tags: RocksDB
 
 `DBImpl::BackgroundCallFlush`中调用了`DBImpl::BackgroundFlush`，最后再调用`DBImpl::MaybeScheduleFlushOrCompaction`。
 
-`DBImpl::BackgroundFlush`中调用了`DBImpl::FlushMemTablesToOutputFiles`。
+`DBImpl::BackgroundFlush`中先调用`DBImpl::PopFirstFromFlushQueue`从`DBImpl::flush_queue_`中取出`FlushRequest flush_req`（唯一的取出者），然后调用`DBImpl::FlushMemTablesToOutputFiles`。`DBImpl::flush_queue_`里的`FlushRequest`的来源见：{% post_link Storage/"RocksDB代码分析——写入流程" %}
 
 `DBImpl::FlushMemTablesToOutputFiles`中，如果不是atomic_flush（默认），那么一定只有一个要flush的MemTable。取出一些参数之后，调用`DBImpl::FlushMemTableToOutputFile`。
 
