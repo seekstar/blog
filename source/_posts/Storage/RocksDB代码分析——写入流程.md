@@ -19,7 +19,19 @@ Status DBImpl::Put(const WriteOptions& o, ColumnFamilyHandle* column_family,
 
 它显式调用了`DB::Put`。`DB::Put`中首先构造了WriteBatch，然后调用了`DB::Write`，它是个纯虚函数，被`DBImpl::Write` override了。`DBImpl::Write`调用了`DBImpl::WriteImpl`。
 
-`DBImpl::WriteImpl`先检查了一堆option，这里我们先不管。然后将`WriteBatch *my_batch`以及`WriteOption`都转移到了`WriteThread::Writer w`中。然后调用`WriteThread::JoinBatchGroup`。假如我们不是leader，那么调用`WriteBatchInternal::InsertInto`把数据插入到MemTable中，然后返回。假如我们是leader，那么我们负责写入WAL，然后调用`WriteBatchInternal::InsertInto`把数据插入到MemTable。
+`DBImpl::WriteImpl`先检查了一堆option，这里我们先不管。然后将`WriteBatch *my_batch`以及`WriteOption`都转移到了`WriteThread::Writer w`中。然后调用`WriteThread::JoinBatchGroup`。
+
+- 假如我们不是leader，那么调用`WriteBatchInternal::InsertInto`把数据插入到MemTable中，然后返回。
+
+- 假如我们是leader，那么我们先调用`DBImpl::PreprocessWrite`，然后写入WAL，然后调用`WriteBatchInternal::InsertInto`把数据插入到MemTable。
+
+  `DBImpl::PreprocessWrite`中，如果`flush_scheduler_`中有任务，那么就调用`DBImpl::ScheduleFlushes`（唯一调用者）。
+
+  `DBImpl::ScheduleFlushes`中，先调用`FlushScheduler::TakeNextColumnFamily`（正常状态下唯一调用者），它是唯一从`FlushScheduler`中取出flush任务（以`ColumnFamilyData`的形式）的方法。然后用取出的`ColumnFamilyData cfd`作为`DBImpl::GenerateFlushRequest`的参数，得到`FlushRequest flush_req`，再将其作为`DBImpl::SchedulePendingFlush`的参数。
+
+  `DBImpl::SchedulePendingFlush`中，将传进来的`flush_req`加入到`DBImpl::flush_queue_`里。
+
+  接下来的flush流程看这里：{% post_link Storage/"RocksDB代码分析——写入流程" %}
 
 `WriteBatchInternal::InsertInto`中先构造了`MemTableInserter inserter`，然后执行`writer->batch->Iterate(&inserter)`，即执行`WriteBatch::Iterate(Handler* handler)`，其中handler其实是`MemTableInserter*`类型的。`WriteBatch::Iterate`中调用了`WriteBatchInternal::Iterate`，
 
@@ -34,4 +46,6 @@ if (cfd->mem()->ShouldScheduleFlush())
     flush_scheduler_->ScheduleWork(cfd);
 ```
 
-然后后台线程会在适当的时间把flush任务取出来执行。
+前面提到了，在`DBImpl::WriteImpl`中作为leader时，会检查`flush_scheduler_`中有没有任务，有的话就拿出来放到`DBImpl::flush_queue_`中。
+
+我的问题：为什么不直接放到`DBImpl::flush_queue_`中？
