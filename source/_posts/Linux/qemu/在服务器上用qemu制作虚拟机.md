@@ -3,7 +3,11 @@ title: 在服务器上用qemu制作虚拟机
 date: 2021-01-21 18:55:15
 ---
 
-deepin和centos 8测试通过。
+已测试的组合：
+
+- 宿主机：Deepin、Debian 11、centos 8
+
+- 虚拟机：CentOS 8
 
 ## 下载操作系统镜像
 可以用中科大的源下载镜像：<http://mirrors.ustc.edu.cn/>
@@ -32,7 +36,7 @@ grep -E 'vmx|svm' /proc/cpuinfo
 lsmod | grep kvm
 ```
 
-```
+```text
 kvm_intel             315392  0
 kvm                   847872  1 kvm_intel
 irqbypass              16384  1 kvm
@@ -48,7 +52,7 @@ modprobe kvm-intel
 
 如果输出
 
-```
+```text
 modprobe: ERROR: could not insert 'kvm_intel': Operation not supported
 ```
 
@@ -60,7 +64,7 @@ dmesg | less
 
 按G翻到最后，如果有
 
-```
+```text
 kvm: disabled by bios
 ```
 
@@ -75,24 +79,27 @@ kvm: disabled by bios
 sudo yum install virt-install
 # Ubuntu 20.04, deepin 20
 sudo apt install virtinst
+# Debian 11
+sudo apt install virtinst libvirt-daemon-system
+sudo virsh net-start default
 ```
 
 ```shell
-sudo virt-install --name=centos8 --memory=1024 --vcpus=4 --os-type=linux --os-variant=rhel8.4 --location=/home/searchstar/Downloads/CentOS-8.4.2105-x86_64-dvd1.iso --disk path=centos.img,size=100 --graphics=none --console=pty,target_type=serial --extra-args="console=tty0 console=ttyS0"
+virt-install --name=centos8 --memory=1024 --vcpus=4 --os-type=linux --os-variant=rhel8.4 --location=/home/searchstar/Downloads/CentOS-8.4.2105-x86_64-dvd1.iso --disk path=centos.img,size=100 --graphics=none --console=pty,target_type=serial --extra-args="console=tty0 console=ttyS0"
 ```
 
-其中os-variant不填也可以。其取值范围可以通过`osinfo-query os`查看。
+os-variant不填也可以。其取值范围可以通过`osinfo-query os`查看，`osinfo-query`在`libosinfo-bin`包中。
 
-注意deepin不支持命令行安装，会报错：
+注意虚拟机deepin不支持命令行安装，会报错：
 
-```
+```text
 ERROR    验证安装位置出错：Could not find an installable distribution at 'deepin-desktop-community-20.2.2-amd64.iso'
 The location must be the root directory of an install tree.
 ```
 
 安装界面：
 
-```
+```text
 Installation
 
 1) [x] Language settings                 2) [x] Time settings
@@ -122,7 +129,7 @@ Please make a selection from the above ['b' to begin installation, 'q' to quit,
 qemu-img create -f qcow2 centos.img 256G
 ```
 
-```
+```text
 Formatting 'centos.img', fmt=qcow2 size=274877906944 cluster_size=65536 lazy_refcounts=off refcount_bits=16
 ```
 
@@ -149,7 +156,7 @@ sudo qemu-system-x86_64 -m 4096 -enable-kvm centos.img -cdrom ~/Downloads/CentOS
 
 如果没有允许弹出root窗口，会报这个错：
 
-```
+```text
 X11 connection rejected because of wrong authentication.
 Unable to init server: Could not connect: Connection refused
 gtk initialization failed
@@ -163,7 +170,7 @@ Centos 8比较特殊:
 sudo /usr/libexec/qemu-kvm -m 4096 -enable-kvm centos.img -cdrom ~/Downloads/CentOS-8.2.2004-x86_64-minimal.iso
 ```
 
-```
+```text
 VNC server running on ::1:5900
 ```
 
@@ -202,7 +209,7 @@ sudo apt install bridge-utils uml-utilities
 ip addr
 ```
 
-```
+```text
 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
     inet 127.0.0.1/8 scope host lo
@@ -434,7 +441,7 @@ sudo qemu-system-x86_64 -m 4096 -enable-kvm centos.img -net nic -net tap,script=
 ![在这里插入图片描述](在服务器上用qemu制作虚拟机/20210121153720100.png)
 这个方法我在家里的电脑上实验成功，但是在学校的服务器上失败了，不知道为什么。
 
-##  其他
+## 其他
 
 ### nographic启动
 
@@ -445,7 +452,7 @@ sudo qemu-system-x86_64 -m 4096 -enable-kvm centos.img -net nic -net tap,script=
 就是虚拟机里套虚拟机：
 参数里添加
 
-```
+```text
 -enable-kvm -cpu host
 ```
 
@@ -472,7 +479,7 @@ sudo qemu-system-x86_64 -m 4096 -enable-kvm centos.img -net nic -net tap,script=
 
 centos虚拟机中出现过，要好几分钟才能进去，而且最终这几个服务会启动失败：
 
-```
+```text
 [FAILED] Failed to start System Security Services Daemon.
 [FAILED] Failed to start Disk Manager.
 [FAILED] Failed to start OpenSSH server daemon.
@@ -499,3 +506,5 @@ centos虚拟机中出现过，要好几分钟才能进去，而且最终这几�
 [qemu虚拟机与外部网络的通信](https://blog.csdn.net/u014022631/article/details/53411557)
 [kvm 命令行安装虚拟机方法](https://jingyan.baidu.com/article/c910274bdcee218c371d2d36.html)
 [KVM 使用 virt-install 创建虚拟机失败经历](https://blog.csdn.net/sdulibh/article/details/51657260)
+<https://askubuntu.com/questions/1225216/failed-to-connect-socket-to-var-run-libvirt-libvirt-sock>
+<https://www.xmodulo.com/network-default-is-not-active.html>
