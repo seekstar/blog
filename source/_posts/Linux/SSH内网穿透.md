@@ -64,17 +64,8 @@ sudo systemctl restart sshd
              this may be a better solution than the monitoring port.
 ```
 
-所以在内网机器上配置`~/.ssh/config`，例如：
-
-```text
-Host 服务器IP
-        ServerAliveInterval 60
-```
-
-然后启动`autossh`:
-
 ```shell
-autossh -M 0 -R 6100:localhost:8789 服务器IP
+autossh -M 0 -R 6100:localhost:8789 服务器IP -o ServerAliveInterval=60
 ```
 
 有些发行版比如Debian可以省略掉`-M 0`。
@@ -94,11 +85,11 @@ sudo lsof -i
 所以可以：
 
 ```shell
-autossh -M 0 -fNR 6100:localhost:8789 服务器IP
+autossh -M 0 -fNR 6100:localhost:8789 服务器IP -o ServerAliveInterval=60
 ```
 
 ```shell
-ssh -fNR 6100:localhost:8789 服务器IP
+ssh -fNR 6100:localhost:8789 服务器IP -o ServerAliveInterval=60
 ```
 
 ## 开机自启
@@ -107,7 +98,7 @@ ssh -fNR 6100:localhost:8789 服务器IP
 
 ```
 [program:autossh]
-command=autossh -NR 6100:localhost:8789 服务器IP
+command=autossh -NR 6100:localhost:8789 服务器IP -o ServerAliveInterval=60
 autostart=true
 autorestart=true
 stderr_logfile=/tmp/autossh_stderr.log
