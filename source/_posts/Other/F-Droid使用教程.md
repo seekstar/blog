@@ -65,3 +65,7 @@ GPLv3协议的音乐播放器。以m3u后缀的文本方式保存歌单，可以
 metadata fetcher
 
 lyrics search（中文歌好像很少能搜到歌词。。。）
+
+## Fennec
+
+相当于firefox国际版
