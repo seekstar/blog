@@ -7,7 +7,7 @@ date: 2021-06-15 22:47:51
 
 # 常用
 
-- {% post_link Linux/app/Linux在PDF中插入文字 插入文字 %}
+- {% post_link App/Linux在PDF中插入文字 插入文字 %}
 - {% post_link Draw/inkscape裁剪 裁剪 %}
 
 # P1 界面和基本图
