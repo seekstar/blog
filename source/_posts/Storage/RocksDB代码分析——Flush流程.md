@@ -6,7 +6,7 @@ tags: RocksDB
 
 这里从`DBImpl::MaybeScheduleFlushOrCompaction`开始讲起。
 
-`DBImpl::MaybeScheduleFlushOrCompaction`可能会schedule`DBImpl::BGWorkFlush`和`DBImpl::BGWorkCompaction`。这里主要看Flush。
+`DBImpl::MaybeScheduleFlushOrCompaction`可能会schedule`DBImpl::BGWorkFlush`和`DBImpl::BGWorkCompaction`。这里主要看Flush。Compaction部分见：{% post_link Storage/'RocksDB代码分析——Compaction流程' %}
 
 `DBImpl::BGWorkFlush`中调用了`DBImpl::BackgroundCallFlush`。
 
