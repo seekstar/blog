@@ -64,3 +64,5 @@ uint32_t LevelCompactionBuilder::GetPathId(
 ```
 
 大意就是检查`ImmutableCFOptions::cf_paths`的每个`cf_path`，直到找到某个path能放下要compact到的那个level。
+
+这个`ImmutableCFOptions`的来源见{% post_link Storage/'RocksDB代码分析——各种option的传递' %}
