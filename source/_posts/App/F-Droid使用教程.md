@@ -52,6 +52,8 @@ F-Droid下载地址：<https://f-droid.org/>
 
 基于Matrix协议的去中心化即时聊天软件。可以自己搭聊天服务器，可以跨服聊天。支持端到端加密。
 
+使用教程：{% post_link App/'Element apk使用教程' %}
+
 ## syncthing
 
 p2p同步。
