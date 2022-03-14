@@ -46,6 +46,10 @@ https://element.io | Stable: v1.10.7 | Release status: Release status: v1.10.7 i
 
 ## Programming language
 
+### `#purec:matrix.org`
+
+Pure C language no C++
+
 ### `#cpplang:matrix.org`
 
 The cpp (c++) programming language.
