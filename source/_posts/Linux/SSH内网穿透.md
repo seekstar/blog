@@ -108,8 +108,32 @@ user = searchstar
 
 注意这里没有`-f`。
 
+## 客户端崩溃后重新连接
+
+客户端崩溃后，重新连接时可能会出现这个错误：
+
+```text
+Warning: remote port forwarding failed for listen port 端口号
+```
+
+这时可以在服务器上查找监听这个端口的进程：
+
+```shell
+sudo lsof -i:端口号
+```
+
+这个进程是sshd fork出来的进程，杀掉它不影响其他端口的监听，而且可以把这个端口释放出来：
+
+```shell
+kill 进程号
+```
+
+然后再在客户端上重新构建反向隧道即可。
+
 ## 参考
 
 [使用SSH反向隧道进行内网穿透——持续更新中](https://blog.csdn.net/jiangbenchu/article/details/84438959)
 
 [利用AutoSSH建立SSH隧道，实现内网穿透](https://zhuanlan.zhihu.com/p/112227542)
+
+<https://superuser.com/questions/1504220/ssh-tunnel-server-cant-close-listen-port-when-client-unexpected-close>
