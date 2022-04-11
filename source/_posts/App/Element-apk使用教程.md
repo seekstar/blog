@@ -8,13 +8,15 @@ tags:
 
 推荐使用`F-Droid`安装：{% post_link App/'F-Droid使用教程' %}
 
+有梯子的话也可以在官网下载：<https://element.io/get-started>
+
 ## 注册帐号
 
 ![](Element-apk使用教程/QQ%E5%9B%BE%E7%89%8720220310154907.jpg)
 
 ![](Element-apk使用教程/QQ%E5%9B%BE%E7%89%8720220310155004.jpg)
 
-`matrix.org`可能访问不了，一般需要选择`其他`服务器：
+有梯子的话可以选择`matrix.org`，否则需要选择`其他`服务器：
 
 ![](Element-apk使用教程/QQ%E5%9B%BE%E7%89%8720220310155013.jpg)
 
