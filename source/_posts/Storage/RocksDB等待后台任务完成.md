@@ -48,7 +48,7 @@ void wait_for_background_work(rocksdb::DB *db) {
 			std::this_thread::sleep_for(std::chrono::seconds(1));
 			continue;
 		}
-		// The properties are not get atomically. Test for more 20 times more.
+		// The properties are not get atomically. Test for more 20 times.
 		int i;
 		for (i = 0; i < 20; ++i) {
 			std::this_thread::sleep_for(std::chrono::milliseconds(100));
