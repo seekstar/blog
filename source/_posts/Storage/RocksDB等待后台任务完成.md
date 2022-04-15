@@ -27,21 +27,17 @@ bool has_background_work(rocksdb::DB *db) {
 	bool ok =
 		db->GetIntProperty(
 			rocksdb::Slice("rocksdb.mem-table-flush-pending"), &flush_pending);
-	// assert(ok);
-	crash_if(!ok, "");
+	assert(ok);
 	ok = db->GetIntProperty(
 			rocksdb::Slice("rocksdb.compaction-pending"), &compaction_pending);
-	// assert(ok);
-	crash_if(!ok, "");
+	assert(ok);
 	ok = db->GetIntProperty(
 			rocksdb::Slice("rocksdb.num-running-flushes"), &flush_running);
-	// assert(ok);
-	crash_if(!ok, "");
+	assert(ok);
 	ok = db->GetIntProperty(
 			rocksdb::Slice("rocksdb.num-running-compactions"),
 			&compaction_running);
-	// assert(ok);
-	crash_if(!ok, "");
+	assert(ok);
 	return flush_pending || compaction_pending || flush_running ||
 		compaction_running;
 }
