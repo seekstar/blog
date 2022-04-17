@@ -10,6 +10,7 @@ date: 2021-01-21 18:55:15
 - 虚拟机：CentOS 8
 
 ## 下载操作系统镜像
+
 可以用中科大的源下载镜像：<http://mirrors.ustc.edu.cn/>
 找到要下载的镜像后，右键该链接，点击复制链接，然后到服务器上用wget下载之即可。
 
@@ -142,11 +143,11 @@ raw: 默认格式。裸的磁盘文件。
 
 #### 配置vnc viewer
 
-字符界面配置虚拟机好像有点难，所以还是先用vnc连接服务器：<https://blog.csdn.net/qq_41961459/article/details/112909800>
+字符界面配置虚拟机好像有点难，所以还是先用vnc连接服务器：{% post_link Linux/'vnc通过ssh隧道连接到Linux服务器' %}
 
 #### debian系
 
-要先允许弹出root窗口：[vnc root窗口无法弹出](https://blog.csdn.net/qq_41961459/article/details/112916589)
+要先允许弹出root窗口：{% post_link Linux/'异常处理'/'vnc root窗口无法弹出' %}
 
 然后安装虚拟机：
 
@@ -195,7 +196,7 @@ vncviewer localhost:0
 
 ### 桥接网卡（使用nmcli+virsh）
 
-<https://blog.csdn.net/qq_41961459/article/details/119501450>
+{% post_link Linux/qemu/'virsh终端访问虚拟机并联网' %}
 
 ### 桥接网卡（有概率失败）
 
@@ -445,7 +446,7 @@ sudo qemu-system-x86_64 -m 4096 -enable-kvm centos.img -net nic -net tap,script=
 
 ### nographic启动
 
-<https://blog.csdn.net/qq_41961459/article/details/119108333>
+{% post_link Linux/qemu/'qemu-system-x86_64 nographic' %}
 
 ### 嵌套虚拟化
 
@@ -473,7 +474,7 @@ sudo qemu-system-x86_64 -m 4096 -enable-kvm centos.img -net nic -net tap,script=
 
 这个在deepin虚拟机里更换内核之后碰到过。解决方案：
 
-<https://blog.csdn.net/qq_41961459/article/details/119701527>
+{% post_link Linux/'异常处理'/'login: abort requested by PAM' %}
 
 ### network disk service卡住
 
@@ -489,15 +490,7 @@ centos虚拟机中出现过，要好几分钟才能进去，而且最终这几�
 
 其实原因和解决方案都跟上一个一样，都是这个：
 
-<https://blog.csdn.net/qq_41961459/article/details/119701527>
-
-### 设置静态IP
-
-[deepin设置静态IP](https://blog.csdn.net/qq_41961459/article/details/119704794)
-
-但是如果路由器只路由DHCP给的IP，那这个静态IP就只能在局域网里用了。如果在局域网里有一台永远不关机的机器，那可以在这个机器上做端口转发，把本地某个端口接收到的数据都转发给虚拟机的22端口，这样在局域网外就可以通过这台机器ssh到虚拟机了。方法看这里：
-
-<https://blog.csdn.net/qq_41961459/article/details/119705167>
+{% post_link Linux/'异常处理'/'login: abort requested by PAM' %}
 
 ## 参考文献
 
