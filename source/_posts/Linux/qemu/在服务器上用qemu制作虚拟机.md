@@ -85,6 +85,12 @@ sudo apt install virtinst libvirt-daemon-system
 sudo virsh net-start default
 ```
 
+然后让普通用户使用libvirt时能使用KVM：
+
+{% post_link Linux/qemu/'libvirt让普通用户能用kvm' %}
+
+然后就可以开始安装了：
+
 ```shell
 virt-install --name=centos8 --memory=1024 --vcpus=4 --os-type=linux --os-variant=rhel8.4 --location=/home/searchstar/Downloads/CentOS-8.4.2105-x86_64-dvd1.iso --disk path=centos.img,size=100 --graphics=none --console=pty,target_type=serial --extra-args="console=tty0 console=ttyS0"
 ```

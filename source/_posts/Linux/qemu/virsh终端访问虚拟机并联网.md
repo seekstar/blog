@@ -3,9 +3,19 @@ title: virsh终端访问虚拟机并联网
 date: 2021-08-08 05:18:41
 ---
 
+如果要使用KVM的话，首先要让普通用户使用libvirt时能使用KVM：
+
+{% post_link Linux/qemu/'libvirt让普通用户能用kvm' %}
+
 ## 配置网桥
 
-命令如下，记得把ens3换成自己的网卡号。
+先安装`nmcli`，Debian 11:
+
+```shell
+sudo apt install network-manager
+```
+
+然后以root身份运行如下命令，记得把`ens3`换成自己的网卡号。
 
 ```shell
 nmcli con add type bridge ifname br0
@@ -127,7 +137,7 @@ sudo chown $USER /dev/sdb
 
 ### error: failed to connect to the hypervisor
 
-```
+```text
 error: failed to connect to the hypervisor
 error: Failed to connect socket to '/run/user/1000/libvirt/libvirt-sock': 没有那个文件或目录
 ```
@@ -160,7 +170,7 @@ virsh undefine centos8
 
 宿主机是服务器上的centos 8的时候成功了，但是宿主机是MateBook X Pro上的deepin的时候失败了：
 
-```
+```text
 error: internal error: /usr/lib/qemu/qemu-bridge-helper --use-vnet --br=br0 --fd=27: failed to communicate with bridge helper: Transport endpoint is not connected
 stderr=failed to parse default acl file `/etc/qemu/bridge.conf'
 ```
@@ -169,7 +179,7 @@ stderr=failed to parse default acl file `/etc/qemu/bridge.conf'
 nmcli device show
 ```
 
-```
+```text
 GENERAL.DEVICE:                         br0
 GENERAL.TYPE:                           bridge
 GENERAL.HWADDR:                         12:94:5E:12:84:F4
