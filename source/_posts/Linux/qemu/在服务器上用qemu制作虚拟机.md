@@ -147,21 +147,12 @@ raw: 默认格式。裸的磁盘文件。
 
 #### debian系
 
-要先允许弹出root窗口：{% post_link Linux/'异常处理'/'vnc root窗口无法弹出' %}
-
-然后安装虚拟机：
-
 ```shell
-sudo qemu-system-x86_64 -m 4096 -enable-kvm centos.img -cdrom ~/Downloads/CentOS-8.2.2004-x86_64-minimal.iso
+# vnc=:2 可以换成其他可用端口。
+sudo qemu-system-x86_64 -m 4096 -enable-kvm centos.img -cdrom ~/Downloads/CentOS-8.2.2004-x86_64-minimal.iso -display vnc=:2
 ```
 
-如果没有允许弹出root窗口，会报这个错：
-
-```text
-X11 connection rejected because of wrong authentication.
-Unable to init server: Could not connect: Connection refused
-gtk initialization failed
-```
+然后就会在`5902`端口（也可以换成其他可用端口）开一个vnc server。用上面提到的方式连上就好了。
 
 #### Centos 8
 
@@ -175,17 +166,7 @@ sudo /usr/libexec/qemu-kvm -m 4096 -enable-kvm centos.img -cdrom ~/Downloads/Cen
 VNC server running on ::1:5900
 ```
 
-注意到端口是5900，所以开一个5900的隧道
-
-```shell
-ssh -g -L 5900:localhost:5900 sshname
-```
-
-然后保持这个shell不要关，在另一个shell里输入如下命令：
-
-```shell
-vncviewer localhost:0
-```
+然后用上面提到的方式连上就好了。
 
 ![在这里插入图片描述](在服务器上用qemu制作虚拟机/20210120225138249.png)
 `ctrl+alt+g`可以取消捕获。
