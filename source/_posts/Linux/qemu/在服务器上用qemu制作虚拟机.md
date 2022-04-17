@@ -141,10 +141,6 @@ raw: 默认格式。裸的磁盘文件。
 
 这些可以通过`man qemu-img`查到。
 
-#### 配置vnc viewer
-
-字符界面配置虚拟机好像有点难，所以还是先用vnc连接服务器：{% post_link Linux/'vnc通过ssh隧道连接到Linux服务器' %}
-
 #### debian系
 
 ```shell
@@ -152,7 +148,7 @@ raw: 默认格式。裸的磁盘文件。
 sudo qemu-system-x86_64 -m 4096 -enable-kvm centos.img -cdrom ~/Downloads/CentOS-8.2.2004-x86_64-minimal.iso -display vnc=:2
 ```
 
-然后就会在`5902`端口（也可以换成其他可用端口）开一个vnc server。用上面提到的方式连上就好了。
+然后就会在`5902`端口（也可以换成其他可用端口）开一个vnc server。用这里的方法连上即可：{% post_link Linux/'vnc通过ssh隧道连接到Linux服务器' %}
 
 #### Centos 8
 
@@ -166,7 +162,7 @@ sudo /usr/libexec/qemu-kvm -m 4096 -enable-kvm centos.img -cdrom ~/Downloads/Cen
 VNC server running on ::1:5900
 ```
 
-然后用上面提到的方式连上就好了。
+用这里的方法连上即可：{% post_link Linux/'vnc通过ssh隧道连接到Linux服务器' %}
 
 ![在这里插入图片描述](在服务器上用qemu制作虚拟机/20210120225138249.png)
 `ctrl+alt+g`可以取消捕获。
