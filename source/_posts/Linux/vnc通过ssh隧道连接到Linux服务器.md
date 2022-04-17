@@ -50,10 +50,12 @@ Log file is /home/searchstar/.vnc/L1707:1.log
 先构建ssh隧道，其语法如下
 
 ```shell
-ssh -g -L xxxx:ip:5901 sshname
+ssh -fNL xxxx:ip:5901 sshname
 ```
 
 ```text
+-f: 后台运行。
+-N: 不执行命令。用于转发端口。
 -L port:host:hostport
         将本地机(客户机)的某个端口转发到远端指定机器的指定端口.  工作原理是这样的,
         本地机器上分配了一个 socket 侦听 port 端口, 一旦这个端口上有了连接, 该连接
@@ -62,15 +64,17 @@ ssh -g -L xxxx:ip:5901 sshname
         格式说明: port/host/hostport
 ```
 
+网上很多教程上还加上了`-g`，这样本地的5901端口会向网络上其他机器开放，就不安全了。
+
 对于我们的情况，命令这样写：
 
 ```shell
-ssh -g -L 5901:localhost:5901 sshname
+ssh -fNL 5901:localhost:5901 sshname
 ```
 
 这样就把服务器自己的5901端口映射到本地的5901端口了。
 
-然后保持这个shell不动，另开一个shell，打开vncviewer:
+然后打开vncviewer:
 
 ```shell
 sudo apt install xtightvncviewer
