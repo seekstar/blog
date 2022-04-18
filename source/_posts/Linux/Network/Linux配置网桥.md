@@ -6,7 +6,7 @@ tags:
 
 ## virsh default network
 
-还有一种方式是利用virsh自带的default network，它是利用NAT实现的。
+可以利用virsh自带的default network，它是利用NAT实现的。
 
 ```shell
 sudo virsh net-start default
@@ -60,8 +60,10 @@ sudo apt install network-manager
 nmcli connection add type bridge ifname br0
 nmcli connection modify bridge-br0 bridge.stp no
 nmcli connection add type bridge-slave ifname ens3 master bridge-br0
-# 可能会改变IP。此时可能br0会得到一个IP，而原来的连接(ens3)在br0得到IP时会没有IP，过一段时间又可能会得到IP。由于IP改变，此时很可能会断网。
+# Debian 11可能会改变IP。此时可能br0会得到一个IP，而原来的连接(ens3)在br0得到IP时会没有IP，过一段时间又可能会得到IP。由于IP改变，此时很可能会断网。
+# CentOS Stream 8不会改变IP，bridge直接继承了ens3的IP，而ens3也不会再获得IP了。
 nmcli connection up bridge-slave-ens3
+nmcli connection up bridge-br0
 ```
 
 好像对无线网卡不起作用，`nmcli c up bridge-slave-wlan0`会报错：
@@ -72,13 +74,15 @@ nmcli connection up bridge-slave-ens3
 
 参考:
 
+[Centos8关于kvm-qemu、libvirt和nmcli创建桥网络的使用和理解](https://blog.csdn.net/Casual_Lei/article/details/115653963)
+
 [CentOS8创建网桥](https://www.cnblogs.com/chia/p/13496248.html)
 
 [如何在 Linux 里使用 nmcli 添加网桥 | Linux 中国](https://blog.csdn.net/F8qG7f9YD02Pe/article/details/79825476)
 
 不起作用:
 
-如果只有`nmcli connection up bridge-br0`，就算通过`nmcli connection down ens3`关掉原来的以太网连接，也会一直卡在获取IP地址。
+如果只有`nmcli connection up bridge-br0`，就算通过`nmcli connection down ens3`甚至是`nmcli device down ens3`关掉原来的以太网连接，也会一直卡在获取IP地址。
 
 <https://www.cyberciti.biz/faq/centos-8-add-network-bridge-br0-with-nmcli-command/#Adding_network_bridge>
 

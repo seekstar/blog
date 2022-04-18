@@ -158,7 +158,6 @@ virsh undefine centos8
 ## 参考文献
 
 <https://libvirt.org/formatdomain.html>
-[Centos8关于kvm-qemu、libvirt和nmcli创建桥网络的使用和理解](https://blog.csdn.net/Casual_Lei/article/details/115653963)
 [How to enable KVM virsh console access](https://ravada.readthedocs.io/en/latest/docs/config_console.html)
 [利用virsh和xml文件创建虚拟机](https://blog.csdn.net/qq_15437629/article/details/77827033)
 [kvm常见故障及解决方案](https://blog.51cto.com/dangzhiqiang/1783061)
