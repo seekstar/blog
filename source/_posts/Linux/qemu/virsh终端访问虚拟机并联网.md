@@ -9,20 +9,7 @@ date: 2021-08-08 05:18:41
 
 ## 配置网桥
 
-先安装`nmcli`，Debian 11:
-
-```shell
-sudo apt install network-manager
-```
-
-然后以root身份运行如下命令，记得把`ens3`换成自己的网卡号。
-
-```shell
-nmcli con add type bridge ifname br0
-nmcli con modify bridge-br0 bridge.stp no
-nmcli con add type bridge-slave ifname ens3 master bridge-br0
-nmcli connection up bridge-br0
-```
+{% post_link Linux/Network/'Linux配置网桥' %}
 
 ## 将虚拟机导入virsh
 
@@ -71,7 +58,9 @@ nmcli connection up bridge-br0
     </console>
     // 联网
     <interface type='bridge'>
+      // 如果使用的是virsh default network，这里的br0要改成virbr0。
       <source bridge='br0'/>
+      // 这行好像不用也可以？
       <model type='virtio'/>
     </interface>
   </devices>
@@ -166,39 +155,10 @@ virsh destroy centos8
 virsh undefine centos8
 ```
 
-## 奇怪的是
-
-宿主机是服务器上的centos 8的时候成功了，但是宿主机是MateBook X Pro上的deepin的时候失败了：
-
-```text
-error: internal error: /usr/lib/qemu/qemu-bridge-helper --use-vnet --br=br0 --fd=27: failed to communicate with bridge helper: Transport endpoint is not connected
-stderr=failed to parse default acl file `/etc/qemu/bridge.conf'
-```
-
-```shell
-nmcli device show
-```
-
-```text
-GENERAL.DEVICE:                         br0
-GENERAL.TYPE:                           bridge
-GENERAL.HWADDR:                         12:94:5E:12:84:F4
-GENERAL.MTU:                            1500
-GENERAL.STATE:                          70（连接中（正在获取 IP 配置））
-GENERAL.CONNECTION:                     bridge-br0
-GENERAL.CON-PATH:                       /org/freedesktop/NetworkManager/ActiveConne
-```
-
-不知道是不是跟WIFI配置和硬件有关。。。
-
-这里的做法好像都没啥用：<https://askubuntu.com/questions/574962/stuck-at-getting-ip-configuration>
-
 ## 参考文献
 
 <https://libvirt.org/formatdomain.html>
 [Centos8关于kvm-qemu、libvirt和nmcli创建桥网络的使用和理解](https://blog.csdn.net/Casual_Lei/article/details/115653963)
-[CentOS8创建网桥](https://www.cnblogs.com/chia/p/13496248.html)
-[如何在 Linux 里使用 nmcli 添加网桥 | Linux 中国](https://blog.csdn.net/F8qG7f9YD02Pe/article/details/79825476)
 [How to enable KVM virsh console access](https://ravada.readthedocs.io/en/latest/docs/config_console.html)
 [利用virsh和xml文件创建虚拟机](https://blog.csdn.net/qq_15437629/article/details/77827033)
 [kvm常见故障及解决方案](https://blog.51cto.com/dangzhiqiang/1783061)
