@@ -19,7 +19,7 @@ date: 2021-01-21 18:55:15
 ```shell
 # debian系(deepin)
 sudo apt install qemu qemu-kvm
-# Centos 8
+# Centos 8 & Centos stream 8
 sudo yum install qemu-kvm
 ```
 
@@ -76,8 +76,8 @@ kvm: disabled by bios
 ### 命令行安装
 
 ```shell
-# Centos 8
-sudo yum install virt-install
+# Centos stream 8
+sudo yum install libvirt virt-install
 # Ubuntu 20.04, deepin 20
 sudo apt install virtinst
 # Debian 11

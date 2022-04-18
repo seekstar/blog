@@ -4,7 +4,7 @@ date: 2022-04-17 20:31:48
 tags:
 ---
 
-普通用户可能没法用KVM：
+有些发行版中，普通用户可能没法用KVM：
 
 ```shell
 virsh capabilities | grep domain
@@ -57,3 +57,5 @@ virsh capabilities | grep domain
 就正常了。
 
 来源：<https://serverfault.com/questions/1002043/libvirt-has-no-kvm-capabilities-even-though-qemu-kvm-works>
+
+ps: CentOS Stream 8默认配置下普通用户可使用KVM，不知道是不是因为`qemu`用户默认就在`kvm`组里。
