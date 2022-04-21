@@ -512,6 +512,26 @@ sed 's/源pattern/目的pattern/g' FileName
 
 `-c`: 保护符号链接和硬链接（但是我的sed没有这个选项）。
 
+### less
+
+最基础用法：
+
+```shell
+less 文件路径
+```
+
+显示行号：
+
+```shell
+less -N 文件路径
+```
+
+也可以在`less`里面按`-` `N` `Enter`即可显示/隐藏行号。
+
+跳转到指定行：在`less`里面输入自己要跳转的行号，然后按`g`
+
+来源：[Linux之Less命令跳转到特定的行号](https://blog.csdn.net/lovedingd/article/details/120885183)
+
 ## 其他
 
 [linux中怎么用shell显示文件某一行或几行内容](https://blog.csdn.net/mydriverc2/article/details/82623778)
