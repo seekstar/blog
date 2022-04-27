@@ -17,6 +17,15 @@ pacman -Sc
 pacman -Scc
 ```
 
+yay的缓存在`~/.cache/yay`，清理缓存的方法类似pacman：
+
+```shell
+# 清理未安装软件包
+yay -Sc
+# 清理缓存中所有内容
+yay -Scc
+```
+
 来源：
 
 <https://wiki.archlinux.org/title/Pacman>
