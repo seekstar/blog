@@ -13,6 +13,12 @@ mount --rbind /dev dev/
 
 按照我的理解，`mount -rbind a b`相当于把a目录挂载到b目录，这样访问b目录就相当于访问a目录了。
 
+如果运行某命令出现`syslog is not available`的报错，可以试试：
+
+```shell
+mount --rbind /run run/
+```
+
 来源：
 
 <https://wiki.archlinux.org/title/Chroot#Using_chroot>
