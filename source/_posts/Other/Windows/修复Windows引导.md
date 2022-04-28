@@ -21,3 +21,5 @@ tags:
 虽然成功修复了，但是其实不是很清楚是什么原理。
 
 现在回过头来，应该直接`bootsect /nt60 sys`，然后`BOOTREC /FIXBOOT`，而不必格式化EFI分区。或者从一开始就尝试windows启动盘里的`继续使用windows`能不能启动电脑里的windows。
+
+用这种方法修复windows引导之后，原先的Linux引导大概率已经被破坏了，开机会直接进Windows。修复Linux引导的方法看这里：{% post_link Other/Windows/'解决安装windows后Linux引导被覆盖的问题' %}
