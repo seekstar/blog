@@ -111,6 +111,10 @@ flatpak install shadowsocks
 
 里面的`LibreOffice Draw`是很棒的PDF编辑工具。
 
+### Zotero
+
+一款文献管理器。
+
 ### KeePassXC
 
 密码管理器。要把apt安装的旧版卸载之后，Deepin启动器上的才会变成flatpak的版本。
