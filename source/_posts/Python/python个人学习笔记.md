@@ -10,16 +10,19 @@ date: 2020-03-22 00:16:52
 ## for循环
 
 0到9循环：
+
 ```py
 for i in range(10) :
 	Statements
 
 ```
+
 在交互式环境中（如命令行形式）后面要多打一个回车才开始运行
 
 ## 阶乘
 
 10!
+
 ```py
 from math import *
 factorial(10)
@@ -51,6 +54,8 @@ print('hello', end='')
 
 <!-- Without "-", the two post_link will be in the same line -->
 
+- {% post_link Python/'python常用输入方式' %}
+
 - {% post_link Python/'numpy矩阵操作' %}
 
 - {% post_link Python/'python文件管理' %}
@@ -62,6 +67,10 @@ print('hello', end='')
 - [vim 空格转tab，2空格缩进转4空格](https://blog.csdn.net/windeal3203/article/details/67638038)
 
 - [判断python变量是否存在？](https://www.pynote.net/archives/1681)
+
+- [[Python教学]Python Dictionary完全教学一次搞懂](https://baijiahao.baidu.com/s?id=1694102996150591628&wfr=spider&for=pc)
+
+- [Python中Tuple（元组）](https://blog.csdn.net/wsq119/article/details/105385142)
 
 正则：<https://docs.python.org/3/library/re.html>
 
