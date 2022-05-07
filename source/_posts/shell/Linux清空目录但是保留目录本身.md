@@ -4,19 +4,6 @@ date: 2022-05-04 18:22:08
 tags:
 ---
 
-## ls
-
-```shell
-ls -A | xargs rm -r
-```
-
-```text
--A, --almost-all
-        显示除 "." 和 ".." 外的所有文件。
-```
-
-## find
-
 ```shell
 find . -maxdepth 1 ! -path . -exec rm -r {} +
 ```
