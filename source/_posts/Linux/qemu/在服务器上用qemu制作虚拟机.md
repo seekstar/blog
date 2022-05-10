@@ -7,7 +7,7 @@ date: 2021-01-21 18:55:15
 
 - 宿主机：Deepin、Debian 11、centos 8
 
-- 虚拟机：CentOS 8
+- 虚拟机：CentOS 8, CentOS Stream 9, Debian 11
 
 ## 下载操作系统镜像
 
@@ -85,9 +85,7 @@ sudo apt install virtinst libvirt-daemon-system
 sudo virsh net-start default
 ```
 
-然后让普通用户使用libvirt时能使用KVM：
-
-{% post_link Linux/qemu/'libvirt让普通用户能用kvm' %}
+然后让普通用户使用libvirt时能使用KVM：{% post_link Linux/qemu/'libvirt让普通用户能用kvm' %}
 
 然后就可以开始安装了：
 

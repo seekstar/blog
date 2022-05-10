@@ -112,7 +112,15 @@ virsh console centos8
 
 注意，普通用户的virsh域和root的virsh域是不互通的。
 
-## 常见错误
+## 常见问题
+
+### 无法自动联网
+
+有的发行版没有设置开机自动联网，可以用`/sbin/dhclient`临时联网，开机自动联网需要手动设置：
+
+[CentOS 7 怎样自动连接网络](https://blog.csdn.net/qq_40309341/article/details/121354132)
+
+有时候也可能是因为网络设备的名字变了，导致原来的网络配置没有用了。Debian的话修改`/etc/network/interfaces`里的设备名即可，比如把`ens2`改成`enp0s2`。
 
 ### Could not open '/dev/sdb': Permission denied
 
