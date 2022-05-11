@@ -31,3 +31,5 @@ sudo trash-put /etc/ssh/ssh_host*
 ```shell
 sudo ssh-keygen -A
 ```
+
+来源：<https://serverfault.com/questions/471327/how-to-change-a-ssh-host-key>
