@@ -27,6 +27,14 @@ cssh username@server1 username@server2 username@server3
 
 完整版：`man cssh`
 
+### 解决xterm的复制粘贴问题
+
+xterm默认将选中的区域放入PRIMARY buffer，然后鼠标中键将PRIMARY buffer里的内容粘贴出来。但是系统剪切板是CLIPBOARD buffer。因此xterm不能跟系统剪切板交互。可以让xterm使用CLIPBOARD: <https://www.bianchengquan.com/article/450754.html>
+
+然后选中区域就会被放入系统剪切板，鼠标中键就会把系统剪切板里的东西粘贴出来。
+
+参考：[xterm 如何实现文字的复制粘贴](https://www.jianshu.com/p/078a1794731a)
+
 ## parallel-ssh
 
 ArchLinux:
