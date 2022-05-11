@@ -112,6 +112,30 @@ virsh console centos8
 
 注意，普通用户的virsh域和root的virsh域是不互通的。
 
+## 可选
+
+### 通过复制镜像开新虚拟机
+
+如果直接复制镜像来开新机器，会把machine ID一起复制到新机器，从而导致一些问题。更改machine ID的方法：{% post_link Linux/'Linux更改machine-ID' %}
+
+此外，SSH host key也会复制过去，重新生成的方法：{% post_link Linux/'更改SSH-host-key' %}
+
+参考：<https://octetz.com/docs/2020/2020-10-19-machine-images/>
+
+### 配置静态IP
+
+Deepin、Debian 11: {% post_link Linux/Network/'deepin设置静态IP' %}
+
+如果发现仍然会获取动态IP，检查这几点：
+
+- machine ID是唯一的，不然好像可能会从其他同machine ID的机器那里继承动态IP。
+
+- dhcpcd服务没有运行。dhcpcd的全程是DHCP Client Daemon。
+
+如果都没问题，再检查这里提到的另外几项：[Debian 9系统配置静态ip之后还会获取动态ip的问题](https://blog.csdn.net/weixin_44555609/article/details/109049543)
+
+参考：[树莓派（Debian）系统设置了静态IP之后还会获取动态IP的问题解决（scope global secondary eth0）](https://www.cnblogs.com/EasonJim/p/8426642.html)
+
 ## 常见问题
 
 ### 无法自动联网
