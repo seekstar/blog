@@ -131,6 +131,7 @@ dmesg | less
 #include <linux/kernel.h>
 #include <linux/slab.h>
 #include <linux/rhashtable.h>
+#include <linux/sched.h>
 
 MODULE_LICENSE("GPL");
 
@@ -184,7 +185,7 @@ static int __init start_init(void)
 	printk("rhashtable_init returns %d\n", ret);
 	if (ret < 0)
 		return ret;
-	for (i = 0; i < (1 << 26); ++i) {
+	for (i = 0; i < (1 << 20); ++i) {
 		//entry = kmalloc(sizeof(struct hash_entry), GFP_KERNEL);
 		entry = kzalloc(sizeof(struct hash_entry), GFP_KERNEL);
 		if (entry == NULL) {
@@ -194,14 +195,24 @@ static int __init start_init(void)
 		entry->kv.key = i;
 		entry->kv.value = i * i;
 		//printk("Inserting %llu %llu\n", entry->key, entry->value);
-		ret = rhashtable_insert_fast(&rht, &entry->node, param);
+		while (1) {
+			// rhashtable_insert_fast 不检查这个元素是否已经存在，而是直接插入
+			ret = rhashtable_insert_fast(&rht, &entry->node, param);
+			// 如果插入太快，尤其是多线程插入的时候，可能会返回-EBUSY。好像是因为需要触发table resizing，但是同一时间只能有一个table resizing任务，所以就返回-EBUSY。此时需要schedule一下然后重试。
+			if (ret != -EBUSY)
+				break;
+			schedule();
+		}
 		if (ret < 0) {
 			kfree(entry);
 			printk("rhashtable_insert_fast returns %d\n", ret);
 			goto err_exit;
 		}
+		// hashtable_lookup_insert_key 会检查元素是否已经存在，如果已经存在就返回-EEXIST，不存在则插入并返回0
+		ret = rhashtable_lookup_insert_key(&rht, &i, &entry->node, param);
+		BUG_ON(ret != -EEXIST);
 	}
-	for (i = 0; i < (1 << 26); ++i) {
+	for (i = 0; i < (1 << 20); ++i) {
 		// 如果可以保证entry不被删掉，那么可以用rhashtable_lookup_fast
 		entry = rhashtable_lookup_fast(&rht, &i, param);
 		if (entry == NULL) {
