@@ -4,6 +4,8 @@ date: 2022-04-27 16:33:44
 tags:
 ---
 
+## mount
+
 ```shell
 cd /location/of/new/root
 mount -t proc /proc proc/
@@ -24,3 +26,17 @@ mount --rbind /run run/
 <https://wiki.archlinux.org/title/Chroot#Using_chroot>
 
 <https://blog.csdn.net/sinat_37322535/article/details/117022038>
+
+## umount
+
+```shell
+cd /location/of/new/root
+umount proc/
+umount sys/
+mount --make-rslave dev/
+umount -R dev/
+```
+
+`run/`同理。
+
+来源：<https://unix.stackexchange.com/questions/120827/recursive-umount-after-rbind-mount>
