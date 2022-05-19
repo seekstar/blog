@@ -57,11 +57,15 @@ make -j$(nproc)
 
 注意，vol-async v1.1与 HDF5 v1.12.1不兼容。
 
-## 编译安装 h5bench
+## 编译 h5bench
+
+<https://github.com/hpc-io/h5bench>
 
 ```shell
 sudo apt install libpnetcdf-dev
 ```
+
+不知道为啥，就算没有`-DH5BENCH_ALL=ON`，也要依赖AMReX和openPMD。
 
 ```shell
 mkdir build
@@ -71,6 +75,8 @@ make -j$(nproc)
 echo "export PATH=$(pwd):\$PATH" >> ~/.bashrc
 source ~/.bashrc
 ```
+
+如果提示`mpi.h`找不到的话，就把mpi的include路径放到`CPATH`环境变量中。
 
 不需要跑`sudo make install`。而且跑了之后，安装在系统目录下的`h5bench`的权限位是700，所以普通用户没法执行。
 
@@ -82,7 +88,11 @@ execvp error on file h5bench_write (No such file or directory)
 
 ## 运行 h5bench
 
-官方文档：<https://h5bench.readthedocs.io/en/latest/running.html>
+官方文档
+
+<https://h5bench.readthedocs.io/en/latest/running.html>
+
+<https://h5bench.readthedocs.io/en/latest/vpic.html>
 
 配置文件的一些坑：
 
@@ -138,6 +148,16 @@ execvp error on file h5bench_write (No such file or directory)
 }
 ```
 
+其中`DIM_1`乘上`1300`差不多就是生成的文件的字节数了。
+
+我保存为了`write.json`。然后运行测试：
+
+```shell
+./h5bench write.json
+```
+
 ## 参考
 
 <https://support.hdfgroup.org/HDF5/PHDF5/>
+
+[Linux下将某个include路径添加到g++的默认搜索路径](https://blog.csdn.net/weixin_44759449/article/details/122136852)
