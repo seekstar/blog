@@ -158,6 +158,7 @@ https://zhidao.baidu.com/question/9844116.html
 顾名思义，.tar.gz就是对tar文件用gzip压缩得到的文件。所以解压可以先解压gz，再解压tar，压缩也可以先压缩成tar，再压缩成gz。
 
 也可以使用一条命令完成解压或压缩。
+
 ### 解压
 
 - 解压到当前目录
@@ -244,6 +245,7 @@ https://zhidao.baidu.com/question/1639604825027635340.html
 解压时可以先解压xz得到tar文件，再解压tar。
 
 也可以使用一条命令完成解压或压缩。
+
 ### 单线程解压
 
 ```shell
@@ -252,6 +254,7 @@ tar xJf name.tar.xz
 
 x: extract
 J: xz
+
 ### 单线程压缩
 
 ```shell
@@ -283,6 +286,7 @@ tar如果输出的文件名是“-”，则会输出到stdout
 ## bzip2
 
 压缩解压过程都会把源文件删掉。如果要保留，选项里加个`k`就好了（keep)。
+
 ### 多线程
 
 用pbzip2。如果不指定线程数，就自动检测能用多少个线程。
