@@ -175,7 +175,7 @@ VNC server running on ::1:5900
 
 虚拟机一开始是没有网络的。
 
-### 桥接网卡（使用nmcli+virsh）
+### virsh
 
 {% post_link Linux/qemu/'virsh终端访问虚拟机并联网' %}
 
