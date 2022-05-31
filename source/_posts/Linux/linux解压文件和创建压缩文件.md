@@ -96,6 +96,7 @@ tar -xvf FileName.tar
 x: 解压文件(extract里的x)
 v: 打印详细信息(verbose)
 f: 指定文件名(file)
+
 ### 解压到指定目录
 
 ```shell
@@ -120,9 +121,10 @@ c: 压缩(compress)
 
 参考网站：https://blog.csdn.net/zdx1515888659/article/details/82841100
 
-### 解压到当前目录
+### 单线程解压
 
 ```shell
+# 到当前目录
 gzip -d FileName.gz
 ```
 
@@ -137,9 +139,10 @@ gzip -dk FileName.gz
 
 k: keep
 
-### 压缩到当前目录
+### 单线程压缩
 
 ```shell
+# 到当前目录
 gzip FileName
 ```
 
@@ -150,6 +153,36 @@ k: 保留源文件(keep)
 - gzip其他常用选项
 v: 打印详细信息(verbose)
 
+### 多线程解压
+
+`gzip`不支持多线程解压。一般来讲`gzip`的解压非常快，通常可以达到I/O设备的吞吐极限，所以一般也没必要多线程解压。
+
+`unpigz`通过流水线的方式将解压并行化了，但是并行度有限。
+
+```shell
+# 到当前目录
+unpigz xxx.gz
+```
+
+默认使用所有核。可以加上`-p 线程数`限制使用的核数。
+
+默认解压完成后删除原文件。加上`-k`可以保留原文件。
+
+### 多线程压缩
+
+`gzip`单线程压缩很慢，而且不支持多线程压缩。用`pigz`可以实现多线程压缩。
+
+```shell
+# 到当前目录
+pigz 文件名
+```
+
+实测压缩大文件可以跑满CPU，而且不影响压缩率。
+
+默认使用所有核。可以加上`-p 线程数`限制使用的核数。
+
+默认解压完成后删除原文件。加上`-k`可以保留原文件。
+
 ## .tar.gz
 
 参考网站：https://blog.csdn.net/weixin_42628856/article/details/81332138
@@ -159,7 +192,7 @@ https://zhidao.baidu.com/question/9844116.html
 
 也可以使用一条命令完成解压或压缩。
 
-### 解压
+### 单线程解压
 
 - 解压到当前目录
 
@@ -175,13 +208,24 @@ z表示gz
 tar -zxvf FileName.tar.gz -C path
 ```
 
-### 创建
+### 单线程压缩
 
 ```shell
 tar -zcvf FileName.tar.gz files
 ```
 
 其中files可以是文件夹名，也可以是表示文件的正则表达式（如*.jpg）
+
+### 多线程压缩
+
+```shell
+# tar
+#   -c: create
+#   -f: archive file. 这里是“-”， 表示输出到stdout
+# pigz
+#   -: 文件名是"-"，表示从stdin读取，并且输出到stdout
+tar -cf - 文件或目录 | pigz - > FileName.tar.gz
+```
 
 ## .xz
 
