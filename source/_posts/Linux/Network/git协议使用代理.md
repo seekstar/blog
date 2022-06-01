@@ -9,13 +9,15 @@ tags:
 ```text
 Host github.com
     User git
-    # ProxyCommand nc -X 5 -x <socks_host>:<socks_port> %h %p
-    ProxyCommand nc -x <socks_host>:<socks_port> %h %p
+    # ProxyCommand netcat -X 5 -x <socks_host>:<socks_port> %h %p
+    ProxyCommand netcat -x <socks_host>:<socks_port> %h %p
 ```
 
 其中`%h`表示host，`%p`表示port。
 
-`man nc`:
+注意这里的`netcat`有些教程里是写的`nc`，但是这是不合适的，因为`nc`在debian系中指向`ncat`，而在CentOS中指向`netcat`，两者是不同的。
+
+`man netcat`:
 
 ```text
 NAME
