@@ -22,7 +22,16 @@ tags: RocksDB
 
 - 如果是最底层的compaction，而且不是`prepicked compaction`，那么就把priority改成`BOTTOM`，并且设置成`prepicked_compaction`，然后schedule `DBImpl::BGWorkBottomCompaction`，这个函数其实最后还是回到了`DBImpl::BackgroundCompaction`。这其实就相当于推迟bottom level的compaction。
 
-- 如果是`prepicked compaction`，或者不是最底层的compaction，那么就构造`CompactionJob compaction_job`，其中`FSDirectory* output_directory`被设置成`GetDataDir(c->column_family_data(), c->output_path_id())`。然后`mutex_.Unlock()`，执行`compaction_job.Run()`，再`mutex_.Lock()`。这说明数据库的元数据是受互斥锁保护的，只有在执行耗时操作时才暂时把锁放开。
+- 如果是`prepicked compaction`，或者不是最底层的compaction，那么：
+
+>构造`CompactionJob compaction_job`，其中`FSDirectory* output_directory`被设置成`GetDataDir(c->column_family_data(), c->output_path_id())`
+>`mutex_.Unlock()`，执行`compaction_job.Run()`，再`mutex_.Lock()`。这说明数据库的元数据是受互斥锁保护的，只有在执行耗时操作时才暂时把锁放开。
+>`compaction_job.Install`
+>>`CompactionJob::InstallCompactionResults`
+>>>先把输入文件删掉：`compaction->AddInputDeletions(edit);`
+>>>再把输出文件加上：`edit->AddFile`
+>
+>`Compaction::ReleaseCompactionFiles`。所以Compaction的文件是有上锁的，不会出现一边compaction一边上面compact到输入层的情况。
 
 ## CompactionJob::output_directory
 
@@ -48,7 +57,7 @@ struct AdvancedColumnFamilyOptions {
 
 `LevelCompactionPicker::PickCompaction`调用`LevelCompactionBuilder::PickCompaction`。
 
-`LevelCompactionBuilder::PickCompaction`调用`LevelCompactionBuilder::GetCompaction`。
+`LevelCompactionBuilder::PickCompaction`先选择输入文件：{% post_link Storage/'RocksDB代码分析——Compaction的输入文件的选择' %}，然后调用`LevelCompactionBuilder::GetCompaction`构造`Compaction`对象。
 
 `LevelCompactionBuilder::GetCompaction`中构造了`Compaction`, 其中`output_path_id`: `GetPathId(ioptions_, mutable_cf_options_, output_level_)`
 
