@@ -27,7 +27,9 @@ tags: RocksDB
 >构造`CompactionJob compaction_job`，其中`FSDirectory* output_directory`被设置成`GetDataDir(c->column_family_data(), c->output_path_id())`
 >`mutex_.Unlock()`，执行`compaction_job.Run()`，再`mutex_.Lock()`。这说明数据库的元数据是受互斥锁保护的，只有在执行耗时操作时才暂时把锁放开。
 >`compaction_job.Install`
+>
 >>`CompactionJob::InstallCompactionResults`
+>>
 >>>先把输入文件删掉：`compaction->AddInputDeletions(edit);`
 >>>再把输出文件加上：`edit->AddFile`
 >
