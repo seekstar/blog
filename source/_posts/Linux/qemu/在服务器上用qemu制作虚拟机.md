@@ -451,6 +451,14 @@ sudo qemu-system-x86_64 -m 4096 -enable-kvm centos.img -net nic -net tap,script=
 
 <https://blog.csdn.net/u012972536/article/details/79827292>
 
+### UEFI启动
+
+Debian 11：加上`-bios /usr/share/ovmf/OVMF.fd`即可。
+
+启动之后，发现`/sys/firmware/efi`目录存在，说明确实是UEFI启动的。
+
+参考：[linux怎么查看操作系统是uefi启动还是bios启动？](https://blog.csdn.net/weixin_50698817/article/details/123530442)
+
 ### ttyS0登录时输入用户名后卡住
 
 这个在deepin虚拟机里更换内核之后碰到过。解决方案：
