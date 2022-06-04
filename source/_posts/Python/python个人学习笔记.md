@@ -72,6 +72,12 @@ print('hello', end='')
 
 - [Python中Tuple（元组）](https://blog.csdn.net/wsq119/article/details/105385142)
 
+- [Python 3 命令行参数](https://www.twle.cn/l/yufei/python30/python-30-command-line-arguments.html)
+
+- [Python3 函数](https://www.runoob.com/python3/python3-function.html)
+
+- [python如何修改全局变量](https://blog.csdn.net/yytasty/article/details/115675322)
+
 正则：<https://docs.python.org/3/library/re.html>
 
 字符串trim: <https://www.freecodecamp.org/news/python-strip-how-to-trim-a-string-or-line/>
