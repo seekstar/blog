@@ -1,5 +1,5 @@
 ---
-title: hadoop集群部署
+title: HDFS集群部署
 date: 2022-06-07 20:16:14
 tags:
 ---
