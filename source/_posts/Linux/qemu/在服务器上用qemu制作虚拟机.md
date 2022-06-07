@@ -459,6 +459,14 @@ Debian 11：加上`-bios /usr/share/ovmf/OVMF.fd`即可。
 
 参考：[linux怎么查看操作系统是uefi启动还是bios启动？](https://blog.csdn.net/weixin_50698817/article/details/123530442)
 
+### 克隆虚拟机
+
+```shell
+virt-clone --original 源虚拟机 --name 新虚拟机名字 --file 新虚拟机的磁盘文件路径
+```
+
+来源：<https://www.cyberciti.biz/faq/how-to-clone-existing-kvm-virtual-machine-images-on-linux/>
+
 ### ttyS0登录时输入用户名后卡住
 
 这个在deepin虚拟机里更换内核之后碰到过。解决方案：
