@@ -50,7 +50,29 @@ print("%e %e" %(x, 111 + 111))
 print('hello', end='')
 ```
 
+## 时间
+
+<https://docs.python.org/3/library/datetime.html>
+
+```py
+datetime.datetime.fromtimestamp(1516332287)
+```
+
+也可以用`time`包：[Python中时间与时间戳之间的转换](https://blog.csdn.net/google19890102/article/details/51355282)
+
+### 减去月数
+
+<https://dateutil.readthedocs.io/en/stable/>
+
+```shell
+pip3 install python-dateutil
+```
+
+来源：<https://thispointer.com/subtract-months-from-a-date-in-python/>
+
 ## 其他
+
+### 本站博客
 
 <!-- Without "-", the two post_link will be in the same line -->
 
@@ -59,6 +81,8 @@ print('hello', end='')
 - {% post_link Python/'numpy矩阵操作' %}
 
 - {% post_link Python/'python文件管理' %}
+
+### 中文资料
 
 - [Python assert 断言函数](https://www.cnblogs.com/hezhiyao/p/7805278.html)
 
@@ -70,6 +94,8 @@ print('hello', end='')
 
 - [[Python教学]Python Dictionary完全教学一次搞懂](https://baijiahao.baidu.com/s?id=1694102996150591628&wfr=spider&for=pc)
 
+- [Python 列表(List)](https://www.runoob.com/python/python-lists.html)
+
 - [Python中Tuple（元组）](https://blog.csdn.net/wsq119/article/details/105385142)
 
 - [Python 3 命令行参数](https://www.twle.cn/l/yufei/python30/python-30-command-line-arguments.html)
@@ -78,6 +104,18 @@ print('hello', end='')
 
 - [python如何修改全局变量](https://blog.csdn.net/yytasty/article/details/115675322)
 
+- [python之generator详解](https://blog.csdn.net/zhong_jay/article/details/91799459)
+
+- [python字典和JSON格式的转换](https://blog.csdn.net/sinat_36899414/article/details/77817195)
+
+### 英文资料
+
 正则：<https://docs.python.org/3/library/re.html>
 
+Waiting for I/O completion: <https://docs.python.org/3/library/select.html>
+
 字符串trim: <https://www.freecodecamp.org/news/python-strip-how-to-trim-a-string-or-line/>
+
+requirements.txt: <https://note.nkmk.me/en/python-pip-install-requirements/>
+
+[with statement in Python](https://www.geeksforgeeks.org/with-statement-in-python/)
