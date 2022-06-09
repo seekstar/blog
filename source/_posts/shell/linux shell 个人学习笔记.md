@@ -80,11 +80,11 @@ fi
 如果想像C语言那样进行条件判断，可以使用`[[]]`。
 例如下面这两句都表示`如果参数的个数等于０或者大于２`
 
-```
+```text
 if [[ $# = 0 || $# > 2 ]]; then
 ```
 
-```
+```text
 if [ $# = 0 -o $# -gt 2 ]; then
 ```
 
@@ -252,7 +252,7 @@ sort -u txt
 
 输出
 
-```
+```text
 fffff
 jason
 ```
@@ -495,7 +495,6 @@ sudo find . -path ./media -path ./mnt -prune -o -name gsettings
 sudo find . -name b ! -path “./a/*”
 ```
 
-
 ### locate
 
 ```shell
@@ -553,3 +552,9 @@ less -N 文件路径
 ## 其他
 
 [linux中怎么用shell显示文件某一行或几行内容](https://blog.csdn.net/mydriverc2/article/details/82623778)
+
+[linux shell 将多行文件转换为一行](https://blog.csdn.net/hjxhjh/article/details/17264739)
+
+[Linux awk 命令](https://m.runoob.com/linux/linux-comm-awk.html)
+
+[AWK 条件语句与循环](https://www.runoob.com/w3cnote/awk-if-loop.html)
