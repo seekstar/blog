@@ -29,7 +29,13 @@ cd /mnt
 mount /dev/EFI分区 /mnt/boot/efi
 ```
 
-然后生成grub配置：
+然后chroot到原有Linux:
+
+```shell
+sudo chroot /mnt
+```
+
+然后在chroot里生成grub配置：
 
 ```shell
 update-grub
@@ -43,7 +49,7 @@ grub-install /dev/EFI分区所在的磁盘
 
 然后检查`/etc/fstab`里的`/boot/efi`所在的行，如果使用的是UUID，那么可能需要改成`/dev/EFI分区`，因为UUID可能会改变，导致之后进不去系统。
 
-然后重启之后应该就可以看到正常的GRUB界面，Linux和Windows系统也应该都能进去了。
+然后退出chroot，重启之后应该就可以看到正常的GRUB界面，Linux和Windows系统也应该都能进去了。
 
 P.S. 不知道为什么，chroot到deepin的分区之后重启看不到GRUB界面，但是chroot到debian的分区之后重启就能看到GRUB界面。
 
