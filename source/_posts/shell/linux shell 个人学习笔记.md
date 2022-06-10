@@ -10,6 +10,8 @@ date: 2020-02-05 18:10:23
 
 ### 条件判断
 
+`man bash`，然后搜索`CONDITIONAL EXPRESSIONS`，可以看到完整的列表。
+
 #### if elif else
 
 参考：<https://blog.csdn.net/u014783674/article/details/24474001>
@@ -72,7 +74,7 @@ fi
 | -gt | > | `[ $1 -gt 2 ]` |
 | -a | && | `[ $1 -gt 0 -a $1 -lt 10 ]` |
 | -o | \|\| | `[ $1 -lt 0 -o $1 -gt 10 ]` |
-| -z | 为空 | `[ -z  "$1" ]` |
+| -z | 为空 | `[ -z "$1" ]` |
 | -n | 非空 | `[ -n "$1" ]` |
 
 其中`-eq`和`-ne`可以分别用`=`和`!=`替换。
@@ -111,6 +113,16 @@ else
      fi
 fi
 ```
+
+#### 判断文件权限
+
+| 代码 | 含义 |
+| ---- | ---- |
+| -r | 存在且可读 |
+| -w | 存在且可写 |
+| -x | 存在且可执行 |
+
+参考：<https://stackoverflow.com/questions/10319652/check-if-a-file-is-executable>
 
 ### 函数
 
@@ -558,3 +570,5 @@ less -N 文件路径
 [Linux awk 命令](https://m.runoob.com/linux/linux-comm-awk.html)
 
 [AWK 条件语句与循环](https://www.runoob.com/w3cnote/awk-if-loop.html)
+
+`[`和`[[`的区别：<https://stackoverflow.com/questions/3427872/whats-the-difference-between-and-in-bash>
