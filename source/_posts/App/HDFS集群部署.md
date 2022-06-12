@@ -130,7 +130,7 @@ Escape character is '^]'.
 
 ### Data node
 
-一定要解析node node的host name。但是保险起见，我把所有node的主机名都解析了：
+一定要解析name node的host name。但是保险起见，我把所有node的主机名都解析了：
 
 ```text
 192.168.122.102 hdfs-name

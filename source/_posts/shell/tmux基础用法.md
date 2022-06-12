@@ -78,15 +78,15 @@ tmux kill-session -t <session-name>
 
 详见：[tmux复制模式使用说明](https://blog.csdn.net/yangzhongxuan/article/details/6890232)
 
-进入复制模式：`Ctrl+b [`
-退出复制模式：默认是`Esc`
-默认是上下左右箭头来移动光标的。但是可以通过在`~/.tmux.conf`里加入
+进入复制模式：`Ctrl+b [`。
+退出复制模式：默认是`q`或`Esc`。
+默认是上下左右箭头来移动光标的。但是可以通过在`~/.tmux.conf`里加入：
 
 ```shell
 set-window-option -g mode-keys vi
 ```
 
-来设置成vi风格的光标操作方式，需要关闭所有的tmux会话，再重新打开才能生效。注意这个时候退出复制模式的快捷键变成了`Enter`。
+来设置成vi风格的光标操作方式，需要关闭所有的tmux会话，再重新打开才能生效。注意这个时候退出复制模式的快捷键变成了`q`或`Enter`。
 在vi风格的光标操作方式中，可以`ctrl+u`或者`PgUp`上翻页，`ctrl+d`或者`PgDn`下翻页，这在默认设定中好像是做不到的。
 
 进入复制模式之后，按空格选择要复制的起始位置，然后移动光标到要复制的结束位置，然后按`Enter`复制，同时退出复制模式，按`ctrl+]`可以粘贴（只能在tmux内粘贴）。
