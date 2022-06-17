@@ -8,9 +8,9 @@ tags:
 
 ```text
 Host github.com
-    User git
-    # ProxyCommand netcat -X 5 -x <socks_host>:<socks_port> %h %p
-    ProxyCommand netcat -x <socks_host>:<socks_port> %h %p
+        User git
+        # ProxyCommand netcat -X 5 -x <socks_host>:<socks_port> %h %p
+        ProxyCommand netcat -x <socks_host>:<socks_port> %h %p
 ```
 
 其中`%h`表示host，`%p`表示port。
