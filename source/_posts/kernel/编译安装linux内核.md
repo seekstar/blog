@@ -13,6 +13,23 @@ date: 2020-12-28 13:58:21
 
 ## 配置
 
+### 编辑`.config`
+
+一些常用的配置：
+
+#### KASAN
+
+KASAN是一个动态检测内存错误的工具：[在Linux内核使用Kasan](https://blog.csdn.net/weiqifa0/article/details/120359407)
+
+```text
+CONFIG_SLUB_DEBUG=y
+CONFIG_KASAN=y
+```
+
+### make menuconfig
+
+如果手动编辑了`.config`的话，这一步可能会根据手动编辑的内容调整一些其他选项，比如如果设置了`CONFIG_KASAN=y`，执行`make menuconfig`后会自动加上`CONFIG_KASAN_GENERIC=y`和`CONFIG_KASAN_OUTLINE=y`。
+
 ```shell
 sudo apt install -y flex bison libelf-dev
 make menuconfig
