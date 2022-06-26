@@ -27,9 +27,27 @@ Xournal++的用法跟Xournal差不多。Xournal++在deepin商店里找不到。�
 
 可以插入文本框，可以插入弹出式笔记，可以画线之类的，但是不能插入图片。
 
+## inkscape
+
+可以将PDF转换为SVG格式，然后无损编辑。教程：{% post_link Draw/'inkscape学习笔记' %}
+
 ## Scribus
 
 好像打不开PDF。而且最新版1.5.7在deepin上会段错误。
+
+## pdftk
+
+命令行软件，可以输出pdf的指定几页：
+
+```shell
+pdftk full-pdf.pdf cat 12-15 output outfile_p12-15.pdf
+```
+
+来源：<https://askubuntu.com/questions/221962/how-can-i-extract-a-page-range-a-part-of-a-pdf>
+
+## 压缩PDF
+
+{% post_link App/'Linux压缩pdf' %}
 
 ## 参考链接
 
