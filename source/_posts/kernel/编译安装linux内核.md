@@ -51,7 +51,9 @@ make -j$(nproc) > /dev/null
 
 `> /dev/null`是为了防止warning和error被刷掉，比如让我们装`libelf-dev`的警告。
 
-## 安装内核模块
+## 安装到系统目录
+
+### 内核模块
 
 如果没有特殊需求，一般可以把内核模块的debug信息给去掉，节约安装空间。
 
@@ -69,7 +71,7 @@ make modules_install
 
 {% post_link kernel/'解决编译安装内核时-lib-modules过大的问题' %}
 
-## 安装
+### 内核
 
 ```shell
 make install
@@ -84,6 +86,88 @@ make install
 那可能要把`.config`里的`CONFIG_SYSTEM_TRUSTED_KEYS`后面引号里的东西删掉。
 
 另外要注意看看有没有要我们安装`console-setup`和`plymouth-themes`的提示。
+
+### （可选）用于编译内核模块的文件
+
+这个安装的头文件只能给用户态程序用，不能用于编译内核模块：
+
+```shell
+# make INSTALL_HDR_PATH=指定目录 headers_install
+make headers_install
+```
+
+如果用包管理器安装`linux-headers-xxx`的话，会把头文件安装在`/usr/src/linux-headers-xxx-amd64`和`/usr/src/linux-headers-xxx-common`下面，里面有用的只有这几个文件或文件夹：
+
+```text
+arch/x86/include/ arch/x86/Makefile* include/ Makefile Module.symvers scripts/ tools/
+```
+
+所以如果要安装用于编译内核模块的文件到系统目录，只需要把这些文件或文件夹放进`/usr/src/linux-headers-我们编译的内核版本`即可。
+
+之前安装的内核模块的目录`/usr/lib/modules/我们编译的内核版本`里的`build`和`source`符号链接原先是指向编译时使用的源码的路径，现在改到`/usr/src/linux-headers-我们编译的内核版本/`即可。
+
+## 安装到指定目录
+
+这样可以在服务器上编译内核，安装到`指定目录`，然后`指定目录`打包传到目标机器，再安装到目标机器上的系统目录即可。
+
+### 内核模块
+
+把内核模块安装到`指定目录/lib/modules/xxx`：
+
+```shell
+INSTALL_MOD_PATH=指定目录 make modules_install
+#INSTALL_MOD_PATH=指定目录 make INSTALL_MOD_STRIP=1 modules_install
+```
+
+### 内核
+
+把`System.map-xxx`和`vmlinuz-xxx`安装到`指定目录`下面：
+
+```shell
+INSTALL_PATH=指定目录 make install
+```
+
+会报错：
+
+```text
+ln: 无法创建符号链接'/boot/System.map': 权限不够
+ln: 无法创建符号链接'/boot/vmlinuz': 权限不够
+ln: 无法创建符号链接'/boot/System.map': 权限不够
+```
+
+不用管这个报错，因为我们不安装到系统目录。
+
+### （可选）用于编译内核模块的文件
+
+把这些文件安装到`指定目录/linux-headers`：
+
+```shell
+mkdir -p 指定目录/linux-headers/arch/x86/
+cp -r arch/x86/include/ arch/x86/Makefile* 指定目录/linux-headers/arch/x86/
+cp -r include/ Makefile Module.symvers scripts/ tools/ 指定目录/linux-headers/
+```
+
+### 在目标机器上安装到系统目录
+
+在编译服务器上把`指定目录`压缩，传输到目标机器上，解压出来，进入`指定目录`，然后执行以下指令来安装到目标机器上的系统目录里：
+
+```shell
+kernel_version_to_install=$(ls lib/modules/)
+# 内核模块
+sudo cp -r lib/modules/$kernel_version_to_install /lib/modules/
+# 内核
+sudo cp -r vmlinuz-* System.map-* /boot/
+# 生成initramfs
+sudo update-initramfs -ck $kernel_version_to_install
+# 更新GRUB
+sudo update-grub
+# （可选）安装用于编译内核模块的文件
+sudo rm -rf /usr/src/linux-headers-$kernel_version_to_install
+sudo cp -r linux-headers/ /usr/src/linux-headers-$kernel_version_to_install
+sudo rm /lib/modules/$kernel_version_to_install/build /lib/modules/$kernel_version_to_install/source
+sudo ln -s /usr/src/linux-headers-$kernel_version_to_install /lib/modules/$kernel_version_to_install/build
+sudo ln -s /usr/src/linux-headers-$kernel_version_to_install/ /lib/modules/$kernel_version_to_install/source
+```
 
 ## 更新grub
 
