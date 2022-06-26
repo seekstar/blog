@@ -84,13 +84,23 @@ pip3 install python-dateutil
 
 ### 中文资料
 
+#### 语法
+
+- [Python if 语句](https://m.runoob.com/python3/python3-if-example.html)
+
+- [Python3 函数](https://www.runoob.com/python3/python3-function.html)
+
+- [python之generator详解](https://blog.csdn.net/zhong_jay/article/details/91799459)
+
+- [python如何修改全局变量](https://blog.csdn.net/yytasty/article/details/115675322)
+
 - [Python assert 断言函数](https://www.cnblogs.com/hezhiyao/p/7805278.html)
+
+- [判断python变量是否存在？](https://www.pynote.net/archives/1681)
 
 - [Python ASCII码与字符的相互转换](https://blog.csdn.net/beautiful77moon/article/details/88873261)
 
-- [vim 空格转tab，2空格缩进转4空格](https://blog.csdn.net/windeal3203/article/details/67638038)
-
-- [判断python变量是否存在？](https://www.pynote.net/archives/1681)
+#### 内置数据结构
 
 - [[Python教学]Python Dictionary完全教学一次搞懂](https://baijiahao.baidu.com/s?id=1694102996150591628&wfr=spider&for=pc)
 
@@ -98,15 +108,19 @@ pip3 install python-dateutil
 
 - [Python中Tuple（元组）](https://blog.csdn.net/wsq119/article/details/105385142)
 
+#### 常用模块
+
 - [Python 3 命令行参数](https://www.twle.cn/l/yufei/python30/python-30-command-line-arguments.html)
 
-- [Python3 函数](https://www.runoob.com/python3/python3-function.html)
-
-- [python如何修改全局变量](https://blog.csdn.net/yytasty/article/details/115675322)
-
-- [python之generator详解](https://blog.csdn.net/zhong_jay/article/details/91799459)
-
 - [python字典和JSON格式的转换](https://blog.csdn.net/sinat_36899414/article/details/77817195)
+
+`json.dumps(obj, indent='\t')`可以使用tab进行缩进。
+
+- 获取命令输出：[python的popen函数](https://blog.csdn.net/Z_Stand/article/details/89375589)
+
+#### 其他
+
+- [vim 空格转tab，2空格缩进转4空格](https://blog.csdn.net/windeal3203/article/details/67638038)
 
 ### 英文资料
 
