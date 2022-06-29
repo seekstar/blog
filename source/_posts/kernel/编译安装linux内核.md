@@ -87,6 +87,8 @@ make install
 
 另外要注意看看有没有要我们安装`console-setup`和`plymouth-themes`的提示。
 
+参考：[make[1]: *** 没有规则可制作目标“debian/canonical-certs.pem”，由“certs/x509_certificate_list” 需求。 停止。](https://blog.csdn.net/Chenciyuan_nj/article/details/115099040)
+
 ### （可选）用于编译内核模块的文件
 
 这个安装的头文件只能给用户态程序用，不能用于编译内核模块：
@@ -137,6 +139,14 @@ ln: 无法创建符号链接'/boot/System.map': 权限不够
 
 不用管这个报错，因为我们不安装到系统目录。
 
+### （可选）内核配置
+
+把`config-$kernel_version_to_install`安装到`指定目录`下：
+
+```shell
+cp .config 指定目录/config-$kernel_version_to_install
+```
+
 ### （可选）用于编译内核模块的文件
 
 把这些文件安装到`指定目录/linux-headers`：
@@ -157,38 +167,61 @@ kernel_version_to_install=$(ls lib/modules/)
 sudo cp -r lib/modules/$kernel_version_to_install /lib/modules/
 # 内核
 sudo cp -r vmlinuz-* System.map-* /boot/
-# 生成initramfs
-sudo update-initramfs -ck $kernel_version_to_install
-# 更新GRUB
-sudo update-grub
+# （可选）安装内核配置
+sudo cp config-$kernel_version_to_install /boot/
 # （可选）安装用于编译内核模块的文件
 sudo rm -rf /usr/src/linux-headers-$kernel_version_to_install
 sudo cp -r linux-headers/ /usr/src/linux-headers-$kernel_version_to_install
 sudo rm /lib/modules/$kernel_version_to_install/build /lib/modules/$kernel_version_to_install/source
-sudo ln -s /usr/src/linux-headers-$kernel_version_to_install /lib/modules/$kernel_version_to_install/build
+sudo ln -s /usr/src/linux-headers-$kernel_version_to_install/ /lib/modules/$kernel_version_to_install/build
 sudo ln -s /usr/src/linux-headers-$kernel_version_to_install/ /lib/modules/$kernel_version_to_install/source
 ```
 
+然后给刚刚安装的内核生成initramfs：{% post_link kernel/'Linux生成initramfs' %}
+
 ## 更新grub
 
-一般`make install`的时候会自动做。但是如果电脑上装了多个linux，那选系统界面的grub可能不是当前系统提供的，这个时候就要去提供grub的那个系统做一次`update-grub`才行。
+如果电脑上装了多个linux，那选系统界面的grub可能不是当前系统提供的，这个时候就要去提供grub的那个系统更新grub才行。
 
-对于centos，`make install`的时候好像不会自动更新grub，需要手动更新：
+### Debian系
 
 ```shell
-sudo grub2-mkconfig -o /boot/grub2/grub.cfg
+sudo update-grub
 ```
 
-然后设置默认内核
+### CentOS
 
 ```shell
+# Legacy启动
+sudo grub2-mkconfig -o /boot/grub2/grub.cfg
+# EFI启动
+sudo grub2-mkconfig -o /boot/efi/EFI/centos/grub.cfg
+```
+
+CentOS的启动内核是通过grubby设置的，所以CentOS的`grub2-mkconfig`可能只会输出发现的其他操作系统的启动项，比如只输出`Windows`：
+
+```text
+Generating grub configuration file ...
+Found Windows Boot Manager on /dev/sda1@/efi/Microsoft/Boot/bootmgfw.efi
+Adding boot menu entry for EFI firmware configuration
+done
+```
+
+但是其实也同时把当前操作系统的内核给识别出来了。
+
+## 设置默认内核
+
+CentOS使用grubby来管理启动项，因此需要使用grubby来设置默认内核：
+
+```shell
+sudo grubby --add-kernel=/boot/vmlinuz-xxxx --title="随便写点啥"
 sudo grubby --set-default=/boot/vmlinuz-xxxx
 ```
+
+如果可以与GRUB菜单交互，那么也可以这样：{% post_link Linux/'GRUB菜单记住上次的选择的内核' %}
+
+参考：<https://www.golinuxcloud.com/grubby-command-examples/>
 
 ## 删除旧内核（可选）
 
 <https://www.cnblogs.com/amanlikethis/p/3599170.html>
-
-## 参考文献
-
-[make[1]: *** 没有规则可制作目标“debian/canonical-certs.pem”，由“certs/x509_certificate_list” 需求。 停止。](https://blog.csdn.net/Chenciyuan_nj/article/details/115099040)
