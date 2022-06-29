@@ -114,7 +114,7 @@ arch/x86/include/ arch/x86/Makefile* include/ Makefile Module.symvers scripts/ t
 
 ### 内核模块
 
-把内核模块安装到`指定目录/lib/modules/xxx`：
+把内核模块安装到`指定目录/lib/modules/$kernel_version_to_install`：
 
 ```shell
 INSTALL_MOD_PATH=指定目录 make modules_install
@@ -123,7 +123,7 @@ INSTALL_MOD_PATH=指定目录 make modules_install
 
 ### 内核
 
-把`System.map-xxx`和`vmlinuz-xxx`安装到`指定目录`下面：
+把`System.map-$kernel_version_to_install`和`vmlinuz-$kernel_version_to_install`安装到`指定目录`下面：
 
 ```shell
 INSTALL_PATH=指定目录 make install
@@ -144,17 +144,20 @@ ln: 无法创建符号链接'/boot/System.map': 权限不够
 把`config-$kernel_version_to_install`安装到`指定目录`下：
 
 ```shell
+kernel_version_to_install=$(make kernelrelease)
 cp .config 指定目录/config-$kernel_version_to_install
 ```
 
 ### （可选）用于编译内核模块的文件
 
-把这些文件安装到`指定目录/linux-headers`：
+把这些文件安装到`指定目录/linux-headers-$kernel_version_to_install`：
 
 ```shell
-mkdir -p 指定目录/linux-headers/arch/x86/
-cp -r arch/x86/include/ arch/x86/Makefile* 指定目录/linux-headers/arch/x86/
-cp -r include/ Makefile Module.symvers scripts/ tools/ 指定目录/linux-headers/
+kernel_version_to_install=$(make kernelrelease)
+header_dir=指定目录/linux-headers-$kernel_version_to_install
+mkdir -p /arch/x86/
+cp -r arch/x86/include/ arch/x86/Makefile* $header_dir/arch/x86/
+cp -r include/ Makefile Module.symvers scripts/ tools/ $header_dir/
 ```
 
 ### 在目标机器上安装到系统目录
@@ -166,12 +169,12 @@ kernel_version_to_install=$(ls lib/modules/)
 # 内核模块
 sudo cp -r lib/modules/$kernel_version_to_install /lib/modules/
 # 内核
-sudo cp -r vmlinuz-* System.map-* /boot/
+sudo cp -r vmlinuz-$kernel_version_to_install System.map-$kernel_version_to_install /boot/
 # （可选）安装内核配置
 sudo cp config-$kernel_version_to_install /boot/
 # （可选）安装用于编译内核模块的文件
 sudo rm -rf /usr/src/linux-headers-$kernel_version_to_install
-sudo cp -r linux-headers/ /usr/src/linux-headers-$kernel_version_to_install
+sudo cp -r linux-headers-$kernel_version_to_install/ /usr/src/linux-headers-$kernel_version_to_install
 sudo rm /lib/modules/$kernel_version_to_install/build /lib/modules/$kernel_version_to_install/source
 sudo ln -s /usr/src/linux-headers-$kernel_version_to_install/ /lib/modules/$kernel_version_to_install/build
 sudo ln -s /usr/src/linux-headers-$kernel_version_to_install/ /lib/modules/$kernel_version_to_install/source
