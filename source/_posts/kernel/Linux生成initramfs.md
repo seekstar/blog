@@ -15,6 +15,7 @@ dracut [OPTION...] [<image> [<kernel version>]]
 例子：
 
 ```shell
+cd /boot
 # 给/boot/vmlinuz-5.1.0-amd64-desktop+生成initramfs
 dracut initramfs-5.1.0-amd64-desktop+.img 5.1.0-amd64-desktop+
 ```

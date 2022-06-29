@@ -94,7 +94,7 @@ make install
 这个安装的头文件只能给用户态程序用，不能用于编译内核模块：
 
 ```shell
-# make INSTALL_HDR_PATH=指定目录 headers_install
+# make INSTALL_HDR_PATH=$target_dir headers_install
 make headers_install
 ```
 
@@ -110,23 +110,23 @@ arch/x86/include/ arch/x86/Makefile* include/ Makefile Module.symvers scripts/ t
 
 ## 安装到指定目录
 
-这样可以在服务器上编译内核，安装到`指定目录`，然后`指定目录`打包传到目标机器，再安装到目标机器上的系统目录即可。
+这样可以在服务器上编译内核，安装到`$target_dir`，然后`$target_dir`打包传到目标机器，再安装到目标机器上的系统目录即可。
 
 ### 内核模块
 
-把内核模块安装到`指定目录/lib/modules/$kernel_version_to_install`：
+把内核模块安装到`$target_dir/lib/modules/$kernel_version_to_install`：
 
 ```shell
-INSTALL_MOD_PATH=指定目录 make modules_install
-#INSTALL_MOD_PATH=指定目录 make INSTALL_MOD_STRIP=1 modules_install
+# INSTALL_MOD_PATH=$target_dir make modules_install
+INSTALL_MOD_PATH=$target_dir make INSTALL_MOD_STRIP=1 modules_install
 ```
 
 ### 内核
 
-把`System.map-$kernel_version_to_install`和`vmlinuz-$kernel_version_to_install`安装到`指定目录`下面：
+把`System.map-$kernel_version_to_install`和`vmlinuz-$kernel_version_to_install`安装到`$target_dir`下面：
 
 ```shell
-INSTALL_PATH=指定目录 make install
+INSTALL_PATH=$target_dir make install
 ```
 
 会报错：
@@ -141,28 +141,28 @@ ln: 无法创建符号链接'/boot/System.map': 权限不够
 
 ### （可选）内核配置
 
-把`config-$kernel_version_to_install`安装到`指定目录`下：
+把`config-$kernel_version_to_install`安装到`$target_dir`下：
 
 ```shell
 kernel_version_to_install=$(make kernelrelease)
-cp .config 指定目录/config-$kernel_version_to_install
+cp .config $target_dir/config-$kernel_version_to_install
 ```
 
 ### （可选）用于编译内核模块的文件
 
-把这些文件安装到`指定目录/linux-headers-$kernel_version_to_install`：
+把这些文件安装到`$target_dir/linux-headers-$kernel_version_to_install`：
 
 ```shell
 kernel_version_to_install=$(make kernelrelease)
-header_dir=指定目录/linux-headers-$kernel_version_to_install
-mkdir -p /arch/x86/
+header_dir=$target_dir/linux-headers-$kernel_version_to_install
+mkdir -p $header_dir/arch/x86/
 cp -r arch/x86/include/ arch/x86/Makefile* $header_dir/arch/x86/
 cp -r include/ Makefile Module.symvers scripts/ tools/ $header_dir/
 ```
 
 ### 在目标机器上安装到系统目录
 
-在编译服务器上把`指定目录`压缩，传输到目标机器上，解压出来，进入`指定目录`，然后执行以下指令来安装到目标机器上的系统目录里：
+在编译服务器上把`$target_dir`压缩，传输到目标机器上，解压出来，进入`$target_dir`，然后执行以下指令来安装到目标机器上的系统目录里：
 
 ```shell
 kernel_version_to_install=$(ls lib/modules/)
