@@ -221,6 +221,21 @@ sudo grubby --add-kernel=/boot/vmlinuz-xxxx --title="随便写点啥"
 sudo grubby --set-default=/boot/vmlinuz-xxxx
 ```
 
+其他实用grubby子命令：
+
+```shell
+# 查看grubby列表中的所有内核
+sudo grubby --info ALL
+# 查看指定内核的信息
+sudo grubby --info=kernel-path
+# 查看当前的默认内核
+sudo grubby --default-kernel
+# 查看默认内核在grubby列表中的index
+sudo grubby --default-index
+# 将指定内核从grubby列表中移出
+sudo grubby --remove-kernel=kernel-path
+```
+
 如果可以与GRUB菜单交互，那么也可以这样：{% post_link Linux/'GRUB菜单记住上次的选择的内核' %}
 
 参考：<https://www.golinuxcloud.com/grubby-command-examples/>
