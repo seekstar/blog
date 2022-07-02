@@ -17,7 +17,14 @@ qemu-nbd --connect=/dev/nbd0 镜像路径
 
 ```shell
 fdisk -l /dev/nbd0
-mount /dev/nbd0p分区号 /mnt/somepoint/
+mount /dev/nbd0p分区号 挂载点
+```
+
+umount:
+
+```shell
+umount 挂载点
+qemu-nbd --disconnect /dev/nbd0
 ```
 
 来源：<https://gist.github.com/shamil/62935d9b456a6f9877b5>
