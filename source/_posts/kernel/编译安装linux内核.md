@@ -13,19 +13,6 @@ date: 2020-12-28 13:58:21
 
 ## 配置
 
-### 编辑`.config`
-
-一些常用的配置：
-
-#### KASAN
-
-KASAN是一个动态检测内存错误的工具：[在Linux内核使用Kasan](https://blog.csdn.net/weiqifa0/article/details/120359407)
-
-```text
-CONFIG_SLUB_DEBUG=y
-CONFIG_KASAN=y
-```
-
 ### make menuconfig
 
 如果手动编辑了`.config`的话，这一步可能会根据手动编辑的内容调整一些其他选项，比如如果设置了`CONFIG_KASAN=y`，执行`make menuconfig`后会自动加上`CONFIG_KASAN_GENERIC=y`和`CONFIG_KASAN_OUTLINE=y`。
@@ -40,6 +27,27 @@ make menuconfig
 ![在这里插入图片描述](编译安装linux内核/20201228134609864.png)
 
 然后按enter，选保存即可。
+
+也可以在里面更改一些内核配置，常见的：
+
+#### KASAN
+
+KASAN是一个动态检测内存错误的工具：[在Linux内核使用Kasan](https://blog.csdn.net/weiqifa0/article/details/120359407)
+
+对应`.config`里的：
+
+```text
+CONFIG_SLUB_DEBUG=y
+CONFIG_KASAN=y
+```
+
+#### kobject debugging
+
+kobject debugging
+
+kobject release debugging
+
+这俩开了之后dmesg里有意义不明的输出。
 
 ## make
 
