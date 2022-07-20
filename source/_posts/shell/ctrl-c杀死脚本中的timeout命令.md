@@ -11,3 +11,7 @@ timeout --foreground 1h sleep 1m
 ```
 
 来源：<https://stackoverflow.com/questions/67997060/bash-script-run-with-timeout-wont-exit-on-sigint>
+
+## 奇怪的是
+
+SIGINT应该是会发送给脚本的，因此预期行为应该是脚本被杀死了，而timeout进程变成了孤儿进程。但是实际上脚本似乎被timeout进程给阻塞了，要在timeout命令结束之后才会接收SIGINT信号，原因不明。
