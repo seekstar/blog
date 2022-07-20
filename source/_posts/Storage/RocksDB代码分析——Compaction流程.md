@@ -10,11 +10,11 @@ tags: RocksDB
 
 `DBImpl::BGWorkCompaction`中调用了`DBImpl::BackgroundCallCompaction`。
 
-`DBImpl::BackgroundCallCompaction`中调用了`DBImpl::BackgroundCompaction`，然后调用`DBImpl::MaybeScheduleFlushOrCompaction`，我的理解是compaction完成之后下一层可能过大了，这样就需要做新的compaction。
+`DBImpl::BackgroundCallCompaction`中先锁住`DBImpl::mutex_`，保护DB元数据，然后调用`DBImpl::BackgroundCompaction`，然后调用`DBImpl::MaybeScheduleFlushOrCompaction`，我的理解是compaction完成之后下一层可能过大了，这样就需要做新的compaction。`DBImpl::BackgroundCallCompaction`返回的时候会自动把`DBImpl::mutex_`给释放掉。
 
 `DBImpl::BackgroundCompaction`中：
 
-- 如果不是`prepicked compaction`，那么就调用`DBImpl::PickCompactionFromQueue`从`compaction_queue_`里取出一个`ColumnFamilyData *cfd`，然后调用`cfd->PickCompaction`，得到`Compaction *`，作为要做的任务。
+- 如果不是`prepicked compaction`，那么就调用`DBImpl::PickCompactionFromQueue`从`compaction_queue_`里取出一个`ColumnFamilyData *cfd`，然后调用`cfd->PickCompaction`，得到`Compaction *`，作为要做的任务，同时将输入文件标记为`being_compacted`，防止出现一边compaction一边上面compact到输入层的情况。。
 
 - 如果是`prepicked compaction`，那么就将`prepicked_compaction->compaction`作为要做的compaction任务。
 
@@ -25,7 +25,7 @@ tags: RocksDB
 - 如果是`prepicked compaction`，或者不是最底层的compaction，那么：
 
 >构造`CompactionJob compaction_job`，其中`FSDirectory* output_directory`被设置成`GetDataDir(c->column_family_data(), c->output_path_id())`
->`mutex_.Unlock()`，执行`compaction_job.Run()`，再`mutex_.Lock()`。这说明数据库的元数据是受互斥锁保护的，只有在执行耗时操作时才暂时把锁放开。
+>`mutex_.Unlock()`，执行`compaction_job.Run()`，再`mutex_.Lock()`。`DBImpl::mutex_`最开始是在`DBImpl::BackgroundCallCompaction`里锁住用来保护数据库元数据的，这里要执行耗时操作了，所以暂时把锁放开。
 >`compaction_job.Install`
 >
 >>`CompactionJob::InstallCompactionResults`
@@ -33,7 +33,7 @@ tags: RocksDB
 >>>先把输入文件删掉：`compaction->AddInputDeletions(edit);`
 >>>再把输出文件加上：`edit->AddFile`
 >
->`Compaction::ReleaseCompactionFiles`。所以Compaction的文件是有上锁的，不会出现一边compaction一边上面compact到输入层的情况。
+>`Compaction::ReleaseCompactionFiles`，将输入文件的`being_compacted`标志清除。
 
 ## CompactionJob::output_directory
 
