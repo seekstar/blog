@@ -13,6 +13,16 @@ date: 2020-12-28 13:58:21
 
 ## 配置
 
+### .config
+
+里面是一些flag，内核编译的时候会读取这个文件，根据这些flag来配置。
+
+常用的有：
+
+- CONFIG_LOCALVERSION
+
+附加在在内核的version string后面。自动生成的通常默认是`-amd64-desktop+`，生成的内核版本类似于`5.1.0-amd64-desktop+`。设置`CONFIG_LOCALVERSION="-default-config"`后，编译生成的内核版本号就是类似于`5.1.0-default-config`。来源：<https://stackoverflow.com/questions/28684811/how-to-change-version-string-of-the-kernel>
+
 ### make menuconfig
 
 如果手动编辑了`.config`的话，这一步可能会根据手动编辑的内容调整一些其他选项，比如如果设置了`CONFIG_KASAN=y`，执行`make menuconfig`后会自动加上`CONFIG_KASAN_GENERIC=y`和`CONFIG_KASAN_OUTLINE=y`。
