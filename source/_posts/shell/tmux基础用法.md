@@ -93,6 +93,104 @@ set-window-option -g mode-keys vi
 
 复制模式中，虽然不再显示新的输出，但是其实程序仍然在跑，在退出复制模式后新的输出就会显示出来。
 
+## 插件
+
+建议使用Tmux Plugin Manager管理插件：<https://github.com/tmux-plugins/tpm>
+
+可用插件列表：<https://github.com/tmux-plugins/list>
+
+### Tmux Plugin Manager
+
+#### apt安装
+
+```shell
+sudo apt install tmux-plugin-manager
+```
+
+然后Tmux Plugin Manager就被安装到了`/usr/share/tmux-plugin-manager`。
+
+然后在`~/.tmux.conf`中写入如下内容：
+
+```text
+# List of plugins
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-sensible'
+
+# Other examples:
+# set -g @plugin 'github_username/plugin_name'
+# set -g @plugin 'github_username/plugin_name#branch'
+# set -g @plugin 'git@github.com:user/plugin'
+# set -g @plugin 'git@bitbucket.com:user/plugin'
+
+# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+run '/usr/share/tmux-plugin-manager/tpm'
+```
+
+#### 手动安装
+
+```shell
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+```
+
+然后在`~/.tmux.conf`中写入如下内容：
+
+```text
+# List of plugins
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-sensible'
+
+# Other examples:
+# set -g @plugin 'github_username/plugin_name'
+# set -g @plugin 'github_username/plugin_name#branch'
+# set -g @plugin 'git@github.com:user/plugin'
+# set -g @plugin 'git@bitbucket.com:user/plugin'
+
+# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+run '~/.tmux/plugins/tpm/tpm'
+```
+
+#### 激活Tmux Plugin Manager
+
+可以先把所有tmux窗口都关闭，然后再新开tmux的时候，新开的tmux中就会自动读取`~/.tmux.conf`，从而激活Tmux Plugin Manager。
+
+如果要在已有的tmux里激活新安装的Tmux Plugin Manager，需要这样：
+
+```shell
+# 在已有tmux窗口里执行此命令
+tmux source ~/.tmux.conf
+```
+
+#### 安装并激活插件
+
+往`~/.tmux.conf`里加入`set -g @plugin '...'`，然后在tmux窗口里按`ctrl+b`然后按`shift+i`即可。新插件会被自动clone到`~/.tmux/plugins/`并且激活。安装并激活插件的时候会卡一下。完成之后会显示这个：
+
+```text
+TMUX environment reloaded.
+Done, press ENTER to continue.
+```
+
+注意有的是按ENTER继续，有的是按ESCAPE继续，不知道为什么。
+
+### tmux-sensible
+
+repo: <https://github.com/tmux-plugins/tmux-sensible>
+
+这是一款可以让所有用户都接受的插件。我也不清楚这个到底干了啥。
+
+```text
+set -g @plugin 'tmux-plugins/tmux-sensible'
+```
+
+### tmux-logging
+
+repo: <https://github.com/tmux-plugins/tmux-logging>
+
+按`ctrl+b`再按`shift+p`即可把tmux窗口里的内容log到文件。
+
+```text
+set -g @plugin 'tmux-plugins/tmux-logging'
+```
+
 ## 参考文献
 
 <https://unix.stackexchange.com/questions/13787/is-there-a-way-to-run-screen-in-read-only-mode>
