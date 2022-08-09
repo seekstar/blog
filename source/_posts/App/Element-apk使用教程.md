@@ -73,3 +73,13 @@ Element采用端到端加密，服务器只存储加密后的聊天记录，而�
 ![](Element-apk使用教程/QQ%E5%9B%BE%E7%89%8720220310161320.jpg)
 
 然后就大功告成了！以后如果有多个设备登录的话，也可以选择在其他设备上验证此登录，原理就是从其他设备上直接下载加密密钥。
+
+## 房间管理
+
+升级房间之后，房间的home server会变成升级者的home server。
+
+房间的发布地址首先得是本地地址，不然这个发布地址无效，别人用这个发布地址搜索会加入到拥有这个本地地址的房间。
+
+桥接机器人列表：<https://docs.mau.fi/bridges/python/telegram/index.html>
+
+t2bot.io好像已经不维护了，版本貌似已经偏旧了，有概率出bug：`Unhandled error while handling command. Check logs for more details`。推荐tchncs.de。
