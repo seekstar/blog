@@ -10,12 +10,16 @@ tags:
 
 ```shell
 sudo virsh net-start default
+# 关闭
+# sudo virsh net-destroy default
 ```
 
 然后`ip a`就可以看到一个名为`virbr0`的网桥。让它开机自启：
 
 ```shell
 sudo virsh net-autostart default
+# 取消开机自启
+#sudo virsh net-autostart --disable default
 ```
 
 ```text
