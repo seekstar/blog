@@ -18,7 +18,7 @@ ssh localhost 6100
 
 要允许所有IP都能通过服务器的6100端口连接上这台机器，需要在服务器上的`/etc/ssh/sshd_config`里加上
 
-```
+```text
 GatewayPorts yes
 ```
 
@@ -48,6 +48,8 @@ sudo systemctl restart sshd
 ```
 
 一定要看英文的manual page，中文的好像很久没有更新了，不全。
+
+然后再跑`ssh -R 6100:localhost:8789 服务器IP`，服务器的`6100`端口就可以接受任何IP的连接请求了。注意已有的`ssh -R`连接好像仍然看不到`GatewayPorts yes`，要先把原来的`ssh -R`的连接断开才行（在客户端`ctrl+c`或者采用后面描述的方法在服务器端把监听这个端口的`sshd`进程杀掉）。
 
 ## autossh
 
@@ -96,17 +98,17 @@ ssh -fNR 6100:localhost:8789 服务器IP -o ServerAliveInterval=60
 
 可以用supervisor设置开机自启，配置文件：
 
-```
-[program:autossh]
-command=autossh -NR 6100:localhost:8789 服务器IP -o ServerAliveInterval=60
+```text
+[program:ssh-intranet-penetration]
+command=ssh -NR 6100:localhost:8789 服务器IP -o ServerAliveInterval=60 -o ExitOnForwardFailure=yes
 autostart=true
 autorestart=true
-stderr_logfile=/tmp/autossh_stderr.log
-stdout_logfile=/tmp/autossh_stdout.log
+stderr_logfile=/tmp/ssh-intranet-penetration_stderr.log
+stdout_logfile=/tmp/ssh-intranet-penetration_stdout.log
 user = searchstar
 ```
 
-注意这里没有`-f`。
+注意这里没有`-f`。这里用的是`ssh`而不是`autossh`，并且加上了`-o ExitOnForwardFailure=yes`，这样连接中断或者出现其他错误之后`supervisor`会自动重试。
 
 ## 客户端崩溃后重新连接
 
