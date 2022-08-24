@@ -16,8 +16,12 @@ s.chars().nth(k)
 
 ```rs
 let x: u8 = s.as_bytes()[k];
-// 还可以赋值
-s.as_bytes()[k] = b'x';
+```
+
+如果要修改第k个字节，则需要`unsafe`，因此这一步可能会导致出现无效的UTF-8字符：
+
+```rust
+unsafe { s.as_bytes_mut()[len - 1] = b'-'; }
 ```
 
 参考：
@@ -25,3 +29,5 @@ s.as_bytes()[k] = b'x';
 <https://stackoverflow.com/questions/24542115/how-to-index-a-string-in-rust>
 
 <https://users.rust-lang.org/t/solved-rust-u8-literal-notation/25306>
+
+<https://doc.rust-lang.org/std/primitive.str.html#method.as_bytes_mut>
