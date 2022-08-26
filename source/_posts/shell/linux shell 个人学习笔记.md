@@ -564,6 +564,12 @@ less -N 文件路径
 
 来源：[Linux之Less命令跳转到特定的行号](https://blog.csdn.net/lovedingd/article/details/120885183)
 
+### diff
+
+忽略换行符的区别：`--strip-trailing-cr`
+
+来源：<https://stackoverflow.com/questions/40974170/how-can-i-ignore-line-endings-when-comparing-files>
+
 ## 其他
 
 [linux中怎么用shell显示文件某一行或几行内容](https://blog.csdn.net/mydriverc2/article/details/82623778)
