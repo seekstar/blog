@@ -74,3 +74,9 @@ LD_LIBRARY_PATH=add/target/debug/ ./test
 ```
 
 成功输出`3`。
+
+## 参考
+
+<https://doc.rust-lang.org/reference/linkage.html>
+
+<https://parallel-rust-cpp.github.io/cpp_abi.html>
