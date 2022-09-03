@@ -4,6 +4,8 @@ date: 2022-09-02 13:36:46
 tags:
 ---
 
+相关：{% post_link Rust/'C语言调用Rust' %}
+
 ## 场景
 
 在C++中有一个类想用Rust的`std::collections::BinaryHeap`维护：
@@ -377,3 +379,7 @@ gcc -I heap/include/ -I. heap/target/debug/libheap.o test.cpp -o test
 332
 233
 ```
+
+## 注意事项
+
+由于Rust编译出来的目标文件里会自带很多符号，因此本博客提供的方法无法实现C++代码调用多个Rust工程提供的接口，需要将所有Rust接口的实现都塞进一个Rust工程。暂时不清楚解决方案。
