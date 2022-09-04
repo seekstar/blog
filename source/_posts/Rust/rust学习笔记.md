@@ -6,7 +6,11 @@ tags:
 
 ## 安装
 
-{% post_link Rust/'linux 非交互式安装rust' %}
+```shell
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
+
+或者：{% post_link Rust/'linux 非交互式安装rust' %}
 
 安装rust之后`rustup doc`，文档就会在浏览器里打开。点击里面的The Rust Programming Language，就可以看到入门书的网页版了。
 
