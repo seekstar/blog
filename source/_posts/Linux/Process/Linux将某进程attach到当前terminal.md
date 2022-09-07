@@ -112,7 +112,7 @@ systemd(1)─┬─
 
 ## 另一个选择
 
-如果只需要进程的输出，而不需要进行输入的话，可以试试：{% post_link shell/"Linux将进程从当前终端detach" %}
+如果只需要进程的输出，而不需要进行输入的话，可以试试：{% post_link Linux/Process/"Linux将进程从当前终端detach" %}
 
 ## 参考文献
 

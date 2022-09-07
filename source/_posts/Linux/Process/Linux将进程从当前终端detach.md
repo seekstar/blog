@@ -14,7 +14,7 @@ ssh到服务器，开了进程，然后想把进程转移到后台执行，然�
 
 然后`jobs`查看被暂停的进程的编号，再`bg 编号`将这个进程放到后台执行，然后`disown 编号`将这个进程从任务列表中删掉，再`exit`退出当前终端。由于这个进程已经不在`jobs`里了，而且正在运行，因此不会对这个进程发送SIGHUP，而是让其变成孤儿进程，被init进程或者systemd进程收养，这样就实现了detach。
 
-如果需要获取这个进程的输出，可以用reredirect：{% post_link shell/'重定向正在运行的进程的输出' %}
+如果需要获取这个进程的输出，可以用reredirect：{% post_link Linux/Process/'重定向正在运行的进程的输出' %}
 
 但是我没找到可以往这个进程的stdin里塞东西的方法。
 
@@ -87,11 +87,11 @@ systemd(1)───bash(60237)───sleep(60520)
 
 可以看到变成孤儿进程，被1号进程收养了。
 
-如果要获取其输出，可以用reredirect：`reredirect -m FILE 60237`，然后其`stdout`和`stderr`都被重定向到`FILE`了。详见：{% post_link shell/'重定向正在运行的进程的输出' %}
+如果要获取其输出，可以用reredirect：`reredirect -m FILE 60237`，然后其`stdout`和`stderr`都被重定向到`FILE`了。详见：{% post_link Linux/Process/'重定向正在运行的进程的输出' %}
 
 ## 参考文献
 
-{% post_link shell/'linux shell暂停前台作业' %}
+{% post_link Linux/Process/'linux shell暂停前台作业' %}
 
 <https://stackoverflow.com/questions/11886812/what-is-the-difference-between-sigstop-and-sigtstp>
 

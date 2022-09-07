@@ -34,4 +34,4 @@ trap "kill -TERM -$$" EXIT
 
 [Linux shell 如何捕获信号(trap命令)](https://blog.csdn.net/chen1415886044/article/details/103301121)
 
-{% post_link shell/'Linux-shell向进程组发信号' %}
+{% post_link Linux/Process/'Linux-shell向进程组发信号' %}
