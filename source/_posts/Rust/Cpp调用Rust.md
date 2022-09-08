@@ -340,16 +340,21 @@ target/debug/libheap.a: $(shell find src -type f) Cargo.toml Cargo.lock
 target/debug/libheap.o: target/cpp_to_rust.o target/rust_to_cpp.o target/debug/libheap.a
 	ld -r -o $@ --whole-archive target/rust_to_cpp.o --no-whole-archive target/cpp_to_rust.o target/debug/libheap.a
 
-debug: target/debug/libheap.o
+obj_debug: target/debug/libheap.o
 
-.PHONY: debug
+target/debug/libheap.so: obj_debug
+	gcc -shared $^ -ldl -o $@
+
+shared_lib_debug: target/debug/libheap.so
+
+.PHONY: debug shared_lib_debug
 ```
 
 其中`ld`的`-r`表示`relocatable`。按照我的理解，由于要将多个`.o`文件合并起来，所以不可避免地要进行`relocation`。
 
 `--whole-archive`：将后面的文件里的所有符号都加入到目标文件中。`--no-whole-archive`是取消前面的`--whole-archive`的影响，使得后面的文件里只有用到了的符号才加入到目标文件。这里`rust_to_cpp.o`里存储了需要给使用端用的C++接口，因此里面的符号应该全部加入到目标文件中。而其他的选择性加入即可。
 
-然后`make debug INCLUDE_DIR=..`即可编译出`target/debug/libheap.o`，里面有我们需要的C++接口。
+然后`make obj_debug INCLUDE_DIR=..`即可编译出`target/debug/libheap.o`，里面有我们需要的C++接口。`make shared_lib_debug INCLUDE_DIR=..`即可编译出动态库`target/debug/libheap.so`。
 
 参考：
 
@@ -365,11 +370,22 @@ debug: target/debug/libheap.o
 
 <https://stackoverflow.com/questions/2826029/passing-additional-variables-from-command-line-to-make>
 
+`-ldl`: [编译错误undefined reference to `dlsym'](https://blog.csdn.net/shareyao/article/details/5362642)。不过这里好像不加`-ldl`也不会报这个错误。
+
 ## 使用
+
+用obj文件：
 
 ```shell
 gcc -I heap/include/ -I. heap/target/debug/libheap.o test.cpp -o test
 ./test
+```
+
+用动态库：
+
+```shell
+gcc -I heap/include -I. -L heap/target/debug/ -lheap test.cpp -o test
+LD_LIBRARY_PATH=heap/target/debug/ ./test
 ```
 
 输出：
