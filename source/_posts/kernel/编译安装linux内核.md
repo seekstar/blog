@@ -51,6 +51,10 @@ CONFIG_SLUB_DEBUG=y
 CONFIG_KASAN=y
 ```
 
+`CONFIG_KASAN_OUTLINE=y`生成的二进制文件更小，而`CONFIG_KASAN_INLINE=y`更快。
+
+参考：<https://www.kernel.org/doc/html/v5.1/dev-tools/kasan.html>
+
 #### kobject debugging
 
 kobject debugging
