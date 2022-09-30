@@ -5,55 +5,33 @@ tags:
 ---
 
 ```cpp
-#define panic(fmt, ...) do { \
+#define panic(...) do { \
 	fprintf(stderr, "panic: %s:%u: %s:", \
 		__FILE__, __LINE__, __func__); \
-	fprintf(stderr, " " fmt, ##__VA_ARGS__);	\
-	abort(); \
-} while (0)
-```
-
-例子：
-
-```cpp
-#include <stdio.h>
-#include <stdlib.h>
-
-#define panic(fmt, ...) do { \
-	fprintf(stderr, "panic: %s:%u: %s:", \
-		__FILE__, __LINE__, __func__); \
-	fprintf(stderr, " " fmt, ##__VA_ARGS__);	\
+	fprintf(stderr, " " __VA_ARGS__);	\
 	abort(); \
 } while (0)
 
-int main() {
-	// They all works
-	//panic();
-	//panic("%d", 233);
-	panic("%d != %d", 233, 332);
-
-	return 0;
-}
+// They all works
+// panic: panic.cpp:17: main: 
+panic();
+// panic: panic.cpp:18: main: 233
+panic("%d", 233);
+// panic: panic.cpp:19: main: 233 != 332
+panic("%d != %d", 233, 332);
 ```
-
-```text
-panic: panic.cpp:15: main: 233 != 332
-```
-
-注意，宏参是可以少给的，其中`panic()`里没给`fmt`，所以宏展开里`fmt`就直接消失，不替换成任何东西。
 
 也可以弄一个类似于`assert`的`crash_if`，不同的是这个`crash_if`不受编译选项的影响：
 
 ```cpp
-#define crash_if(cond, fmt, ...) do { \
-	if (cond) { panic(fmt, ##__VA_ARGS__); }	\
+#define crash_if(cond, ...) do { \
+	if (cond) { panic(__VA_ARGS__); }	\
 } while (0)
 
+// panic: panic.cpp:20: main: 
+crash_if(233 != 332);
+// panic: panic.cpp:21: main: 233 != 332
 crash_if(233 != 332, "%d != %d", 233, 332);
-```
-
-```text
-panic: panic.cpp:21: main: 233 != 332
 ```
 
 ## 失败经验：stacktrace
