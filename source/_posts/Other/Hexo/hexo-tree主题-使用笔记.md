@@ -289,7 +289,16 @@ hexo new '博客标题'
 
 ## 换一台机器写博客
 
-把gitee上的博客源码仓库clone下来，然后`npm install`，然后就可以正常`hexo g && hexo s`预览和`hexo d -g`部署了。
+把gitee上的博客源码仓库clone下来，再把网站的仓库clone到源码仓库的`.deploy_git`下。然后`npm install`，然后就可以正常`hexo g && hexo s`预览和`hexo d -g`部署了。比如我的：
+
+```shell
+# 源码
+git clone git@gitee.com:searchstar/blog.git
+cd blog
+# 网站
+git clone git@github.com:seekstar/seekstar.github.io.git .deploy_git
+npm install
+```
 
 ## 支持Latex风格的公式编辑
 
