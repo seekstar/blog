@@ -4,7 +4,7 @@ date: 2022-10-08 16:59:54
 tags:
 ---
 
-本文展示了如何使用另一个已安装的Linux系统上安装ArchLinux。本文以Deepin V23为例。
+本文展示了如何使用另一个已安装的Linux系统安装ArchLinux。本文以Deepin V23为例。
 
 ## 必要工具
 
@@ -135,7 +135,22 @@ sudo pacstrap /mnt wget
 
 ## 本地化
 
-修改时区：
+### Locale
+
+ArchLinux没有默认的locale，所以一定要设置locale，否则之后运行一些命令时会出现这种报错：`bsdtar: Failed to set default locale`。
+
+为了方便出现问题后到国际平台上寻求帮助，这里设置成`en_US.UTF-8`。
+
+```shell
+sudo chroot /mnt /bin/bash -c 'echo -e "en_US.UTF-8 UTF-8\nzh_CN.UTF-8 UTF-8" >> /etc/locale.gen && locale-gen'
+# https://wiki.archlinux.org/title/Locale
+#sudo localectl set-locale LANG=en_US.UTF-8
+sudo bash -c "echo LANG=en_US.UTF-8 > /mnt/etc/locale.conf"
+# https://wiki.archlinux.org/title/Locale#My_system_is_still_using_wrong_language
+#rm ~/.config/plasma-localerc
+```
+
+### 时区
 
 ```shell
 sudo chroot /mnt /bin/bash -c "ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime"
