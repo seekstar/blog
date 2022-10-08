@@ -4,6 +4,10 @@ date: 2022-07-30 11:58:48
 tags:
 ---
 
+`--needed`: 当未安装或者版本较旧时才安装。
+
+参考：https://superuser.com/questions/568967/prevent-pacman-from-reinstalling-packages-that-were-already-installed
+
 ## 无效或已损坏的软件包
 
 可能是`archlinux-keyring`过时了，需要更新一下：
