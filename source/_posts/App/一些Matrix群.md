@@ -21,3 +21,7 @@ TUNA技术群
 ## `#tuna-random:matrix.org`
 
 TUNA水群
+
+## 不活跃
+
+### `#linuxcn:matrix.org`

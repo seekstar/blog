@@ -148,8 +148,32 @@ Official Chatroom For The Libre Voxel Game Engine Join Our Space! #minetest:tchn
 
 ps: Minetest is a open source game similar to Minecraft.
 
+### `#dst:matrix.org`
+
+Don't Starve Together
+
+## Rooms bridged to IRC
+
+### `#freenode_##asm:matrix.org`
+
+Assembly programming channel, all architectures welcome (please specify). | Please register your nick to speak - talk to NickServ. | Don't ask to ask! Use a pastebin if appropriate! Check your manuals! | AT&T vs Intel flamers will be banned.
+
+### `#freenode_##nginx:matrix.org`
+
+### `#freenode_#fedora:matrix.org`
+
+## Not active
+
+### `#javaroom:matrix.org`
+
+This room is dedicated to learning and helping eachother with java related problems. General discussion is also welcome about java. Happy coding!
+
 ### `#nginx:matrix.org`
 
 ### `#F-Droid:matrix.ordoevangelistarum.com`
 
 F-Droid ☞ ؟⸮UNOFFICIAL⸮؟ – Free and Open Source Android App Repository - An End Users' Self Support Community for Community Self Support
+
+### `#vim:matrix.org`
+
+### `#stellaris:matrix.org`
