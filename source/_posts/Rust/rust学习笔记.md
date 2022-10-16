@@ -62,3 +62,15 @@ cargo new <项目名>
 去掉前后空格。
 - parse
 把字符串转成特定类型（通过要被赋值给的变量确定？）
+
+## C语言字符串转String
+
+原文：<https://stackoverflow.com/questions/24145823/how-do-i-convert-a-c-string-into-a-rust-string-and-back-via-ffi>
+
+```rs
+use std::ffi::CStr;
+let c_buf: *const c_char = unsafe { hello() };
+let c_str: &CStr = unsafe { CStr::from_ptr(c_buf) };
+let str_slice: &str = c_str.to_str().unwrap();
+let str_buf: String = str_slice.to_owned();  // if necessary
+```
