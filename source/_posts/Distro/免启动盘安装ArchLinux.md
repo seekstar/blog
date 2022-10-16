@@ -39,9 +39,23 @@ cd pacman-$version/
 meson build
 ninja -C build
 sudo ninja -C build install
+```
+
+但是库的pc文件被安装到了`/usr/lib64/pkgconfig`里，而这下面的pc文件通常默认是不被搜索的：
+
+```shell
+# https://askubuntu.com/a/373217
+pkg-config --variable pc_path pkg-config
+# 里面通常没有/usr/lib64/pkgconfig
+```
+
+因此需要将这个路径添加到`PKG_CONFIG_PATH`里：
+
+```shell
 # https://people.freedesktop.org/~dbn/pkg-config-guide.html
 sudo bash -c 'echo "export PKG_CONFIG_PATH=/usr/lib64/pkgconfig" >> /etc/bash.bashrc'
 # 需要重启终端使PKG_CONFIG_PATH生效
+# 需要把PKG_CONFIG_PATH加入到sudoers里的env_keep才能在sudo的时候使用这个设置的环境变量。
 ```
 
 然后配置一下pacman的源：
