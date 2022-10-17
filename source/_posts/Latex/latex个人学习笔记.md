@@ -11,6 +11,8 @@ tags: 学习笔记
 
 ## 符号
 
+<https://en.wikibooks.org/wiki/LaTeX/Mathematics>
+
 [希腊字母](https://blog.csdn.net/lanchunhui/article/details/49819445)
 
 [Latex常用数学符号输入方法](https://jingyan.baidu.com/article/4b52d702df537efc5c774bc9.html)
