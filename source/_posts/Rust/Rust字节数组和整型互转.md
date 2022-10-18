@@ -28,3 +28,7 @@ fn main() {
     assert_eq!([2, 1], x.to_be_bytes());
 }
 ```
+
+## 参考文献
+
+<https://crates.io/crates/byteorder>
