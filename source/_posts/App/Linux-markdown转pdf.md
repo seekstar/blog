@@ -4,27 +4,12 @@ date: 2022-06-14 21:14:49
 tags:
 ---
 
-## 用vscode插件
-
-安装yzane的Markdown PDF插件。然后点进要转换的markdown文件，右键，选择`Markdown PDF: Export (pdf)`。缺点是会使得右键菜单条目太多。
-
-原文：<https://stackoverflow.com/a/55484165/13688160>
-
-## markdown-pdf
-
-```shell
-npm install -g markdown-pdf
-markdown-pdf <markdown-file-path>
-```
-
-原文：<https://stackoverflow.com/a/37977314/13688160>
-
 ## pandoc
 
 看这里：[Pandoc+TeXLive实现Markdown转PDF](https://www.jianshu.com/p/1d02fc5121c2)
 
 ```shell
-pandoc --toc -N -s --pdf-engine=xelatex -V CJKmainfont='Source Han Serif CN' --highlight-style tango -o manual.pdf manual.md
+pandoc --toc -N -s --pdf-engine=xelatex -V CJKmainfont='Source Han Serif CN' --highlight-style tango -V colorlinks=true -o manual.pdf manual.md
 ```
 
 `--toc`: 生成目录
@@ -43,6 +28,8 @@ pandoc --toc -N -s --pdf-engine=xelatex -V CJKmainfont='Source Han Serif CN' --h
 
 - tango: 代码块背景色为淡灰色。
 
+`-V colorlinks=true`: 给链接染色。来源：<https://stackoverflow.com/questions/58866818/pandoc-conversion-to-pdf-not-providing-colored-hyptertext-links>
+
 但是代码块不会自动换行，不知道怎么解决。相关：
 
 [使用 Pandoc 来转换 Markdown 为漂亮的 PDF 格式](https://blog.csdn.net/u013019701/article/details/119512493)
@@ -50,3 +37,28 @@ pandoc --toc -N -s --pdf-engine=xelatex -V CJKmainfont='Source Han Serif CN' --h
 <https://gist.github.com/c-x/2e5c6e39b334676378c1>
 
 <https://stackoverflow.com/a/48507868/13688160>
+
+## markdown-pdf
+
+```shell
+npm install -g markdown-pdf
+markdown-pdf <markdown-file-path>
+```
+
+似乎不支持Latex公式？
+
+原文：<https://stackoverflow.com/a/37977314/13688160>
+
+## 用vscode插件
+
+安装yzane的Markdown PDF插件。然后点进要转换的markdown文件，右键，选择`Markdown PDF: Export (pdf)`。缺点是会使得右键菜单条目太多。而且似乎不支持Latex公式？
+
+<https://github.com/yzane/vscode-markdown-pdf>
+
+[how to export pdf with latex](https://github.com/yzane/vscode-markdown-pdf/issues/21)
+
+[Math support](https://github.com/yzane/vscode-markdown-pdf/issues/276)
+
+但是这里又好像说可以？：[A bug of rendering latex formula #221](https://github.com/yzane/vscode-markdown-pdf/issues/221)
+
+原文：<https://stackoverflow.com/a/55484165/13688160>

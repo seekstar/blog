@@ -9,7 +9,20 @@ tags: 学习笔记
 [各种width](https://www.latexstudio.net/archives/4257)
 [各种空格](https://blog.csdn.net/seaskying/article/details/51316607)
 
-## 符号
+## 技巧
+
+1. 在enumerate中的item后换行用\par，这样与正文之间会有一条缝隙。
+![在这里插入图片描述](latex个人学习笔记/20200402205824533.png)
+如果使用`\\`换行则标题与正文之间没有缝隙，很难看
+![在这里插入图片描述](latex个人学习笔记/20200402205909906.png)
+
+## 公式
+
+```tex
+\usepackage{amsmath}
+```
+
+### 符号
 
 <https://en.wikibooks.org/wiki/LaTeX/Mathematics>
 
@@ -17,7 +30,7 @@ tags: 学习笔记
 
 [Latex常用数学符号输入方法](https://jingyan.baidu.com/article/4b52d702df537efc5c774bc9.html)
 
-### 杂项
+#### 杂项
 
 | 名字 | 符号 | 代码 | 备注 |
 | ---- | ---- | ---- | ---- |
@@ -32,8 +45,9 @@ tags: 学习笔记
 | 无穷 | $\infty$ | \\infty | [latex无穷大](https://blog.csdn.net/qq_43539664/article/details/108966105) |
 | 组合数 | $\binom{n}{m}$ 或者 $C_n^m$ | \\binom{n}{m} 或者 C_n^m | [LaTex排版技巧：[11]如何输入组合数？](https://jingyan.baidu.com/article/915fc414f5dbe351384b2043.html) |
 | 约等号 | $\approx$ | \\approx | [Latex 约等于](https://blog.csdn.net/qq_42067550/article/details/106868884) |
+| argmax | $\mathop{\arg\max}\limits_{a, b}$ | `\mathop{\arg\max}\limits_{a, b}` | [LaTeX中argmin / argmax下标书写方法](https://blog.csdn.net/SunshineSki/article/details/87893347) |
 
-### 各种箭头
+#### 各种箭头
 
 | 符号 | 代码 |
 | ---- | ---- |
@@ -46,7 +60,7 @@ tags: 学习笔记
 
 完整版：[如何用LaTeX打出各种箭头？](https://zhuanlan.zhihu.com/p/263896738)
 
-### 符号上面的横杠等
+#### 符号上面的横杠等
 
 | 样式 | 效果 | 代码 |
 | ---- | ---- | ---- |
@@ -58,30 +72,62 @@ tags: 学习笔记
 
 完整版：[latex 字母上面加符号](https://blog.csdn.net/dlaicxf/article/details/52680666)
 
-## 技巧
+### 等式
 
-1. 在enumerate中的item后换行用\par，这样与正文之间会有一条缝隙。
-![在这里插入图片描述](latex个人学习笔记/20200402205824533.png)
-如果使用`\\`换行则标题与正文之间没有缝隙，很难看
-![在这里插入图片描述](latex个人学习笔记/20200402205909906.png)
+`equation*`中的`*`表示不要编号。
 
-## 公式中插入中文
+```tex
+\begin{equation*}
+    10 + \frac{20}{(1+y)^{\frac{5}{12}}} - \frac{20}{(1+y)^\frac{9}{12}} = 0
+\end{equation*}
+```
+
+![在这里插入图片描述](latex个人学习笔记/20200411104803290.png)
+
+### 公式集
+
+```tex
+\usepackage{amsmath}
+```
+
+```tex
+\begin{gather*}
+    Co2Low1(lightIntensity, temperature) \\
+    Co2Low2(lightIntensity, temperature)
+\end{gather*}
+```
+
+![在这里插入图片描述](latex个人学习笔记/2020041817504311.png)
+
+### 多行公式
+
+第一个对齐点用`&`，第二个对齐点用`&&`：
+
+```tex
+\begin{aligned}
+a &= f(x), && x > 0 \\
+g(x) &= h(x)^2, && x > 0
+\end{aligned}
+```
+
+效果：
+
+$$
+\begin{aligned}
+a &= f(x), && x > 0 \\
+g(x) &= h(x)^2, && x > 0
+\end{aligned}
+$$
+
+### 公式中插入中文
 
 ```tex
 \text{中文}
 ```
 
-## 左引号
+### 把下标放到正下方
 
-参考：<https://blog.csdn.net/dyzok88/article/details/44222765>
-
-左单引号（键盘上1左边那个）`` ` ``
-
- 左双引号（按两下键盘上1左边的按键）``` `` ```
-
-## 把下标放到正下方
-
-### 使用underset
+#### 使用underset
 
 这种方法可用于任何符号
 
@@ -95,7 +141,7 @@ $$\underset{theta}{\bowtie}$$
 
 感谢RMan大佬告知。
 
-### 使用limits
+#### 使用limits
 
 参考：<https://zhidao.baidu.com/question/873705252499505652.html>
 
@@ -446,39 +492,6 @@ $$\mathop{\bowtie}\limits_{theta}$$
 \geometry{top=1.5cm,bottom=1.5cm, left=1.5cm, right=1.5cm}
 ```
 
-## 插入公式
-
-```tex
-\usepackage{amsmath}
-```
-
-### 等式
-
-`equation*`中的`*`表示不要编号。
-
-```tex
-\begin{equation*}
-    10 + \frac{20}{(1+y)^{\frac{5}{12}}} - \frac{20}{(1+y)^\frac{9}{12}} = 0
-\end{equation*}
-```
-
-![在这里插入图片描述](latex个人学习笔记/20200411104803290.png)
-
-### 公式集
-
-```tex
-\usepackage{amsmath}
-```
-
-```tex
-\begin{gather*}
-    Co2Low1(lightIntensity, temperature) \\
-    Co2Low2(lightIntensity, temperature)
-\end{gather*}
-```
-
-![在这里插入图片描述](latex个人学习笔记/2020041817504311.png)
-
 ## 标签
 
 用`\label`创建标签，用`\ref`引用标签
@@ -554,3 +567,11 @@ mpirun -n 20 ./xhpl
 ```
 
 ![在这里插入图片描述](latex个人学习笔记/20210101140526555.png)
+
+## 左引号
+
+参考：<https://blog.csdn.net/dyzok88/article/details/44222765>
+
+左单引号（键盘上1左边那个）`` ` ``
+
+ 左双引号（按两下键盘上1左边的按键）``` `` ```
