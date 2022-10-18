@@ -6,7 +6,7 @@ tags:
 
 ## 英文群
 
-{% post_link App/'A collection of matrix groups' %}
+{% post_link App/'A-collection-of-matrix-groups' %}
 
 ## `#rime_home:gitter.im`
 
