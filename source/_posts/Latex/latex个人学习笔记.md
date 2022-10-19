@@ -22,6 +22,8 @@ tags: 学习笔记
 \usepackage{amsmath}
 ```
 
+{% post_link Latex/'Latex多行公式对齐' %}
+
 ### 符号
 
 <https://en.wikibooks.org/wiki/LaTeX/Mathematics>
@@ -46,6 +48,8 @@ tags: 学习笔记
 | 组合数 | $\binom{n}{m}$ 或者 $C_n^m$ | \\binom{n}{m} 或者 C_n^m | [LaTex排版技巧：[11]如何输入组合数？](https://jingyan.baidu.com/article/915fc414f5dbe351384b2043.html) |
 | 约等号 | $\approx$ | \\approx | [Latex 约等于](https://blog.csdn.net/qq_42067550/article/details/106868884) |
 | argmax | $\mathop{\arg\max}\limits_{a, b}$ | `\mathop{\arg\max}\limits_{a, b}` | [LaTeX中argmin / argmax下标书写方法](https://blog.csdn.net/SunshineSki/article/details/87893347) |
+| 因为 | $\because$ | `\because` | [如何用LaTeX打出"因为"-∵、"所以"∴？](https://zhuanlan.zhihu.com/p/263053868) |
+| 所以 | $\therefore$ | `\therefore` | [如何用LaTeX打出"因为"-∵、"所以"∴？](https://zhuanlan.zhihu.com/p/263053868) |
 
 #### 各种箭头
 
@@ -99,24 +103,38 @@ tags: 学习笔记
 
 ![在这里插入图片描述](latex个人学习笔记/2020041817504311.png)
 
-### 多行公式
+### 大括号
 
-第一个对齐点用`&`，第二个对齐点用`&&`：
+开始：`\left\符号`，结束：`\right\符号`。
+
+符号：花括号`{`和`}`，方括号`[`和`]`，小括号`(`和`)`，或者没有符号`.`。
+
+例子：左边是左花括号`{`，右边无符号`.`：
 
 ```tex
-\begin{aligned}
-a &= f(x), && x > 0 \\
-g(x) &= h(x)^2, && x > 0
-\end{aligned}
+\left\{\begin{aligned}
+f(x) &= -1, & x < 0 \\
+f(x) &= 0, & x = 0 \\
+f(x) &= 1, & x > 0
+\end{aligned}\right.
 ```
 
-效果：
+$$
+\left\{\begin{aligned}
+f(x) &= -1, & x < 0 \\
+f(x) &= 0, & x = 0 \\
+f(x) &= 1, & x > 0
+\end{aligned}\right.
+$$
+
+它的效果跟`cases`一样：
 
 $$
-\begin{aligned}
-a &= f(x), && x > 0 \\
-g(x) &= h(x)^2, && x > 0
-\end{aligned}
+\begin{cases}
+f(x) = -1, & x < 0 \\
+f(x) = 0, & x = 0 \\
+f(x) = 1, & x > 0
+\end{cases}
 $$
 
 ### 公式中插入中文
