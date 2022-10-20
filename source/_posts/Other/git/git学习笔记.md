@@ -4,6 +4,14 @@ date: 2022-10-05 16:10:45
 tags:
 ---
 
+{% post_link Other/git/'git回退指定个commit' %}
+
+{% post_link Other/git/'git同步空文件夹' %}
+
+{% post_link Other/git/'git解决sign_and_send_pubkey: signing failed: agent refused operation' %}
+
+{% post_link Other/git/'git checkout 远程分支error' %}
+
 ## 删除未跟踪的文件
 
 预览有哪些未跟踪的文件
