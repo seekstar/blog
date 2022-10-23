@@ -4,6 +4,8 @@ date: 2020-08-15 10:41:03
 tags:
 ---
 
+[Rust编程知识拾遗：Rust 编程，读取命令行参数](https://blog.csdn.net/lcloveyou/article/details/105595040)
+
 ## 安装
 
 ```shell
