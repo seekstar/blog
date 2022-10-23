@@ -8,6 +8,14 @@ tags:
 
 参考：https://superuser.com/questions/568967/prevent-pacman-from-reinstalling-packages-that-were-already-installed
 
+## 查看已安装的包
+
+```shell
+pacman -Q
+```
+
+这里面也会把用yay安装的包列出来。
+
 ## 无效或已损坏的软件包
 
 可能是`archlinux-keyring`过时了，需要更新一下：
