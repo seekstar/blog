@@ -50,6 +50,8 @@ tags: 学习笔记
 | argmax | $\mathop{\arg\max}\limits_{a, b}$ | `\mathop{\arg\max}\limits_{a, b}` | [LaTeX中argmin / argmax下标书写方法](https://blog.csdn.net/SunshineSki/article/details/87893347) |
 | 因为 | $\because$ | `\because` | [如何用LaTeX打出"因为"-∵、"所以"∴？](https://zhuanlan.zhihu.com/p/263053868) |
 | 所以 | $\therefore$ | `\therefore` | [如何用LaTeX打出"因为"-∵、"所以"∴？](https://zhuanlan.zhihu.com/p/263053868) |
+| 数学期望 | $\mathbb{E}$ | `\mathbb{E}` | [Blackboard bold](https://en.wikipedia.org/wiki/Blackboard_bold) |
+| 正态分布 | $\mathcal{N}$ | `\mathcal{N}` | [`\mathcal`](https://proofwiki.org/wiki/Symbols:%5Cmathcal)是Latex用来写花体字(calligraphic)的内置指令 |
 
 #### 各种箭头
 
