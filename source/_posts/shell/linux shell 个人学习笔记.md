@@ -462,7 +462,7 @@ dpkg --list
 
 ### grep
 
-查找当前目录下有某字符串的文件：
+- 查找当前目录下有某字符串的文件：
 
 ```shell
 grep -rn string *
@@ -472,6 +472,14 @@ grep -rn string *
 -n:显示行号
 -i:忽略大小写
 *:当前目录所有文件。可以换成某个文件名。
+
+- 查找当前目录下后缀名为`.rs`的文件中含有`splay_safe_rs`的文件：
+
+```shell
+grep -rn splay_safe_rs --include \*.rs
+```
+
+来源：<https://stackoverflow.com/questions/12516937/how-can-i-grep-recursively-but-only-in-files-with-certain-extensions>
 
 ### find
 
