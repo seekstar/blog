@@ -48,6 +48,15 @@ cargo doc --open
 cargo new <项目名>
 ```
 
+### Blocking waiting for file lock on package cache
+
+```shell
+rm -rf ~/.cargo/registry/index/*
+rm ~/.cargo/.package-cache
+```
+
+<https://stackoverflow.com/questions/47565203/cargo-build-hangs-with-blocking-waiting-for-file-lock-on-the-registry-index-a#answer-53066206>
+
 ## 语法
 
 - `_`是通配符
