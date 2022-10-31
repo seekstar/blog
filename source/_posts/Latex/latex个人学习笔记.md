@@ -88,7 +88,11 @@ tags: 学习笔记
 \end{equation*}
 ```
 
-![在这里插入图片描述](latex个人学习笔记/20200411104803290.png)
+$$
+\begin{equation*}
+    10 + \frac{20}{(1+y)^{\frac{5}{12}}} - \frac{20}{(1+y)^\frac{9}{12}} = 0
+\end{equation*}
+$$
 
 ### 公式集
 
@@ -103,7 +107,12 @@ tags: 学习笔记
 \end{gather*}
 ```
 
-![在这里插入图片描述](latex个人学习笔记/2020041817504311.png)
+$$
+\begin{gather*}
+    Co2Low1(lightIntensity, temperature) \\
+    Co2Low2(lightIntensity, temperature)
+\end{gather*}
+$$
 
 ### 大括号
 
