@@ -62,6 +62,18 @@ G &= \{A_1 \rightarrow (A_2, A_3); A_3 \rightarrow A_4\} \cup \{(A_2, A_3) \righ
 \end{aligned}
 $$
 
+## 公式编号及引用
+
+要装一个插件：`pandoc-crossref`:
+
+```shell
+pandoc file.md --filter pandoc-crossref -o file.pdf
+```
+
+<https://tex.stackexchange.com/questions/111868/pandoc-how-can-i-get-numbered-latex-equations-to-show-up-in-both-pdf-and-html-o>
+
+感觉这个方法通用性不是很好。
+
 ## 换行
 
 参考：<https://www.jianshu.com/p/763e5b531d8f>
@@ -76,8 +88,11 @@ $Z = Z\cup ((Z\cap R_i)^+ \cap R_i)$ <br/>
 ```
 
 在vscode中
+
 ![在这里插入图片描述](markdown个人学习笔记/20200426181235932.png)
+
 但是在csdn中是这样：
+
 Z = X <br/>
 WHILE Z变化 DO <br/>
 对每个关系$R_i$，<br/>
