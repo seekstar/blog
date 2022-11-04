@@ -332,7 +332,7 @@ target/cpp_to_rust.o: cpp/cpp_to_rust.cpp cpp/c_struct.h $(INCLUDE_DIR)/test.h
 	g++ -I $(INCLUDE_DIR) cpp/cpp_to_rust.cpp -c -o $@
 
 target/rust_to_cpp.o: cpp/rust_to_cpp.cpp cpp/c_struct.h $(INCLUDE_DIR)/test.h
-	g++ -I $(INCLUDE_DIR) cpp/rust_to_cpp.cpp -c -o $@
+	g++ -fPIC -I $(INCLUDE_DIR) cpp/rust_to_cpp.cpp -c -o $@
 
 target/debug/libheap.a: $(shell find src -type f) Cargo.toml Cargo.lock
 	cargo build
