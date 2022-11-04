@@ -528,6 +528,8 @@ locate name
 
 ### sed
 
+#### 模式匹配
+
 从stdin读入，将修改后的结果写入到stdout：
 
 ```shell
@@ -551,6 +553,22 @@ sed 's/源pattern/目的pattern/g' FileName
 `--follow-symlinks`: `-i`会破坏符号链接和硬链接，加上这个选项之后可以保护软链接不被破坏，但是不保护硬链接。参考：<https://www.cnblogs.com/cherryhaha1234/p/10848024.html>
 
 `-c`: 保护符号链接和硬链接（但是我的sed没有这个选项）。
+
+#### 匹配指定行
+
+`sed -n 起始行号[,终止行号]动作 file`
+
+动作一般是`p`，即打印(Print)。
+
+sed默认会将文件的每行打印出来，然后对匹配的内容进行相应的操作。`-n`表示不把文件的每行都打印出来，只对匹配的内容做相应的操作。
+
+例子：
+
+打印第2行：`sed -n '2p' file`
+
+打印第2行到第4行：`sed -n '2,4p' file`
+
+参考：<https://www.commandlinefu.com/commands/view/3802/to-print-a-specific-line-from-a-file>
 
 ### less
 
