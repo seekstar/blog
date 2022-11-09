@@ -4,8 +4,6 @@ date: 2019-05-29 18:45:49
 tags:
 ---
 
-参考网站：https://www.cnblogs.com/sinsenliu/p/9369729.html
-
 约定：
 FileName表示文件名，不能是目录名
 name表示可以是文件名，也可以是目录名。
@@ -19,6 +17,15 @@ vim FileName.tar.xz
 ```
 
 防止解压出一堆散的文件污染目标文件夹。
+
+## 速记
+
+对于`.tar.*`的格式，tar的类别参数如下：
+
+| 格式 | 参数 |
+| .tar.gz | z |
+| .tar.xz | J |
+| .tar.bz2 | j |
 
 ## .rar
 
@@ -356,16 +363,24 @@ pbzip2 -zp线程数 FileName
 
 ## tar.bz2
 
-### 单线程
+### 单线程压缩
 
 ```shell
 tar -cjf name.tar.bz2 name
 ```
 
-### 多线程
+### 单线程解压
 
-解压：
+```shell
+tar xjf name.tar.bz2
+```
+
+### 多线程解压
 
 ```shell
 pbzip2 -cdp线程数 b.tar.bz2 | tar -xC DirName
 ```
+
+## 参考文献
+
+<https://www.cnblogs.com/sinsenliu/p/9369729.html>
