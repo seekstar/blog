@@ -13,7 +13,11 @@ C_Cpp › Code Analysis › Clang Tidy: Enabled
 C_Cpp › Code Analysis: Run Automatically
 ```
 
-默认似乎是不做任何检查的。需要在`C_Cpp › Code Analysis › Clang Tidy › Checks: Enabled`中启用需要的检查，各种检查的文档可以在这里找到：<https://clang.llvm.org/extra/clang-tidy/checks/list.html>。例如`bugprone-use-after-move`的文档在这里：<https://clang.llvm.org/extra/clang-tidy/checks/bugprone/use-after-move.html>
+默认似乎是不做任何检查的。需要在`C_Cpp › Code Analysis › Clang Tidy › Checks: Enabled`中启用需要的检查，各种检查的文档可以在这里找到：<https://clang.llvm.org/extra/clang-tidy/checks/list.html>。建议开启的检查：
+
+- `bugprone-use-after-move`: <https://clang.llvm.org/extra/clang-tidy/checks/bugprone/use-after-move.html>
+
+- `bugprone-narrowing-conversions`: <https://clang.llvm.org/extra/clang-tidy/checks/bugprone/narrowing-conversions.html>
 
 举个例子，只启用`bugprone-use-after-move`，然后创建一个vscode工程：
 
