@@ -230,6 +230,12 @@ int main() {
 }
 ```
 
+### vscode clang-tidy静态检查
+
+比如检查是否使用了moved value：`bugprone-use-after-move`
+
+教程：{% post_link vscode/'vscode-clang-tidy' %}
+
 ### 迭代器
 
 建议自定义迭代器时使用Rust风格的接口：
