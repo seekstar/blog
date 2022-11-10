@@ -23,9 +23,10 @@ vim FileName.tar.xz
 对于`.tar.*`的格式，tar的类别参数如下：
 
 | 格式 | 参数 |
-| .tar.gz | z |
-| .tar.xz | J |
-| .tar.bz2 | j |
+| ---- | ---- |
+| `.tar.gz` | `z` |
+| `.tar.xz` | `J` |
+| `.tar.bz2` | `j` |
 
 ## .rar
 
