@@ -26,3 +26,5 @@ sudo pacman-fix-permissions
 yes
 ==> Done!
 ```
+
+但是这个工具似乎不能修复`/`的权限错误，需要手动修复一下。（据`#archlinux-cn:nichi.co`群的`shootingstardragon`说，flatpak存在一个有概率导致`/`的权限变成`777`的BUG）
