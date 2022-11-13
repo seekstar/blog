@@ -50,6 +50,28 @@ print("%e %e" %(x, 111 + 111))
 print('hello', end='')
 ```
 
+### 打印到stderr
+
+```py
+print('xxx', file=sys.stderr)
+```
+
+来源：<https://stackoverflow.com/questions/5574702/how-do-i-print-to-stderr-in-python>
+
+### 指定分隔符打印数组
+
+```py
+>>> L = [1, 2, 3, 4, 5]
+>>> print(*L)
+1 2 3 4 5
+>>> print(*L, sep=', ')
+1, 2, 3, 4, 5
+>>> print(*L, sep=' -> ')
+1 -> 2 -> 3 -> 4 -> 5
+```
+
+来源：<https://stackoverflow.com/questions/22556449/print-a-list-of-space-separated-elements>
+
 ## 时间
 
 <https://docs.python.org/3/library/datetime.html>
@@ -76,6 +98,40 @@ pip3 install python-dateutil
 
 {% post_link Python/'pandas数据框常用操作' %}
 
+## 文件
+
+{% post_link Python/'python文件管理' %}
+
+[python基础之写文件操作](https://blog.csdn.net/jiankang66/article/details/125981793)
+
+## 排序
+
+用`sorted`。
+
+### 对字典的key排序
+
+```py
+x = {1: 2, 4: 3, 2: 1}
+sorted(x)
+```
+
+```text
+[1, 2, 4]
+```
+
+### 对字典的值排序
+
+```py
+x = {1: 2, 3: 4, 4: 3, 2: 1, 0: 0}
+sorted(x.items(), key=lambda item: item[1])
+```
+
+```text
+[(0, 0), (2, 1), (1, 2), (4, 3), (3, 4)]
+```
+
+来源：<https://stackoverflow.com/questions/613183/how-do-i-sort-a-dictionary-by-value>
+
 ## 其他
 
 ### 本站博客
@@ -85,8 +141,6 @@ pip3 install python-dateutil
 - {% post_link Python/'python常用输入方式' %}
 
 - {% post_link Python/'numpy矩阵操作' %}
-
-- {% post_link Python/'python文件管理' %}
 
 ### 中文资料
 
