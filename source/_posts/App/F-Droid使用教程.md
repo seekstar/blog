@@ -46,13 +46,17 @@ F-Droid下载地址：<https://f-droid.org/>
 
 ## Termux
 
-手机上的Linux命令行终端.
+手机上的Linux命令行终端。
 
 ## Element
 
 基于Matrix协议的去中心化即时聊天软件。可以自己搭聊天服务器，可以跨服聊天。支持端到端加密。
 
 使用教程：{% post_link App/'Element-apk使用教程' %}
+
+## Telegram FOSS
+
+去除了专有部分的完全自由开源版Telegram。
 
 ## syncthing
 
@@ -70,4 +74,54 @@ lyrics search（中文歌好像很少能搜到歌词。。。）
 
 ## Fennec
 
-相当于firefox国际版
+相当于firefox国际版。去除了所有专有部分。
+
+## EinkBro
+
+为墨水屏设计的浏览器。
+
+基于Chromium。Firefox出问题的网站可以尝试用这个浏览器，比如网易云音乐网页版搜索界面。
+
+## Seafile
+
+云盘，开源，可自己部署。官方提供1G的免费容量。
+
+## collabora
+
+相当于安卓版本的libreoffice。
+
+需要在F-Droid中添加repo：<https://www.collaboraoffice.com/downloads/fdroid/repo>
+
+缺点：pdf阅读体验极差，不能打开大型txt文档。
+
+## Email
+
+### FairEmail
+
+### K-9 Mail
+
+## Coffee
+
+临时保持屏幕常亮。要允许后台运行。
+
+## Tor Browser
+
+## CAPod
+
+连接airpods和airports pro，可以看耳机和盒子的电量。
+
+## Blue Square Speedometer
+
+通过GPS测速和海拔。要等一段时间才有海拔。
+
+## Calculator++
+
+计算器。
+
+## TimerDroid
+
+闹钟。但是手机关机的时候不能唤醒手机然后闹铃。
+
+## G-Droid
+
+另一个可以访问F-Droid的软件仓库的应用。里面有星级和评论。但是不支持F-Droid以外的软件仓库。
