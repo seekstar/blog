@@ -12,6 +12,8 @@ sshname表示在`.ssh/config`里的名字，可以是IP地址。
 
 ## 服务器
 
+### 安装VNC server
+
 debian系:
 
 ```shell
@@ -24,9 +26,17 @@ Centos 8:
 sudo yum install tigervnc-server.x86_64
 ```
 
+### 启动VNC server
+
 ```shell
 vncserver
 ```
+
+`Would you like to enter a view-only password (y/n)?`选`n`，因为我们要用ssh隧道连接，所以不需要设置密码。
+
+`New 'X' desktop is L1707:1`，表示新建的桌面在`:1`，端口号为`5901`。
+
+完整输出：
 
 ```text
 searchstar@L1707:~$  vncserver
@@ -45,13 +55,25 @@ Starting applications specified in /home/searchstar/.vnc/xstartup
 Log file is /home/searchstar/.vnc/L1707:1.log
 ```
 
-## 客户端
+### 关闭VNC server
 
-先构建ssh隧道，其语法如下
+使用完毕后可以关掉VNC server的session：
 
 ```shell
-ssh -fNL xxxx:ip:5901 sshname
+vncserver -kill :1
 ```
+
+## 客户端
+
+### 构建ssh隧道
+
+语法如下：
+
+```shell
+ssh -fNL port:hostip:hostport sshname
+```
+
+将`sshname:port`的流量转发到`hostip:hostport`。
 
 ```text
 -f: 后台运行。
@@ -74,17 +96,27 @@ ssh -fNL 5901:localhost:5901 sshname
 
 这样就把服务器自己的5901端口映射到本地的5901端口了。
 
-然后打开vncviewer:
+### 安装VNC viewer并查看
+
+在vncviewer中查看`localhost:1`即可。
+
+Debian系：
 
 ```shell
 sudo apt install xtightvncviewer
 vncviewer localhost:1
 ```
 
+MacOS: `brew install tigervnc-viewer`，然后打开tigervnc，在弹出的窗口里输入`localhost:1`即可。
+
 ![在这里插入图片描述](vnc通过ssh隧道连接到Linux服务器/20210120205541777.png)
 就是任务栏没了。。。
 
-如果需要在终端中执行GUI程序，先查看`DISPLAY`环境变量是否已经设置了：
+当然显示出来是一片灰色也是正常的。
+
+### 在终端中执行GUI程序
+
+先查看`DISPLAY`环境变量是否已经设置了：
 
 ```shell
 echo $DISPLAY
@@ -105,12 +137,6 @@ xclock
 ```
 
 ![在这里插入图片描述](vnc通过ssh隧道连接到Linux服务器/fd3f482000354813b770351771e3d084.png)
-
-## 关闭vncserver
-
-```shell
-vncserver -kill :1
-```
 
 ## 参考文献
 
