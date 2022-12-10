@@ -65,7 +65,7 @@ pip3 install spleeter
 
 如果报这个错：`locale.Error: unsupported locale setting`
 
-可以这样解决：
+设置一下locale即可：
 
 ```shell
 export LC_ALL=C.UTF-8
