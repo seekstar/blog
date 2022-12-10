@@ -604,3 +604,7 @@ mpirun -n 20 ./xhpl
 左单引号（键盘上1左边那个）`` ` ``
 
  左双引号（按两下键盘上1左边的按键）``` `` ```
+
+## Bibliography URL
+
+Bibliography里URL不要用`url = {https://xxx}`的形式，要用`note = {\url{https://xxx}}`的形式，因为有些论文模板不认前者。
