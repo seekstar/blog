@@ -596,6 +596,15 @@ less -N 文件路径
 
 来源：<https://stackoverflow.com/questions/40974170/how-can-i-ignore-line-endings-when-comparing-files>
 
+### zsh不共享历史
+
+`zsh`特性比bash丰富一些。zsh默认会在不同的会话之间共享历史，禁用这个特性：
+
+```shell
+# https://github.com/ohmyzsh/ohmyzsh/issues/2537
+echo "unsetopt share_history" >> ~/.zshrc
+```
+
 ## 其他
 
 [linux中怎么用shell显示文件某一行或几行内容](https://blog.csdn.net/mydriverc2/article/details/82623778)
