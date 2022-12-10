@@ -149,11 +149,17 @@ bash: /var/lib/flatpak/app/com.jgraph.drawio.desktop/current/active/export/bin/c
 
 ### Element
 
-包名是im.riot.Riot。需要配置代理。有一个很大的问题，是flatpak运行在沙箱环境中，所以传文件时不能看到系统里的文件。所以还是建议用官网提供的方式安装。
+包名是im.riot.Riot。需要配置代理。有一个很大的问题，是flatpak运行在沙箱环境中，默认传文件时不能看到系统里的文件。可以设置其允许读取home目录下的文件：
+
+```shell
+# https://docs.flatpak.org/en/latest/sandbox-permissions.html#filesystem-access
+# https://github.com/flathub/im.riot.Riot/issues/33
+flatpak override --user --filesystem=home:ro im.riot.Riot
+```
 
 ### Telegram
 
-包名是`org.telegram.desktop`。需要注销重新登录才能在deepin启动器里找到。需要配置代理，用`flatpak run --command=sh`的方法好像没用，貌似要在应用内设置代理。这个好像就能访问系统里的文件，这说明是Element打包有问题。
+包名是`org.telegram.desktop`。需要注销重新登录才能在deepin启动器里找到。需要配置代理，用`flatpak run --command=sh`的方法好像没用，貌似要在应用内设置代理。
 
 ### torbrowser-launcher
 
