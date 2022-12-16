@@ -107,6 +107,13 @@ sudo apt install xtightvncviewer
 vncviewer localhost:1
 ```
 
+ArchLinux:
+
+```shell
+sudo pacman -S tigervnc
+vncviewer localhost:1
+```
+
 MacOS: `brew install tigervnc-viewer`，然后打开tigervnc，在弹出的窗口里输入`localhost:1`即可。
 
 ![在这里插入图片描述](vnc通过ssh隧道连接到Linux服务器/20210120205541777.png)
