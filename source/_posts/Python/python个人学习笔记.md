@@ -132,6 +132,30 @@ sorted(x.items(), key=lambda item: item[1])
 
 来源：<https://stackoverflow.com/questions/613183/how-do-i-sort-a-dictionary-by-value>
 
+## 类
+
+```py
+from dataclasses import dataclass
+@dataclass
+class A:
+    a: int
+    b: str
+    c: float
+li: list[A] = []
+li.append(A(1, "2", 3.3))
+li.append(A(2, "3", 4.4))
+print(li)
+# [<class '__main__.A'>, A(a=1, b='2', c=3.3), A(a=2, b='3', c=4.4)]
+item = li[1]
+print(item.c)
+# 3.3
+sorted(li, key = lambda item: item.c, reverse=True)
+```
+
+参考：<https://stackoverflow.com/questions/35988/c-like-structures-in-python>
+
+完整教程：[Python 面向对象](https://www.runoob.com/python/python-object.html)
+
 ## 其他
 
 ### 本站博客
@@ -177,6 +201,8 @@ sorted(x.items(), key=lambda item: item[1])
 `json.dumps(obj, indent='\t')`可以使用tab进行缩进。
 
 - 获取命令输出：[python的popen函数](https://blog.csdn.net/Z_Stand/article/details/89375589)
+
+- [python 生成随机数的三种方法](https://blog.csdn.net/robert_chen1988/article/details/82887820)
 
 #### 其他
 
