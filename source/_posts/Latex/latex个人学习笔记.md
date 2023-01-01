@@ -608,3 +608,13 @@ mpirun -n 20 ./xhpl
 ## Bibliography URL
 
 Bibliography里URL不要用`url = {https://xxx}`的形式，要用`note = {\url{https://xxx}}`的形式，因为有些论文模板不认前者。
+
+## 异常处理
+
+### `textbf{}`加粗对英文无效
+
+`\usepackage[T1]{fontenc}`
+
+来源：[latex \textbf{} 字体加粗失效](https://blog.csdn.net/dongqing0315/article/details/125385922)
+
+相关：<https://tex.stackexchange.com/questions/664/why-should-i-use-usepackaget1fontenc>
