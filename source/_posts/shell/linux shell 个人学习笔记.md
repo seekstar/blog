@@ -210,6 +210,30 @@ fi
 
 会打印出`yes`。
 
+## 组管理
+
+### 创建组
+
+```shell
+sudo groupadd GroupName
+```
+
+### 向组中加入用户
+
+参考：<https://blog.csdn.net/u013078295/article/details/52173311>
+
+```shell
+sudo usermod -aG GroupName UserName
+```
+
+### 查看group里的用户
+
+参考：<https://blog.csdn.net/withiter/article/details/8132525>里的评论
+
+```shell
+grep GroupName /etc/group
+```
+
 ## 按应用
 
 ### crontab
@@ -293,22 +317,6 @@ watch -n Interval Command
 ```
 
 Interval: 执行间隔，以秒为单位
-
-### 查看group里的用户
-
-参考：<https://blog.csdn.net/withiter/article/details/8132525>里的评论
-
-```shell
-grep GroupName /etc/group
-```
-
-### 加入某用户到某group
-
-参考：<https://blog.csdn.net/u013078295/article/details/52173311>
-
-```shell
-sudo usermod -aG davfs2 UserName
-```
 
 ### 获取精确到纳秒的当前时间
 
