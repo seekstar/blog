@@ -73,7 +73,7 @@ vncserver -kill :1
 ssh -fNL port:hostip:hostport sshname
 ```
 
-将`sshname:port`的流量转发到`hostip:hostport`。
+将`localhost:port`的流量通过远程服务器`sshname`转发到`hostip:hostport`。
 
 ```text
 -f: 后台运行。
@@ -86,7 +86,7 @@ ssh -fNL port:hostip:hostport sshname
         格式说明: port/host/hostport
 ```
 
-网上很多教程上还加上了`-g`，这样本地的5901端口会向网络上其他机器开放，就不安全了。
+网上很多教程上还加上了`-g`，这样本地的端口会向网络上其他机器开放，就不安全了。
 
 对于我们的情况，命令这样写：
 
@@ -94,7 +94,7 @@ ssh -fNL port:hostip:hostport sshname
 ssh -fNL 5901:localhost:5901 sshname
 ```
 
-这样就把服务器自己的5901端口映射到本地的5901端口了。
+这样就把本地的5901端口的流量通过`sshname`转发给`localhost:5901`，也就是转发给服务器自己的5901端口了。这就实现了将服务器的5901端口映射到本地的5901端口了。
 
 ### 安装VNC viewer并查看
 
