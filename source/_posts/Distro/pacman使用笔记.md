@@ -16,6 +16,22 @@ pacman -Q
 
 这里面也会把用yay安装的包列出来。
 
+## 查看某包被哪些包依赖
+
+```shell
+pacman -Qi 包名
+```
+
+里面的`Required By`后面的就是依赖这个包的包。
+
+或者用`pkgtools`包里的`whoneeds`：
+
+```shell
+# archlinuxcn源里也有pkgtools
+sudo yay -S pkgtools
+whoneeds 包名
+```
+
 ## 无效或已损坏的软件包
 
 可能是`archlinux-keyring`过时了，需要更新一下：
