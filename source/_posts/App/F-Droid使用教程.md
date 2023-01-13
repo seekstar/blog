@@ -48,6 +48,15 @@ F-Droid下载地址：<https://f-droid.org/>
 
 手机上的Linux命令行终端。
 
+### sshd
+
+```shell
+apt install openssh
+sshd
+```
+
+然后SSH server就会开在8022端口了。
+
 ## Element
 
 基于Matrix协议的去中心化即时聊天软件。可以自己搭聊天服务器，可以跨服聊天。支持端到端加密。
