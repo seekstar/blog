@@ -5,6 +5,12 @@ tags:
 ---
 
 ```shell
+nmap -p- 地址
+```
+
+查看本地开启的端口：
+
+```shell
 nmap -p- localhost
 ```
 
