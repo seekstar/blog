@@ -252,3 +252,101 @@ class Iterator {
 ```
 
 注意`Peek`返回的object不要保存，而是每次都调用`Peek`来访问，否则会出现下次调用`Next`之后原先保存的引用失效的问题。
+
+## 模板类分离声明和定义
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+template <typename T>
+struct A {
+	A();
+	void Print();
+	T a_;
+};
+
+template <typename T>
+A<T>::A() : a_(233) {}
+
+template <typename T>
+void A<T>::Print() {
+	std::cout << a_ << std::endl;
+}
+
+int main() {
+	A<int>().Print();
+
+	return 0;
+}
+```
+
+参考：<https://stackoverflow.com/questions/2464296/is-it-possible-to-defer-member-initialization-to-the-constructor-body>
+
+嵌套类同理：
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+template <typename T>
+struct A {
+	struct B {
+		static void Print();
+	};
+};
+
+template <typename T>
+void A<T>::B::Print() {
+	std::cout << typeid(T).name() << std::endl;
+}
+
+int main() {
+	A<int>::B::Print();
+
+	return 0;
+}
+```
+
+## 隐藏构造函数
+
+有时会只想让特定的函数（比如`begin()`）能够返回一个类（比如迭代器），此时就需要隐藏这个类的构造函数。
+
+最优雅的方法是用C++20里的module。如果不能用C++20的话，可以弄一个隐藏的namespace来模拟module里没有export的部分。将要隐藏的构造函数声明为`protected`，然后在隐藏的namespace里声明一个继承这个类的子类，这样这个子类就可以访问这个隐藏的构造函数。将子类的构造函数声明为`public`，需要使用隐藏的构造函数时，调用子类的构造函数，然后将构造出来的子类转换为那个类即可。
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+class A {
+public:
+	void Print() {
+		std::cout << a_ << std::endl;
+	}
+protected:
+	A(int a) : a_(a) {}
+private:
+	int a_;
+};
+
+// This should not be accessed by users
+namespace __A {
+struct _A : A {
+	_A(int a) : A(a) {}
+};
+
+}
+
+A Create() {
+	return __A::_A(233);
+}
+
+int main() {
+	Create().Print();
+
+	return 0;
+}
+```
