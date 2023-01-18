@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  hljs.initHighlightingOnLoad();
+  // hljs.initHighlightingOnLoad();
   clickTreeDirectory();
   serachTree();
   pjaxLoad();
@@ -151,9 +151,9 @@ function pjaxLoad() {
       {fragment: '#content', timeout: 8000});
   $(document).on({
     "pjax:complete": function (e) {
-      $("pre code").each(function (i, block) {
-        hljs.highlightBlock(block);
-      });
+      // $("pre code").each(function (i, block) {
+        // hljs.highlightBlock(block);
+      // });
       // 添加 active
       $("#tree .active").removeClass("active");
       var title = $("#article-title").text().trim();
