@@ -314,7 +314,44 @@ int main() {
 
 有时会只想让特定的函数（比如`begin()`）能够返回一个类（比如迭代器），此时就需要隐藏这个类的构造函数。
 
-最优雅的方法是用C++20里的module。如果不能用C++20的话，可以弄一个隐藏的namespace来模拟module里没有export的部分。将要隐藏的构造函数声明为`protected`，然后在隐藏的namespace里声明一个继承这个类的子类，这样这个子类就可以访问这个隐藏的构造函数。将子类的构造函数声明为`public`，需要使用隐藏的构造函数时，调用子类的构造函数，然后将构造出来的子类转换为那个类即可。
+### C++20 module
+
+这是最优雅的方法。但是却不总是可行。
+
+### friend
+
+把要访问隐藏的构造函数的函数和类声明为friend即可。
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+class A {
+public:
+	void Print() {
+		std::cout << a_ << std::endl;
+	}
+private:
+	A(int a) : a_(a) {}
+	int a_;
+	friend A Create();
+};
+
+A Create() {
+	return A(233);
+}
+
+int main() {
+	Create().Print();
+
+	return 0;
+}
+```
+
+### （不推荐）引入隐藏的namespace
+
+引入一个隐藏的namespace来模拟module里没有export的部分。将要隐藏的构造函数声明为`protected`，然后在隐藏的namespace里声明一个继承这个类的子类，这样这个子类就可以访问这个隐藏的构造函数。将子类的构造函数声明为`public`，需要使用隐藏的构造函数时，调用子类的构造函数，然后将构造出来的子类转换为那个类即可。
 
 ```cpp
 #include <iostream>
@@ -350,3 +387,5 @@ int main() {
 	return 0;
 }
 ```
+
+但是这样比较麻烦，也很丑。
