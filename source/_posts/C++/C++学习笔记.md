@@ -389,3 +389,126 @@ int main() {
 ```
 
 但是这样比较麻烦，也很丑。
+
+## 返回多个对象
+
+需要使用C++17的structured binding：
+
+```cpp
+#include <iostream>
+#include <tuple>
+
+using namespace std;
+
+struct A {
+	A() {
+		std::cout << "A constructing\n";
+	}
+	A(A&&) {
+		std::cout << "A moving\n";
+	}
+	A(const A&) = delete;
+	~A() {
+		std::cout << "A deconstructing\n";
+	}
+};
+
+std::tuple<int, A> f() {
+	return std::tuple(233, A());
+}
+
+int main() {
+	auto [x, a] = f();
+	return 0;
+}
+```
+
+输出：
+
+```text
+A constructing
+A moving
+A deconstructing
+A deconstructing
+```
+
+可见接收返回值的时候调用的是move constructor。
+
+但是vscode显示那些返回的对象的类型是`<unnamed>`，而且也没有任何成员函数之类的提示。似乎是因为返回出来的实际上是指向返回值中的对象的引用类型，而且没有名字。所以这个特性对IDE非常不友好。
+
+## move constructor里构造父类
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+struct A {
+	A(int a) : a_(a) {}
+	A(A&& a) : a_(a.a_) {}
+	A(const A&) = delete;
+	void PrintA() {
+		std::cout << a_ << std::endl;
+	}
+	int a_;
+};
+
+struct B : A {
+	B(int a, int b) : A(a), b_(b) {}
+	// 直接调用父类的move constructor
+	// B&&会被自动转换为A&&
+	B(B&& r) : A(std::move(r)), b_(r.b_) {}
+	B(const B&) = delete;
+	void PrintB() {
+		std::cout << b_ << std::endl;
+	}
+	int b_;
+};
+
+int main() {
+	B b(1, 2);
+	b.PrintA();
+	b.PrintB();
+
+	B c(std::move(b));
+	c.PrintA();
+	c.PrintB();
+
+	return 0;
+}
+```
+
+参考：<https://stackoverflow.com/questions/37668952/move-constructor-for-derived-class>
+
+## std::optional
+
+Since C++17.
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <optional>
+
+std::optional<std::vector<int>> f(bool none) {
+	if (none) {
+		return std::nullopt;
+	} else {
+		return std::vector<int>({1, 2, 3});
+	}
+}
+
+int main() {
+	auto ret = f(false);
+	// If not none, then evaluated to true
+	std::cout << (bool)ret << std::endl;
+	for (int v : ret.value())
+		std::cout << v << ' ';
+	std::cout << std::endl;
+
+	ret = f(true);
+	// If none, then evaluated to false
+	std::cout << (bool)ret << std::endl;
+
+	return 0;
+}
+```
