@@ -318,3 +318,11 @@ npm install
 npm i hexo@latest
 hexo --version
 ```
+
+## 其他
+
+### 折叠部分文字
+
+[Hexo+Github博客：如何折叠(显示/隐藏)部分文字](https://blog.csdn.net/qq_36408085/article/details/104323711)
+
+<https://github.com/fletchto99/hexo-sliding-spoiler>
