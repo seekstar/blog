@@ -47,7 +47,7 @@ pdftk full-pdf.pdf cat 12-15 output outfile_p12-15.pdf
 
 ## 压缩PDF
 
-{% post_link App/'Linux压缩pdf' %}
+{% post_link CLI/'Linux压缩pdf' %}
 
 ## 参考链接
 
