@@ -124,3 +124,5 @@ pandoc:
     - preserve-tabs:
     # - highlight-style: kate
     # - css: https://cdn.jsdelivr.net/npm/pygments-css@1.0.0/github.min.css
+  filters:
+    - node_modules/hexo-pandoc-header-anchor/header-anchor.py
