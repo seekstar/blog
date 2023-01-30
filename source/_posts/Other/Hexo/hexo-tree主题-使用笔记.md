@@ -252,27 +252,25 @@ valine:
 
 `themes/tree/_config.yml`里的`siteStartYear: 2019`修改成你想要的年份。结束年份会自己计算出来。
 
-## 安装Markdown-it
+## 将渲染器更换为[hexo-renderer-pandoc](https://github.com/hexojs/hexo-renderer-pandoc)
 
-自带的markdown没有语法高亮，而且有BUG，行内代码有时候会被处理成行间代码，然后全乱了。改成`Markdown-it`就好了。
-
-在项目根目录执行
+默认的渲染器是`hexo-renderer-marked`，没有语法高亮，而且有BUG，行内代码有时候会被处理成行间代码，然后全乱了。所以需要更换渲染器。[hexo-renderer-markdown-it](https://github.com/hexojs/hexo-renderer-markdown-it)比较流行，但是不支持Latex风格的数学公式。所以这里把渲染器换成[hexo-renderer-pandoc](https://github.com/hexojs/hexo-renderer-pandoc)：
 
 ```shell
-npm install markdown-it --save
+npm uninstall hexo-renderer-marked
+npm install hexo-renderer-pandoc --save
 ```
 
-然后在`_config.yml`中把默认的highlight关掉：
+更换渲染器之后要在`_config.yml`中把默认的highlight关掉，才能使用新的渲染器提供的highlight：
 
 ```yml
 highlight:
   enable: false
-  line_number: false
-  auto_detect: false
-  tab_replace: ''
 ```
 
 注意这里要把之前的预览`ctrl+c`关掉，然后重新`hexo g && hexo s`才能生效。
+
+然后就可以开启对Latex风格的公式的支持了：{% post_link Other/Hexo/'Hexo支持Latex风格的公式编辑' %}
 
 ## 写博客
 
@@ -300,10 +298,6 @@ git clone git@github.com:seekstar/seekstar.github.io.git .deploy_git
 npm install
 ```
 
-## 支持Latex风格的公式编辑
-
-<https://seekstar.github.io/2021/11/16/hexo%E6%94%AF%E6%8C%81latex%E9%A3%8E%E6%A0%BC%E7%9A%84%E5%85%AC%E5%BC%8F%E7%BC%96%E8%BE%91/>
-
 ## 上传图片
 
 <https://seekstar.github.io/2021/11/16/hexo%E6%8F%92%E5%85%A5%E5%9B%BE%E7%89%87/>
@@ -326,3 +320,19 @@ hexo --version
 [Hexo+Github博客：如何折叠(显示/隐藏)部分文字](https://blog.csdn.net/qq_36408085/article/details/104323711)
 
 <https://github.com/fletchto99/hexo-sliding-spoiler>
+
+### 保留代码块中的tab
+
+```yaml
+pandoc:
+  extra:
+    - preserve-tabs:  # note this colon!!
+```
+
+然后`hexo clean && hexo g`使其生效。
+
+### 标题锚点
+
+<https://github.com/seekstar/hexo-pandoc-header-anchor>
+
+通过锚点可以得到指向标题的URL，例如：<https://seekstar.github.io/2022/03/10/a-collection-of-matrix-groups/#matrix>
