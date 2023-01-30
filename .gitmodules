@@ -1,0 +1,4 @@
+[submodule "themes/tree"]
+	path = themes/tree
+	url = https://github.com/seekstar/hexo-theme-tree.git
+	branch = seekstar
