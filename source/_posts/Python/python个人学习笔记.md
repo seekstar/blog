@@ -216,6 +216,10 @@ Waiting for I/O completion: <https://docs.python.org/3/library/select.html>
 
 字符串trim: <https://www.freecodecamp.org/news/python-strip-how-to-trim-a-string-or-line/>
 
-requirements.txt: <https://note.nkmk.me/en/python-pip-install-requirements/>
-
 [with statement in Python](https://www.geeksforgeeks.org/with-statement-in-python/)
+
+#### pip
+
+安装指定版本：<https://www.marsja.se/pip-install-specific-version-of-python-package/>
+
+requirements.txt: <https://note.nkmk.me/en/python-pip-install-requirements/>
