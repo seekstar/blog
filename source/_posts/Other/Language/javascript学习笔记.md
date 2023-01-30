@@ -6,7 +6,7 @@ tags:
 
 字体颜色和样式之类的定义在CSS里。
 
-## ejs检测变量是否存在
+## EJS检测变量是否存在
 
 ```html
 <% if (theme.sidebar.headerPrefix) { %>
@@ -23,3 +23,9 @@ tags:
 ```
 
 然后`headerPrefix`就可以在之后的javascript脚本里访问。
+
+## EJS中`<%=`和`<%-`的区别
+
+`<%=`转义，`<%-`不转义。
+
+来源：<https://stackoverflow.com/questions/11024840/ejs-versus>
