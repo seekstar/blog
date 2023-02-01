@@ -240,6 +240,17 @@ valine:
 
 `themes/tree/_config.yml`里的`siteStartYear: 2019`修改成你想要的年份。结束年份会自己计算出来。
 
+## 更改网站图标
+
+将自己的网站图标（文件名不要跟默认的`favicon.ico`相同）放进`source`文件夹里。假如文件名是`seekstar.ico`，那么就可以通过`https://博客网站/seekstar.ico`访问到这个图标。然后更改`themes/tree/_config.yml`：
+
+```yaml
+# 改成自己的图标文件名，比如 /seekstar.ico
+favicon: /favicon.ico
+```
+
+即可让网站使用新的网站图标。
+
 ## 将渲染器更换为[hexo-renderer-pandoc](https://github.com/hexojs/hexo-renderer-pandoc)
 
 默认的渲染器是`hexo-renderer-marked`，没有语法高亮，而且有BUG，行内代码有时候会被处理成行间代码，然后全乱了。所以需要更换渲染器。[hexo-renderer-markdown-it](https://github.com/hexojs/hexo-renderer-markdown-it)比较流行，但是不支持Latex风格的数学公式。所以这里把渲染器换成[hexo-renderer-pandoc](https://github.com/hexojs/hexo-renderer-pandoc)：
