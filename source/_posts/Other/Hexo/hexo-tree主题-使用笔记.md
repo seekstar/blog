@@ -146,31 +146,19 @@ theme: tree
 
 ## 修改header
 
-默认的header里有一个作者自己的项目`UidGenerator`，并且github的链接也是作者自己的。
+通过`themes/tree/_config.yml`里的`links`配置：
 
-打开`themes/tree/layout/_partial/header.ejs`，找到
-
-```html
-<li class="menu-item">
-    <a href="https://github.com/wujun234/uid-generator-spring-boot-starter" class="menu-item-link" target="_blank">
-        UidGenerator
-    </a>
-</li>
+```yaml
+links:
+  # 改成自己的github链接
+  github: https://github.com/wujun234
+  # 自定义链接
+  custom:
+    - name: UidGenerator
+      URL: https://github.com/wujun234/uid-generator-spring-boot-starter
 ```
 
-删掉它或者换成自己的项目。项目链接可以多放几个，但是由于手机上header长度有限，不宜过多。实际上我觉得一个都不放比较好，可以全部塞进后面提到的about页。
-
-找到
-
-```html
-<li class="menu-item">
-    <a href="https://github.com/wujun234" class="menu-item-link" target="_blank">
-        <i class="fa fa-github fa-2x"></i>
-    </a>
-</li>
-```
-
-把作者的链接`https://github.com/wujun234`换成自己的github链接。
+默认有一个作者自己的项目`UidGenerator`，删掉它或者换成自己的项目。项目链接可以多放几个，但是由于手机上header长度有限，不宜过多。实际上我觉得一个都不放比较好，可以全部塞进后面提到的about页。
 
 ## 开启标签和分类
 
