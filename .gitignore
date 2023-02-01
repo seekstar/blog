@@ -3,6 +3,5 @@ Thumbs.db
 db.json
 *.log
 node_modules/
-public/*
-!public/googleca342d2ad36b95d9.html
+public/
 .deploy*/
