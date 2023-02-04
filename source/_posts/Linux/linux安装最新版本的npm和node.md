@@ -23,11 +23,19 @@ npm -v
 
 我的输出是
 
-```
+```text
 3.5.2
 ```
 
 是非常老的版本
+
+## 安装cnpm
+
+这样可以使用国内镜像来下载。
+
+```shell
+sudo npm install -g cnpm --registry=https://registry.npmmirror.com
+```
 
 ## 安装最新版node
 
@@ -36,13 +44,16 @@ npm -v
 所以先升级node。
 
 ```shell
-sudo npm install -g n
-sudo n stable
+# 可能需要使用root执行
+cnpm install -g n
+# https://github.com/tj/n#custom-source
+export N_NODE_MIRROR=https://npmmirror.com/mirrors/node
+n stable
 ```
 
 我的输出
 
-```
+```text
 searchstar@searchstar-mint19:~$ sudo n stable
 
   installing : node-v12.16.1
@@ -70,7 +81,7 @@ PATH="$PATH"
 node -v
 ```
 
-```
+```text
 v12.16.1
 ```
 
@@ -81,7 +92,7 @@ v12.16.1
 可以通过旧版本npm直接安装新版npm
 
 ```shell
-sudo npm install npm@latest -g
+sudo cnpm install npm@latest -g
 ```
 
 非常坑的是，现在立即执行
@@ -99,7 +110,7 @@ PATH="$PATH"
 就可以更新npm命令指向的文件了。
 再查看版本：
 
-```
+```text
 6.14.4
 ```
 
