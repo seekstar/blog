@@ -6,13 +6,10 @@ date: 2020-04-03 16:53:54
 ## 先安装旧版本npm
 
 ```shell
-sudo apt install -y node
-```
-
-有些发行版是
-
-```shell
+# Deepin
 sudo apt install -y npm
+# CentOS
+sudo yum install npm
 ```
 
 查看当前版本
@@ -29,14 +26,6 @@ npm -v
 
 是非常老的版本
 
-## 安装cnpm
-
-这样可以使用国内镜像来下载。
-
-```shell
-sudo npm install -g cnpm --registry=https://registry.npmmirror.com
-```
-
 ## 安装最新版node
 
 新版npm可能不支持老版本的node：<https://seekstar.github.io/2021/12/30/npm-does-not-support-node-js-v10-21-0-you-should-probably-upgrade-to-a-newer-version-of-node/>
@@ -45,7 +34,7 @@ sudo npm install -g cnpm --registry=https://registry.npmmirror.com
 
 ```shell
 # 可能需要使用root执行
-cnpm install -g n
+npm install -g n
 # https://github.com/tj/n#custom-source
 export N_NODE_MIRROR=https://npmmirror.com/mirrors/node
 n stable
@@ -92,7 +81,7 @@ v12.16.1
 可以通过旧版本npm直接安装新版npm
 
 ```shell
-sudo cnpm install npm@latest -g
+sudo npm install npm@latest -g
 ```
 
 非常坑的是，现在立即执行
