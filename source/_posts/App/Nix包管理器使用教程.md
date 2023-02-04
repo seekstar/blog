@@ -10,10 +10,12 @@ tags:
 
 ```shell
 # https://mirrors.tuna.tsinghua.edu.cn/help/nix/
-sh <(curl https://mirrors.tuna.tsinghua.edu.cn/nix/latest/install) --daemon
+sh <(curl https://mirrors.tuna.tsinghua.edu.cn/nix/latest/install) --daemon --no-channel-add
 ```
 
-这一步比较慢，只有大约200K/s，要多等一段时间：
+`--no-channel-add`: 不添加`nixpkgs-unstable`作为channel。
+
+否则这一步会很慢：
 
 ```text
 ---- sudo execution ------------------------------------------------------------
@@ -35,6 +37,7 @@ sudo -i nix-channel --add https://mirrors.tuna.tsinghua.edu.cn/nix-channels/nixp
 sudo -i nix-channel --update
 nix-channel --add https://mirrors.tuna.tsinghua.edu.cn/nix-channels/nixpkgs-unstable nixpkgs
 nix-channel --update
+sudo systemctl restart nix-daemon.service
 ```
 
 清华镜像是cache。如果命中了cache，就会显示`copying path '/nix/store/xxx' from 'https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store'...`。如果没有命中，就会显示`copying path '/nix/store/xxx' from 'https://cache.nixos.org'...`，也就是从官方源`https://cache.nixos.org`下载。
@@ -81,15 +84,25 @@ sudo systemctl restart nix-daemon.service
 
 搜索可用包：<https://search.nixos.org/packages>
 
-安装：`nix-env -iA 包名`
+安装：`nix-env -iA 源.包名`
 
-一些选项：
+卸载：`nix-env -e 包名`
 
-- `-i`: --install
+一些`nix-env`的选项：
 
-- `-A`: --attr。表示从根开始解析，更快。
+- `-i`: `--install`
 
-- `-q`: --query。默认`--installed`，即只查询已安装的包。也可以加上`-a`，即`--availble`，`nix-env -qa`表示打印源的所有包的列表，`nix-env -qa xxx`表示搜索。但是这个好慢，而且还不能模糊搜索，不如在这里搜索：<https://search.nixos.org/packages>
+- `-A`: `--attr`。表示从根开始解析，更快。
+
+- `-e`: `--uninstall`
+
+- `-q`: `--query`。默认`--installed`，即只查询已安装的包。也可以加上`-a`，即`--availble`，`nix-env -qa`表示打印源的所有包的列表，`nix-env -qa xxx`表示搜索。但是这个好慢，而且还不能模糊搜索，不如在这里搜索：<https://search.nixos.org/packages>
+
+垃圾回收：`nix-collect-garbage -d`。
+
+```text
+-d (--delete-old) deletes  all  old  generations of all profiles in /nix/var/nix/profiles by invoking nix-env --delete-generations old on all profiles (of course, this makes rollbacks to previous configurations impossible)
+```
 
 ## 运行OpenGL程序
 
