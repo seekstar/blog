@@ -53,6 +53,10 @@ flatpak install xxx
 flatpak uninstall xxx
 flatpak list # 列出已安装的包
 flatpak run 包名(比如com.jgraph.drawio.desktop)
+# 查看源列表
+flatpak remotes
+# 或者flatpak remote-list
+# 似乎不能看某个remote的URL之类的: https://github.com/flatpak/flatpak/issues/1983
 ```
 
 不同于apt，flatpak可以并行安装。安装的软件存放在`~/.var/app/`和`/var/lib/flatpak/app`里。一般来讲，软件的启动入口一般在`/var/lib/flatpak/app/com.jgraph.drawio.desktop/current/active/export/bin`。
@@ -64,6 +68,14 @@ flatpak run 包名(比如com.jgraph.drawio.desktop)
 <https://seekstar.github.io/2022/01/06/flatpak%E5%BA%94%E7%94%A8%E8%AE%BE%E7%BD%AE%E4%BB%A3%E7%90%86/>
 
 ## 一些可以用flatpak安装的软件
+
+### KeePassXC
+
+密码管理器。要把apt安装的旧版卸载之后，Deepin启动器上的才会变成flatpak的版本。
+
+### Thunderbird
+
+Mozilla出品的邮件客户端。
 
 ### Xournal++
 
@@ -115,15 +127,9 @@ flatpak install shadowsocks
 
 一款文献管理器。
 
-### KeePassXC
-
-密码管理器。要把apt安装的旧版卸载之后，Deepin启动器上的才会变成flatpak的版本。
-
-其实我觉得2.6.6还没有2.3.4好用。新版上创建条目的时候不会要求输入两遍了，而且也不会显示密码强度。
-
 ### Seafile
 
-但是没有单点登录。
+云盘客户端。但是flatpak版本没有单点登录。
 
 ### drawio
 
@@ -141,13 +147,15 @@ flatpak run com.jgraph.drawio.desktop
 
 会报错：
 
-```
+```text
 bash: /var/lib/flatpak/app/com.jgraph.drawio.desktop/current/active/export/bin/com.jgraph.drawio.desktop：/bin/sh：解释器错误: 没有那个文件或目录
 ```
 
 这是因为这个脚本的后缀名是`.desktop`，然后系统以为它是启动器。
 
-### Element
+### Matrix客户端
+
+#### Element
 
 包名是im.riot.Riot。需要配置代理。有一个很大的问题，是flatpak运行在沙箱环境中，默认传文件时不能看到系统里的文件。可以设置其允许读取home目录下的文件：
 
@@ -155,6 +163,12 @@ bash: /var/lib/flatpak/app/com.jgraph.drawio.desktop/current/active/export/bin/c
 # https://docs.flatpak.org/en/latest/sandbox-permissions.html#filesystem-access
 # https://github.com/flathub/im.riot.Riot/issues/33
 flatpak override --user --filesystem=home:ro im.riot.Riot
+```
+
+#### Nheko
+
+```shell
+flatpak install io.github.NhekoReborn.Nehko
 ```
 
 ### Telegram
