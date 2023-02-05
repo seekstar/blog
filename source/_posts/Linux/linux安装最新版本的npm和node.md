@@ -30,14 +30,20 @@ npm -v
 
 新版npm可能不支持老版本的node：<https://seekstar.github.io/2021/12/30/npm-does-not-support-node-js-v10-21-0-you-should-probably-upgrade-to-a-newer-version-of-node/>
 
-所以先升级node。
+所以先升级node。使用国内镜像源升级：
 
 ```shell
-# 可能需要使用root执行
-npm install -g n
+sudo npm install -g n --registry=https://registry.npmmirror.com
 # https://github.com/tj/n#custom-source
-export N_NODE_MIRROR=https://npmmirror.com/mirrors/node
-n stable
+# 有些发行版sudo的PATH可能没有/usr/local/bin，加上-i之后会执行/etc/profile，就有/usr/local/bin了。
+sudo bash -i -c "N_NODE_MIRROR=https://npmmirror.com/mirrors/node n stable"
+```
+
+如果不使用国内镜像源的话：
+
+```shell
+sudo npm install -g n
+sudo n stable
 ```
 
 我的输出
@@ -81,6 +87,7 @@ v12.16.1
 可以通过旧版本npm直接安装新版npm
 
 ```shell
+# 可以加上--registry=https://registry.npmmirror.com来使用国内镜像源
 sudo npm install npm@latest -g
 ```
 
