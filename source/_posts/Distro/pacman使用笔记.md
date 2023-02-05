@@ -46,6 +46,16 @@ sudo pacman -Sy archlinux-keyring && sudo pacman -Su
 
 <https://wiki.archlinux.org/title/Pacman/Package_signing#Upgrade_system_regularly>
 
+## 不再使用的依赖
+
+```shell
+pacman -Qdt
+```
+
+其中有一些可能是yay自动下载用于构建包的，所以最好肉眼挑选出不需要的包，手动卸载。如果确认里面没有需要使用的包，才可以用这条指令把它们全部卸掉：`pacman -Rsn $(pacman -Qdtq)`。
+
+来源：<https://bbs.archlinux.org/viewtopic.php?id=57431>
+
 ## 其他
 
 - {% post_link Distro/'pacman查看可更新包' %}
