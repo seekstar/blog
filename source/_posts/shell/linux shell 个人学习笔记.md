@@ -210,7 +210,90 @@ fi
 
 会打印出`yes`。
 
-## 组管理
+### 重定向
+
+```shell
+# 将`stdout`重定向到`stdout.txt`
+Command > stdout.txt
+# 将`stderr`重定向到`stderr.txt`
+Command 2> stderr.txt
+# 将stderr重定向到stdout
+Command 2>&1
+# 将stderr和stdout都重定向到一个文件
+# 参考：<https://blog.csdn.net/u011630575/article/details/52151995>
+Command > shell.log 2>&1
+Command &> shell.log
+# 将`stdin`重定向到`stdin.txt`
+Command < stdin.txt
+# 将Command1的stdout输入到Command2的stdin
+Command1 | Command2 # 例如 echo 'whoami' | bash，可以让bash执行whoami。
+
+```
+
+#### 将多行字面量作为stdin
+
+```text
+Command <<标记
+第一行
+第二行
+...
+标记
+```
+
+例如：
+
+```shell
+bash <<EOF
+whoami
+echo 2333
+EOF
+```
+
+## 用户管理
+
+### 创建普通用户
+
+```shell
+adduser 用户名
+```
+
+但是有些发行版没有`adduser`命令，就只能用`useradd`命令创建用户了：
+
+```shell
+# -m: 创建家目录
+useradd -m 用户名
+# 设置密码
+passwd 用户名
+```
+
+### 创建系统用户
+
+```shell
+# -r, --system: 创建系统用户，UID小于1000，无密码，无家目录，无法登录。
+useradd --system 用户名
+```
+
+来源：<https://superuser.com/a/515909/1677998>
+
+### 以另一用户的身份执行命令
+
+参考：<https://www.cnblogs.com/bigben0123/archive/2013/05/07/3064843.html>
+
+```shell
+sudo -u UserName Command
+```
+
+### 判断用户是否存在
+
+```shell
+if id "$1" &>/dev/null; then
+    echo 'user found'
+else
+    echo 'user not found'
+fi
+```
+
+来源：<https://stackoverflow.com/questions/14810684/check-whether-a-user-exists>
 
 ### 创建组
 
@@ -330,22 +413,6 @@ date +%Y%m%d%X%N
 
 ```shell
 date +%s%N
-```
-
-### 把stderr和stdout都重定向到一个文件
-
-参考：<https://blog.csdn.net/u011630575/article/details/52151995>
-
-```shell
-./shell.sh > shell.log 2>&1
-```
-
-### 以另一用户的身份执行命令
-
-参考：<https://www.cnblogs.com/bigben0123/archive/2013/05/07/3064843.html>
-
-```shell
-sudo -u UserName Command
 ```
 
 ### 查看端口占用情况
