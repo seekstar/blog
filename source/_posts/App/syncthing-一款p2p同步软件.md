@@ -10,6 +10,10 @@ tags:
 
 电脑端建议直接在github下载：<https://github.com/syncthing/syncthing/releases>
 
+一些命令行选项：
+
+`--gui-address=localhost:端口`: 指定网页GUI的端口。
+
 这里主要说一些坑点。
 
 ## 不要用Deepin商店里的syncthing

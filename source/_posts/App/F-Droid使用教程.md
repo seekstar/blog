@@ -69,7 +69,7 @@ sshd
 
 ## syncthing
 
-p2p同步。
+{% post_link App/'syncthing-一款p2p同步软件' %}
 
 ## vanilla music
 
