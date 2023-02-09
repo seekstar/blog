@@ -514,3 +514,118 @@ int main() {
 	return 0;
 }
 ```
+
+## 二分搜索
+
+`std::lower_bound`返回第一个>=目标的元素迭代器，`std::upper_bound`返回第一个>目标的元素的迭代器：
+
+```cpp
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
+
+int main() {
+	int a[] = {1, 2, 3};
+	// 2
+	std::cout << *std::lower_bound(a, a + sizeof(a) / sizeof(a[0]), 2) << std::endl;
+	// 3
+	std::cout << *std::upper_bound(a, a + sizeof(a) / sizeof(a[0]), 2) << std::endl;
+
+	return 0;
+}
+```
+
+但是`std::lower_bound`要求数组元素和目标可比较，而`std::upper_bound`要求目标和数组元素可比较。例如下面的代码可以正常使用`std::lower_bound`，因为`A`可以和目标`int`比较，但是`std::upper_bound`不能正常使用，因此`int`不能和`A`比较：
+
+```cpp
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
+
+struct A {
+	int v;
+	bool operator < (int b) const {
+		return v < b;
+	}
+};
+
+int main() {
+	A a[] = {A{1}, A{2}, A{3}};
+	std::cout << std::lower_bound(a, a + sizeof(a) / sizeof(A), 2)->v << std::endl;
+	std::cout << std::upper_bound(a, a + sizeof(a) / sizeof(A), 2)->v << std::endl;
+
+	return 0;
+}
+```
+
+编译报错：
+
+```text
+/usr/include/c++/12.2.1/bits/predefined_ops.h:98:22: error: no match for ‘operator<’ (operand types are ‘const int’ and ‘A’)
+   98 |       { return __val < *__it; }
+      |
+```
+
+要修复这个问题，只需要再加一个`int`和`A`的比较函数即可：
+
+```cpp
+bool operator < (int a, const A& b) {
+	return a < b.v;
+}
+```
+
+也可以用C++20的三路比较来实现只需要定义一个方向的比较函数的二分搜索：
+
+```cpp
+#include <iostream>
+#include <compare>
+
+using namespace std;
+
+struct A {
+	int v;
+};
+
+struct Compare {
+	std::weak_ordering operator () (A *a, int b) const {
+		return a->v <=> b;
+	}
+};
+
+template <typename Addable, typename T, typename ThreeWayCompare>
+Addable LowerBoundAddable(Addable start, Addable end, T d, ThreeWayCompare comp) {
+	while (start != end) {
+		Addable mid = start + (end - start) / 2;
+		if (comp(mid, d) == std::weak_ordering::less) {
+			start = mid + 1;
+		} else {
+			end = mid;
+		}
+	}
+	return start;
+}
+template <typename Addable, typename T, typename ThreeWayCompare>
+Addable UpperBoundAddable(Addable start, Addable end, T d, ThreeWayCompare comp) {
+	while (start != end) {
+		Addable mid = start + (end - start) / 2;
+		if (comp(mid, d) == std::weak_ordering::greater) {
+			end = mid;
+		} else {
+			start = mid + 1;
+		}
+	}
+	return start;
+}
+
+int main() {
+	A a[] = {A{1}, A{2}, A{3}};
+	// 2
+	std::cout << LowerBoundAddable(a, a + sizeof(a) / sizeof(A), 2, Compare())->v << std::endl;
+	// 3
+	std::cout << UpperBoundAddable(a, a + sizeof(a) / sizeof(A), 2, Compare())->v << std::endl;
+
+	return 0;
+}
+```

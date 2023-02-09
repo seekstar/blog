@@ -4,6 +4,10 @@ date: 2020-05-04 21:50:19
 tags:
 ---
 
+## 大段随机二进制
+
+思路：先用`std::random_device`生成真随机数，用来初始化长周期随机数发生器`std::mt19937`，然后再用`std::mt19937`来不断生成随机数。代码：
+
 ```cpp
 #include <assert.h>
 #include <random>
@@ -26,13 +30,31 @@ void genrand(void *dest, size_t n) {
     }
 }
 ```
-# 坑点
-不能
+
+（坑点）不能这样：
+
 ```cpp
 typedef RandEngine::result_type res_t;
 ```
+
 因为标准库里的mt19937是用来生成32bit的伪随机数的，而`RandEngine::result_type`有可能是64bit的。
 
-# 参考
+## 随机十进制字符串
+
+```cpp
+template <typename Engine>
+std::string rand_digits(Engine e, size_t n) {
+	std::uniform_int_distribution<char> dist(0, 9);
+	std::string ret;
+	ret.reserve(n);
+	while (n--) {
+		ret.push_back(dist(e) + '0');
+	}
+    return ret;
+}
+```
+
+## 参考
+
 <http://www.cplusplus.com/reference/random/mt19937/>
 [What is uint_fast32_t and why should it be used instead of the regular int and uint32_t?](https://stackoverflow.com/questions/8500677/what-is-uint-fast32-t-and-why-should-it-be-used-instead-of-the-regular-int-and-u)

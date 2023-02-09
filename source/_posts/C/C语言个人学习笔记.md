@@ -76,3 +76,24 @@ void * memccpy(void *dest, const void * src, int c, size_t n);
 ```
 
 拷贝src 所指的内存内容前n 个字节到dest 所指的地址上，直到发现某一个字节的值与c相等，然后返回指向相等的字节的后一个字节的指针。如果没有相等的字节，就返回NULL。
+
+## 创建临时目录
+
+用`mkdtemp`，文档：<https://linux.die.net/man/3/mkdtemp>
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+	char template[] = "/tmp/test-XXXXXX";
+	char *fname = mkdtemp(template);
+	if (fname == NULL) {
+		perror("mkdtemp");
+		return 1;
+	}
+	puts(fname);
+
+	return 0;
+}
+```
