@@ -6,6 +6,14 @@ tags:
 
 本文持续更新。
 
+## Rust -> C++
+
+`Box` -> `std::unique_ptr`
+
+`Rc` -> `std::shared_ptr`
+
+`Arc` -> `std::atomic<std::shared_ptr>` (since C++20)
+
 ## Move-only object
 
 一个典型的move-only class：
@@ -146,3 +154,128 @@ int main() {
 	return 0;
 }
 ```
+
+## `enum` -> `std::variant`
+
+```cpp
+template<class... Ts> struct overloaded : Ts... { using Ts::operator()...; };
+// explicit deduction guide (not needed as of C++20)
+template<class... Ts> overloaded(Ts...) -> overloaded<Ts...>;
+
+template <typename Val, typename... Ts>
+auto match(Val val, Ts... ts) {
+	return std::visit(overloaded{ts...}, val);
+}
+```
+
+用法：
+
+```cpp
+match(value, [](Type1& type1) {
+		;
+	},
+	[](Type2& type2) {
+		;
+	},
+	...
+	[](TypeN& typeN) {
+		;
+	}
+);
+```
+
+例子：
+
+```cpp
+#include <iostream>
+#include <variant>
+#include <string>
+
+// https://en.cppreference.com/w/cpp/utility/variant/visit
+template<class... Ts> struct overloaded : Ts... { using Ts::operator()...; };
+// explicit deduction guide (not needed as of C++20)
+template<class... Ts> overloaded(Ts...) -> overloaded<Ts...>;
+
+template <typename Val, typename... Ts>
+auto match(Val val, Ts... ts) {
+	return std::visit(overloaded{ts...}, val);
+}
+
+class A {
+public:
+	A() : v_(0) {}
+	A(int v) : v_(v) {
+		std::cout << "Initializing " << V() << std::endl;
+	}
+	A(const A& a) : v_(a.v_) {
+		std::cout << "Copying " << V() << std::endl; }
+	A(A&& a) : v_(a.v_) {
+		std::cout << "Moving " << V() << std::endl;
+		a.Drop();
+	}
+	// Explicitly delete it just in case.
+	A& operator=(const A&) = delete;
+	A& operator=(A&& a) {
+		v_ = a.v_;
+		a.Drop();
+		std::cout << "Move assigning " << V() << std::endl;
+		return *this;
+	}
+	~A() {
+		if (V()) {
+			std::cout << "Deconstructing " << V() << std::endl;
+		}
+	}
+	int V() { return v_; }
+private:
+	void Drop() {
+		v_ = 0;
+	}
+	int v_;
+};
+auto func(bool choice) -> std::variant<A, int> {
+	if (choice) {
+		// Initializing 1
+		return A(1);
+		// Moving 1
+	} else {
+		return 233;
+	}
+};
+auto main() -> int {
+	A a;
+	std::cout << match(func(true),
+		[&](A& ret) -> std::string {
+			// Move assigning 1
+			a = std::move(ret);
+			return "A";
+		},
+		[&](int ret) -> std::string {
+			a = A(ret);
+			return "int";
+		}
+	) << std::endl; // A
+	// 1
+	std::cout << a.V() << std::endl;
+
+	return 0;
+	// Deconstructing 1
+}
+```
+
+输出：
+
+```text
+Initializing 1
+Moving 1
+Move assigning 1
+A
+1
+Deconstructing 1
+```
+
+参考：
+
+<https://en.cppreference.com/w/cpp/utility/variant/visit>
+
+<https://polomack.eu/std-variant/>
