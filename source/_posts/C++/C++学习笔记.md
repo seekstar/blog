@@ -242,7 +242,6 @@ int main() {
 
 ```cpp
 class Iterator {
-	void Seek(T x);
 	// Return owned object
 	T Next();
 	// If peekable
@@ -626,6 +625,153 @@ int main() {
 	// 3
 	std::cout << UpperBoundAddable(a, a + sizeof(a) / sizeof(A), 2, Compare())->v << std::endl;
 
+	return 0;
+}
+```
+
+## 覆盖不可复制对象
+
+比如对象`a`：
+
+```cpp
+#include <iostream>
+using namespace std;
+class A {
+public:
+	A(int v) : v_(v) {}
+	A(const A&) = delete;
+	A(A&& a) : v_(a.v_) {}
+	int V() const { return v_; }
+private:
+	int v_;
+};
+int main() {
+	A a(1);
+	std::cout << a.V() << std::endl;
+	a = A(2);
+	std::cout << a.V() << std::endl;
+	return 0;
+}
+```
+
+```text
+overwrite_unclonable.cpp: 在函数‘int main()’中:
+overwrite_unclonable.cpp:15:16: 错误：使用了被删除的函数‘constexpr A& A::operator=(const A&)’
+   15 |         a = A(2);
+      |                ^
+overwrite_unclonable.cpp:3:7: 附注：‘constexpr A& A::operator=(const A&)’ is implicitly declared as deleted because ‘A’ declares a move constructor or move assignment operator
+    3 | class A {
+      |       ^
+```
+
+这是因为定义了move constructor之后就不再提供默认的copy assignment operator，但是move assignment operator又没有默认给出，因此`operator=`就没有定义了。要解决这个问题，只需要显式给出move assignment operator即可：
+
+```cpp
+	A& operator = (A&& a) {
+		v_ = a.v_;
+		return *this;
+	}
+```
+
+保险起见，最好把copy assignment operator给显式delete掉：
+
+```cpp
+	A& operator=(const A&) = delete;
+```
+
+## 调用基类的operator
+
+`对象.基类::operator=(派生类对象)`
+
+例如：
+
+```cpp
+class B {
+public:
+	B& operator = (B&& b) {
+		std::cout << "B\n";
+		return *this;
+	}
+};
+class A : B {
+	A& operator=(A&& a) {
+		B::operator=(std::move(a));
+		v_ = a.v_;
+		return *this;
+	}
+}
+```
+
+完整代码：
+
+```cpp
+#include <iostream>
+using namespace std;
+class B {
+public:
+	B& operator = (B&& b) {
+		std::cout << "B\n";
+		return *this;
+	}
+};
+class A : B {
+public:
+	A(int v) : v_(v) {}
+	A(const A&) = delete;
+	A(A&& a) : v_(a.v_) {}
+	A& operator=(A&& a) {
+		B::operator=(std::move(a));
+		v_ = a.v_;
+		return *this;
+	}
+	A& operator=(const A&) = delete;
+	int V() const { return v_; }
+private:
+	int v_;
+};
+int main() {
+	A a(1);
+	std::cout << a.V() << std::endl;
+	a = A(2);
+	std::cout << a.V() << std::endl;
+	return 0;
+}
+```
+
+## `std::optional`
+
+### Optional reference
+
+可以结合`std::optional`和`std::reference_wrapper`来实现optional reference，替代裸指针。例如可以把裸指针`T *`换成`std::optional<std::reference_wrapper<T>>`。但是C++目前没有对后者进行优化，后者比`T *`要多用一个字节来保存是否有值的信息：
+
+```cpp
+#include <iostream>
+#include <optional>
+int main() {
+	// 16
+	std::cout << sizeof(std::optional<char*>) << std::endl;
+	// 16
+	std::cout << sizeof(std::optional<std::reference_wrapper<char>>) << std::endl;
+	// 2
+	std::cout << sizeof(std::optional<bool>) << std::endl;
+	return 0;
+}
+```
+
+因此在性能敏感场合目前还是建议用裸指针。
+
+### 比较
+
+```cpp
+#include <iostream>
+#include <optional>
+int main() {
+	// 1
+	std::cout << (std::optional<int>(2) == std::optional<int>(2)) << std::endl;
+	// 1
+	std::cout << (std::optional<int>(2) == 2) << std::endl;
+	// 0
+	std::cout << (std::optional<int>(2) == std::nullopt) << std::endl;
 	return 0;
 }
 ```
