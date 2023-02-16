@@ -14,6 +14,12 @@ tags:
 
 `Arc` -> `std::atomic<std::shared_ptr>` (since C++20)
 
+`Ord` -> `std::weak_order`, `std::strong_order` (since C++20)
+
+注意C++中`std::weak_ordering::equivalent`不代表比较的双方可互相替换。而`std::strong_ordering::equivalent`代表比较的双方可以互相替换。
+
+`PartialOrd` -> `std::partial_order` (since C++20)
+
 ## Move-only object
 
 一个典型的move-only class：
