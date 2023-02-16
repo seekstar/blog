@@ -59,6 +59,8 @@ int main() {
 
 尤其要注意的是，C++中moved object仍然要析构，因此在move constructor和move assignment operator中一定要把旧的object相关状态清空，从而使其析构函数成为空操作。
 
+可以用vscode clang-tidy静态检查是否使用了moved value：`bugprone-use-after-move`。教程：{% post_link vscode/'vscode-clang-tidy' %}
+
 ## 函数返回值类型后置
 
 C++11引入了函数返回值类型后置的写法(trailing return type)：<https://en.wikipedia.org/wiki/Trailing_return_type>
