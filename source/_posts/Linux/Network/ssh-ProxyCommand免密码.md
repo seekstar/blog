@@ -10,10 +10,12 @@ tags:
 Host B
         HostName 在A视角下B的IP
         Port 在A视角下B的端口
+        User B上的用户名
         IdentityFile 本地的ssh私钥路径
 
 Host C
         ProxyCommand ssh -W 在B视角下C的IP:在B视角下C的端口 B
+        User C上的用户名
         IdentityFile 本地的ssh私钥路径
 ```
 
