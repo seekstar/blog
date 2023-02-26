@@ -11,10 +11,24 @@ tags:
 ## 查看已安装的包
 
 ```shell
+# 所有包
 pacman -Q
+# 查看已安装的包的信息
+pacman -Qi 包名
+# 查看已安装的包内的所有文件
+pacman -Ql 包名
 ```
 
-这里面也会把用yay安装的包列出来。
+这里面也包括用yay安装的包。
+
+参考：[pacman常用命令](https://hustlei.github.io/2018/11/msys2-pacman.html)
+
+## 查看云端包
+
+```shell
+# 查看云端的包的信息
+pacman -Si 包名
+```
 
 ## 查看某包被哪些包依赖
 
@@ -61,6 +75,8 @@ pacman -Qdt
 - {% post_link Distro/'pacman查看可更新包' %}
 
 - {% post_link Distro/'pacman查看命令由哪个包提供' %}
+
+- {% post_link Distro/'pacman查看未安装的包内的文件' %}
 
 - {% post_link Distro/'pacman清理软件包缓存' %}
 
