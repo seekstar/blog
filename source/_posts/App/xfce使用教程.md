@@ -102,3 +102,16 @@ synclient HorizScrollDelta=$((-$old_value))
 `Settings Manager -> Mouse and Touchpad`，`Device:`选择触摸板，然后选择`Touchpad`选项卡，勾选`Tap touchpad to click`。
 
 来源：<https://forums.linuxmint.com/viewtopic.php?t=272698>
+
+## 锁屏
+
+```shell
+sudo pacman -S xfce4-screensaver
+nohup xfce4-screensaver &
+```
+
+然后左键右上角，点击`Lock Screen`就可以锁屏了。
+
+快捷键设置在`Settings Manager -> Keyboard -> Application shortcuts -> xflock4`。默认是`ctrl+alt+L`。可以改成`Super+L`。
+
+参考：<https://wiki.archlinux.org/title/Xfce#Lock_the_screen>
