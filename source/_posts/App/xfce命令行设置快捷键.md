@@ -75,6 +75,8 @@ xfconf-query --reset --channel xfce4-keyboard-shortcuts --property "/xfwm4/custo
 xfconf-query --create --channel xfce4-keyboard-shortcuts --property "/xfwm4/custom/<Primary><Shift><Alt>Left" --set tile_down_left_key
 ```
 
+但是奇怪的是，有时候重启之后有些用这种方式设置的快捷键在外接键盘上会失效，而内置键盘不会，比如`Alt+Shift+3`，即`<Shift><Alt>numbersign`。解决方法是用内置键盘使用一下这个快捷键，或者重新跑一遍`xfconf-query`命令。把同功能的快捷键`--reset`掉好像也有用？
+
 ## 参考文献
 
 <https://docs.xfce.org/xfce/xfconf/xfconf-query>
