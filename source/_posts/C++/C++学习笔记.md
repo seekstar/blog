@@ -737,3 +737,31 @@ int main() {
 	return 0;
 }
 ```
+
+## 文件管理
+
+### 新建文件
+
+```cpp
+// 如果文件已存在就将长度截断为0
+std::fstream f(path);
+// 如果文件已存在就将长度截断为0
+std::ofstream f(path);
+// 如果文件已存在则保持原样
+std::fstream f(path, std::ios::app);
+```
+
+完整版: <https://en.cppreference.com/w/cpp/io/basic_filebuf/open>
+
+注意open mode里如果有`std::ios::in`的话，就不会自动新建文件了。
+
+### 删除文件
+
+```cpp
+// 删除单个文件或者空目录。如果删除成功，则返回true，如果文件不存在，则返回false
+bool std::filesystem::remove(const std::filesystem::path& p);
+// 删除目录或文件。返回删除的目录或文件的个数。如果p一开始就不存在，则返回0。
+std::uintmax_t remove_all(const std::filesystem::path& p);
+```
+
+文档：<https://en.cppreference.com/w/cpp/filesystem/remove>
