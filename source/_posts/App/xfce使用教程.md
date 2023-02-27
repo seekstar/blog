@@ -6,6 +6,12 @@ tags:
 
 XFCE是一款轻量级桌面环境，但是上手并不容易。本文以ArchLinux上的XFCE为例介绍其基础用法。
 
+## 安装
+
+```shell
+sudo pacman -S xfce4
+```
+
 ## 设置快捷键
 
 设置窗口相关的快捷键：Settings Manager -> Window Manager -> Keyboard
@@ -115,3 +121,28 @@ nohup xfce4-screensaver &
 快捷键设置在`Settings Manager -> Keyboard -> Application shortcuts -> xflock4`。默认是`ctrl+alt+L`。可以改成`Super+L`。
 
 参考：<https://wiki.archlinux.org/title/Xfce#Lock_the_screen>
+
+## 剪切板管理工具
+
+### 快捷键
+
+弹出所有剪切板历史的命令：
+
+```shell
+xfce4-clipman-history
+```
+
+所以将快捷键映射到这个命令即可。用命令行设置快捷键：
+
+```shell
+# Super+v 弹出剪切板历史
+xfconf-query --create -c xfce4-keyboard-shortcuts -p "/commands/custom/<Super>v" -s "xfce4-clipman-history" --type string
+```
+
+### 托盘项
+
+```shell
+sudo pacman -S xfce4-clipman-plugin
+```
+
+然后在右上角的面板右键，依次点击`Panel -> Panel Preferences -> Items -> Add`，选择Clipman，点击`Add`，然后托盘项就出现在托盘的最右边了。可以在`Items`界面调整其位置。
