@@ -282,8 +282,104 @@ A
 Deconstructing 1
 ```
 
+如果类没有默认构造函数的话（比如`std::reference_wrapper`），按照Rust的写法，这个类应该通过返回值将其从visitor中传出来。但是C++要求所有visitor的返回值类型相同，因此这种方法行不通。比如这个：
+
+```cpp
+#include <iostream>
+#include <variant>
+
+// https://en.cppreference.com/w/cpp/utility/variant/visit
+template<class... Ts> struct overloaded : Ts... { using Ts::operator()...; };
+// explicit deduction guide (not needed as of C++20)
+template<class... Ts> overloaded(Ts...) -> overloaded<Ts...>;
+
+template <typename Val, typename... Ts>
+auto match(Val val, Ts... ts) {
+	return std::visit(overloaded{ts...}, val);
+}
+
+int a = 233;
+auto choose(bool err) -> std::variant<std::reference_wrapper<int>, int> {
+	if (err) {
+		return -1;
+	} else {
+		return std::ref(a);
+	}
+}
+
+int main() {
+	auto x = match(choose(false),
+		[](std::reference_wrapper<int> x) {
+			std::cout << x.get() << std::endl;
+			return x;
+		},
+		[](int err) {
+			std::cout << err << std::endl;
+			throw err;
+		}
+	);
+
+	return 0;
+}
+```
+
+编译会报错：
+
+```text
+std::visit requires the visitor to have the same return type for all alternatives of a variant
+```
+
+其实我们可以通过`std::optional`来在外面声明一个未初始化的变量，然后在visitor里面将其初始化：
+
+```cpp
+#include <iostream>
+#include <variant>
+#include <optional>
+
+// https://en.cppreference.com/w/cpp/utility/variant/visit
+template<class... Ts> struct overloaded : Ts... { using Ts::operator()...; };
+// explicit deduction guide (not needed as of C++20)
+template<class... Ts> overloaded(Ts...) -> overloaded<Ts...>;
+
+template <typename Val, typename... Ts>
+auto match(Val val, Ts... ts) {
+	return std::visit(overloaded{ts...}, val);
+}
+
+int a = 233;
+auto choose(bool err) -> std::variant<std::reference_wrapper<int>, int> {
+	if (err) {
+		return -1;
+	} else {
+		return std::ref(a);
+	}
+}
+
+int main() {
+	std::optional<std::reference_wrapper<int>> x;
+	match(choose(false),
+		[&x](std::reference_wrapper<int> ret) {
+			std::cout << ret.get() << std::endl;
+			x = ret;
+		},
+		[](int err) {
+			std::cout << err << std::endl;
+		}
+	);
+	if (x.has_value()) {
+		std::cout << x.value() << std::endl;
+	}
+
+	return 0;
+}
+```
+
+`std::unique_ptr`也是可以的，缺点是需要多一层indirection。
+
 参考：
 
 <https://en.cppreference.com/w/cpp/utility/variant/visit>
 
 <https://polomack.eu/std-variant/>
+
+<https://www.cppstories.com/2019/10/lazyinit/>
