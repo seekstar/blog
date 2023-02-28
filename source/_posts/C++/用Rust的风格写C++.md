@@ -75,6 +75,12 @@ C++11引入了函数返回值类型后置的写法(trailing return type)：<http
 auto func() -> int {
 	return 2333;
 }
+
+auto func(int i, int j, int k)
+	-> AVeryVeryLoooooooooooooooooooooooooooooooooooooooooooongType
+{
+	return 2333;
+}
 ```
 
 ## `Option` -> `std::optional`
