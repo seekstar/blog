@@ -6,7 +6,7 @@ tags:
 
 Settings Manager -> Appearance -> Settings -> Window Scaling -> 调成2x
 
-然后logout，再login，系统自带的组件就变大了。
+系统自带的组件就变大了。左上角的下拉框可能有问题，最好注销再重新登录一下。
 
 注意，与其他桌面不同，Settings Manager -> Display中的Scale调整的是桌面本身的大小，其越大，桌面就越大，而桌面中的各个组件看起来就越小。相关：
 
@@ -24,7 +24,7 @@ Settings Manager -> Appearance -> Settings -> Window Scaling -> 调成2x
 export QT_SCALE_FACTOR=2
 ```
 
-然后重启即可生效。
+然后注销再重新登录即可生效。
 
 ## 参考文献
 
