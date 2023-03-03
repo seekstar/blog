@@ -1,16 +1,17 @@
 ---
-title: Nix包管理器使用教程
+title: 使用国内源安装和使用Nix包管理器
 date: 2023-02-04 20:18:49
 tags:
 ---
 
-本文介绍Nix包管理器在非NixOS操作系统上的用法。
+本文介绍如何使用国内源（以清华源为例）在非NixOS操作系统上安装和使用Nix包管理器。
 
 ## 安装
 
 ```shell
 # https://mirrors.tuna.tsinghua.edu.cn/help/nix/
 sh <(curl https://mirrors.tuna.tsinghua.edu.cn/nix/latest/install) --daemon --no-channel-add
+source /etc/profile
 ```
 
 `--no-channel-add`: 不添加`nixpkgs-unstable`作为channel。
@@ -26,9 +27,9 @@ I am executing:
 to update the default channel in the default profile
 ```
 
-## 镜像源
+然后新开一个终端，这样才可以用
 
-这里以清华源为例：
+## 添加channel
 
 ```shell
 # https://mirrors.tuna.tsinghua.edu.cn/help/nix/
@@ -162,6 +163,25 @@ Uninstalling nix:
   sudo rm -rf /etc/nix /nix /root/.nix-profile /root/.nix-defexpr /root/.nix-channels $HOME/.nix-profile $HOME/.nix-defexpr $HOME/.nix-channels
 ```
 
+## 允许安装闭源软件
+
+根据输出提示，在`~/.config/nixpkgs/config.nix`（如果没有就创建）里设置：
+
+```text
+{ allowUnfree = true; }
+```
+
 ## 已知的问题
 
 如果不自己创建`.desktop`文件，Deepin启动器里好像没法找到安装的GUI软件：<https://www.bilibili.com/video/av335652600/>。不知道其他系统是不是这样。
+
+### `error: opening lock file '/nix/var/nix/profiles/per-user/searchstar/profile.lock': No such file or directory`
+
+在ArchLinux上出现。原因未知。可以手动创建该目录解决：
+
+```shell
+sudo mkdir -m 0755 -p /nix/var/nix/{profiles,gcroots}/per-user/$USER
+sudo chown $USER:$USER /nix/var/nix/{profiles,gcroots}/per-user/$USER
+```
+
+参考：<https://discourse.nixos.org/t/per-user-profiles-not-created-when-home-mounted-on-nfs/5864/4>
