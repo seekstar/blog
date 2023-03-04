@@ -417,7 +417,9 @@ int main() {
 
 ## Trait
 
-Rust可以为已存在的类型实现trait，从而为其引进新的成员函数，但是C++不能为已存在的类型定义新的成员函数。但是C++可以使用template struct实现Rust的trait的功能：
+Rust可以为已存在的类型实现trait，从而为其引进新的成员函数，但是C++不能为已存在的类型定义新的成员函数。不过C++可以通过以下方式实现Rust的trait的功能：
+
+### template struct
 
 ```cpp
 #include <iostream>
@@ -510,11 +512,16 @@ fn main() {
 }
 ```
 
-能不能用函数重载的方式来实现呢？答案是不能，因为前面的函数似乎看不到后面新声明的函数：
+### template function
+
+template function比template struct写起来更方便。例子：
 
 ```cpp
 #include <iostream>
 #include <vector>
+
+template <typename T>
+void test(T x);
 
 template <typename T>
 void test(const std::vector<T>& v) {
@@ -522,6 +529,7 @@ void test(const std::vector<T>& v) {
 		test(x);
 	}
 }
+template <>
 void test(int x) {
 	std::cout << x << std::endl;
 }
@@ -531,52 +539,4 @@ int main() {
 }
 ```
 
-编译报错：
-
-```text
-trait.cpp: In instantiation of ‘void Print::print(const std::vector<T>&) [with T = int]’:
-trait.cpp:17:14:   required from here
-trait.cpp:8:22: error: no matching function for call to ‘print(const int&)’
-    8 |                 print(x);
-      |                 ~~~~~^~~
-trait.cpp:6:6: note: candidate: ‘template<class T> void Print::print(const std::vector<T>&)’
-    6 | void print(const std::vector<T>& v) {
-      |      ^~~~~
-trait.cpp:6:6: note:   template argument deduction/substitution failed:
-trait.cpp:8:22: note:   mismatched types ‘const std::vector<T>’ and ‘const int’
-    8 |                 print(x);
-      |                 ~~~~~^~~
-```
-
-但是用template struct的方式是可以实现的：
-
-```cpp
-#include <iostream>
-#include <vector>
-
-template <typename T>
-struct Print {
-	static void print(T x);
-};
-
-template <typename T>
-struct Print<const std::vector<T>&> {
-	static void print(const std::vector<T>& v) {
-		for (const T& x : v) {
-			Print<const T&>::print(x);
-		}
-	}
-};
-
-template <>
-struct Print<const int&> {
-	static void print(const int& x) {
-		std::cout << x << std::endl;
-	}
-};
-
-int main() {
-	Print<const std::vector<int>&>::print(std::vector<int>{1, 2, 3});
-	return 0;
-}
-```
+但是template function无法实现没有参数的接口，比如上面的`print_type`。
