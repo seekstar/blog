@@ -171,6 +171,8 @@ int main() {
 
 ## `enum` -> `std::variant`
 
+### match
+
 ```cpp
 template<class... Ts> struct overloaded : Ts... { using Ts::operator()...; };
 // explicit deduction guide (not needed as of C++20)
@@ -389,3 +391,192 @@ int main() {
 <https://polomack.eu/std-variant/>
 
 <https://www.cppstories.com/2019/10/lazyinit/>
+
+### `std::variant::index`
+
+可以用`index()`获取其类型的下标，用`std::get`获取对应的内容：
+
+```cpp
+#include <iostream>
+#include <variant>
+int main() {
+	std::variant<int, float> a(2);
+	// 0 (int)
+	std::cout << a.index() << std::endl;
+	// 2
+	std::cout << std::get<0>(a) << std::endl;
+
+	std::variant<int, float> b((float)2.33);
+	// 1 (float)
+	std::cout << b.index() << std::endl;
+	// 2.33
+	std::cout << std::get<1>(b) << std::endl;
+	return 0;
+}
+```
+
+## Trait
+
+Rust可以为已存在的类型实现trait，从而为其引进新的成员函数，但是C++不能为已存在的类型定义新的成员函数。但是C++可以使用template struct实现Rust的trait的功能：
+
+```cpp
+#include <iostream>
+struct A {
+	A(int x) : x_(x) {}
+	A(const A&) {
+		std::cout << "Copying" << std::endl;
+	}
+	int x_;
+};
+template <typename T>
+struct Print {
+	static void print_type();
+	static void print(T x) {
+		std::cout << x << std::endl;
+	}
+};
+template <>
+struct Print<int> {
+	static void print_type() {
+		std::cout << "int" << std::endl;
+	}
+	static void print(int x) {
+		std::cout << x << std::endl;
+	}
+};
+template <>
+struct Print<const A&> {
+	static void print_type() {
+		std::cout << "const A&" << std::endl;
+	}
+	static void print(const A& a) {
+		std::cout << a.x_ << std::endl;
+	}
+};
+int main() {
+	// int
+	Print<int>::print_type();
+	// 233
+	Print<int>::print(233);
+	// const A&
+	Print<const A&>::print_type();
+	// 2333. Without copying
+	Print<const A&>::print(A(2333));
+	return 0;
+}
+```
+
+它相当于：
+
+```rs
+struct A {
+    x: i32,
+}
+impl A {
+    fn new(x: i32) -> A {
+        A { x }
+    }
+}
+trait Print {
+    fn print_type();
+    fn print(self);
+}
+impl Print for i32 {
+    fn print_type() {
+        println!("i32");
+    }
+    fn print(self) {
+        println!("{}", self);
+    }
+}
+impl Print for &A {
+    fn print_type() {
+        println!("&A");
+    }
+    fn print(self) {
+        println!("{}", self.x);
+    }
+}
+fn main() {
+	// i32
+    i32::print_type();
+    let x: i32 = 233;
+	// 233
+    x.print();
+    // &A
+    <&A>::print_type();
+    // 2333
+    A::new(2333).print();
+}
+```
+
+能不能用函数重载的方式来实现呢？答案是不能，因为前面的函数似乎看不到后面新声明的函数：
+
+```cpp
+#include <iostream>
+#include <vector>
+
+template <typename T>
+void test(const std::vector<T>& v) {
+	for (const T& x : v) {
+		test(x);
+	}
+}
+void test(int x) {
+	std::cout << x << std::endl;
+}
+int main() {
+	test(std::vector<int>{1, 2, 3});
+	return 0;
+}
+```
+
+编译报错：
+
+```text
+trait.cpp: In instantiation of ‘void Print::print(const std::vector<T>&) [with T = int]’:
+trait.cpp:17:14:   required from here
+trait.cpp:8:22: error: no matching function for call to ‘print(const int&)’
+    8 |                 print(x);
+      |                 ~~~~~^~~
+trait.cpp:6:6: note: candidate: ‘template<class T> void Print::print(const std::vector<T>&)’
+    6 | void print(const std::vector<T>& v) {
+      |      ^~~~~
+trait.cpp:6:6: note:   template argument deduction/substitution failed:
+trait.cpp:8:22: note:   mismatched types ‘const std::vector<T>’ and ‘const int’
+    8 |                 print(x);
+      |                 ~~~~~^~~
+```
+
+但是用template struct的方式是可以实现的：
+
+```cpp
+#include <iostream>
+#include <vector>
+
+template <typename T>
+struct Print {
+	static void print(T x);
+};
+
+template <typename T>
+struct Print<const std::vector<T>&> {
+	static void print(const std::vector<T>& v) {
+		for (const T& x : v) {
+			Print<const T&>::print(x);
+		}
+	}
+};
+
+template <>
+struct Print<const int&> {
+	static void print(const int& x) {
+		std::cout << x << std::endl;
+	}
+};
+
+int main() {
+	Print<const std::vector<int>&>::print(std::vector<int>{1, 2, 3});
+	return 0;
+}
+```
