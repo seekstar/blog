@@ -456,7 +456,7 @@ int main() {
 
 Rust可以为已存在的类型实现trait，从而为其引进新的成员函数，但是C++不能为已存在的类型定义新的成员函数。不过C++可以通过以下方式实现Rust的trait的功能：
 
-### template struct
+### （不推荐）template struct
 
 ```cpp
 #include <iostream>
@@ -549,14 +549,115 @@ fn main() {
 }
 ```
 
-### `tag_invoke`
+但是这种方法要求所有的template class的specialization都在同一个namespace里。这可能会导致链接冲突，比方说在两个不同的obj文件分别specialize了`Print<const A&>`。
 
-这里只给个例子，讲解看这里：[c++ execution 与 coroutine （一) : CPO与tag_invoke](https://zhuanlan.zhihu.com/p/431032074)
+### `CPO + tag_invoke`
+
+CPO: Customization Point Object.
+
+详细的讲解：[c++ execution 与 coroutine （一) : CPO与tag_invoke](https://zhuanlan.zhihu.com/p/431032074)
+
+这里简单归纳一下。
+
+#### 背景
+
+ADL (Argument Dependent Lookup)是指，如果有限定地调用某个函数时，比如`lib::print`，那么只会在限定的namespace里查询该函数。如果在没有限定(unqualified)地调用某个函数时，比方说`print(x, y)`，那么编译器不仅会在调用点的namespace里查询有没有叫做`print`的函数，也会在x和y的namespace里查询有没有叫做`print`的函数。如果x和y是实例化的模板的话，还会从模板参数所在的namespace里查询有没有叫做`print`的函数。
+
+例子：
 
 ```cpp
 #include <iostream>
 #include <vector>
+namespace lib {
+template <typename T>
+void print(T x) {
+	std::cout << x;
+}
+template <typename T>
+void print(const std::vector<T>& v) {
+	for (const auto& x : v) {
+		print(x);
+	}
+}
+}
+struct A {int x;};
+std::ostream& operator<<(std::ostream& out, const A& a) {
+	out << a.x;
+	return out;
+}
+void print(const A& a) {
+	std::cout << "{x:" << a.x << "}";
+}
+int main() {
+	std::vector<A> v({A{2}, A{3}, A{4}});
+	lib::print(v);
+	return 0;
+}
+```
 
+输出：`{x:2}{x:3}{x:4}`。`lib::print`只会去`lib`中找`print`，显然找到的是`void print(const std::vector<T>& v)`。然后在里面调用`print(x)`时，因为`x`的类型是`const A&`，所以会去`A`所在的namespace里找`print`，显然找到的是`void print(const A& a)`，然后就顺利打印出来了。
+
+但是如果我们在`main`函数里这样：
+
+```cpp
+lib::print(A{2});
+```
+
+那么C++只会去`lib`里找`print`，找到的就是`void print(T x)`了。因此打印出来的就是`2`，而不是`{x:2}`。但是显然这时调用`void print(const A& a)`是更合理的选择。
+
+#### CPO (Customization Point Object)
+
+CPO的目标是将原本的有限定的函数调用变成无限定的函数调用，而库只提供调用的接口。比如用CPO来实现`lib::print`：
+
+```cpp
+#include <iostream>
+#include <vector>
+namespace lib {
+namespace detail {
+struct print_t {
+	template <typename T>
+	void operator()(T x) {
+		print(x);
+	}
+};
+template <typename T>
+void print(T x) {
+	std::cout << x;
+}
+template <typename T>
+void print(const std::vector<T>& v) {
+	for (const auto& x : v) {
+		print(x);
+	}
+}
+} // namespace detail
+inline detail::print_t print{};
+} // namespace lib
+struct A {int x;};
+std::ostream& operator<<(std::ostream& out, const A& a) {
+	out << a.x;
+	return out;
+}
+void print(const A& a) {
+	std::cout << "{x:" << a.x << "}";
+}
+int main() {
+	lib::print(A{2});
+	return 0;
+}
+```
+
+这时`lib::print`变成了一个对象(object)，`lib::print(A{2})`变成了调用`lib::detail::print_t::()`，在里面调用了`print(x)`，它是无限定的，所以既会在调用点的namespace（即`lib::detail`）里找`print`，也会在其参数的类型（即`const A&`）的namespace里找，所以顺利找到了`void print(const A& a)`，并且打印出来了`{x:2}`。
+
+可以看到，对于纯CPO的方式，如果某个类想要实现`lib`提供的`print`的接口，那么必须在其namespace中预留`print`的名字。这就会带来一个问题，假如另一个库`lib2`也提供了`print`接口，而某个类想要同时实现`lib::print`和`lib2::print`的接口，就会导致命名冲突。
+
+#### `tag_invoke + CPO`
+
+`tag_invoke`可以解决纯CPO的命名冲突，思路是让所有接口都通过`tag_invoke`实现，而调用时通过tag来指定具体要调用哪个实现。上面的例子用`tag_invoke + CPO`重写：
+
+```cpp
+#include <iostream>
+#include <vector>
 namespace lib {
 namespace detail {
 struct print_t {
@@ -567,43 +668,43 @@ struct print_t {
 };
 template <typename T>
 void tag_invoke(print_t, T x) {
-	std::cout << x << std::endl;
+	std::cout << x;
 }
 template <typename T>
 void tag_invoke(print_t, const std::vector<T>& v) {
-	for (const T& x : v) {
+	for (const auto& x : v) {
 		tag_invoke(print_t{}, x);
 	}
 }
 } // namespace detail
-inline detail::print_t print{};
 template <auto& Tag>
 using tag_t = std::decay_t<decltype(Tag)>;
+inline detail::print_t print{};
 } // namespace lib
-
-class A {
-public:
-	A(int x) : x_(x) {}
-private:
-	int x_;
-	friend void tag_invoke(lib::tag_t<lib::print>, const A& a);
-};
+struct A {int x;};
+std::ostream& operator<<(std::ostream& out, const A& a) {
+	out << a.x;
+	return out;
+}
 void tag_invoke(lib::tag_t<lib::print>, const A& a) {
-	std::cout << a.x_ << std::endl;
+	std::cout << "{x:" << a.x << "}";
 }
-
-void tag_invoke(lib::tag_t<lib::print>, int x) {
-	std::cout << x << std::endl;
-}
-
 int main() {
-	std::vector<A> v1({A(1), A(2), A(3)});
-	lib::print(v1);
-	std::vector<int> v2({1, 2, 3});
-	lib::print(v2);
-
+	std::vector<A> v({A{2}, A{3}, A{4}});
+	lib::print(v);
+	std::cout << std::endl;
+	lib::print(A{2});
 	return 0;
 }
+```
+
+可以看到，这里的`lib::detail::print_t`成了tag，用于区分`tag_invoke`的各个实现。这个tag是在`detail`里的，所以另外提供了`std::tag_t`用来从接口（也就是`lib::print`）取得tag的类型。
+
+输出：
+
+```text
+{x:2}{x:3}{x:4}
+{x:2}
 ```
 
 相关：<https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2021/p2279r0.html>
