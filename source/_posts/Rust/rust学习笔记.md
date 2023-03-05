@@ -85,3 +85,22 @@ let c_str: &CStr = unsafe { CStr::from_ptr(c_buf) };
 let str_slice: &str = c_str.to_str().unwrap();
 let str_buf: String = str_slice.to_owned();  // if necessary
 ```
+
+## trait
+
+Rust的trait相当于定义了这个类型有哪些接口。定义了trait之后，可以对已知类型实现这个trait:
+
+```rs
+trait A {
+    fn a() -> i32;
+}
+impl A for f32 {
+    fn a() -> i32 {
+        return 2333;
+    }
+}
+fn main() {
+	// 2333
+    println!("{}", f32::a());
+}
+```
