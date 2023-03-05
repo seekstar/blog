@@ -512,31 +512,61 @@ fn main() {
 }
 ```
 
-### template function
+### `tag_invoke`
 
-template function比template struct写起来更方便。例子：
+这里只给个例子，讲解看这里：[c++ execution 与 coroutine （一) : CPO与tag_invoke](https://zhuanlan.zhihu.com/p/431032074)
 
 ```cpp
 #include <iostream>
 #include <vector>
 
-template <typename T>
-void test(T x);
-
-template <typename T>
-void test(const std::vector<T>& v) {
-	for (const T& x : v) {
-		test(x);
+namespace lib {
+namespace detail {
+struct print_t {
+	template <typename T>
+	void operator()(T x) {
+		tag_invoke(print_t{}, x);
 	}
-}
-template <>
-void test(int x) {
+};
+template <typename T>
+void tag_invoke(print_t, T x) {
 	std::cout << x << std::endl;
 }
+template <typename T>
+void tag_invoke(print_t, const std::vector<T>& v) {
+	for (const T& x : v) {
+		tag_invoke(print_t{}, x);
+	}
+}
+} // namespace detail
+inline detail::print_t print{};
+template <auto& Tag>
+using tag_t = std::decay_t<decltype(Tag)>;
+} // namespace lib
+
+class A {
+public:
+	A(int x) : x_(x) {}
+private:
+	int x_;
+	friend void tag_invoke(lib::tag_t<lib::print>, const A& a);
+};
+void tag_invoke(lib::tag_t<lib::print>, const A& a) {
+	std::cout << a.x_ << std::endl;
+}
+
+void tag_invoke(lib::tag_t<lib::print>, int x) {
+	std::cout << x << std::endl;
+}
+
 int main() {
-	test(std::vector<int>{1, 2, 3});
+	std::vector<A> v1({A(1), A(2), A(3)});
+	lib::print(v1);
+	std::vector<int> v2({1, 2, 3});
+	lib::print(v2);
+
 	return 0;
 }
 ```
 
-但是template function无法实现没有参数的接口，比如上面的`print_type`。
+相关：<https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2021/p2279r0.html>
