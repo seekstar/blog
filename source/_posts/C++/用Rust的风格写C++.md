@@ -72,13 +72,18 @@ int main() {
 C++11引入了函数返回值类型后置的写法(trailing return type)：<https://en.wikipedia.org/wiki/Trailing_return_type>
 
 ```cpp
-auto func() -> int {
+auto func(int i, int j, int k) -> int {
 	return 2333;
 }
 
-auto func(int i, int j, int k)
-	-> AVeryVeryLoooooooooooooooooooooooooooooooooooooooooooongType
-{
+auto func(int i, int j, int k
+) -> AVeryVeryLoooooooooooooooooooooooooooooooooooooooooooongType {
+	return 2333;
+}
+
+auto func(int very_very_loooooooooooooooooooooooooooooooog_arg_1,
+	int very_very_loooooooooooooooooooooooooooooooog_arg_2
+) -> AVeryVeryLoooooooooooooooooooooooooooooooooooooooooooongType {
 	return 2333;
 }
 ```
