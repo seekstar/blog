@@ -67,6 +67,38 @@ int main() {
 
 可以用vscode clang-tidy静态检查是否使用了moved value：`bugprone-use-after-move`。教程：{% post_link vscode/'vscode-clang-tidy' %}
 
+## 不使用构造函数
+
+使用`New`等static member function来构造，而将构造函数隐藏起来：
+
+```cpp
+#include <iostream>
+class A {
+public:
+	A(const A&) = delete;
+	A& operator=(const A&) = delete;
+	A(A&& a) { std::cout << "Moving\n"; }
+	A& operator=(A&& a) { std::cout << "Move assigning\n"; return *this; }
+	~A() { std::cout << "Deconstructing\n"; }
+	static A New() { return A(); }
+private:
+	A() { std::cout << "Constructing\n"; }
+};
+int main() {
+	A a = A::New();
+	return 0;
+}
+```
+
+输出：
+
+```text
+Constructing
+Deconstructing
+```
+
+可以看到只构造和析构了一次，实际上没有move assignment，所以跟使用构造函数的方法相比没有任何性能损失。
+
 ## 函数返回值类型后置
 
 C++11引入了函数返回值类型后置的写法(trailing return type)：<https://en.wikipedia.org/wiki/Trailing_return_type>
