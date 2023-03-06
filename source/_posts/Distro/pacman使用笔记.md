@@ -4,31 +4,44 @@ date: 2022-07-30 11:58:48
 tags:
 ---
 
-`--needed`: 当未安装或者版本较旧时才安装。
+## 命令行选项
 
-参考：https://superuser.com/questions/568967/prevent-pacman-from-reinstalling-packages-that-were-already-installed
+### `-S, --sync`：源里的包
 
-## 查看已安装的包
+```shell
+# 安装或升级某包
+pacman -S 包名
+# 当未安装或者版本较旧时才安装
+# https://superuser.com/questions/568967/prevent-pacman-from-reinstalling-packages-that-were-already-installed
+pacman -S --needed 包名
+# 源中某包的详细信息
+pacman -Si 包名
+```
+
+### `-R`: 移除某包
+
+`-s`: recursive，同时移除该包的依赖。例如A依赖B依赖C，那么`pacman -Rs A`会同时移除A B C。
+
+`-c`: cascade，同时移除依赖该包的其他包。例如A依赖B依赖C，那么`pacman -Rc C`会同时移除A B C。
+
+参考：[pacman: cascade vs. recursive](https://bbs.archlinux.org/viewtopic.php?id=21470)
+
+### `-Q`: 查看已安装的包
 
 ```shell
 # 所有包
 pacman -Q
-# 查看已安装的包的信息
+# 某包
+pacman -Q 包名
+# 详细信息
 pacman -Qi 包名
-# 查看已安装的包内的所有文件
+# 包内的所有文件
 pacman -Ql 包名
 ```
 
 这里面也包括用yay安装的包。
 
 参考：[pacman常用命令](https://hustlei.github.io/2018/11/msys2-pacman.html)
-
-## 查看云端包
-
-```shell
-# 查看云端的包的信息
-pacman -Si 包名
-```
 
 ## 查看某包被哪些包依赖
 
