@@ -469,6 +469,17 @@ cat $tmp
 rm $tmp
 ```
 
+### 转义
+
+```shell
+# hello\\world
+printf "%q" "hello\world"
+# var='hello\\world'
+printf -v var "%q\n" "hello\world"
+```
+
+来源：<https://stackoverflow.com/a/2856010/13688160>
+
 ### 使用ImageMagick将多个jpg转换为A4大小的PDF
 
 转自：<https://blog.csdn.net/lpwmm/article/details/83503736>
