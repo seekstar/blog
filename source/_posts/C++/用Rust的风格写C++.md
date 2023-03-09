@@ -108,15 +108,21 @@ auto func(int i, int j, int k) -> int {
 	return 2333;
 }
 
-auto func(int i, int j, int k
+auto func(
+	int i, int j, int k
 ) -> AVeryVeryLoooooooooooooooooooooooooooooooooooooooooooongType {
 	return 2333;
 }
 
-auto func(int very_very_loooooooooooooooooooooooooooooooog_arg_1,
-	int very_very_loooooooooooooooooooooooooooooooog_arg_2
-) -> AVeryVeryLoooooooooooooooooooooooooooooooooooooooooooongType {
-	return 2333;
+auto func(
+	int i, int j, int k
+) -> std::tuple<
+	Arg1,
+	Arg2,
+	...
+	ArgN
+> {
+	return xxx;
 }
 ```
 
