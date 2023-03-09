@@ -714,3 +714,107 @@ int main() {
 ```
 
 相关：<https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2021/p2279r0.html>
+
+#### `tag_invoke + type tag`
+
+如何利用`tag_invoke`实现反序列化（deserialize）呢？理想的tag应该是这样的：
+
+```cpp
+struct deserialize_t {
+	template <typename T>
+	T operator()(std::string_view x) {
+		return tag_invoke(deserialize_t{}, x);
+	}
+};
+```
+
+但是C++目前无法根据返回值来推断`T`的类型，例如下面这段代码无法通过编译：
+
+```cpp
+#include <iostream>
+using namespace std;
+struct A {
+	A() { std::cout << 233; }
+};
+struct B {
+	template <typename T>
+	T operator()() {
+		return T();
+	}
+};
+int main() {
+	B()();
+	return 0;
+}
+```
+
+```text
+template_operator.cpp: In function ‘int main()’:
+template_operator.cpp:16:12: error: no match for call to ‘(B) ()’
+   16 |         B()();
+      |         ~~~^~
+template_operator.cpp:10:11: note: candidate: ‘template<class T> T B::operator()()’
+   10 |         T operator()() {
+      |           ^~~~~~~~
+template_operator.cpp:10:11: note:   template argument deduction/substitution failed:
+template_operator.cpp:16:12: note:   couldn’t deduce template parameter ‘T’
+   16 |         B()();
+      |         ~~~^~
+```
+
+要指定要调用的`operator()`的类型，只能这样：
+
+```cpp
+B().operator()<A>();
+```
+
+这十分麻烦。因此这里采用type tag的方式，即定义一个空的模板结构体`template <typename T> struct type_tag {};`，它的功能仅仅是作为类型`T`的tag，用来帮助编译器找到对应的模板函数。结合`tag_invoke`和type tag实现的反序列化如下:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+namespace lib {
+template <typename T>
+struct type_tag_t {};
+template <typename T>
+inline constexpr type_tag_t<T> type_tag{};
+
+namespace detail {
+class deserialize_t;
+template <typename T>
+T tag_invoke(deserialize_t, type_tag_t<T>, std::string_view x);
+struct deserialize_t {
+	template <typename T>
+	T operator()(type_tag_t<T>, std::string_view x) {
+		return tag_invoke(deserialize_t{}, type_tag<T>, x);
+	}
+};
+int tag_invoke(deserialize_t, type_tag_t<int>, std::string_view x) {
+	return *(int *)x.data();
+}
+} // namespace detail
+template <auto& Tag>
+using tag_t = std::decay_t<decltype(Tag)>;
+inline detail::deserialize_t deserialize{};
+} // namespace lib
+
+struct A {int x;};
+A tag_invoke(lib::tag_t<lib::deserialize>, lib::type_tag_t<A>, std::string_view x) {
+	return *(A *)x.data();
+}
+
+int main() {
+	int x = 2333;
+	std::string_view d((const char *)&x, sizeof(x));
+	std::cout << lib::deserialize(lib::type_tag<int>, d) << std::endl;
+
+	A a{233};
+	d = std::string_view((const char *)&a, sizeof(a));
+	std::cout << lib::deserialize(lib::type_tag<A>, d).x << std::endl;
+
+	return 0;
+}
+```
+
+注意，由于ADL的限制，对基础数据类型（如float）和第三方类型（即不属于调用点的namespace），无法用这种方法定义其反序列化操作。Rust也采用了这种方式，即trait的implementation要么在trait声明的地方，要么在类型定义的地方。
