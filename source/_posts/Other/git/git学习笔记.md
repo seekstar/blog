@@ -63,3 +63,22 @@ git rebase --onto <newbase> <oldbase>
 相当于先保存当前的HEAD为`oldhead`，然后`reset --hard`到`newbase`，然后将从`oldbase`开始（不含）到`oldhead`（含）的所有commit给逐个cherry-pick过来。
 
 来源：<https://www.atlassian.com/git/tutorials/rewriting-history/git-rebase>
+
+## submodule
+
+```shell
+# 添加
+git submodule add <URL> <path>
+# 更新
+git submodule update --remote
+# 令其reset到repo中指定的commit
+# https://stackoverflow.com/questions/7882603/how-to-revert-a-git-submodule-pointer-to-the-commit-stored-in-the-containing-rep
+git submodule update --init
+```
+
+## push到不同名的远程分支
+
+```shell
+# https://stackoverflow.com/questions/19154302/git-push-to-specific-branch
+git push origin localBranchName:remoteBranchName
+```
