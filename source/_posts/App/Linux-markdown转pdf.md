@@ -54,7 +54,18 @@ block quote默认使用了Latex的`quote`环境，效果只是往右缩进了一
 
 <https://tex.stackexchange.com/questions/154528/how-to-change-the-background-color-and-border-of-a-pandoc-generated-blockquote>
 
-## markdown-pdf
+## md-to-pdf
+
+<https://github.com/simonhaenisch/md-to-pdf>
+
+```shell
+npm install -g md-to-pdf
+md-to-pdf path/to/file.md
+```
+
+## （现在无效）markdown-pdf
+
+<https://github.com/alanshaw/markdown-pdf>
 
 ```shell
 npm install -g markdown-pdf
@@ -64,6 +75,8 @@ markdown-pdf <markdown-file-path>
 似乎不支持Latex公式？
 
 原文：<https://stackoverflow.com/a/37977314/13688160>
+
+Update: 作者好像不维护了，而且运行会报错。
 
 ## vscode插件：Markdown PDF
 
