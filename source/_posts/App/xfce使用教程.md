@@ -20,7 +20,9 @@ sudo pacman -S xfce4
 
 也可以用命令行来设置快捷键：{% post_link App/'xfce命令行设置快捷键' %}
 
-## 音量调节的托盘项
+## 托盘项
+
+### 音量调节
 
 ```shell
 sudo pacman -S xfce4-pulseaudio-plugin
@@ -28,7 +30,15 @@ sudo pacman -S xfce4-pulseaudio-plugin
 
 然后在右上角的托盘右键，依次点击`Panel -> Panel Preferences -> Items -> Add`，选择`PulseAudio Plugin`，点击`Add`，然后音量调节的托盘项就出现在托盘的最右边了。可以在`Items`界面调整其位置。
 
-## 网络管理的托盘项
+如果用的是pipewire，需要安装pulseaudio的兼容层：
+
+```shell
+sudo pacman -S --needed pipewire-pulse
+```
+
+参考：<https://wiki.archlinux.org/title/PipeWire>
+
+### 网络管理
 
 ```shell
 sudo pacman -S --needed network-manager-applet
@@ -37,6 +47,14 @@ sudo pacman -S --needed network-manager-applet
 然后启动`nm-applet`：`nohup nm-applet &`，托盘中就会出现网络管理的托盘项了。logout再login之后它会被自动启动。
 
 在Settings Manager里没有网络管理的入口。如果需要管理网络连接，需要右键网络管理的托盘项，选择`Edit Connections`，里面就可以设置自动连接之类的了。
+
+### 蓝牙管理
+
+```shell
+sudo pacman -S --needed blueman
+```
+
+然后`nohup blueman-applet &`，托盘中就出现蓝牙管理的托盘项了。重启之后会被自动启动。
 
 ## 代理
 
