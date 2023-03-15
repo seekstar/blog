@@ -82,3 +82,14 @@ git submodule update --init
 # https://stackoverflow.com/questions/19154302/git-push-to-specific-branch
 git push origin localBranchName:remoteBranchName
 ```
+
+## Squash commits
+
+```shell
+# -i: --interactive
+git rebase <base-commit-hash> -i
+```
+
+然后第一个commit标记为`pick`，其他的都标记为`squash`，即`s`。然后退出编辑器。
+
+然后会让你编辑新的commit的message。可以全删了然后编辑新的message，然后退出编辑器，从原来的HEAD到base commit（不含）的所有commit就都被squash成了一个commit了。
