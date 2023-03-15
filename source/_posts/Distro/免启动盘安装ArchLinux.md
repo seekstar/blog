@@ -123,28 +123,38 @@ sudo bash -c 'echo "%wheel ALL=(ALL) ALL" >> /mnt/etc/sudoers'
 sudo chmod 440 /mnt/etc/sudoers
 ```
 
+## chroot
+
+使用`arch-chroot`来chroot，因为`arch-chroot`会自动挂载一些其他目录。
+
+```shell
+sudo arch-chroot /mnt
+```
+
+接下来的操作都在chroot里执行。
+
 ## 安装桌面环境
 
 以KDE为例：
 
 ```shell
-sudo pacstrap /mnt plasma-meta konsole dolphin ark
+pacman -S --needed plasma-meta konsole dolphin ark
 # Optional dependencies of ark
-sudo pacstrap /mnt p7zip unrar unarchiver lzop lrzip
-sudo chroot /mnt /bin/bash -c "systemctl enable sddm"
+pacman -S --needed p7zip unrar unarchiver lzop lrzip
+systemctl enable sddm
 # Dependencies of Discover
-sudo pacstrap /mnt packagekit-qt5 packagekit appstream-qt appstream
+pacman -S --needed packagekit-qt5 packagekit appstream-qt appstream
 ```
 
 ## 安装一些额外包
 
 ```shell
 # Sound
-sudo pacstrap /mnt sof-firmware alsa-firmware alsa-ucm-conf
-sudo pacstrap /mnt ntfs-3g
-sudo pacstrap /mnt adobe-source-han-serif-cn-fonts wqy-zenhei noto-fonts-cjk noto-fonts-emoji noto-fonts-extra
-sudo pacstrap /mnt firefox
-sudo pacstrap /mnt wget
+pacman -S --needed sof-firmware alsa-firmware alsa-ucm-conf
+pacman -S --needed ntfs-3g
+pacman -S --needed adobe-source-han-serif-cn-fonts wqy-zenhei noto-fonts-cjk noto-fonts-emoji noto-fonts-extra
+pacman -S --needed firefox
+pacman -S --needed wget
 ```
 
 ## 本地化
@@ -156,10 +166,10 @@ ArchLinux没有默认的locale，所以一定要设置locale，否则之后运�
 为了方便出现问题后到国际平台上寻求帮助，这里设置成`en_US.UTF-8`。
 
 ```shell
-sudo chroot /mnt /bin/bash -c 'echo -e "en_US.UTF-8 UTF-8\nzh_CN.UTF-8 UTF-8" >> /etc/locale.gen && locale-gen'
+echo -e "en_US.UTF-8 UTF-8\nzh_CN.UTF-8 UTF-8" >> /etc/locale.gen && locale-gen
 # https://wiki.archlinux.org/title/Locale
 #sudo localectl set-locale LANG=en_US.UTF-8
-sudo bash -c "echo LANG=en_US.UTF-8 > /mnt/etc/locale.conf"
+echo LANG=en_US.UTF-8 > /etc/locale.conf
 # https://wiki.archlinux.org/title/Locale#My_system_is_still_using_wrong_language
 #rm ~/.config/plasma-localerc
 ```
@@ -167,7 +177,7 @@ sudo bash -c "echo LANG=en_US.UTF-8 > /mnt/etc/locale.conf"
 ### 时区
 
 ```shell
-sudo chroot /mnt /bin/bash -c "ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime"
+ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 ```
 
 ## 引导
@@ -177,16 +187,16 @@ sudo chroot /mnt /bin/bash -c "ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/loc
 ### 使用原有的引导
 
 ```shell
-sudo update-grub
+update-grub
 ```
 
 ### 安装并使用ArchLinux的引导
 
 ```shell
-sudo pacstrap /mnt grub efibootmgr
-sudo arch-chroot /mnt /bin/bash -c "grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB"
-sudo bash -c "echo GRUB_DISABLE_OS_PROBER=false >> /mnt/etc/default/grub"
-sudo arch-chroot /mnt /bin/bash -c "grub-mkconfig -o /boot/grub/grub.cfg"
+pacman -S --needed grub efibootmgr
+grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB
+echo GRUB_DISABLE_OS_PROBER=false >> /etc/default/grub
+grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
 ## 启动ArchLinux
