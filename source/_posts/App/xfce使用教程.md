@@ -36,6 +36,8 @@ sudo pacman -S --needed network-manager-applet
 
 然后启动`nm-applet`：`nohup nm-applet &`，托盘中就会出现网络管理的托盘项了。logout再login之后它会被自动启动。
 
+在Settings Manager里没有网络管理的入口。如果需要管理网络连接，需要右键网络管理的托盘项，选择`Edit Connections`，里面就可以设置自动连接之类的了。
+
 ## 代理
 
 XFCE的桌面设置中没有提供系统代理的设置。可以将代理设置写入`/etc/profile.d/profile.sh`，例如：
