@@ -3,6 +3,21 @@ title: C++学习笔记
 date: 2020-04-03 23:33:34
 ---
 
+## vscode插件
+
+clangd，可替代微软的C/C++插件。它可以显示auto变量的类型，在template里也能报错。默认情况下它以`clang FILE`的方式来parse文件。在有多个文件的工程中需要使用cmake生成`compile_commands.json`告诉它文件是怎么编译的，它才能正确理解文件内容：
+
+```shell
+mkdir build
+cd build
+cmake .. -DCMAKE_EXPORT_COMPILE_COMMANDS=1
+# compile_commands.json will be generated right here
+```
+
+clangd能自动找到build下面的`compile_commands.json`。所以重启窗口即可。
+
+注意它会往项目根目录的`.cache/clangd`下面存一些缓存文件，所以需要在`.cache`下面建立一个内容为`*`的`.gitignore`，让git忽略`.cache`下面的文件。也可以直接在项目根目录下面的`.gitignore`里加上`.cache`。
+
 ## string和int相互转化
 
 参考：<https://blog.csdn.net/lxj434368832/article/details/78874108>
