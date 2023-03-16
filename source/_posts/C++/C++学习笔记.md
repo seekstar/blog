@@ -46,6 +46,10 @@ cout << (const void*)char_pointer << endl;
 std::this_thread::sleep_for(std::chrono::milliseconds(233));
 ```
 
+### Memory order
+
+{% post_link 'C++/cpp-memory-order' %}
+
 ## 正则表达式
 
 参考：<https://blog.csdn.net/philpanic9/article/details/88141305>
