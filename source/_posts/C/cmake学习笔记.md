@@ -4,9 +4,11 @@ date: 2023-03-14 15:02:15
 tags:
 ---
 
-{% post_link C/'cmake开启优化的同时启用assert' %}
-{% post_link C/'cmake设置默认CMAKE_BUILD_TYPE' %}
-{% post_link C/'cmake使用C++17' %}
+- {% post_link C/'cmake开启优化的同时启用assert' %}
+
+- {% post_link C/'cmake设置默认CMAKE_BUILD_TYPE' %}
+
+- {% post_link 'C++/cmake使用cpp-17' %}
 
 ## 传入宏定义
 
