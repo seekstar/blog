@@ -50,6 +50,47 @@ std::this_thread::sleep_for(std::chrono::milliseconds(233));
 
 {% post_link 'C++/cpp-memory-order' %}
 
+### CAS (Compare And Swap)
+
+`std::atomic`通过`compare_exchange_weak`和`compare_exchange_strong`来实现CAS操作：<https://en.cppreference.com/w/cpp/atomic/atomic/compare_exchange>
+
+基础接口：
+
+```cpp
+bool compare_exchange_weak( T& expected, T desired);
+bool compare_exchange_strong( T& expected, T desired);
+```
+
+如果原子变量的值等于expected，那么就将其赋值为desired，并返回true。如果原子变量的值不等于expected，那么就将真正的值赋值到expected里，并返回false。
+
+换言之，调用结束之后expected为原子变量中最终存的值。
+
+`compare_exchange_weak`与`compare_exchange_strong`不同的地方在于，即使原子变量的值等于expected，`compare_exchange_weak`也可能会返回false，而`compare_exchange_strong`不会出现这种情况，但是性能可能比`compare_exchange_weak`低。因此如果CAS本来就在一个循环里，比如它来实现原子加1，那么可以直接用`compare_exchange_weak`：
+
+```cpp
+#include <iostream>
+#include <thread>
+#include <atomic>
+#include <vector>
+
+std::atomic<int> x;
+void add1() {
+	int ori;
+	do {
+		ori = x.load(std::memory_order_relaxed);
+	} while (!x.compare_exchange_weak(ori, ori + 1, std::memory_order_relaxed));
+}
+int main() {
+	std::vector<std::thread> ts;
+	for (size_t i = 0; i < 10000; ++i)
+		ts.emplace_back(add1);
+	for (auto& t : ts)
+		t.join();
+	std::cout << x.load() << std::endl;
+	return 0;
+}
+```
+
 ## 正则表达式
 
 参考：<https://blog.csdn.net/philpanic9/article/details/88141305>
