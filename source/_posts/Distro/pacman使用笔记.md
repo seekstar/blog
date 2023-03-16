@@ -37,11 +37,17 @@ pacman -Q 包名
 pacman -Qi 包名
 # 包内的所有文件
 pacman -Ql 包名
+# 查看文件由哪个包提供
+pacman -Qo 相对路径或绝对路径
 ```
 
 这里面也包括用yay安装的包。
 
-参考：[pacman常用命令](https://hustlei.github.io/2018/11/msys2-pacman.html)
+参考：
+
+[pacman常用命令](https://hustlei.github.io/2018/11/msys2-pacman.html)
+
+[How to find which package holds a file?](https://bbs.archlinux.org/viewtopic.php?id=90635)
 
 ## 查看某包被哪些包依赖
 
