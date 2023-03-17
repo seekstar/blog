@@ -22,3 +22,14 @@ endif ()
 ```
 
 然后`cmake .. -DMACRO_NAME=ON`，再`make`就好了。
+
+## `find_library`
+
+<https://stackoverflow.com/questions/29657195/how-to-test-if-cmake-found-a-library-with-find-library>
+
+```cmake
+find_library(LUA_LIB lua)
+if(NOT LUA_LIB)
+  message(FATAL_ERROR "lua library not found")
+endif()
+```
