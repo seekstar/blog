@@ -171,6 +171,27 @@ Uninstalling nix:
 { allowUnfree = true; }
 ```
 
+## 安装和使用库
+
+Nix的设计理念是只将应用暴露给用户，而不将库暴露给用户：<https://nixos.wiki/wiki/FAQ#I_installed_a_library_but_my_compiler_is_not_finding_it._Why.3F>。我认为这是为了支持在一个系统中同时安装多个版本的库。
+
+因此如果用Nix包管理器安装了库，比如gtest: `nix-env -iA nixpkgs.gtest`，编译器是找不到`gtest.h`的。只能在`nix-shell`里使用gtest库：`nix-shell -p gtest`，然后在这里面编译：
+
+```cpp
+#include <iostream>
+#include <gtest/gtest.h>
+int main() {
+	std::cout << "test\n";
+	return 0;
+}
+```
+
+```shell
+g++ test.cpp -o test -lgtest
+```
+
+如果是用cmake + make编译的话，进入`nix-shell`的命令是`nix-shell -p gtest cmake`，据Nick Cao说是cmake的setup hook去找依赖。之后需要把原来的`build`删掉，再重新`cmake ..`才行。
+
 ## 已知的问题
 
 如果不自己创建`.desktop`文件，Deepin启动器里好像没法找到安装的GUI软件：<https://www.bilibili.com/video/av335652600/>。不知道其他系统是不是这样。
