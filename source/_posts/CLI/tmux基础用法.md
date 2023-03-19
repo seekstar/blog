@@ -191,6 +191,10 @@ repo: <https://github.com/tmux-plugins/tmux-logging>
 set -g @plugin 'tmux-plugins/tmux-logging'
 ```
 
+## 存在的问题
+
+tmux会用空格填充到行末。如果直接复制tmux中的文本的话，会把后面填充的空格也复制出来。`screen`没有这个问题：<https://unix.stackexchange.com/a/333983>
+
 ## 参考文献
 
 <https://unix.stackexchange.com/questions/13787/is-there-a-way-to-run-screen-in-read-only-mode>
