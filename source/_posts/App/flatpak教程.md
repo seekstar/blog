@@ -125,7 +125,13 @@ flatpak install shadowsocks
 
 ### Zotero
 
-一款文献管理器。
+一款文献管理器。可以选择把文献导出为文件，也可以直接把文献拖到文本编辑器，格式在`Edit -> Preferences -> Export -> Item Format`设置。
+
+参考：
+
+<https://www.zotero.org/support/creating_bibliographies#quick_copy>
+
+<https://forums.zotero.org/discussion/87285/export-bibtex-to-clipboard>
 
 ### Seafile
 
