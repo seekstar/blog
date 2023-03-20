@@ -55,6 +55,7 @@ xfconf-query --channel xfce4-keyboard-shortcuts -lv
 | ! | 0x21 | exclam |
 | # | 0x23 | numbersign |
 | $ | 0x24 | dollar |
+| % | 0x25 | percent |
 | @ | 0x40 | at |
 | 左箭头 | 0x00ff51 | Left |
 | 右箭头 | 0x00ff53 | Right |
