@@ -465,6 +465,8 @@ Debian 11：加上`-bios /usr/share/ovmf/OVMF.fd`即可。
 virt-clone --original 源虚拟机 --name 新虚拟机名字 --file 新虚拟机的磁盘文件路径
 ```
 
+其好处是只会克隆磁盘文件中有效的部分，不会克隆其中为0的部分。
+
 来源：<https://www.cyberciti.biz/faq/how-to-clone-existing-kvm-virtual-machine-images-on-linux/>
 
 ### ttyS0登录时输入用户名后卡住
