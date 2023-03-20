@@ -3,6 +3,25 @@ title: 使用apt安装latex
 date: 2020-02-10 15:40:32
 ---
 
+## 英文写作
+
+测试环境：Debian 11
+
+英文写作通常使用pdflatex。
+
+```shell
+# pdflatex
+sudo apt install texlive-latex-base
+# xkeyval.sty
+sudo apt install texlive-latex-recommended
+# xstring.sty
+sudo apt install texlive-latex-extra
+# libertine
+sudo apt install texlive-fonts-extra
+```
+
+## 中文写作
+
 测试环境：deepin 15.11
 
 由于xetex对中文的支持较好，为了节约磁盘空间和安装时间，就只安装xetex。
