@@ -6,7 +6,7 @@ tags: RocksDB
 
 这里主要分析`LevelCompactionBuilder::PickCompaction`是如何选择输入文件的。
 
->`SetupInitialFiles();`找一个需要compact到下层的SST file。
+>`SetupInitialFiles();`找一个需要compact到下层的SST file。只会在score >= 1的level里找。score的计算见`VersionStorageInfo::ComputeCompactionScore`（{% post_link Storage/'RocksDB代码分析——Compaction流程' %}）。
 >`LevelCompactionBuilder::SetupOtherL0FilesIfNeeded`
 >
 >>`CompactionPicker::GetOverlappingL0Files`
