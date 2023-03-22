@@ -18,6 +18,7 @@ tags: RocksDB
 
 >调用`DBImpl::PickCompactionFromQueue`从`compaction_queue_`里取出一个`ColumnFamilyData *cfd`
 >调用`cfd->PickCompaction`，得到`Compaction *`，作为要做的任务。
+>
 >>`ColumnFamilyData::PickCompaction`调用`compaction_picker_->PickCompaction`。
 >>`ColumnFamilyData::compaction_picker_`是在`ColumnFamilyData`的构造函数里根据`ioptions_.compaction_style`赋值的。
 >>
@@ -29,14 +30,13 @@ tags: RocksDB
 >>
 >>所以我们假设`ColumnFamilyData::compaction_picker_`是`LevelCompactionPicker`，即假设`ColumnFamilyData::PickCompaction`调用的`compaction_picker_->PickCompaction`其实是`LevelCompactionPicker::PickCompaction`。
 >>`LevelCompactionPicker::PickCompaction`调用`LevelCompactionBuilder::PickCompaction`。
+>>
 >>>选择输入文件：{% post_link Storage/'RocksDB代码分析——Compaction的输入文件的选择' %}
 >>>调用`LevelCompactionBuilder::GetCompaction`构造`Compaction`对象。
+>>>
 >>>>将要返回的`Compaction *`中的score会被设置为start level的score。
 >>>>在`Compaction`的构造函数中调用`Compaction::MarkFilesBeingCompacted`将输入文件标记为`being_compacted`，防止出现一边compaction一边上面compact到输入层的情况。
->>>>调用`VersionStorageInfo::ComputeCompactionScore`重新计算各层的score。
->>>>>除了Level 0，其他层的score等于没有在compact的file的`compensated_file_size`除以该层的最大字节数。
->>>>>只有score>=1的层才会被选择作为compaction的start level，见`LevelCompactionBuilder::SetupInitialFiles`（{% post_link Storage/'RocksDB代码分析——Compaction的输入文件的选择' %}）。
->>>>>file的`compensated_file_size`在`VersionStorageInfo::ComputeCompensatedSizes`中计算得到。
+>>>>调用`VersionStorageInfo::ComputeCompactionScore`重新计算各层的score。除了Level 0，其他层的score等于没有在compact的file的`compensated_file_size`除以该层的最大字节数。只有score>=1的层才会被选择作为compaction的start level，见`LevelCompactionBuilder::SetupInitialFiles`（{% post_link Storage/'RocksDB代码分析——Compaction的输入文件的选择' %}）。file的`compensated_file_size`在`VersionStorageInfo::ComputeCompensatedSizes`中计算得到。
 
 - 如果是`prepicked compaction`，那么就将`prepicked_compaction->compaction`作为要做的compaction任务。
 
