@@ -192,6 +192,42 @@ g++ test.cpp -o test -lgtest
 
 如果是用cmake + make编译的话，进入`nix-shell`的命令是`nix-shell -p gtest cmake`，据Nick Cao说是cmake的setup hook去找依赖。之后需要把原来的`build`删掉，再重新`cmake ..`才行。
 
+## 搜索哪个包提供了文件
+
+先安装`nix-index`：
+
+```shell
+nix-env -iA nixpkgs.nix-index
+```
+
+生成数据库（可能需要很长一段时间）：
+
+```shell
+nix-index
+```
+
+然后就可以用`nix-locate`查找哪个包提供了某个文件了：
+
+```shell
+nix-locate -w xxx
+```
+
+例如
+
+```shell
+nix-locate -w "/iostat"
+```
+
+这一行就是我们想要的：
+
+```text
+sysstat.out                                      67,720 x /nix/store/39wxpjmmd6m082d492rg6wiwqcv5npvr-sysstat-12.6.2/bin/iostat
+```
+
+所以我们就知道了提供`iostat`命令的包是`sysstat`。
+
+参考：<https://unix.stackexchange.com/questions/252224/how-to-find-out-which-not-installed-package-a-file-belongs-to-on-nixos>
+
 ## 已知的问题
 
 如果不自己创建`.desktop`文件，Deepin启动器里好像没法找到安装的GUI软件：<https://www.bilibili.com/video/av335652600/>。不知道其他系统是不是这样。
@@ -206,3 +242,9 @@ sudo chown $USER:$USER /nix/var/nix/{profiles,gcroots}/per-user/$USER
 ```
 
 参考：<https://discourse.nixos.org/t/per-user-profiles-not-created-when-home-mounted-on-nfs/5864/4>
+
+### `error: this derivation has bad 'meta.outputsToInstall'`
+
+可能是在`nix-env -iA`的时候`ctrl+c`导致的？反正回滚一下就行了：`nix-env --rollback`
+
+来源：<https://github.com/NixOS/nixpkgs/issues/189555>
