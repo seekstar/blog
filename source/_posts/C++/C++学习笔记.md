@@ -28,23 +28,83 @@ clangd能自动找到build下面的`compile_commands.json`。所以重启窗口�
 
 可以运行和调试单个GTest测试。
 
-## string和int相互转化
+## 字符串和数值相互转化
 
 参考：<https://blog.csdn.net/lxj434368832/article/details/78874108>
 
-string -> int
+### C字符串 -> 数值
 
-```cpp
-string str("123");
-int ret = atoi(str.c_str());
+C字符串是以`\0`结尾的`const char *`。
+
+#### `ato`系列
+
+文档：<https://en.cppreference.com/w/cpp/string/byte/atoi>
+
+```c
+int       atoi( const char* str );
+	(1) 	
+long      atol( const char* str );
+	(2) 	
+long long atoll( const char* str );
+	(3) 	(since C++11)
 ```
 
-int -> string
-C++11中可以用to_string
+```cpp
+int ret = atoi("123");
+```
+
+#### `strto`系列
+
+C99提供了`strtoul`和`strtoull`将C字符串转成unsigned long和unsigned long long。文档：<https://en.cppreference.com/w/c/string/byte/strtoul>
+
+```c
+unsigned long      strtoul( const char *restrict str, char **restrict str_end,
+                            int base );
+unsigned long long strtoull( const char *restrict str, char **restrict str_end,
+                             int base );
+```
+
+例子：
+
+```c
+unsigned long x = strtoul("233", NULL, 10);
+printf("%lu\n", x); // 233
+x = strtoul("0xf", NULL, 16);
+printf("%lu\n", x); // 15
+// 将base设置为0可以自动检测
+printf("%lu\n", strtoul("233", NULL, 0)); // 233
+printf("%lu\n", strtoul("0xf", NULL, 0)); // 15
+```
+
+### string -> 数值
+
+可以用C++11里的`std::stoul`和`std::stoull`把string转换为unsigned long和unsigned long long：
+
+```cpp
+unsigned long x = std::stoul("233");
+std::cout << x << std::endl; // 233
+x = std::stoul("0xf", nullptr, 16);
+std::cout << x << std::endl; // 15
+// 将base设置为0可以自动检测
+std::cout << std::stoul("0xf", nullptr, 0) << std::endl;
+std::cout << std::stoul("233", nullptr, 0) << std::endl;
+```
+
+文档：<https://en.cppreference.com/w/cpp/string/basic_string/stoul>
+
+同理，C++11还提供了string转signed integer的函数：<https://en.cppreference.com/w/cpp/string/basic_string/stol>
+
+以及string转浮点数的函数：<https://en.cppreference.com/w/cpp/string/basic_string/stof>
+
+参考：<https://stackoverflow.com/questions/1070497/c-convert-hex-string-to-signed-integer>
+
+### 数值 -> string
+
+C++11中可以用`std::to_string`，文档：<https://en.cppreference.com/w/cpp/string/basic_string/to_string>
 
 ```cpp
 int x = 123;
-string str = to_string(x);
+std::string str = std::to_string(x);
 ```
 
 ## 输出字符型指针指向的地址
