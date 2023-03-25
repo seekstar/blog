@@ -6,6 +6,89 @@ tags:
 
 本文持续更新。
 
+## 代码风格
+
+### 函数返回值类型后置
+
+C++11引入了函数返回值类型后置的写法(trailing return type)：<https://en.wikipedia.org/wiki/Trailing_return_type>
+
+```cpp
+auto func(int i, int j, int k) -> int {
+	printf("2333");
+	return 2333;
+}
+
+auto func(
+	int i, int j, int k, int a, int b, int c, int d, int e, int f, int g, int h
+) -> int {
+	return 2333;
+}
+
+auto func(
+	int i, int j, int k
+) -> AVeryVeryLoooooooooooooooooooooooooooooooooooooooooooongType {
+	return 2333;
+}
+
+auto func(
+	int i, int j, int k
+) -> std::tuple<
+	Arg1,
+	Arg2,
+	...
+	ArgN
+> {
+	return xxx;
+}
+```
+
+### （不推荐）`.clang-format`
+
+```yaml
+# <https://clang.llvm.org/docs/ClangFormatStyleOptions.html>
+
+IndentWidth: 4
+UseTab: Always
+TabWidth: 4
+IndentAccessModifiers: false
+AccessModifierOffset: -4
+AllowShortIfStatementsOnASingleLine: Never
+
+AlignAfterOpenBracket: BlockIndent
+ContinuationIndentWidth: 4
+ConstructorInitializerIndentWidth: 4
+...
+```
+
+```shell
+find . -regex '.*\.\(cpp\|hpp\|cc\|cxx\)' -exec clang-format -style=file -i {} \;
+```
+
+存在的问题：
+
+- 后置返回值如果太长的话会崩
+
+```cpp
+auto func(
+	int i, int j, int k, int a, int b, int c, int d, int e, int f, int g, int h
+)
+	-> std::tuple<
+		int, int, int, int, int, int, int, int, int, int, int, int, int, int> {
+	return xxx;
+}
+```
+
+因为目前`BlockIndent`只对圆括号起作用，对尖括号不起作用。
+
+- 参数太短而返回值太长的话会崩
+
+```cpp
+auto func(int i, int j, int k)
+	-> AVeryVeryLoooooooooooooooooooooooooooooooooooooooooooongType {
+	return 2333;
+}
+```
+
 ## Rust -> C++
 
 `Box` -> `std::unique_ptr`
@@ -98,33 +181,6 @@ Deconstructing
 ```
 
 可以看到只构造和析构了一次，实际上没有move assignment，所以跟使用构造函数的方法相比没有任何性能损失。
-
-## 函数返回值类型后置
-
-C++11引入了函数返回值类型后置的写法(trailing return type)：<https://en.wikipedia.org/wiki/Trailing_return_type>
-
-```cpp
-auto func(int i, int j, int k) -> int {
-	return 2333;
-}
-
-auto func(
-	int i, int j, int k
-) -> AVeryVeryLoooooooooooooooooooooooooooooooooooooooooooongType {
-	return 2333;
-}
-
-auto func(
-	int i, int j, int k
-) -> std::tuple<
-	Arg1,
-	Arg2,
-	...
-	ArgN
-> {
-	return xxx;
-}
-```
 
 ## `Option` -> `std::optional`
 

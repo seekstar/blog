@@ -3,6 +3,64 @@ title: C++学习笔记
 date: 2020-04-03 23:33:34
 ---
 
+## `.clang-format`
+
+```yaml
+# <https://clang.llvm.org/docs/ClangFormatStyleOptions.html>
+
+IndentWidth: 4
+UseTab: Always
+TabWidth: 4
+IndentAccessModifiers: false
+AccessModifierOffset: -4
+AllowShortIfStatementsOnASingleLine: Never
+
+AlignAfterOpenBracket: DontAlign
+ContinuationIndentWidth: 8
+ConstructorInitializerIndentWidth: 4
+...
+```
+
+例子：
+
+```cpp
+int func(int a, int b, int c, int d, int e, int f, int g, int h, int i, int j,
+		int k) { // 2 tabs
+	return 2333;
+}
+
+class RouterVisCnts : public rocksdb::CompactionRouter {
+public: // 顶格写
+```
+
+但是构造器有问题，期望应该是这样：
+
+```cpp
+class RouterVisCnts : public rocksdb::CompactionRouter {
+public:
+	RouterVisCnts(int target_level, const char *path, double delta,
+			bool create_if_missing)
+		:	ac_(VisCntsOpen(path, delta, create_if_missing)), not_retained_(0),
+			test(0) {
+		return;
+	}
+};
+```
+
+但是实际上被格式化为了这样：
+
+```cpp
+class RouterVisCnts : public rocksdb::CompactionRouter {
+public:
+	RouterVisCnts(int target_level, const char *path, double delta,
+			bool create_if_missing)
+		: ac_(VisCntsOpen(path, delta, create_if_missing)), not_retained_(0),
+		  test(0) { // 冒号后面应该插入tab而不是一个空格
+		return;
+	}
+};
+```
+
 ## vscode插件
 
 ### [clangd](https://marketplace.visualstudio.com/items?itemName=llvm-vs-code-extensions.vscode-clangd)
