@@ -154,7 +154,7 @@ ip netns exec $spacename 命令 参数1 参数2 ...
 
 在netns里ping：`ip netns exec $spacename ping google.com`
 
-我们可以对比一下netns里`ip gs`和在宿主机直接`ip gs`打印出来的IP，看看我们是否成功绕过了wireguard: `ip netns exec $spacename ip gs`
+我们可以对比一下netns里`curl ip.gs`和在宿主机直接`curl ip.gs`打印出来的IP，看看我们是否成功绕过了wireguard: `ip netns exec $spacename curl ip.gs`
 
 ## 参考文献
 
