@@ -5,7 +5,7 @@ date: 2021-08-08 05:18:41
 
 如果要使用KVM的话，首先要让普通用户使用libvirt时能使用KVM：
 
-{% post_link Linux/qemu/'libvirt让普通用户能用kvm' %}
+{% post_link Linux/vm/'libvirt让普通用户能用kvm' %}
 
 ## 配置网桥
 

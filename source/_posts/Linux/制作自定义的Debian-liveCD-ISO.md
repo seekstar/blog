@@ -253,7 +253,7 @@ xorriso \
 qemu-system-x86_64 -enable-kvm -cpu host -m 4096 -cdrom debian-custom.iso
 ```
 
-联网、VNC等参考：{% post_link Linux/qemu/'在服务器上用qemu制作虚拟机' %}
+联网、VNC等参考：{% post_link Linux/vm/'在服务器上用qemu制作虚拟机' %}
 
 ## 注意事项
 

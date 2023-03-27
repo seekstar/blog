@@ -85,7 +85,7 @@ sudo apt install virtinst libvirt-daemon-system
 sudo virsh net-start default
 ```
 
-然后让普通用户使用libvirt时能使用KVM：{% post_link Linux/qemu/'libvirt让普通用户能用kvm' %}
+然后让普通用户使用libvirt时能使用KVM：{% post_link Linux/vm/'libvirt让普通用户能用kvm' %}
 
 然后就可以开始安装了：
 
@@ -177,7 +177,7 @@ VNC server running on ::1:5900
 
 ### virsh
 
-{% post_link Linux/qemu/'virsh终端访问虚拟机并联网' %}
+{% post_link Linux/vm/'virsh终端访问虚拟机并联网' %}
 
 ### 桥接网卡（有概率失败）
 
@@ -427,7 +427,7 @@ sudo qemu-system-x86_64 -m 4096 -enable-kvm centos.img -net nic -net tap,script=
 
 ### nographic启动
 
-{% post_link Linux/qemu/'qemu-system-x86_64 nographic' %}
+{% post_link Linux/vm/'qemu-system-x86_64 nographic' %}
 
 ### 嵌套虚拟化
 

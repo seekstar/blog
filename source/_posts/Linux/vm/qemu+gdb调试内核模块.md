@@ -5,7 +5,7 @@ date: 2021-01-24 00:12:35
 
 ## 制作qemu虚拟机
 
-看这里：{% post_link Linux/qemu/'在服务器上用qemu制作虚拟机' %}
+看这里：{% post_link Linux/vm/'在服务器上用qemu制作虚拟机' %}
 
 如果是PC的话，就不用配置vnc了。
 
@@ -19,7 +19,7 @@ sudo qemu-system-x86_64 -m 4096 centos.img -net nic -net tap,ifname=tap0,script=
 
 ## 设置nokaslr
 
-{% post_link Linux/qemu/'qemu gdb lx-symbols Python Exception ＜class ‘gdb.MemoryError‘＞ Cannot access memory at address 0xfff' %}
+{% post_link Linux/vm/'qemu gdb lx-symbols Python Exception ＜class ‘gdb.MemoryError‘＞ Cannot access memory at address 0xfff' %}
 
 ## 编译内核模块
 
