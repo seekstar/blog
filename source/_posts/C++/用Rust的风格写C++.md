@@ -60,6 +60,8 @@ ConstructorInitializerIndentWidth: 4
 ...
 ```
 
+`AlignAfterOpenBracket: BlockIndent`表示将圆括号里的东西按照block的风格来align：<https://stackoverflow.com/questions/71710337/how-to-make-clang-format-not-align-parameters-to-function-call>。但是它需要安装clang-format 14。Debian 11提供的clang-format的版本是11，可以用`nix`安装最新版的clang-format：`nix-env -iA nixpkgs.clang-tools`，nix包管理器教程：{% post_link App/'使用国内源安装和使用Nix包管理器' %}
+
 ```shell
 find . -regex '.*\.\(cpp\|hpp\|cc\|cxx\)' -exec clang-format -style=file -i {} \;
 ```
