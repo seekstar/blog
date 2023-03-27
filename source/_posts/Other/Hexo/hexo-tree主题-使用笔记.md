@@ -335,3 +335,7 @@ pandoc:
 <https://github.com/seekstar/hexo-pandoc-header-anchor>
 
 通过锚点可以得到指向标题的URL，例如：<https://seekstar.github.io/2022/03/10/a-collection-of-matrix-groups/#matrix>
+
+### 脚注
+
+<https://github.com/kchen0x/hexo-reference>
