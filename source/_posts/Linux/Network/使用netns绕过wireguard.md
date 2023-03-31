@@ -156,6 +156,81 @@ ip netns exec $spacename 命令 参数1 参数2 ...
 
 我们可以对比一下netns里`curl ip.gs`和在宿主机直接`curl ip.gs`打印出来的IP，看看我们是否成功绕过了wireguard: `ip netns exec $spacename curl ip.gs`
 
+## IPv6
+
+如果没有配置IPv6的话，socks代理可能会出问题。因此这里在netns中另外再配置一下ipv6，使得netns中可以访问公网中的ipv6地址。本节主要参考这篇博客：<https://blogs.igalia.com/dpino/2016/05/02/network-namespaces-ipv6/>
+
+### 打开IPv6的forwarding
+
+`accept_ra`的全称是accept router advertisement，它有三个级别[^5]：
+
+```text
+0: Do not accept Router Advertisements.
+1: Accept Router Advertisements if forwarding is disabled.
+2: Overrule forwarding behaviour. Accept Router Advertisements even if forwarding is enabled.
+```
+
+默认是1。此时直接打开IPv6的forwarding的话，如果default route是外界advertise进来的，就会导致default route消失：<https://serverfault.com/questions/976775/ipv6-default-route-is-removed-after-net-ipv6-conf-all-forwarding-is-set-to-1>
+
+因此我们需要先将`accept_ra`设置为2，再打开IPv6的forwarding：
+
+```shell
+sysctl net.ipv6.conf.$realdev.accept_ra
+# 2: Accept Router Advertisements even if forwarding is enabled.
+sysctl -w net.ipv6.conf.$realdev.accept_ra=2
+
+sysctl net.ipv6.conf.all.forwarding
+sysctl -w net.ipv6.conf.all.forwarding=1
+```
+
+### 为veth的两端设置私有IPv6地址
+
+`fd00::/8`是私有的IPv6地址块：<https://en.wikipedia.org/wiki/Private_network>。所以我们可以将`${spacename}veth1`的IP设置为`fd00::1/64 dev`，将`${spacename}veth2`的IP设置为`fd00::2/64 dev`：
+
+```shell
+ip -6 addr add fd00::1/64 dev ${spacename}veth1
+ip link set dev ${spacename}veth1 up
+ip netns exec $spacename ip -6 addr add fd00::2/64 dev ${spacename}veth2
+ip netns exec $spacename ip link set dev ${spacename}veth2 up
+```
+
+### 在netns里设置IPv6路由
+
+将`${spacename}veth1`设置成默认网关，让netns里的IPv6流量都通过`${spacename}veth2`发往`${spacename}veth1`：
+
+```shell
+ip netns exec $spacename ip -6 route add default dev ${spacename}veth2 via fd00::1
+```
+
+### 配置IPv6 NAT
+
+```shell
+ip6tables -t nat -A POSTROUTING -o $realdev -j MASQUERADE
+```
+
+显式accept netns和物理网卡之间的流量：
+
+```shell
+sudo ip6tables -t filter -A FORWARD -i $realdev -o ${spacename}veth1 -j ACCEPT
+sudo ip6tables -t filter -A FORWARD -o $realdev -i ${spacename}veth1 -j ACCEPT
+```
+
+设置来自netns子网的流量的fwmark为51820，从而使得其bypass wireguard:
+
+```shell
+sudo ip6tables -t mangle -A PREROUTING -s fd00::/64 -j MARK --set-mark 51820
+```
+
+### 在netns中访问公网的IPv6地址
+
+```shell
+$ sudo ip netns exec trojannowg ping ipv6.google.com
+PING ipv6.google.com(nrt20s09-in-x0e.1e100.net (2404:6800:4004:80b::200e)) 56 data bytes
+64 bytes from nrt20s09-in-x0e.1e100.net (2404:6800:4004:80b::200e): icmp_seq=1 ttl=105 time=2.37 ms
+```
+
+大功告成。
+
 ## 参考文献
 
 [^1]: <https://github.com/haoel/haoel.github.io#94-cloudflare-warp-原生-ip>
@@ -165,3 +240,5 @@ ip netns exec $spacename 命令 参数1 参数2 ...
 [^3]: <https://www.procustodibus.com/blog/2022/01/wg-quick-firewall-rules/#routes-and-policies>
 
 [^4]: <https://ch1p.io/gentoo-wireguard-custom-resolver-captive-portal/>
+
+[^5]: <https://sysctl-explorer.net/net/ipv6/accept_ra/>
