@@ -4,8 +4,6 @@ date: 2020-08-15 10:41:03
 tags:
 ---
 
-[Rust编程知识拾遗：Rust 编程，读取命令行参数](https://blog.csdn.net/lcloveyou/article/details/105595040)
-
 ## 安装
 
 ```shell
@@ -59,11 +57,46 @@ rm ~/.cargo/.package-cache
 
 ## 语法
 
+[Rust for循环](https://www.yiibai.com/rust/rust-for-loop.html)
+
 - `_`是通配符
 
 ![在这里插入图片描述](rust学习笔记/20200814170430309.png)
 
 这里指匹配所有的Err，不管里面是啥。
+
+## I/O
+
+- {% post_link Rust/'Rust文件操作' %}
+
+- {% post_link Rust/'rust格式化打印到文件' %}
+
+- {% post_link Rust/'算法竞赛中rust的一种比较健壮的读入' %}
+
+- {% post_link Rust/'rust识别EOF' %}
+
+- {% post_link Rust/'rust-BufReader逐字符读取' %}
+
+- {% post_link Rust/'rust单行读取多个整数' %}
+
+- {% post_link Rust/'rust从一行中读取数组' %}
+
+- {% post_link Rust/'rust用BufReader加速stdin读取' %}
+
+- {% post_link Rust/'rust格式控制' %}
+
+- {% post_link Rust/'rust print固定宽度左边补零' %}
+
+- [Rust编程知识拾遗：Rust 编程，读取命令行参数](https://blog.csdn.net/lcloveyou/article/details/105595040)
+
+### 从文件中逐行读取
+
+```rs
+let file = File::open("path")?;
+let reader = BufReader::new(file);
+```
+
+参考：[在 Rust 中读取文件的 4 种方法](https://blog.csdn.net/qq_29607687/article/details/125438652)
 
 ## 常见函数
 
@@ -100,7 +133,7 @@ impl A for f32 {
     }
 }
 fn main() {
-	// 2333
+    // 2333
     println!("{}", f32::a());
 }
 ```
