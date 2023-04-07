@@ -33,3 +33,7 @@ if(NOT LUA_LIB)
   message(FATAL_ERROR "lua library not found")
 endif()
 ```
+
+## message
+
+<https://cmake.org/cmake/help/latest/command/message.html>
