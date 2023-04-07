@@ -47,12 +47,15 @@ auto func(
 ```yaml
 # <https://clang.llvm.org/docs/ClangFormatStyleOptions.html>
 
+AlwaysBreakTemplateDeclarations: Yes
+
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLoopsOnASingleLine: false
 IndentWidth: 4
 UseTab: Always
 TabWidth: 4
 IndentAccessModifiers: false
 AccessModifierOffset: -4
-AllowShortIfStatementsOnASingleLine: Never
 
 AlignAfterOpenBracket: BlockIndent
 ContinuationIndentWidth: 4
@@ -64,6 +67,9 @@ ConstructorInitializerIndentWidth: 4
 
 ```shell
 find . -regex '.*\.\(cpp\|hpp\|cc\|cxx\)' -exec clang-format -style=file -i {} \;
+# https://stackoverflow.com/questions/4210042/how-do-i-exclude-a-directory-when-using-find
+# 如果要排除某目录的话
+find . -regex '.*\.\(cpp\|hpp\|cc\|cxx\)' -not -path "./子目录/*" -exec clang-format -style=file -i {} \;
 ```
 
 存在的问题：
