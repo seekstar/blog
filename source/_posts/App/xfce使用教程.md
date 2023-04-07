@@ -146,6 +146,11 @@ nohup xfce4-screensaver &
 
 ### 快捷键
 
+```shell
+# ArchLinux
+sudo pacman -S xfce4-clipman-plugin
+```
+
 弹出所有剪切板历史的命令：
 
 ```shell
