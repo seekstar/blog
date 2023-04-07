@@ -138,6 +138,35 @@ fn main() {
 }
 ```
 
+## 获得`Vec`里多个元素的mutable reference
+
+比如要获得`a[1]`和`a[3]`的可变引用，可以用iterator:
+
+```rs
+fn main() {
+    let mut a = vec![0, 1, 2, 3, 4, 5];
+    let mut iter = a.iter_mut();
+    let a1 = iter.nth(1).unwrap();
+    let a3 = iter.nth(3 - 1 - 1).unwrap();
+    *a1 = -1;
+    *a3 = -1;
+    println!("{:?}", a);
+}
+```
+
+也可以用nightly特性`get_many_mut`:
+
+```rs
+#![feature(get_many_mut)]
+fn main() {
+    let mut a = vec![0, 1, 2, 3, 4, 5];
+    let [a1, a3] = a.get_many_mut([1, 3]).unwrap();
+    *a1 = -1;
+    *a3 = -1;
+    println!("{:?}", a);
+}
+```
+
 ## 已知问题
 
 ### Non-lexical lifetimes (NLL)
