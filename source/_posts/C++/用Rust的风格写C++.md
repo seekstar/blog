@@ -42,6 +42,20 @@ auto func(
 }
 ```
 
+### 构造器
+
+```cpp
+ClassA(int a, int b, int c) : a_(a), b_(b), c_(c) {}
+ClassA(
+	int aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,
+	int bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+) : a_(aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa),
+	b_(bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb)
+{
+	// Constructor body
+}
+```
+
 ### （不推荐）`.clang-format`
 
 ```yaml
