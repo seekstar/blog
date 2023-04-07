@@ -137,3 +137,69 @@ fn main() {
     println!("{}", f32::a());
 }
 ```
+
+## 已知问题
+
+### Non-lexical lifetimes (NLL)
+
+来源：<https://blog.rust-lang.org/2022/08/05/nll-by-default.html>
+
+```rs
+fn last_or_push<'a>(vec: &'a mut Vec<String>) -> &'a String {
+    if let Some(s) = vec.last() { // borrows vec
+        // returning s here forces vec to be borrowed
+        // for the rest of the function, even though it
+        // shouldn't have to be
+        return s; 
+    }
+    
+    // Because vec is borrowed, this call to vec.push gives
+    // an error!
+    vec.push("".to_string()); // ERROR
+    vec.last().unwrap()
+}
+```
+
+```text
+error[E0502]: cannot borrow `*vec` as mutable because it is also borrowed as immutable
+  --> a.rs:11:5
+   |
+1  | fn last_or_push<'a>(vec: &'a mut Vec<String>) -> &'a String {
+   |                 -- lifetime `'a` defined here
+2  |     if let Some(s) = vec.last() { // borrows vec
+   |                      ---------- immutable borrow occurs here
+...
+6  |         return s; 
+   |                - returning this value requires that `*vec` is borrowed for `'a`
+...
+11 |     vec.push("".to_string()); // ERROR
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^ mutable borrow occurs here
+```
+
+这是因为`s` borrow了`vec`之后，`s`是conditional return的，但是编译器仍然将对`vec`的borrow拓展到所有条件分支了，就导致另一个没有borrow `vec`的分支也被认为borrow了`vec`，就编译报错了。
+
+据说下一代borrow checker polonius可以解决这个问题。现在只能通过推迟对`vec`的borrow绕过这个问题：
+
+```rs
+fn last_or_push<'a>(vec: &'a mut Vec<String>) -> &'a String {
+    if !vec.is_empty() {
+        let s = vec.last().unwrap(); // borrows vec
+        return s; // extends the borrow 
+    }
+    
+    // In this branch, the borrow has never happened, so even
+    // though it is extended, it doesn't cover this call;
+    // the code compiles.
+    //
+    // Note the subtle difference with the previous example:
+    // in that code, the borrow *always* happened, but it was
+    // only *conditionally* returned (but the compiler lost track
+    // of the fact that it was a conditional return).
+    //
+    // In this example, the *borrow itself* is conditional.
+    vec.push("".to_string());
+    vec.last().unwrap()
+}
+
+fn main() { }
+```
