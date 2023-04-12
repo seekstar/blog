@@ -38,6 +38,7 @@ pacman -Qi 包名
 # 包内的所有文件
 pacman -Ql 包名
 # 查看文件由哪个包提供
+# https://bbs.archlinux.org/viewtopic.php?id=90635
 pacman -Qo 相对路径或绝对路径
 ```
 
