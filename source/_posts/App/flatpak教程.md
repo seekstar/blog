@@ -181,6 +181,10 @@ flatpak install io.github.NhekoReborn.Nehko
 
 包名是`org.telegram.desktop`。需要注销重新登录才能在deepin启动器里找到。需要配置代理，用`flatpak run --command=sh`的方法好像没用，貌似要在应用内设置代理。
 
+### 腾讯会议
+
+包名是`com.tencent.wemeet`。启动器里打不开，但是可以通过`flatpak run com.tencent.wemeet`打开。
+
 ### torbrowser-launcher
 
 launcher能打开，但是在系统启动器死活打不开tor browser。。。
