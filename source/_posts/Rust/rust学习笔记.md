@@ -167,6 +167,32 @@ fn main() {
 }
 ```
 
+## struct成员变量默认值
+
+<https://stackoverflow.com/questions/19650265/is-there-a-faster-shorter-way-to-initialize-variables-in-a-rust-struct>
+
+## 生成随机数
+
+用`rand` crate。文档：<https://docs.rs/rand/latest/rand/>。
+
+基础用法：<https://docs.rs/rand/latest/rand/#quick-start>
+
+自带的随机数生成器：<https://docs.rs/rand/latest/rand/rngs/index.html>
+
+如果需要指定随机种子的话，一般`rand::rngs::StdRng`即可满足需求，文档：<https://docs.rs/rand/latest/rand/rngs/struct.StdRng.html>
+
+一些自带的分布：<https://docs.rs/rand/latest/rand/distributions/index.html>
+
+比较常见的均匀分布：<https://docs.rs/rand/latest/rand/distributions/struct.Uniform.html>
+
+## lower_bound / upper_bound
+
+<https://stackoverflow.com/questions/48575866/how-to-get-the-lower-bound-and-upper-bound-of-an-element-in-a-btreeset>
+
+## char -> u8
+
+<https://users.rust-lang.org/t/how-to-convert-char-to-u8/50195>
+
 ## 已知问题
 
 ### Non-lexical lifetimes (NLL)
