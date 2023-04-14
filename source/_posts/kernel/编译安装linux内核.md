@@ -236,6 +236,8 @@ done
 
 ## 设置默认内核
 
+### grubby
+
 CentOS使用grubby来管理启动项，因此需要使用grubby来设置默认内核：
 
 ```shell
@@ -258,9 +260,13 @@ sudo grubby --default-index
 sudo grubby --remove-kernel=kernel-path
 ```
 
-如果可以与GRUB菜单交互，那么也可以这样：{% post_link Linux/'GRUB菜单记住上次的选择的内核' %}
-
 参考：<https://www.golinuxcloud.com/grubby-command-examples/>
+
+### 设置GRUB默认项
+
+[Ubuntu 切换系统默认启动内核](https://blog.csdn.net/cf_wu95/article/details/85984956)
+
+如果可以与GRUB菜单交互，那么也可以这样：{% post_link Linux/'GRUB菜单记住上次的选择的内核' %}
 
 ## 删除旧内核（可选）
 
