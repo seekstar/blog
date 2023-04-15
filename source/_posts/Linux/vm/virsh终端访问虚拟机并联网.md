@@ -23,7 +23,6 @@ date: 2021-08-08 05:18:41
   // 如果要让虚拟机可以迁移到其他宿主机上，要把这个删掉
   <cpu mode='host-passthrough' migratable='off'>
     <cache mode='passthrough'/>
-    <feature policy='disable' name='lahf_lm'/>
   </cpu>
   <os>  
     <type arch='x86_64'>hvm</type>
