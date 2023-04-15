@@ -11,8 +11,14 @@ date: 2021-01-21 18:55:15
 
 ## 下载操作系统镜像
 
-可以用中科大的源下载镜像：<http://mirrors.ustc.edu.cn/>
-找到要下载的镜像后，右键该链接，点击复制链接，然后到服务器上用wget下载之即可。
+可以在国内的镜像源下载。常用的有：
+
+- 中科大源：<http://mirrors.ustc.edu.cn/>
+- 清华TUNA源：<https://mirrors.tuna.tsinghua.edu.cn/>
+
+CentOS的镜像一般在镜像源的`BaseOS/x86_64/iso`下面。比如`CentOS 9-stream`的ISO在这里：<https://mirrors.tuna.tsinghua.edu.cn/centos-stream/9-stream/BaseOS/x86_64/iso/>
+
+找到要下载的镜像后，右键该链接，点击复制链接，然后到服务器上用wget下载之即可。wget 403的话也可以尝试用`curl 链接 > xxx.iso`下载。
 
 ## 安装qemu
 
@@ -90,17 +96,21 @@ sudo virsh net-start default
 然后就可以开始安装了：
 
 ```shell
-virt-install --name=centos8 --memory=1024 --vcpus=4 --os-type=linux --os-variant=rhel8.4 --location=/home/searchstar/Downloads/CentOS-8.4.2105-x86_64-dvd1.iso --disk path=centos.img,size=100 --graphics=none --console=pty,target_type=serial --extra-args="console=tty0 console=ttyS0"
+virt-install --name=centos8 --memory=1024 --vcpus=4 --os-variant=rhel8.4 --location=/home/searchstar/Downloads/CentOS-8.4.2105-x86_64-dvd1.iso --disk path=centos.img,size=100 --graphics=none --console=pty,target_type=serial --extra-args="console=tty0 console=ttyS0"
 ```
+
+`--os-type=linux`已经deprecated了。
 
 os-variant不填也可以。其取值范围可以通过`osinfo-query os`查看，`osinfo-query`在`libosinfo-bin`包中。
 
-注意虚拟机deepin不支持命令行安装，会报错：
+注意虚拟机deepin以及CentOS的`-boot`后缀的镜像不能用这种方式安装，会报错：
 
 ```text
 ERROR    验证安装位置出错：Could not find an installable distribution at 'deepin-desktop-community-20.2.2-amd64.iso'
 The location must be the root directory of an install tree.
 ```
+
+CentOS的的`-dvd1`镜像没有这个问题。
 
 安装界面：
 
