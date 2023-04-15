@@ -22,17 +22,23 @@ mv /etc/yum.repos.d /etc/yum.repos.d-$(date +%Y.%m.%d.%H:%M:%S.%N)
 
 ```shell
 mkdir /etc/yum.repos.d
+
+# tuna
+mirror=https://mirrors.tuna.tsinghua.edu.cn/centos-stream
+# aliyun
+# mirror=https://mirrors.aliyun.com/centos-stream
+
 cat > /etc/yum.repos.d/centos.repo <<EOF
 [baseos]
 name=CentOS Stream \$releasever - BaseOS
-baseurl=https://mirrors.tuna.tsinghua.edu.cn/centos-stream/\$releasever/BaseOS/\$basearch/os/
+baseurl=$mirror/\$stream/BaseOS/\$basearch/os/
 gpgcheck=1
 enabled=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
 
 [appstream]
 name=CentOS Stream \$releasever - AppStream
-baseurl=https://mirrors.tuna.tsinghua.edu.cn/centos-stream/\$releasever/AppStream/\$basearch/os/
+baseurl=$mirror/\$stream/AppStream/\$basearch/os/
 gpgcheck=1
 enabled=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
@@ -41,18 +47,19 @@ EOF
 cat > /etc/yum.repos.d/centos-addons.repo <<EOF
 [extras-common]
 name=CentOS Stream \$releasever - Extras packages
-baseurl=https://mirrors.tuna.tsinghua.edu.cn/centos-stream/SIGs/\$releasever/extras/\$basearch/extras-common/
+baseurl=$mirror/SIGs/\$stream/extras/\$basearch/extras-common/
 gpgcheck=1
 enabled=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-SIG-Extras-SHA512
 EOF
 ```
 
-然后设置`$releasever`为`9-stream`:
+然后将`$releasever`设置为`9`，将`$stream`设置为`9-stream`:
 
 ```shell
 # https://donghao.org/2015/04/30/the-value-of-releasever-for-yum/
-echo 9-stream > /etc/yum/vars/releasever
+echo 9 > /etc/yum/vars/releasever
+echo 9-stream > /etc/yum/vars/stream
 ```
 
 ```shell
@@ -79,6 +86,68 @@ rpmdb --rebuilddb
 ```
 
 注意，CentOS 9 stream创建的XFS分区会引入与旧内核不兼容的新特性：<https://bugzilla.redhat.com/show_bug.cgi?id=2046431>。不过从CentOS 8 stream升级到CentOS 9 stream不会导致在已有的分区中引入该新特性。
+
+### epel
+
+```shell
+# /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-9
+yum install epel-release
+
+# tuna
+mirror=https://mirrors.tuna.tsinghua.edu.cn/epel
+# aliyun
+# mirror=https://mirrors.aliyun.com/epel
+
+cat > /etc/yum.repos.d/epel.repo <<EOF
+[epel]
+name=Extra Packages for Enterprise Linux \$releasever - \$basearch
+baseurl=$mirror/\$releasever/Everything/\$basearch/
+enabled=1
+gpgcheck=1
+countme=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-\$releasever
+
+[epel-debuginfo]
+name=Extra Packages for Enterprise Linux \$releasever - \$basearch - Debug
+baseurl=$mirror/\$releasever/Everything/\$basearch/debug/
+enabled=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-\$releasever
+gpgcheck=1
+
+[epel-source]
+name=Extra Packages for Enterprise Linux \$releasever - \$basearch - Source
+baseurl=$mirror/\$releasever/Everything/source/tree/
+enabled=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-\$releasever
+gpgcheck=1
+EOF
+
+cat > /etc/yum.repos.d/epel-next.repo <<EOF
+[epel-next]
+name=Extra Packages for Enterprise Linux \$releasever - Next - \$basearch
+baseurl=$mirror/next/\$releasever/Everything/\$basearch/
+enabled=1
+gpgcheck=1
+countme=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-\$releasever
+
+[epel-next-debuginfo]
+name=Extra Packages for Enterprise Linux \$releasever - Next - \$basearch - Debug
+baseurl=$mirror/next/\$releasever/Everything/\$basearch/debug/
+enabled=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-\$releasever
+gpgcheck=1
+
+[epel-next-source]
+name=Extra Packages for Enterprise Linux \$releasever - Next - \$basearch - Source
+baseurl=$mirror/next/\$releasever/Everything/source/tree/
+enabled=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-\$releasever
+gpgcheck=1
+EOF
+
+yum update --allowerasing
+```
 
 ### 事务测试失败
 
