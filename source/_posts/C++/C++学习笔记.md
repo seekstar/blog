@@ -966,3 +966,71 @@ std::uintmax_t remove_all(const std::filesystem::path& p);
 ```
 
 文档：<https://en.cppreference.com/w/cpp/filesystem/remove>
+
+## boost
+
+### program_options
+
+可以处理命令行参数。
+
+官方文档：<https://www.boost.org/doc/libs/1_82_0/doc/html/program_options.html>
+
+```shell
+# Debian 11
+sudo apt install libboost-program-options-dev
+# Arch Linux
+sudo pacman -S boost
+```
+
+例子：
+
+```cpp
+#include <iostream>
+#include <boost/program_options.hpp>
+
+int main(int argc, char **argv) {
+	namespace po = boost::program_options;
+	po::options_description desc("Available options");
+	std::string format;
+	bool use_direct_reads;
+	std::string db_path;
+	desc.add_options()
+		("help", "Print help message")
+		("cleanup,c", "Empty the directories first.")
+		("format,f", po::value<std::string>(&format)->default_value("ycsb"), "Trace format: plain/ycsb")
+		("use_direct_reads", po::value<bool>(&use_direct_reads)->default_value(true), "")
+		("db_path", po::value<std::string>(&db_path)->required(), "Path to database")
+	;
+	po::variables_map vm;
+	po::store(po::parse_command_line(argc, argv, desc), vm);
+	if (vm.count("help")) {
+		std::cerr << desc << std::endl;
+		return 1;
+	}
+	po::notify(vm);
+
+	if (vm.count("cleanup")) {
+		std::cerr << "cleanup\n";
+	}
+	std::cerr << format << std::endl;
+	std::cerr << "use_direct_reads: " << use_direct_reads << std::endl;
+	std::cerr << "db_path: " << db_path << std::endl;
+	return 0;
+}
+```
+
+```shell
+g++ program-options.cpp -lboost_program_options -o program-options
+./program-options --help
+```
+
+```text
+Available options:
+  --help                      Print help message
+  -c [ --cleanup ]            Empty the directories first.
+  -f [ --format ] arg (=ycsb) Trace format: plain/ycsb
+  --use_direct_reads arg (=1)
+  --db_path arg               Path to database
+```
+
+参考文献：<https://stackoverflow.com/questions/5395503/required-and-optional-arguments-using-boost-library-program-options>
