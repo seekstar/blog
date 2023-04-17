@@ -55,6 +55,35 @@ rm ~/.cargo/.package-cache
 
 <https://stackoverflow.com/questions/47565203/cargo-build-hangs-with-blocking-waiting-for-file-lock-on-the-registry-index-a#answer-53066206>
 
+## 标准库
+
+### 字符串成员函数
+
+- trim
+去掉前后空格。
+- parse
+把字符串转成特定类型（通过要被赋值给的变量确定？）
+
+### 排序
+
+复杂度稳定的排序用`sort_by`：<https://doc.rust-lang.org/std/primitive.slice.html#method.sort_by>
+
+复杂度不稳定但是常数小的排序用`sort_unstable_by`：<https://doc.rust-lang.org/std/primitive.slice.html#method.sort_unstable_by>
+
+### 多线程
+
+原子量：<https://doc.rust-lang.org/std/sync/atomic/index.html>
+
+## Crates
+
+enum_iterator: <https://docs.rs/enum-iterator/latest/enum_iterator/>
+
+可以获取enum的可能取值个数。
+
+num-derive: <https://docs.rs/num-derive/latest/num_derive/>
+
+可以把enum转成基本类型。
+
 ## 语法
 
 [Rust for循环](https://www.yiibai.com/rust/rust-for-loop.html)
@@ -97,15 +126,6 @@ let reader = BufReader::new(file);
 ```
 
 参考：[在 Rust 中读取文件的 4 种方法](https://blog.csdn.net/qq_29607687/article/details/125438652)
-
-## 常见函数
-
-### 字符串成员函数
-
-- trim
-去掉前后空格。
-- parse
-把字符串转成特定类型（通过要被赋值给的变量确定？）
 
 ## C语言字符串转String
 
@@ -192,6 +212,17 @@ fn main() {
 ## char -> u8
 
 <https://users.rust-lang.org/t/how-to-convert-char-to-u8/50195>
+
+## 让main函数兼容多种Error
+
+```rs
+use std::error::Error;
+fn main() -> Result<(), Box<dyn Error>> {
+```
+
+## Module
+
+<https://doc.rust-lang.org/book/ch07-05-separating-modules-into-different-files.html>
 
 ## 已知问题
 
