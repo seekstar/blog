@@ -188,6 +188,10 @@ cout << (const void*)char_pointer << endl;
 
 ## 多线程
 
+### `atomic`不能用`vector`存储
+
+因为vector在倍增的时候需要移动元素，而atomic不是move constructable的，所以atomic不能用vector存储。但是可以用`std::deque`存储，因为它没有倍增的操作。
+
 ### 睡眠
 
 参考：<https://www.cnblogs.com/alanlvee/p/5152936.html>
