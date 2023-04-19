@@ -57,6 +57,12 @@ rm ~/.cargo/.package-cache
 
 ## 标准库
 
+### `Vec<u8>` -> `String`
+
+<https://stackoverflow.com/questions/19076719/how-do-i-convert-a-vector-of-bytes-u8-to-a-string>
+
+<https://doc.rust-lang.org/stable/std/string/struct.String.html#method.from_utf8>
+
 ### 字符串成员函数
 
 - trim
@@ -83,6 +89,8 @@ rm ~/.cargo/.package-cache
 {% post_link Rust/'rust存取一个含有borrowed域的结构体' %}
 
 <https://serde.rs/attr-skip-serializing.html>
+
+<https://github.com/serde-rs/json#operating-on-untyped-json-values>
 
 ### 其他
 
@@ -126,7 +134,31 @@ num-derive: <https://docs.rs/num-derive/latest/num_derive/>
 
 - {% post_link Rust/'rust print固定宽度左边补零' %}
 
-- [Rust编程知识拾遗：Rust 编程，读取命令行参数](https://blog.csdn.net/lcloveyou/article/details/105595040)
+### 读取命令行参数
+
+```rs
+use std::io;
+use std::env;
+use std::error::Error;
+
+fn main() -> Result<(), Box<dyn Error>> {
+    let mut args = env::args();
+    let arg0 = args.next().unwrap();
+    // args.len(): Returns the exact remaining length of the iterator.
+    if args.len() != 1 {
+        eprintln!("{} dump-file", arg0);
+        return Err(Box::new(io::Error::new(
+            io::ErrorKind::Other,
+            "Invalid arguments",
+        )));
+    }
+    let file_path = args.next().unwrap();
+    println!("{}", file_path);
+    Ok(())
+}
+```
+
+参考：[Rust编程知识拾遗：Rust 编程，读取命令行参数](https://blog.csdn.net/lcloveyou/article/details/105595040)
 
 ### 从文件中逐行读取
 
@@ -233,6 +265,21 @@ fn main() -> Result<(), Box<dyn Error>> {
 ## Module
 
 <https://doc.rust-lang.org/book/ch07-05-separating-modules-into-different-files.html>
+
+## 条件编译
+
+官方文档：<https://doc.rust-lang.org/reference/conditional-compilation.html>
+
+<https://stackoverflow.com/questions/29857002/how-to-define-test-only-dependencies>
+
+仅在测试时derive: `#[cfg_attr(test, derive(Deserialize))]`。来源：<https://www.reddit.com/r/rust/comments/nwywqx/conditionally_derive_for_integration_tests/>
+
+仅在测试时`impl`:
+
+```rs
+#[cfg(test)]
+impl Default for Status {
+```
 
 ## 已知问题
 
