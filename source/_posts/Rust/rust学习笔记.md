@@ -76,6 +76,16 @@ rm ~/.cargo/.package-cache
 
 ## Crates
 
+### serde
+
+{% post_link Rust/'rust serde deserialize borrowed member' %}
+
+{% post_link Rust/'rust存取一个含有borrowed域的结构体' %}
+
+<https://serde.rs/attr-skip-serializing.html>
+
+### 其他
+
 enum_iterator: <https://docs.rs/enum-iterator/latest/enum_iterator/>
 
 可以获取enum的可能取值个数。
