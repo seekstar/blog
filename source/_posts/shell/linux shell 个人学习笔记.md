@@ -353,38 +353,6 @@ hexdump -C FileName > hex.out
 time 命令
 ```
 
-### 去重
-
-参考网站：https://www.cnblogs.com/rwxwsblog/p/4564216.html
-例如txt中有
-
-```
-jason
-jason
-jason
-fffff
-jason
-```
-
-执行以下命令
-
-```shell
-sort -u txt
-```
-
-输出
-
-```text
-fffff
-jason
-```
-
-输出到文件
-
-```shell
-sort -u txt -o txt1
-```
-
 ### 查看8进制文件权限
 
 参考：http://novell.me/Linux/201410/stat-get-file-permission-with-octal-numb.html
@@ -682,6 +650,57 @@ less -N 文件路径
 
 来源：<https://stackoverflow.com/questions/40974170/how-can-i-ignore-line-endings-when-comparing-files>
 
+### sort
+
+`-k列号`: 按这一列排序。列号从1开始。
+
+`-r`: 逆序
+
+`-n`: `--numeric-sort`。按照数字排序。默认是按照字符串排序。
+
+`-o 文件`: 输出到文件。默认是输出到stdout的。
+
+#### 排序
+
+参考：<https://stackoverflow.com/a/17048248>
+
+#### 去重
+
+参考网站：<https://www.cnblogs.com/rwxwsblog/p/4564216.html>
+
+例如txt中有
+
+```text
+jason
+jason
+jason
+fffff
+jason
+```
+
+执行以下命令
+
+```shell
+sort -u txt
+```
+
+输出
+
+```text
+fffff
+jason
+```
+
+输出到文件
+
+```shell
+sort -u txt -o txt1
+```
+
+### join
+
+<https://www.geeksforgeeks.org/join-command-linux/>
+
 ### zsh不共享历史
 
 `zsh`特性比bash丰富一些。zsh默认会在不同的会话之间共享历史，禁用这个特性：
@@ -691,14 +710,24 @@ less -N 文件路径
 echo "unsetopt share_history" >> ~/.zshrc
 ```
 
+### awk
+
+[Linux awk 命令](https://m.runoob.com/linux/linux-comm-awk.html)
+
+[AWK 条件语句与循环](https://www.runoob.com/w3cnote/awk-if-loop.html)
+
+#### 求和
+
+```shell
+seq 1 10 | awk '{s+=$1} END {print s}'
+```
+
+来源：<https://stackoverflow.com/questions/450799/shell-command-to-sum-integers-one-per-line>
+
 ## 其他
 
 [linux中怎么用shell显示文件某一行或几行内容](https://blog.csdn.net/mydriverc2/article/details/82623778)
 
 [linux shell 将多行文件转换为一行](https://blog.csdn.net/hjxhjh/article/details/17264739)
-
-[Linux awk 命令](https://m.runoob.com/linux/linux-comm-awk.html)
-
-[AWK 条件语句与循环](https://www.runoob.com/w3cnote/awk-if-loop.html)
 
 `[`和`[[`的区别：<https://stackoverflow.com/questions/3427872/whats-the-difference-between-and-in-bash>
