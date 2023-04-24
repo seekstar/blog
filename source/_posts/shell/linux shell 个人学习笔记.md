@@ -470,6 +470,10 @@ convert a.png b.png -compress jpeg -resize 1240 \
 
 ### du
 
+`-d数字`: 目录层数。0表示当前目录，1表示当前目录下的所有文件和子目录，以此类推。
+
+`--all`: 显示文件大小。默认只显示目录大小。
+
 - 查看当前目录下所有文件夹的大小
 
 ```shell
@@ -485,6 +489,14 @@ du -sh
 ```
 
 `-s`是`--summarize`的缩写。
+
+- 按大小排序
+
+```shell
+du -hd 1 --all 目录 | sort -h
+```
+
+来源：<https://serverfault.com/questions/62411/how-can-i-sort-du-h-output-by-size>
 
 参考：<https://jingyan.baidu.com/article/ca2d939d7867e0eb6c31ce80.html>
 
