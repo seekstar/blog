@@ -112,6 +112,14 @@ num-derive: <https://docs.rs/num-derive/latest/num_derive/>
 
 这里指匹配所有的Err，不管里面是啥。
 
+<https://users.rust-lang.org/t/calling-function-in-struct-field-requires-extra-parenthesis/14214/2>
+
+### 约束不同类型的associated type相等
+
+这是一个未实现的特性：<https://github.com/rust-lang/rust/issues/20041>
+
+但是可以绕过去：<https://stackoverflow.com/questions/66359551/alternative-to-equality-constraints-for-associated-types>
+
 ## I/O
 
 - {% post_link Rust/'Rust文件操作' %}
@@ -199,6 +207,12 @@ fn main() {
     println!("{}", f32::a());
 }
 ```
+
+相关：
+
+<https://stackoverflow.com/questions/44445730/how-to-call-a-method-when-a-trait-and-struct-use-the-same-method-name>
+
+<https://users.rust-lang.org/t/box-with-a-trait-object-requires-static-lifetime/35261>
 
 ## 获得`Vec`里多个元素的mutable reference
 
