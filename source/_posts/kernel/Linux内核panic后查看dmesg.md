@@ -36,6 +36,8 @@ core_collector makedumpfile -c -l --message-level 1 -d 31
 
 即`message-level`前面应该有两个`-`。
 
+系统会自动为内核生成对应的`/boot/initramfs-xxxdump.img`。如果新安装了自己编译的内核，那么重启之后系统也会自动给它生成对应的`initramfs-xxxdump.img`。
+
 ## 手动触发panic
 
 ```shell

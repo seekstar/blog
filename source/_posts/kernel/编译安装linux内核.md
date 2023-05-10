@@ -242,6 +242,7 @@ CentOS使用grubby来管理启动项，因此需要使用grubby来设置默认�
 
 ```shell
 sudo grubby --add-kernel=/boot/vmlinuz-xxxx --title="随便写点啥"
+# 然后需要用grub2-mkconfig更新一下grub.cfg，grubby的args和root才会正常
 sudo grubby --set-default=/boot/vmlinuz-xxxx
 ```
 

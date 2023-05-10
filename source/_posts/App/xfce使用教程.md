@@ -8,9 +8,27 @@ XFCE是一款轻量级桌面环境，但是上手并不容易。本文以ArchLin
 
 ## 安装
 
+### ArchLinux
+
 ```shell
 sudo pacman -S xfce4
 ```
+
+### CentOS 9 stream
+
+```shell
+sudo yum groupinstall Xfce
+sudo yum install sddm
+sudo systemctl enable sddm --now
+```
+
+设置默认进入桌面环境：
+
+```shell
+sudo systemctl set-default graphical.target
+```
+
+参考：[Centos7更改默认启动桌面（或命令行）模式](https://www.shuzhiduo.com/A/mo5k1m8Ezw/)
 
 ## 设置快捷键
 
