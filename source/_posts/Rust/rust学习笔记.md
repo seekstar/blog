@@ -80,6 +80,45 @@ rm ~/.cargo/.package-cache
 
 原子量：<https://doc.rust-lang.org/std/sync/atomic/index.html>
 
+### Entry API
+
+以BTreeMap的Entry API为例。基础用法见标准库文档：<https://doc.rust-lang.org/stable/std/collections/struct.BTreeMap.html#method.entry>
+
+这里介绍如何用它实现modify and optionally remove：
+
+```rs
+use std::collections::btree_map::{self, BTreeMap};
+
+fn pop(m: &mut BTreeMap<u32, Vec<u32>>, key: u32) -> Option<u32> {
+    match m.entry(key) {
+        btree_map::Entry::Occupied(mut entry) => {
+            let values = entry.get_mut();
+            let ret = values.pop();
+            if values.is_empty() {
+                entry.remove();
+            }
+            ret
+        }
+        btree_map::Entry::Vacant(_) => {
+            None
+        }
+    }    
+}
+fn main() {
+    let mut m: BTreeMap<u32, Vec<u32>> = BTreeMap::new();
+    m.insert(1, vec![2, 3]);
+    assert_eq!(pop(&mut m, 1), Some(3));
+    assert_eq!(pop(&mut m, 1), Some(2));
+    assert!(m.is_empty());
+}
+```
+
+参考：
+
+<https://doc.rust-lang.org/stable/std/collections/btree_map/enum.Entry.html>
+
+<https://doc.rust-lang.org/stable/std/collections/btree_map/struct.VacantEntry.html>
+
 ## Crates
 
 ### serde
