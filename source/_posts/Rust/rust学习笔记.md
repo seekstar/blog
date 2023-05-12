@@ -57,12 +57,6 @@ rm ~/.cargo/.package-cache
 
 ## 标准库
 
-### `Vec<u8>` -> `String`
-
-<https://stackoverflow.com/questions/19076719/how-do-i-convert-a-vector-of-bytes-u8-to-a-string>
-
-<https://doc.rust-lang.org/stable/std/string/struct.String.html#method.from_utf8>
-
 ### 字符串成员函数
 
 - trim
@@ -141,6 +135,32 @@ num-derive: <https://docs.rs/num-derive/latest/num_derive/>
 
 可以把enum转成基本类型。
 
+## 类型转换
+
+{% post_link Rust/'Rust字节数组和整型互转' %}
+
+### `Vec<u8>` -> `String`
+
+<https://stackoverflow.com/questions/19076719/how-do-i-convert-a-vector-of-bytes-u8-to-a-string>
+
+<https://doc.rust-lang.org/stable/std/string/struct.String.html#method.from_utf8>
+
+### char -> u8
+
+<https://users.rust-lang.org/t/how-to-convert-char-to-u8/50195>
+
+### C语言字符串转String
+
+原文：<https://stackoverflow.com/questions/24145823/how-do-i-convert-a-c-string-into-a-rust-string-and-back-via-ffi>
+
+```rs
+use std::ffi::CStr;
+let c_buf: *const c_char = unsafe { hello() };
+let c_str: &CStr = unsafe { CStr::from_ptr(c_buf) };
+let str_slice: &str = c_str.to_str().unwrap();
+let str_buf: String = str_slice.to_owned();  // if necessary
+```
+
 ## 语法
 
 [Rust for循环](https://www.yiibai.com/rust/rust-for-loop.html)
@@ -215,18 +235,6 @@ let reader = BufReader::new(file);
 ```
 
 参考：[在 Rust 中读取文件的 4 种方法](https://blog.csdn.net/qq_29607687/article/details/125438652)
-
-## C语言字符串转String
-
-原文：<https://stackoverflow.com/questions/24145823/how-do-i-convert-a-c-string-into-a-rust-string-and-back-via-ffi>
-
-```rs
-use std::ffi::CStr;
-let c_buf: *const c_char = unsafe { hello() };
-let c_str: &CStr = unsafe { CStr::from_ptr(c_buf) };
-let str_slice: &str = c_str.to_str().unwrap();
-let str_buf: String = str_slice.to_owned();  // if necessary
-```
 
 ## trait
 
@@ -303,10 +311,6 @@ fn main() {
 ## lower_bound / upper_bound
 
 <https://stackoverflow.com/questions/48575866/how-to-get-the-lower-bound-and-upper-bound-of-an-element-in-a-btreeset>
-
-## char -> u8
-
-<https://users.rust-lang.org/t/how-to-convert-char-to-u8/50195>
 
 ## 让main函数兼容多种Error
 
