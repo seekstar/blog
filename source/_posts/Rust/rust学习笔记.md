@@ -70,10 +70,6 @@ rm ~/.cargo/.package-cache
 
 复杂度不稳定但是常数小的排序用`sort_unstable_by`：<https://doc.rust-lang.org/std/primitive.slice.html#method.sort_unstable_by>
 
-### 多线程
-
-原子量：<https://doc.rust-lang.org/std/sync/atomic/index.html>
-
 ### Entry API
 
 以BTreeMap的Entry API为例。基础用法见标准库文档：<https://doc.rust-lang.org/stable/std/collections/struct.BTreeMap.html#method.entry>
@@ -117,9 +113,9 @@ fn main() {
 
 ### serde
 
-{% post_link Rust/'rust serde deserialize borrowed member' %}
+{% post_link Rust/crates/'rust serde deserialize borrowed member' %}
 
-{% post_link Rust/'rust存取一个含有borrowed域的结构体' %}
+{% post_link Rust/crates/'rust存取一个含有borrowed域的结构体' %}
 
 <https://serde.rs/attr-skip-serializing.html>
 
@@ -137,7 +133,7 @@ num-derive: <https://docs.rs/num-derive/latest/num_derive/>
 
 ## 类型转换
 
-{% post_link Rust/'Rust字节数组和整型互转' %}
+{% post_link Rust/std/'Rust字节数组和整型互转' %}
 
 ### `Vec<u8>` -> `String`
 
@@ -181,25 +177,25 @@ let str_buf: String = str_slice.to_owned();  // if necessary
 
 ## I/O
 
-- {% post_link Rust/'Rust文件操作' %}
+- {% post_link Rust/IO/'Rust文件操作' %}
 
-- {% post_link Rust/'rust格式化打印到文件' %}
+- {% post_link Rust/IO/'rust格式化打印到文件' %}
 
-- {% post_link Rust/'算法竞赛中rust的一种比较健壮的读入' %}
+- {% post_link Rust/IO/'算法竞赛中rust的一种比较健壮的读入' %}
 
-- {% post_link Rust/'rust识别EOF' %}
+- {% post_link Rust/IO/'rust识别EOF' %}
 
-- {% post_link Rust/'rust-BufReader逐字符读取' %}
+- {% post_link Rust/IO/'rust-BufReader逐字符读取' %}
 
-- {% post_link Rust/'rust单行读取多个整数' %}
+- {% post_link Rust/IO/'rust单行读取多个整数' %}
 
-- {% post_link Rust/'rust从一行中读取数组' %}
+- {% post_link Rust/IO/'rust从一行中读取数组' %}
 
-- {% post_link Rust/'rust用BufReader加速stdin读取' %}
+- {% post_link Rust/IO/'rust用BufReader加速stdin读取' %}
 
-- {% post_link Rust/'rust格式控制' %}
+- {% post_link Rust/IO/'rust格式控制' %}
 
-- {% post_link Rust/'rust print固定宽度左边补零' %}
+- {% post_link Rust/IO/'rust print固定宽度左边补零' %}
 
 ### 读取命令行参数
 
@@ -260,6 +256,14 @@ fn main() {
 <https://stackoverflow.com/questions/44445730/how-to-call-a-method-when-a-trait-and-struct-use-the-same-method-name>
 
 <https://users.rust-lang.org/t/box-with-a-trait-object-requires-static-lifetime/35261>
+
+### 多线程
+
+原子量：<https://doc.rust-lang.org/std/sync/atomic/index.html>
+
+{% post_link Rust/crates/'rust scoped thread pool' %}
+
+{% post_link Rust/crates/'rust scoped thread' %}
 
 ## 获得`Vec`里多个元素的mutable reference
 

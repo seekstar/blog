@@ -28,4 +28,4 @@ assert_eq!(error.kind(), io::ErrorKind::InvalidInput);
 
 ## 其他
 
-{% post_link Rust/'rust格式化打印到文件' %}
+{% post_link Rust/IO/'rust格式化打印到文件' %}
