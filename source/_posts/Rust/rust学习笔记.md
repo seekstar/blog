@@ -131,7 +131,17 @@ num-derive: <https://docs.rs/num-derive/latest/num_derive/>
 
 可以把enum转成基本类型。
 
+## API guidelines
+
+### Generic reader/writer functions take R: Read and W: Write by value (C-RW-VALUE)
+
+<https://rust-lang.github.io/api-guidelines/interoperability.html#generic-readerwriter-functions-take-r-read-and-w-write-by-value-c-rw-value>
+
+[What is the reason for C-RW-VALUE?](https://github.com/rust-lang/api-guidelines/issues/174)
+
 ## 类型转换
+
+### int <-> `[u8]`
 
 {% post_link Rust/std/'Rust字节数组和整型互转' %}
 
@@ -257,13 +267,57 @@ fn main() {
 
 <https://users.rust-lang.org/t/box-with-a-trait-object-requires-static-lifetime/35261>
 
-### 多线程
+## 多线程
 
 原子量：<https://doc.rust-lang.org/std/sync/atomic/index.html>
+
+读写锁：<https://doc.rust-lang.org/stable/std/sync/struct.RwLock.html>
 
 {% post_link Rust/crates/'rust scoped thread pool' %}
 
 {% post_link Rust/crates/'rust scoped thread' %}
+
+### channel
+
+标准库里的mpsc对应的`select!`已经deprecated了。可以考虑使用crossbeam-channel: <https://docs.rs/crossbeam-channel/latest/crossbeam_channel/>
+
+select: <https://docs.rs/crossbeam-channel/latest/crossbeam_channel/macro.select.html>
+
+## 错误处理
+
+### 让main函数兼容多种Error
+
+```rs
+use std::error::Error;
+fn main() -> Result<(), Box<dyn Error>> {
+```
+
+### 将多种Error通过channel发送出去
+
+`Box<dyn Error>`是没法通过channel发送出去的。可以枚举出有哪些种类的Error，然后手搓一个enum表示它，这样就可以发送出去了：
+
+```rs
+enum FlushError {
+    Bincode(bincode::Error),
+    Io(io::Error),
+}
+impl From<bincode::Error> for FlushError {
+    fn from(e: bincode::Error) -> Self {
+        Self::Bincode(e)
+    }
+}
+impl From<io::Error> for FlushError {
+    fn from(e: io::Error) -> Self {
+        Self::Io(e)
+    }
+}
+```
+
+参考：
+
+<https://fettblog.eu/rust-enums-wrapping-errors/>
+
+<https://stackoverflow.com/questions/71977024/rust-cannot-send-unwrapped-result-data-across-await-point>
 
 ## 获得`Vec`里多个元素的mutable reference
 
@@ -315,13 +369,6 @@ fn main() {
 ## lower_bound / upper_bound
 
 <https://stackoverflow.com/questions/48575866/how-to-get-the-lower-bound-and-upper-bound-of-an-element-in-a-btreeset>
-
-## 让main函数兼容多种Error
-
-```rs
-use std::error::Error;
-fn main() -> Result<(), Box<dyn Error>> {
-```
 
 ## Module
 
