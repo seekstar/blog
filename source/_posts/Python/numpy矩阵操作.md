@@ -14,6 +14,7 @@ import numpy as np
 ```
 
 ## 矩阵定义
+
 $$
 \left[
 	\begin{matrix}
@@ -22,13 +23,21 @@ $$
 	\end{matrix}
 \right]
 $$
+
 ```py
 a = np.array([[1,2],[3,4]])
 ```
+
+## reshape
+
+<https://numpy.org/doc/stable/reference/generated/numpy.reshape.html>
+
 ## 求行列式
+
 ```py
 np.linalg.det(a)
 ```
+
 LINear ALGebra
 
 ## 矩阵拼接
@@ -42,7 +51,7 @@ res = np.vstack([res, [4, 5, 6]])
 res
 ```
 
-```
+```text
 array([[1., 2., 3.],
        [4., 5., 6.]])
 ```
@@ -60,7 +69,31 @@ m.mean(axis=1) # 将第1维干掉。实际上就是求每行的平均数
 
 要求标准差的话，把上面的`mean`换成`std`即可。
 
-# 参考文献
+## 每隔n个元素求均值
+
+```py
+import numpy as np
+a = np.array([1, 4, 2, 3, 5, 6])
+n = 2
+a.reshape(-1, n).mean(axis=1)
+```
+
+如果长度不是n的倍数的话，只能这样：
+
+```py
+def mean_every_n(a, n):
+	split = len(a) - len(a) % n
+	res = a[0:split].reshape(-1, n).mean(axis=1)
+	if split != len(a):
+		res = np.append(res, a[split:].mean())
+	return res
+mean_every_n(a, 4)
+```
+
+参考：<https://www.geeksforgeeks.org/averaging-over-every-n-elements-of-a-numpy-array/#>
+
+## 参考文献
+
 [python中矩阵的用法](https://www.cnblogs.com/abella/p/10207945.html)
 [numpy创建矩阵常用方法](https://blog.csdn.net/zhouweiyu/article/details/78806711)
 [numpy.mean() 计算矩阵均值](https://blog.csdn.net/chixujohnny/article/details/51106421)
