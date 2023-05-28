@@ -88,3 +88,7 @@ test.groupby(test.index // 3).mean()
 2   7.0  17.0
 3   9.0  19.0
 ```
+
+## 遍历
+
+<https://stackoverflow.com/questions/16476924/how-to-iterate-over-rows-in-a-dataframe-in-pandas>

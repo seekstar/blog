@@ -57,7 +57,7 @@ sorted(li, key = lambda item: item.c, reverse=True)
 
 ## 内置数据结构
 
-- [[Python教学]Python Dictionary完全教学一次搞懂](https://baijiahao.baidu.com/s?id=1694102996150591628&wfr=spider&for=pc)
+- [Python教学: Python Dictionary完全教学一次搞懂](https://baijiahao.baidu.com/s?id=1694102996150591628&wfr=spider&for=pc)
 
 - [Python 列表(List)](https://www.runoob.com/python/python-lists.html)
 
@@ -213,6 +213,14 @@ pip3 install python-dateutil
 #### 矩阵操作
 
 - {% post_link Python/'numpy矩阵操作' %}
+
+#### 等差数列
+
+文档：<https://numpy.org/doc/stable/reference/generated/numpy.linspace.html>
+
+```py
+numpy.linspace(start, stop, num=50, endpoint=True, retstep=False, dtype=None, axis=0)[source]
+```
 
 ### 其他
 
