@@ -19,11 +19,11 @@ date: 2020-02-05 18:10:23
 ```shell
 #!/bin/bash
 if [ condition1 ]; then
-        # Do something
+	# Do something
 elif [ condition2 ]; then
-        # Do something
+	# Do something
 else
-        # Do something
+	# Do something
 fi
 ```
 
@@ -102,18 +102,18 @@ if [ $# = 0 -o $# -gt 2 ]; then
 if [ -z $1 ]; then      #如果没有输入参数，也就是第一个参数的字符串长度为0
     :                          #空语句
 else
-     if [ -e $1 ]; then       #如果文件存在的话
-          if [ -f $1 ]; then   #如果文件是个普通文件？
-               echo $1" is a text file."
-          elif [ -d $1 ]; then #如果文件是个目录文件？
-               echo $1" is a directory."
-          elif [ -c $1 ]; then #如果文件是个字符设备？
-               echo $1" is a char device."
-          elif [ -b $1 ]; then #如果文件是个块设备？
-               echo $1" is a block device."
-          else #否则
-               echo $1" is unknow file."
-     fi
+	if [ -e $1 ]; then       #如果文件存在的话
+		if [ -f $1 ]; then   #如果文件是个普通文件？
+			echo $1" is a text file."
+		elif [ -d $1 ]; then #如果文件是个目录文件？
+			echo $1" is a directory."
+		elif [ -c $1 ]; then #如果文件是个字符设备？
+			echo $1" is a char device."
+		elif [ -b $1 ]; then #如果文件是个块设备？
+			echo $1" is a block device."
+		else #否则
+			echo $1" is unknow file."
+	fi
 fi
 ```
 
@@ -196,7 +196,7 @@ done
 
 ```shell
 if [[ 字符串 =~ 模式 ]]; then
-     echo 字符串中含有模式
+	echo 字符串中含有模式
 fi
 ```
 
@@ -204,7 +204,7 @@ fi
 
 ```shell
 if [[ 2333test233222 =~ test233 ]]; then
-     echo yes;
+	echo yes;
 fi
 ```
 
@@ -247,6 +247,125 @@ bash <<EOF
 whoami
 echo 2333
 EOF
+```
+
+### 数组
+
+来源：<https://www.yiibai.com/bash/bash-array.html>
+
+#### 定义
+
+```shell
+ARRAY_NAME=(element_1st element_2nd element_Nth)
+```
+
+#### 访问某个下标的元素
+
+下标从0开始。
+
+```shell
+echo ${ARRAY_NAME[2]}
+```
+
+#### 访问所有元素
+
+```shell
+# 每个元素一个结果
+echo ${ARRAY_NAME[@]}
+# 每个元素一个结果
+echo ${ARRAY_NAME[*]}
+# 所有元素组成一个结果
+echo "${ARRAY_NAME[*]}"
+```
+
+例如：
+
+```shell
+a=(1 2 3)
+```
+
+这四个都打印`1 2 3`：
+
+```shell
+echo ${a[@]}
+echo "${a[@]}"
+echo ${a[*]}
+echo "${a[*]}"
+```
+
+这三个的输出都一样：
+
+```shell
+for x in ${a[@]}; do
+	echo $x
+done
+for x in "${a[@]}"; do
+	echo $x
+done
+for x in ${a[*]}; do
+	echo $x
+done
+```
+
+输出：
+
+```text
+1
+2
+3
+```
+
+但是这个不同：
+
+```shell
+for x in "${a[*]}"; do
+	echo $x
+done
+```
+
+输出：`1 2 3`
+
+#### 访问slice
+
+```shell
+# 从第m个开始一直到末尾
+${ARRAY_NAME[@]:m}
+# 从第m个开始取n个。下标从0开始。
+${ARRAY_NAME[@]:m:n}
+```
+
+保存为新的数组：
+
+```shell
+SLICED_ARRAY=(${ARRAY_NAME[@]:m:n})
+```
+
+参考：<https://stackoverflow.com/questions/1335815/how-to-slice-an-array-in-bash>
+
+#### 命令行参数
+
+命令行参数也是数组，用法跟上面的差不多：
+
+```shell
+# 访问某参数
+echo $2
+# 所有参数
+echo $@
+echo $*
+# 从第m个参数开始一直取到末尾
+echo ${@:m}
+# 从第m个参数开始取n个参数
+echo ${@:m:n}
+# 参数个数（不含$0）
+echo $#
+```
+
+当数组被用于命令行参数时，会被展开成一个个参数：
+
+```shell
+# 等价于./test.sh 1 2 3
+a=(1 2 3)
+./test.sh ${a[@]}
 ```
 
 ## 用户管理
@@ -403,7 +522,7 @@ lsb_release -a
 
 我的输出：
 
-```
+```text
 No LSB modules are available.
 Distributor ID:	Deepin
 Description:	Deepin 15.11
@@ -454,16 +573,16 @@ printf -v var "%q\n" "hello\world"
 
 ```shell
 convert a.png b.png -compress jpeg -resize 1240x1753 \
-                      -extent 1240x1753 -gravity center \
-                      -units PixelsPerInch -density 150x150 multipage.pdf
+				  -extent 1240x1753 -gravity center \
+				  -units PixelsPerInch -density 150x150 multipage.pdf
 ```
 
 如果不想限定高度，可以
 
 ```shell
 convert a.png b.png -compress jpeg -resize 1240 \
-                      -extent 1240 -gravity center \
-                      -units PixelsPerInch -density 150x150 multipage.pdf
+				  -extent 1240 -gravity center \
+				  -units PixelsPerInch -density 150x150 multipage.pdf
 ```
 
 ## 按命令
