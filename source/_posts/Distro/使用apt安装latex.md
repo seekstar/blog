@@ -12,6 +12,8 @@ date: 2020-02-10 15:40:32
 ```shell
 # pdflatex
 sudo apt install texlive-latex-base
+# biblatex.sty
+sudo apt install texlive-bibtex-extra
 # xkeyval.sty
 sudo apt install texlive-latex-recommended
 # xstring.sty

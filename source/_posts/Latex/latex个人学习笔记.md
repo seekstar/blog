@@ -259,6 +259,8 @@ $$\mathop{\bowtie}\limits_{theta}$$
 
 ## 枚举
 
+[LaTex 解决Itemize和Enumerate的item之间行距过大的问题](https://blog.csdn.net/z_feng12489/article/details/99684143)
+
 ### 编号
 
 使用enumerate。可以自定义enumerate的编号样式。
@@ -341,8 +343,9 @@ $$\mathop{\bowtie}\limits_{theta}$$
 \end{tabular}
 ```
 
-- `|c|`: 居中并且单元格两侧添加竖线。(Centering)
-- hline: 水平线（Horizontal LINE)
+- `c`: Centering，居中。另外两种对齐方式是l: Left, 左对齐，r: Right, 右对齐。
+- `|c|`: 单元格两侧添加竖线。
+- hline: 水平线（Horizontal LINE）
 
 效果
 ![在这里插入图片描述](latex个人学习笔记/20200408133652135.png)
@@ -474,7 +477,7 @@ $$\mathop{\bowtie}\limits_{theta}$$
 
 ![在这里插入图片描述](latex个人学习笔记/20200408143817192.png)
 
-#### 去掉左边的缩进
+### 去掉左边的缩进
 
 默认情况下，tabular左边可能会有缩进，如图
 
@@ -513,6 +516,11 @@ $$\mathop{\bowtie}\limits_{theta}$$
 
 ![在这里插入图片描述](latex个人学习笔记/20210101134058576.png)
 
+### 去掉单元格里面的边距
+
+用`@{}`，例如去掉左边的边距：`\begin{tabular}{@{}lr}`，去掉右边的边距：`\begin{tabular}{lr@{}}`，去掉两边的边距：`\begin{tabular}{@{}lr@{}}`。
+
+来源：<https://www.oomake.com/question/703820>
 
 ## 设置页边距
 
@@ -520,6 +528,12 @@ $$\mathop{\bowtie}\limits_{theta}$$
 \usepackage{geometry}
 \geometry{top=1.5cm,bottom=1.5cm, left=1.5cm, right=1.5cm}
 ```
+
+## 去掉段首缩进
+
+`\noindent`
+
+来源：[latex段落取消缩进](https://blog.csdn.net/weixin_43301333/article/details/122137471)
 
 ## 标签
 
@@ -605,9 +619,42 @@ mpirun -n 20 ./xhpl
 
  左双引号（按两下键盘上1左边的按键）``` `` ```
 
-## Bibliography URL
+## Bibliography
+
+### URL
 
 Bibliography里URL不要用`url = {https://xxx}`的形式，要用`note = {\url{https://xxx}}`的形式，因为有些论文模板不认前者。
+
+### 不cite也列出参考文献
+
+`\nocite{xxx}`来强制列出单个参考文献。`\nocite{*}`强制列出所有参
+考文献。
+
+来源：<https://tex.stackexchange.com/questions/17653/how-to-list-all-bibliography-entries-without-citing>
+
+### 去掉标题
+
+```tex
+\usepackage{etoolbox}
+\patchcmd{\thebibliography}{\section*{\refname}}{}{}{}
+```
+
+来源：<https://tex.stackexchange.com/questions/132646/how-to-remove-the-references-title>
+
+## 去掉页码
+
+在导言区加入：
+
+```tex
+\pagestyle{empty}
+```
+
+## 调整页边距
+
+```tex
+\usepackage{geometry}
+\geometry{a4paper,left=3cm,right=3cm,top=3cm,bottom=3cm}
+```
 
 ## 异常处理
 
