@@ -585,6 +585,20 @@ convert a.png b.png -compress jpeg -resize 1240 \
 				  -units PixelsPerInch -density 150x150 multipage.pdf
 ```
 
+### 生成随机数
+
+```shell
+echo $RANDOM
+```
+
+生成长度为n字节的16进制随机数（最终生成的16进制字符串的长度是2n）：
+
+```shell
+openssl rand -hex n
+```
+
+来源：[Linux Shell产生16进制随机数](https://blog.csdn.net/weixin_30325071/article/details/94910182)
+
 ## 按命令
 
 ### du
