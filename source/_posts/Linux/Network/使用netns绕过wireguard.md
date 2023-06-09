@@ -224,7 +224,7 @@ sudo ip6tables -t mangle -A PREROUTING -s fd00::/64 -j MARK --set-mark 51820
 ### 在netns中访问公网的IPv6地址
 
 ```shell
-$ sudo ip netns exec trojannowg ping ipv6.google.com
+$ sudo ip netns exec $spacename ping ipv6.google.com
 PING ipv6.google.com(nrt20s09-in-x0e.1e100.net (2404:6800:4004:80b::200e)) 56 data bytes
 64 bytes from nrt20s09-in-x0e.1e100.net (2404:6800:4004:80b::200e): icmp_seq=1 ttl=105 time=2.37 ms
 ```
