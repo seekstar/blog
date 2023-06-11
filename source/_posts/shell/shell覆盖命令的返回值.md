@@ -10,7 +10,9 @@ shell里`true`命令的返回值是0，`false`命令的返回值是1，因此如
 ```shell
 Command || true
 ```
+
 如果想覆盖成1，那么
+
 ```shell
 Command && false
 ```
