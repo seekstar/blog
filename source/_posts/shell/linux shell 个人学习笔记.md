@@ -599,6 +599,18 @@ openssl rand -hex n
 
 来源：[Linux Shell产生16进制随机数](https://blog.csdn.net/weixin_30325071/article/details/94910182)
 
+### 提取文件后缀名
+
+```shell
+filename=test.tar.gz
+# gz
+echo ${filename##*.}
+# tar.gz
+echo ${filename#*.}
+```
+
+来源：<https://stackoverflow.com/questions/965053/extract-filename-and-extension-in-bash>
+
 ## 按命令
 
 ### du
