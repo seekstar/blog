@@ -270,10 +270,11 @@ echo ${ARRAY_NAME[2]}
 #### 访问所有元素
 
 ```shell
-# 每个元素一个结果
+# 经实测，bash是每个元素一个不带引号的结果，zsh是每个元素一个带引号的结果
 echo ${ARRAY_NAME[@]}
-# 每个元素一个结果
 echo ${ARRAY_NAME[*]}
+# 每个元素一个带引号的结果
+echo "${ARRAY_NAME[@]}"
 # 所有元素组成一个结果
 echo "${ARRAY_NAME[*]}"
 ```
@@ -281,49 +282,16 @@ echo "${ARRAY_NAME[*]}"
 例如：
 
 ```shell
-a=(1 2 3)
-```
-
-这四个都打印`1 2 3`：
-
-```shell
+a=(1 "2   3")
+# bash 相当于 echo 1 2   3
+# zsh 相当于 echo 1 "2   3"
 echo ${a[@]}
-echo "${a[@]}"
 echo ${a[*]}
+# 相当于 echo 1 "2   3"
+echo "${a[@]}"
+# 相当于 echo "1 2   3"
 echo "${a[*]}"
 ```
-
-这三个的输出都一样：
-
-```shell
-for x in ${a[@]}; do
-	echo $x
-done
-for x in "${a[@]}"; do
-	echo $x
-done
-for x in ${a[*]}; do
-	echo $x
-done
-```
-
-输出：
-
-```text
-1
-2
-3
-```
-
-但是这个不同：
-
-```shell
-for x in "${a[*]}"; do
-	echo $x
-done
-```
-
-输出：`1 2 3`
 
 #### 访问slice
 
@@ -435,6 +403,20 @@ sudo usermod -aG GroupName UserName
 ```shell
 grep GroupName /etc/group
 ```
+
+## `set`
+
+bash可以用`set`来设置一些模式。
+
+### 子命令返回值不为0时退出
+
+`set -e`
+
+但是要注意的是，对于用管道连接起来的几个命令，最终的exit code似乎是管道里的最后一个命令。例如对于`command A | command B`，如果`command A`出错返回非0，但是`command B`正常退出，那么这个组合命令的exit code会被设置成0，这样`set -e`就不会生效。
+
+如果要让被管道组合起来命令中任何一个命令返回非0都会退出，则需要加上`set -o pipefail`，其效果是将exit code赋值为被管道组合起来的命令中最后一个返回非0值的命令。
+
+来源：[Get exit status of process that's piped to another](https://unix.stackexchange.com/a/73180/453838)
 
 ## 按应用
 
@@ -610,6 +592,18 @@ echo ${filename#*.}
 ```
 
 来源：<https://stackoverflow.com/questions/965053/extract-filename-and-extension-in-bash>
+
+### 带单位容量转字节数
+
+```shell
+pip3 install humanfriendly
+# 2000
+humanfriendly --parse-size="2 KB"
+# 2048
+humanfriendly --parse-size="2 KiB"
+```
+
+来源：<https://stackoverflow.com/a/46373468>
 
 ## 按命令
 
