@@ -233,15 +233,6 @@ fn main() -> Result<(), Box<dyn Error>> {
 
 参考：[Rust编程知识拾遗：Rust 编程，读取命令行参数](https://blog.csdn.net/lcloveyou/article/details/105595040)
 
-### 从文件中逐行读取
-
-```rs
-let file = File::open("path")?;
-let reader = BufReader::new(file);
-```
-
-参考：[在 Rust 中读取文件的 4 种方法](https://blog.csdn.net/qq_29607687/article/details/125438652)
-
 ## trait
 
 Rust的trait相当于定义了这个类型有哪些接口。定义了trait之后，可以对已知类型实现这个trait:

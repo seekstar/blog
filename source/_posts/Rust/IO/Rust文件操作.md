@@ -4,6 +4,26 @@ date: 2022-10-14 21:27:13
 tags:
 ---
 
+## 文件管理
+
+### `mkdir`
+
+<https://doc.rust-lang.org/std/fs/fn.create_dir.html>
+
+### `mkdir -p`
+
+<https://doc.rust-lang.org/std/fs/fn.create_dir_all.html>
+
+### `mv`
+
+<https://doc.rust-lang.org/std/fs/fn.rename.html>
+
+## 临时文件/目录
+
+<https://crates.io/crates/tempfile>
+
+临时目录：<https://docs.rs/tempfile/latest/tempfile/fn.tempdir.html>
+
 ## 获取文件长度
 
 ```rs
@@ -56,6 +76,26 @@ assert_eq!(v, 0x04030201);
 <https://github.com/rust-lang/rfcs/blob/master/text/2930-read-buf.md>
 
 <https://docs.rs/binread/latest/binread/>
+
+## 从文件中逐行读取
+
+```rs
+let file = File::open("path")?;
+let reader = BufReader::new(file);
+for line in reader.lines() {
+    println!("{}", line?);
+}
+```
+
+值得注意的是，`io::stdin()`也可以这样：
+
+```rs
+for line in io::stdin().lines() {
+    println!("{}", line?);
+}
+```
+
+参考：[在 Rust 中读取文件的 4 种方法](https://blog.csdn.net/qq_29607687/article/details/125438652)
 
 ## 其他
 
