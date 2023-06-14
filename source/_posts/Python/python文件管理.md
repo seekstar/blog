@@ -22,9 +22,11 @@ import os, shutil
 `shutil.move`
 
 - 判断文件是否存在
-`os.path.exists`
+
+[os.path.exists](https://docs.python.org/3/library/os.path.html#os.path.exists)
 
 - 其他
+
 [python遍历目录下的所有文件和目录详细介绍](https://blog.csdn.net/sinat_29957455/article/details/82778306)
 
 检查文件是不是块设备：<https://www.systutorials.com/how-to-check-whether-a-file-of-a-given-path-is-a-block-device-in-python/>

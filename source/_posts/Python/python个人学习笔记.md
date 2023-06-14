@@ -117,6 +117,19 @@ print('xxx', file=sys.stderr)
 
 [python基础之写文件操作](https://blog.csdn.net/jiankang66/article/details/125981793)
 
+### 切换到脚本所在目录
+
+```py
+import sys
+import os
+
+abspath = os.path.abspath(sys.argv[0])
+dname = os.path.dirname(abspath)
+os.chdir(dname)
+```
+
+来源：<https://stackoverflow.com/questions/1432924/python-change-the-scripts-working-directory-to-the-scripts-own-directory>
+
 ## 排序
 
 用`sorted`。
@@ -172,11 +185,24 @@ factorial(10)
 
 <https://docs.python.org/3/library/re.html>
 
+### 执行命令
+
+#### 简单执行命令
+
+```py
+import subprocess
+subprocess.call(['./executable', arg1, arg2])
+```
+
+来源：<https://stackoverflow.com/questions/5788891/execute-a-file-with-arguments-in-python-shell>
+
+#### 获取命令输出
+
+[python的popen函数](https://blog.csdn.net/Z_Stand/article/details/89375589)
+
 ### 其他
 
 - [Python 3 命令行参数](https://www.twle.cn/l/yufei/python30/python-30-command-line-arguments.html)
-
-- 获取命令输出：[python的popen函数](https://blog.csdn.net/Z_Stand/article/details/89375589)
 
 - [python 生成随机数的三种方法](https://blog.csdn.net/robert_chen1988/article/details/82887820)
 
