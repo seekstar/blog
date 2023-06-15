@@ -4,11 +4,15 @@ date: 2023-06-14 21:05:37
 tags:
 ---
 
+GNU的mailutils里的mailx好像不太好使，所以这里使用s-nail。
+
 ## 安装
 
 ```shell
 # ArchLinux
 sudo pacman -S s-nail
+# Debian
+sudo apt install s-nail
 ```
 
 ## `~/.mailrc`
@@ -47,10 +51,6 @@ set folder=mail
 set MBOX=+mbox.mbox record=+sent.mbox DEAD=+dead.mbox
 set inbox=+system.mbox
 
-# Define some shortcuts; now one may say, e.g., file mymbo
-shortcut mymbo %:+mbox.mbox \
-         myrec +sent.mbox
-
 # It can be as easy as
 # (Remember USER and PASS must be URL percent encoded)
 set mta=smtp://用户名:授权码@smtp.163.com \
@@ -61,6 +61,12 @@ set mta=smtp://用户名:授权码@smtp.163.com \
 # Reading the "ON URL SYNTAX.." and smtp manual entries may be worthwhile
 set from="用户名@163.com"
 ```
+
+```shell
+mkdir ~/mail
+```
+
+然后已发送的邮件就会存入`~/mail/sent.mbox`
 
 Arch wiki里还设置了`ssl-ca-file`等变量，但我这里运行后会报这种错：
 
@@ -76,4 +82,18 @@ mail: Warning: variable superseded or obsoleted: ssl-verify
 
 ## 发邮件
 
-echo "test mails" | mailx --subject="test" 接收人@163.com
+ArchLinux用`mailx`命令：
+
+```shell
+echo "test mailx" | mailx --subject="test" 接收人@163.com
+```
+
+Debian用`s-nail`命令：
+
+```shell
+echo "test s-nail" | s-nail --subject="test" 接收人@163.com
+```
+
+## 相关
+
+<https://www.digitalocean.com/community/tutorials/send-email-linux-command-line>

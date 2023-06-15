@@ -191,6 +191,42 @@ repo: <https://github.com/tmux-plugins/tmux-logging>
 set -g @plugin 'tmux-plugins/tmux-logging'
 ```
 
+### tmux-notify
+
+在命令完成之后发送提醒。
+
+repo: <https://github.com/rickstaa/tmux-notify/>
+
+```text
+set -g @plugin 'rickstaa/tmux-notify'
+```
+
+`ctrl+b`，然后再`m`，即可开始监控命令是否完成，完成之后会自动发送一条通知，默认会发送到用户的桌面。
+
+tmux-notify识别命令有没有执行完的原理很简单，就是监视屏幕上的字符是不是以`$`、`#`、`%`结尾的。所以如果你的shell prompt不是以这几个字符结尾的，就要更改shell prompt，或者增加shell后缀：<https://github.com/rickstaa/tmux-notify/#add-additional-shell-suffixes>。目前已知oh my zsh的prompt是没有后缀的，所以只能往它的prompt里加入后缀：在`~/.zshrc`里的最后加上`PROMPT="$PROMPT%# "`，其中`%#`在普通用户模式下显示为`%`，在root模式下显示为`#`，参考：<https://scriptingosx.com/2019/07/moving-to-zsh-06-customizing-the-zsh-prompt/>
+
+tmux-notify还支持在命令完成时执行用户自定义的命令：<https://github.com/rickstaa/tmux-notify/#execute-custom-notification-commands>，可以实现邮件提醒等。下面介绍基于mailx的邮件提醒的方法。
+
+首先安装并配置mailx: {% post_link CLI/'mailx-v15-compat配置教程' %}
+
+然后在`.tmux.conf`里加入：
+
+<details><summary>ArchLinux</summary>
+
+```text
+set -g @tnotify-custom-cmd 'echo "tmux程序跑完啦" | mailx --subject="tmux complete notification" 接收人@163.com'
+```
+
+</details>
+
+<details><summary>Debian</summary>
+
+```text
+set -g @tnotify-custom-cmd 'echo "tmux程序跑完啦" | s-nail --subject="tmux complete notification" 接收人@163.com'
+```
+
+</details>
+
 ## 存在的问题
 
 tmux会用空格填充到行末。如果直接复制tmux中的文本的话，会把后面填充的空格也复制出来。`screen`没有这个问题：<https://unix.stackexchange.com/a/333983>
