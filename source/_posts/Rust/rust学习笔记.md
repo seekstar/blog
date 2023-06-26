@@ -46,11 +46,17 @@ cargo doc --open
 cargo new <项目名>
 ```
 
-### `cargo.toml`
+### `Cargo.toml`
 
 - {% post_link Rust/'cargo-build带优化' %}
 
-- <https://stackoverflow.com/questions/29857002/how-to-define-test-only-dependencies>
+#### `version`
+
+指定crate的版本。如果把crate托管在github上的话，如果连续几个commit里的version都相同，那么实际上只取最早的那个commit作为这个version的crate。因此假如把一个version push到github之后，如果又进行了修改，那么需要更改version code才能让用户使用新的修改。
+
+#### `[dev-dependencies]`
+
+定义只在test里用的依赖：<https://stackoverflow.com/questions/29857002/how-to-define-test-only-dependencies>
 
 ### Blocking waiting for file lock on package cache
 
