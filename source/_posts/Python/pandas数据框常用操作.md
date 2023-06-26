@@ -15,6 +15,16 @@ DataFrame官方文档：<https://pandas.pydata.org/docs/reference/frame.html>
 
 添加新列：<https://www.geeksforgeeks.org/adding-new-column-to-existing-dataframe-in-pandas/>
 
+## 从stdin读取
+
+直接把`sys.stdin`当file输入进去即可：
+
+```py
+latencies = pd.read_table(sys.stdin, names=['operation', 'latency(ns)'], delim_whitespace=True)
+```
+
+来源：<https://stackoverflow.com/questions/18495846/pandas-data-from-stdin>
+
 ## 添加新行
 
 <https://pandas.pydata.org/docs/reference/api/pandas.concat.html#pandas.concat>
@@ -72,7 +82,7 @@ test.mean(axis=1)
 
 <https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.groupby.html>
 
-每3行分组并求均值：
+### 每3行分组并求均值
 
 ```py
 test = pd.DataFrame({'col1': range(0, 10), 'col2': range(10, 20)})
@@ -88,6 +98,10 @@ test.groupby(test.index // 3).mean()
 2   7.0  17.0
 3   9.0  19.0
 ```
+
+### 将某列的值相同的合并成一个list
+
+<https://stackoverflow.com/questions/22219004/how-to-group-dataframe-rows-into-list-in-pandas-groupby>
 
 ## 遍历
 
