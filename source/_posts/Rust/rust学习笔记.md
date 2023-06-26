@@ -46,6 +46,12 @@ cargo doc --open
 cargo new <项目名>
 ```
 
+### `cargo.toml`
+
+- {% post_link Rust/'cargo-build带优化' %}
+
+- <https://stackoverflow.com/questions/29857002/how-to-define-test-only-dependencies>
+
 ### Blocking waiting for file lock on package cache
 
 ```shell
@@ -103,6 +109,8 @@ fn main() {
 }
 ```
 
+但是entry API有个问题，就是`and_modify`和`or_insert_with`虽然是互斥的，但是却不能把一个object的ownership同时传给这两个接口。要解决这个问题，一种比较通用的方法是将object包在`Option`里，然后在`and_modify`和`or_insert_with`里分别用`.take().unwrap()`。假如这个object有一个empty的状态，也可以先`or_insert`把它变成empty，再进行修改操作。来源：<https://users.rust-lang.org/t/hashmap-entry-api-and-ownership/81368>
+
 参考：
 
 <https://doc.rust-lang.org/stable/std/collections/btree_map/enum.Entry.html>
@@ -113,13 +121,17 @@ fn main() {
 
 ### serde
 
-{% post_link Rust/crates/'rust serde deserialize borrowed member' %}
+- {% post_link Rust/crates/'rust serde deserialize borrowed member' %}
 
-{% post_link Rust/crates/'rust存取一个含有borrowed域的结构体' %}
+- {% post_link Rust/crates/'rust存取一个含有borrowed域的结构体' %}
 
-<https://serde.rs/attr-skip-serializing.html>
+- <https://serde.rs/attr-skip-serializing.html>
 
-<https://github.com/serde-rs/json#operating-on-untyped-json-values>
+- <https://serde.rs/lifetimes.html>
+
+- <https://github.com/serde-rs/json#operating-on-untyped-json-values>
+
+- <https://serde.rs/impl-deserialize.html>
 
 ### 其他
 
@@ -151,6 +163,10 @@ num-derive: <https://docs.rs/num-derive/latest/num_derive/>
 
 <https://doc.rust-lang.org/stable/std/string/struct.String.html#method.from_utf8>
 
+### `Vec<T>` -> `[T; N]`
+
+用`try_into`: <https://stackoverflow.com/questions/29570607/is-there-a-good-way-to-convert-a-vect-to-an-array>
+
 ### char -> u8
 
 <https://users.rust-lang.org/t/how-to-convert-char-to-u8/50195>
@@ -178,12 +194,6 @@ let str_buf: String = str_slice.to_owned();  // if necessary
 这里指匹配所有的Err，不管里面是啥。
 
 <https://users.rust-lang.org/t/calling-function-in-struct-field-requires-extra-parenthesis/14214/2>
-
-### 约束不同类型的associated type相等
-
-这是一个未实现的特性：<https://github.com/rust-lang/rust/issues/20041>
-
-但是可以绕过去：<https://stackoverflow.com/questions/66359551/alternative-to-equality-constraints-for-associated-types>
 
 ## I/O
 
@@ -258,15 +268,48 @@ fn main() {
 
 <https://users.rust-lang.org/t/box-with-a-trait-object-requires-static-lifetime/35261>
 
+### Associated type
+
+```rs
+trait A {
+    type T;
+}
+```
+
+如果`B: A`，一般可以这样访问`T`: `B::T`。但是在template argument中比较特殊：`<B as A>::T`。例子：
+
+```rs
+trait A {
+    type T;
+}
+struct C<B: A, C = <B as A>::T> { a: B, at: C }
+```
+
+### Universal call syntax
+
+文档：<https://doc.rust-lang.org/reference/expressions/call-expr.html#disambiguating-function-calls>
+
+主要用来call指定trait的某个method：
+
+```rs
+<T as TraitA>::method_name(xxx)
+```
+
+### 约束不同类型的associated type相等
+
+这是一个未实现的特性：<https://github.com/rust-lang/rust/issues/20041>
+
+但是可以绕过去：<https://stackoverflow.com/questions/66359551/alternative-to-equality-constraints-for-associated-types>
+
 ## 多线程
 
-原子量：<https://doc.rust-lang.org/std/sync/atomic/index.html>
+- 原子量：<https://doc.rust-lang.org/std/sync/atomic/index.html>
 
-读写锁：<https://doc.rust-lang.org/stable/std/sync/struct.RwLock.html>
+- 读写锁：<https://doc.rust-lang.org/stable/std/sync/struct.RwLock.html>
 
-{% post_link Rust/crates/'rust scoped thread pool' %}
+- {% post_link Rust/crates/'rust scoped thread pool' %}
 
-{% post_link Rust/crates/'rust scoped thread' %}
+- {% post_link Rust/crates/'rust scoped thread' %}
 
 ### channel
 
@@ -380,6 +423,10 @@ fn main() {
 impl Default for Status {
 ```
 
+## RFC
+
+[Multiple Attributes in an Attribute Container](https://github.com/rust-lang/rfcs/pull/2600) (postponed)
+
 ## 已知问题
 
 ### Non-lexical lifetimes (NLL)
@@ -445,3 +492,7 @@ fn last_or_push<'a>(vec: &'a mut Vec<String>) -> &'a String {
 
 fn main() { }
 ```
+
+### 调试时不能执行复杂代码
+
+<https://stackoverflow.com/questions/68232945/execute-a-statement-while-debugging-in-rust>
