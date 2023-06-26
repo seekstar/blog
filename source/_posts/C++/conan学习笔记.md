@@ -35,6 +35,19 @@ conan new cmake_lib -d name=包名 -d version=0.1.0
 
 ### `conanfile.py`
 
+#### requirements
+
+定义包的依赖。例子：
+
+```py
+def requirements(self):
+    self.requires("rusty-cpp/[>=0.1.1]")
+    # 0.1.x都行
+    self.requires("rcu-vector/[~0.1]")
+```
+
+官方文档：<https://docs.conan.io/2/tutorial/versioning/version_ranges.html#range-expressions>
+
 #### generate
 
 在`conan install`的时候被调用，用于生成用于编译的文件。
@@ -100,8 +113,10 @@ project(rusty-cpp CXX)
 add_library(rusty-cpp INTERFACE)
 target_include_directories(rusty-cpp INTERFACE include)
 
+# https://stackoverflow.com/a/59257505
+file(GLOB_RECURSE RUSTY_HEADERS "include/rusty/*")
 # PUBLIC_HEADER会被install
-set_target_properties(rusty-cpp PROPERTIES PUBLIC_HEADER "include/rusty/macro.h")
+set_target_properties(rusty-cpp PROPERTIES PUBLIC_HEADER "${RUSTY_HEADERS}")
 
 # 这里要设置DESTINATION，不然install的时候会直接被copy到include目录下面。
 install(TARGETS rusty-cpp DESTINATION "include/rusty")
