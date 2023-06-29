@@ -307,6 +307,36 @@ struct C<B: A, C = <B as A>::T> { a: B, at: C }
 
 但是可以绕过去：<https://stackoverflow.com/questions/66359551/alternative-to-equality-constraints-for-associated-types>
 
+### FnOnce, FnMut, Fn
+
+<https://stackoverflow.com/questions/30177395/when-does-a-closure-implement-fn-fnmut-and-fnonce>
+
+但是如果要构造function array的话，好像只能用`fn`类型，也就是普通函数：<https://stackoverflow.com/questions/31736656/how-to-implement-a-vector-array-of-functions-in-rust-when-the-functions-co>
+
+### Higher-Rank Trait Bounds (HRTBs)
+
+官方文档：<https://doc.rust-lang.org/nomicon/hrtb.html>
+
+基本语法：`T: for<'a> TraitName<'a>`
+
+相当于对所有的lifetime，`T`都要满足这个trait bound。例子：
+
+```rs
+use std::ops::SubAssign;
+fn func<T>(a: &mut T, b: &T)
+where
+    T: for<'a> SubAssign<&'a T>,
+{
+    *a -= b;
+}
+fn main() {
+    let mut a = 2;
+    let b = 1;
+    func(&mut a, &b);
+    println!("{}", a);
+}
+```
+
 ## 多线程
 
 - 原子量：<https://doc.rust-lang.org/std/sync/atomic/index.html>

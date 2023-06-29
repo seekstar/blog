@@ -27,19 +27,16 @@ use std::io::{self, BufRead, BufReader};
 
 fn main() {
     let mut cin = BufReader::new(io::stdin());
-    loop {
-        let len = if let Ok(buf) = cin.fill_buf() {
-            if buf.is_empty() {
-                break;
-            }
-            for c in buf {
-                // Your code here
-                println!("{}", c);
-            }
-            buf.len()
-        } else {
+    while let Ok(buf) = cin.fill_buf() {
+        if buf.is_empty() {
             break;
-        };
+        }
+        for c in buf {
+            // Your code here
+            println!("{}", c);
+        }
+        let len = buf.len();
+        drop(buf);
         cin.consume(len);
     }
 }
@@ -47,14 +44,13 @@ fn main() {
 
 输入：
 
-```
+```text
 abc
 ```
 
-
 输出：
 
-```
+```text
 97
 98
 99
