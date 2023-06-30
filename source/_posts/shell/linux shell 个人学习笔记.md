@@ -607,6 +607,20 @@ humanfriendly --parse-size="2 KiB"
 
 ## 按命令
 
+### awk
+
+[Linux awk 命令](https://m.runoob.com/linux/linux-comm-awk.html)
+
+[AWK 条件语句与循环](https://www.runoob.com/w3cnote/awk-if-loop.html)
+
+#### 求和
+
+```shell
+seq 1 10 | awk '{s+=$1} END {print s}'
+```
+
+来源：<https://stackoverflow.com/questions/450799/shell-command-to-sum-integers-one-per-line>
+
 ### comm
 
 求两个有序文件中的相同行和不同行。第一列是只在第一个文件中的行，第二列是只在第二个文件中的行，第三列是两个文件都存在的行。常用命令行选项：
@@ -616,6 +630,20 @@ humanfriendly --parse-size="2 KiB"
 - `-3`: 不输出第三列
 
 参考：<https://unix.stackexchange.com/questions/28865/list-the-difference-and-overlap-between-two-plain-data-set>
+
+### diff
+
+忽略换行符的区别：`--strip-trailing-cr`
+
+来源：<https://stackoverflow.com/questions/40974170/how-can-i-ignore-line-endings-when-comparing-files>
+
+### dpkg
+
+```shell
+dpkg --list
+```
+
+显示当前已经安装的软件
 
 ### du
 
@@ -649,56 +677,9 @@ du -hd 1 --all 目录 | sort -h
 
 参考：<https://jingyan.baidu.com/article/ca2d939d7867e0eb6c31ce80.html>
 
-### pidof 进程名
-
-返回某进程名对应的pid
-例子：
-杀掉所有名字为ssh-agent的进程
-
-```shell
-kill $(pidof ssh-agent)
-```
-
-### ip
-
-查看本机ip地址
-
-```shell
-ip addr
-```
-
-### dpkg
-
-```shell
-dpkg --list
-```
-
-显示当前已经安装的软件
-
-### grep
-
-- 查找当前目录下有某字符串的文件：
-
-```shell
-grep -rn string *
-```
-
--r:递归查找
--n:显示行号
--i:忽略大小写
-*:当前目录所有文件。可以换成某个文件名。
-
-- 查找当前目录下后缀名为`.rs`的文件中含有`splay_safe_rs`的文件：
-
-```shell
-grep -rn splay_safe_rs --include \*.rs
-```
-
-来源：<https://stackoverflow.com/questions/12516937/how-can-i-grep-recursively-but-only-in-files-with-certain-extensions>
-
 ### find
 
-```
+```text
 find [目录] [查找规则] [查找完后执行的action]
 查找规则：
 -name 根据文件名查找（精确查找）
@@ -733,6 +714,59 @@ sudo find . -path ./media -path ./mnt -prune -o -name gsettings
 sudo find . -name b ! -path “./a/*”
 ```
 
+### grep
+
+- 查找当前目录下有某字符串的文件：
+
+```shell
+grep -rn string *
+```
+
+-r:递归查找
+-n:显示行号
+-i:忽略大小写
+*:当前目录所有文件。可以换成某个文件名。
+
+- 查找当前目录下后缀名为`.rs`的文件中含有`splay_safe_rs`的文件：
+
+```shell
+grep -rn splay_safe_rs --include \*.rs
+```
+
+来源：<https://stackoverflow.com/questions/12516937/how-can-i-grep-recursively-but-only-in-files-with-certain-extensions>
+
+### ip
+
+查看本机ip地址
+
+```shell
+ip addr
+```
+
+### join
+
+<https://www.geeksforgeeks.org/join-command-linux/>
+
+### less
+
+最基础用法：
+
+```shell
+less 文件路径
+```
+
+显示行号：
+
+```shell
+less -N 文件路径
+```
+
+也可以在`less`里面按`-` `N` `Enter`即可显示/隐藏行号。
+
+跳转到指定行：在`less`里面输入自己要跳转的行号，然后按`g`
+
+来源：[Linux之Less命令跳转到特定的行号](https://blog.csdn.net/lovedingd/article/details/120885183)
+
 ### locate
 
 ```shell
@@ -740,6 +774,16 @@ locate name
 ```
 
 查找文件（文件夹）
+
+### pidof 进程名
+
+返回某进程名对应的pid
+例子：
+杀掉所有名字为ssh-agent的进程
+
+```shell
+kill $(pidof ssh-agent)
+```
 
 ### sed
 
@@ -784,32 +828,6 @@ sed默认会将文件的每行打印出来，然后对匹配的内容进行相�
 打印第2行到第4行：`sed -n '2,4p' file`
 
 参考：<https://www.commandlinefu.com/commands/view/3802/to-print-a-specific-line-from-a-file>
-
-### less
-
-最基础用法：
-
-```shell
-less 文件路径
-```
-
-显示行号：
-
-```shell
-less -N 文件路径
-```
-
-也可以在`less`里面按`-` `N` `Enter`即可显示/隐藏行号。
-
-跳转到指定行：在`less`里面输入自己要跳转的行号，然后按`g`
-
-来源：[Linux之Less命令跳转到特定的行号](https://blog.csdn.net/lovedingd/article/details/120885183)
-
-### diff
-
-忽略换行符的区别：`--strip-trailing-cr`
-
-来源：<https://stackoverflow.com/questions/40974170/how-can-i-ignore-line-endings-when-comparing-files>
 
 ### sort
 
@@ -858,10 +876,6 @@ jason
 sort -u txt -o txt1
 ```
 
-### join
-
-<https://www.geeksforgeeks.org/join-command-linux/>
-
 ### zsh不共享历史
 
 `zsh`特性比bash丰富一些。zsh默认会在不同的会话之间共享历史，禁用这个特性：
@@ -870,20 +884,6 @@ sort -u txt -o txt1
 # https://github.com/ohmyzsh/ohmyzsh/issues/2537
 echo "unsetopt share_history" >> ~/.zshrc
 ```
-
-### awk
-
-[Linux awk 命令](https://m.runoob.com/linux/linux-comm-awk.html)
-
-[AWK 条件语句与循环](https://www.runoob.com/w3cnote/awk-if-loop.html)
-
-#### 求和
-
-```shell
-seq 1 10 | awk '{s+=$1} END {print s}'
-```
-
-来源：<https://stackoverflow.com/questions/450799/shell-command-to-sum-integers-one-per-line>
 
 ## 其他
 
