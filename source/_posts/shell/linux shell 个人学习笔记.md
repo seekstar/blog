@@ -607,6 +607,16 @@ humanfriendly --parse-size="2 KiB"
 
 ## 按命令
 
+### comm
+
+求两个有序文件中的相同行和不同行。第一列是只在第一个文件中的行，第二列是只在第二个文件中的行，第三列是两个文件都存在的行。常用命令行选项：
+
+- `-1`: 不输出第一列
+- `-2`: 不输出第二列
+- `-3`: 不输出第三列
+
+参考：<https://unix.stackexchange.com/questions/28865/list-the-difference-and-overlap-between-two-plain-data-set>
+
 ### du
 
 `-d数字`: 目录层数。0表示当前目录，1表示当前目录下的所有文件和子目录，以此类推。
