@@ -130,34 +130,6 @@ os.chdir(dname)
 
 来源：<https://stackoverflow.com/questions/1432924/python-change-the-scripts-working-directory-to-the-scripts-own-directory>
 
-## 排序
-
-用`sorted`。
-
-### 对字典的key排序
-
-```py
-x = {1: 2, 4: 3, 2: 1}
-sorted(x)
-```
-
-```text
-[1, 2, 4]
-```
-
-### 对字典的值排序
-
-```py
-x = {1: 2, 3: 4, 4: 3, 2: 1, 0: 0}
-sorted(x.items(), key=lambda item: item[1])
-```
-
-```text
-[(0, 0), (2, 1), (1, 2), (4, 3), (3, 4)]
-```
-
-来源：<https://stackoverflow.com/questions/613183/how-do-i-sort-a-dictionary-by-value>
-
 ## 标准库
 
 ### 时间
@@ -199,6 +171,34 @@ subprocess.call(['./executable', arg1, arg2])
 #### 获取命令输出
 
 [python的popen函数](https://blog.csdn.net/Z_Stand/article/details/89375589)
+
+### 排序
+
+用`sorted`。
+
+#### 对字典的key排序
+
+```py
+x = {1: 2, 4: 3, 2: 1}
+sorted(x)
+```
+
+```text
+[1, 2, 4]
+```
+
+#### 对字典的值排序
+
+```py
+x = {1: 2, 3: 4, 4: 3, 2: 1, 0: 0}
+sorted(x.items(), key=lambda item: item[1])
+```
+
+```text
+[(0, 0), (2, 1), (1, 2), (4, 3), (3, 4)]
+```
+
+来源：<https://stackoverflow.com/questions/613183/how-do-i-sort-a-dictionary-by-value>
 
 ### 其他
 
@@ -263,3 +263,7 @@ requirements.txt: <https://note.nkmk.me/en/python-pip-install-requirements/>
 ## 有关
 
 - [vim 空格转tab，2空格缩进转4空格](https://blog.csdn.net/windeal3203/article/details/67638038)
+
+## 已知的问题
+
+调用另一个文件里的函数不太方便: <https://www.geeksforgeeks.org/python-import-module-from-different-directory/>
