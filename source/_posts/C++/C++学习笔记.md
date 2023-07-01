@@ -1039,6 +1039,12 @@ Available options:
 
 参考文献：<https://stackoverflow.com/questions/5395503/required-and-optional-arguments-using-boost-library-program-options>
 
+## 执行命令
+
+`std::system`: <https://en.cppreference.com/w/cpp/utility/program/system>
+
+当前线程会一直阻塞到命令完成。如果想要非阻塞的话，可以在命令的最后加一个`&`，让它在后台执行。当前进程退出时这个后台进程会自动被杀掉。
+
 ## 其他
 
 {% post_link C++/'C++获取日期时间戳' %}
