@@ -7,10 +7,14 @@ tags:
 ## pidstat (推荐)
 
 ```shell
-pidstat -p 进程PID 间隔秒数 -u | awk '{print $8}'
+pidstat -p 进程PID -H -u 间隔秒数 | awk '{if(NR>3){print $1,$8}}'
 ```
 
-`-u`: Report CPU utilization.
+- `-H`: Display timestamp in seconds since the epoch.
+- `-u`: Report CPU utilization.
+- `NR>3`: 第四行开始才是有效输出。
+
+awk可能需要加上`fflush(stdout)`: {% post_link shell/'awk-fflush' %}
 
 ## top
 
