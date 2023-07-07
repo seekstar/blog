@@ -10,11 +10,25 @@ tags:
 
 <https://docs.conan.io/2/tutorial/developing_packages/local_package_development_flow.html>
 
+## 安装
+
+官方教程：<https://docs.conan.io/2/installation.html>
+
+```shell
+pip3 install --upgrade conan
+```
+
 ## 配置默认设置
 
 ```shell
 conan profile detect
 vim ~/.conan2/profiles/default
+```
+
+我的偏好：
+
+```shell
+compiler.cppstd=17
 ```
 
 ## 创建包
@@ -98,6 +112,80 @@ conan create .
 
 如果之前没有执行`conan build .`的话会自动执行之。
 
+## Conan server
+
+可以自己部署一个conan server并将打好的包上传上去，方便团队协作。
+
+官方教程太简略了：<https://docs.conan.io/2/tutorial/conan_repositories/setting_up_conan_remotes/conan_server.html#conan-server>
+
+### 安装
+
+```shell
+pip3 install conan-server
+```
+
+### 配置
+
+官方文档：<https://docs.conan.io/2/reference/conan_server.html>
+
+编辑`~/.conan_server/server.conf`。一些比较重要的项如下。
+
+#### `[users]`
+
+格式是`用户名: 密码`。密码是明文保存的，差评。
+
+安全起见，建议把`demo: demo`删掉，换上自己的。
+
+#### `[write_permissions]`
+
+默认为空。虽然上面的注释说author可以write自己的包，但是好像没法上传新的包。所以我直接设置成了所有已登录用户都可以写：
+
+```text
+*/*@*/*: ?
+```
+
+### 运行
+
+```shell
+conan_server
+```
+
+### 添加到remote list
+
+```shell
+conan remote add remote名字 http://localhost:9300
+```
+
+删除：`conan remote remove remote名字`
+
+### 登录
+
+```shell
+conan remote login remote名字 用户名
+```
+
+或者直接提供密码：
+
+```shell
+conan remote login remote名字 用户名 -p 密码
+```
+
+### 上传
+
+官方文档：<https://docs.conan.io/2/tutorial/conan_repositories/uploading_packages.html>
+
+```shell
+conan upload 包名 -r=remote名
+```
+
+### 搜索包
+
+这里列出所有包：
+
+```shell
+conan search "*" -r=remote名
+```
+
 ## 例子
 
 ### 只有头文件的包 (header-only)
@@ -171,3 +259,19 @@ def package_info(self):
 ```
 
 参考：<https://docs.conan.io/2/reference/tools/cmake/cmake.html#conan.tools.cmake.cmake.CMake.configure>
+
+## 已知的问题
+
+### 测试
+
+```shell
+conan test test_package 包名/版本
+```
+
+其中`包名/版本`不可忽略。感觉应该默认为当前包的最新版本。
+
+此外，没找到怎么直接在`conan test`的时候把参数传进去。好像只能通过直接运行`./test_package/build/gcc-10-x86_64-17-release/test 参数1 参数2`来传参。
+
+### 与conan2不兼容的包
+
+(2023.07.07) [userspace-rcu](https://conan.io/center/userspace-rcu)
