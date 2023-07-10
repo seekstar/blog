@@ -86,7 +86,11 @@ rm ~/.cargo/.package-cache
 
 以BTreeMap的Entry API为例。基础用法见标准库文档：<https://doc.rust-lang.org/stable/std/collections/struct.BTreeMap.html#method.entry>
 
-这里介绍如何用它实现modify and optionally remove：
+但是基础的`and_modify`和`or_insert_with`接口有个问题，就是它们虽然是互斥的，但是却不能把一个object的ownership同时传给这两个接口。要解决这个问题，假如这个object有一个empty的状态，可以先`or_insert`把它变成empty，再进行修改操作。来源：<https://users.rust-lang.org/t/hashmap-entry-api-and-ownership/81368>
+
+另一种比较通用的方法是用`match`判断返回的Entry是Occupied还是Vacant，这样编译器就知道这两种情况是互斥的了。
+
+`match`的另一个例子：modify and optionally remove
 
 ```rs
 use std::collections::btree_map::{self, BTreeMap};
@@ -114,8 +118,6 @@ fn main() {
     assert!(m.is_empty());
 }
 ```
-
-但是entry API有个问题，就是`and_modify`和`or_insert_with`虽然是互斥的，但是却不能把一个object的ownership同时传给这两个接口。要解决这个问题，一种比较通用的方法是将object包在`Option`里，然后在`and_modify`和`or_insert_with`里分别用`.take().unwrap()`。假如这个object有一个empty的状态，也可以先`or_insert`把它变成empty，再进行修改操作。来源：<https://users.rust-lang.org/t/hashmap-entry-api-and-ownership/81368>
 
 参考：
 
@@ -462,6 +464,10 @@ impl Default for Status {
 ## RFC
 
 [Multiple Attributes in an Attribute Container](https://github.com/rust-lang/rfcs/pull/2600) (postponed)
+
+支持不允许Drop的类型：[https://github.com/rust-lang/rfcs/pull/776] (postponed)
+
+[Improving Entry API to get the keys back when they are unused](https://github.com/rust-lang/rfcs/issues/690)
 
 ## 已知问题
 
