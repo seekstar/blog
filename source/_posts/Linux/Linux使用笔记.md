@@ -40,3 +40,14 @@ kdeconnect-cli --name CDY-TN90 --share-text testtest233
 ```
 
 文本会被自动保存到手机剪切板。
+
+## 安装字体
+
+以Debian为例：
+
+```shell
+# Times New Roman
+sudo apt install ttf-mscorefonts-installer
+# 如果是matplotlib，还得清一下cache：https://stackoverflow.com/a/49884009
+rm ~/.cache/matplotlib -rf
+```
