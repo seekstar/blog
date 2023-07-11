@@ -112,6 +112,26 @@ conan create .
 
 如果之前没有执行`conan build .`的话会自动执行之。
 
+## `conan.lock`
+
+固定所有依赖版本，避免未来有依赖更新之后无法编译。注意，只有当前包是end product的时候才能锁依赖版本。如果当前包是一个库，就不应该锁依赖版本，因为使用这个库的包可能想用别的版本。
+
+创建`conan.lock`:
+
+```shell
+conan lock create .
+```
+
+创建完了之后好像会自动被用上。
+
+从`conan.lock`中清楚unused locked versions：
+
+```shell
+conan lock create . --lockfile-clean
+```
+
+官方文档：<https://docs.conan.io/2/tutorial/versioning/lockfiles.html>
+
 ## Conan server
 
 可以自己部署一个conan server并将打好的包上传上去，方便团队协作。
@@ -275,3 +295,7 @@ conan test test_package 包名/版本
 ### 与conan2不兼容的包
 
 (2023.07.07) [userspace-rcu](https://conan.io/center/userspace-rcu)
+
+### 会自动使用用`nix-env`安装的库
+
+比如用`nix-env`安装了gflags之后，conan会自动使用它，但是与此同时会使用系统安装的glibc。但是`nix-env`安装的gflags通常依赖高版本的glibc，如果系统里自带的glibc版本过低，就会报链接错误。这时只需要`nix-env -e gflags`，让conan使用系统自带的gflags即可。

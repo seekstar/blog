@@ -1048,3 +1048,7 @@ Available options:
 ## 其他
 
 {% post_link C++/'C++获取日期时间戳' %}
+
+## 已知的问题
+
+不能O(1)地实现`std::vector<char>`和`std::string`的互相转换。
