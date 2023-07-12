@@ -5,6 +5,8 @@ date: 2020-03-22 00:16:52
 
 ## 语法
 
+缩进应该使用4个空格而不是tab：<https://peps.python.org/pep-0008/#tabs-or-spaces>
+
 - [Python if 语句](https://m.runoob.com/python3/python3-if-example.html)
 
 - [Python3 函数](https://www.runoob.com/python3/python3-function.html)
