@@ -112,6 +112,12 @@ conan create .
 
 如果之前没有执行`conan build .`的话会自动执行之。
 
+Debug版本：
+
+```shell
+conan create . -s build_type=Debug
+```
+
 ## `conan.lock`
 
 固定所有依赖版本，避免未来有依赖更新之后无法编译。注意，只有当前包是end product的时候才能锁依赖版本。如果当前包是一个库，就不应该锁依赖版本，因为使用这个库的包可能想用别的版本。
