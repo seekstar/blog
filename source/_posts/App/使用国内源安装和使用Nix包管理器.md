@@ -66,6 +66,7 @@ sudo systemctl restart nix-daemon.service
 或者直接把内容写进`override.conf`：
 
 ```shell
+sudo mkdir -p /etc/systemd/system/nix-daemon.service.d/
 sudo bash -c "cat > /etc/systemd/system/nix-daemon.service.d/override.conf" <<EOF
 [Service]
 Environment="http_proxy=http://localhost:端口号"
@@ -227,6 +228,14 @@ sysstat.out                                      67,720 x /nix/store/39wxpjmmd6m
 所以我们就知道了提供`iostat`命令的包是`sysstat`。
 
 参考：<https://unix.stackexchange.com/questions/252224/how-to-find-out-which-not-installed-package-a-file-belongs-to-on-nixos>
+
+## 只用nix提供的环境
+
+<https://github.com/NixOS/nix/issues/3820>
+
+```shell
+nix-shell --pure
+```
 
 ## 已知的问题
 
