@@ -10,4 +10,7 @@ yum provides xxxx
 yum info 包名
 yum list installed
 yum repolist
+
+# 查看包内文件
+repoquery --list 包名
 ```
