@@ -99,6 +99,12 @@ clangd会自动在项目根目录下和build下面找`compile_commands.json`。�
 
 可以运行和调试单个GTest测试。
 
+## Default move constructor
+
+如果没有自己定义的copy constructor和move constructor，而且每个member都是move constructable的，那么default move constructor就是member-wise move constructor。
+
+来源：<https://stackoverflow.com/a/48987654>
+
 ## 字符串和数值相互转化
 
 参考：<https://blog.csdn.net/lxj434368832/article/details/78874108>
