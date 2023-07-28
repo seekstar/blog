@@ -16,4 +16,10 @@ tags:
 
 Language Identifiers: <https://code.visualstudio.com/docs/languages/identifiers>
 
+补充：
+
+| Language Identifier | 含义 |
+| ---- | ---- |
+| cmake | `CMakeLists.txt` |
+
 来源：<https://stackoverflow.com/questions/44831313/how-to-exclude-file-extensions-and-languages-from-format-on-save-in-vscode>
