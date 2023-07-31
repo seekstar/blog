@@ -105,6 +105,60 @@ clangd会自动在项目根目录下和build下面找`compile_commands.json`。�
 
 来源：<https://stackoverflow.com/a/48987654>
 
+## `std::piecewise_construct`
+
+官方文档：<https://en.cppreference.com/w/cpp/utility/piecewise_construct>
+
+比方说有一个不能移动也不能复制的结构体`A`：
+
+```cpp
+struct A {
+	A(int, float) {}
+	A(const A&) = delete;
+	A(A&&) = delete;
+};
+```
+
+我们要往这里面`emplace_back`：
+
+```cpp
+std::deque<std::pair<A, A>> a;
+```
+
+传统的`emplace_back`需要传入A：
+
+```cpp
+a.emplace_back(A(1, 1.0), A(1, 1.0));
+```
+
+这显然是不行的，因为A既不能复制也不能移动。
+
+这时我们可以用`std::piecewise_construct`:
+
+```cpp
+a.emplace_back(std::piecewise_construct, std::make_tuple(1, 1.0), std::make_tuple(1, 1.0));
+```
+
+这样，它会直接在分配好的内存上用tuple里的内容作为构造函数的参数原地构造这个对象，就不需要复制或者移动了。
+
+完整代码：
+
+```cpp
+#include <iostream>
+#include <deque>
+struct A {
+	A(int, float) {}
+	A(const A&) = delete;
+	A(A&&) = delete;
+};
+int main() {
+	std::deque<std::pair<A, A>> a;
+	//a.emplace_back(A(1, 1.0), A(1, 1.0));
+	a.emplace_back(std::piecewise_construct, std::make_tuple(1, 1.0), std::make_tuple(1, 1.0));
+	return 0;
+}
+```
+
 ## 字符串和数值相互转化
 
 参考：<https://blog.csdn.net/lxj434368832/article/details/78874108>
