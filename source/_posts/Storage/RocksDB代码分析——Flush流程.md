@@ -15,6 +15,7 @@ tags: RocksDB
 `DBImpl::BackgroundFlush`中先调用`DBImpl::PopFirstFromFlushQueue`从`DBImpl::flush_queue_`中取出`FlushRequest flush_req`（唯一的取出者），从中再取出`ColumnFamilyData`。再把这些`ColumnFamilyData`放进`bg_flush_args`，作为`DBImpl::FlushMemTablesToOutputFiles`的参数。`DBImpl::flush_queue_`里的`FlushRequest`的来源见：{% post_link Storage/"RocksDB代码分析——写入流程" %}
 
 `DBImpl::FlushMemTablesToOutputFiles`中，如果不是atomic_flush（默认），那么一定只有一个要flush的MemTable。把`ColumnFamilyData`拿出来，作为参数传给`DBImpl::FlushMemTableToOutputFile`。
+
 >构造`FlushJob flush_job`，然后执行`flush_job.Run`，也就是调用`FlushJob::Run`
 >>调用`FlushJob::WriteLevel0Table`，把MemTable写入到L0层。在里面会先把DB锁解开，写入完成之后再锁上。
 >>调用`MemTableList::TryInstallMemtableFlushResults`
