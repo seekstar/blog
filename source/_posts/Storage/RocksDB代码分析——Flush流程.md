@@ -12,7 +12,7 @@ tags: RocksDB
 
 `DBImpl::BackgroundCallFlush`中先上DB锁，然后调用`DBImpl::BackgroundFlush`，最后再调用`DBImpl::MaybeScheduleFlushOrCompaction`。
 
-`DBImpl::BackgroundFlush`中先调用`DBImpl::PopFirstFromFlushQueue`从`DBImpl::flush_queue_`中取出`FlushRequest flush_req`（唯一的取出者），从中再取出`ColumnFamilyData`。再把这些`ColumnFamilyData`放进`bg_flush_args`，作为`DBImpl::FlushMemTablesToOutputFiles`的参数。`DBImpl::flush_queue_`里的`FlushRequest`的来源见：{% post_link Storage/"RocksDB代码分析——写入流程" %}
+`DBImpl::BackgroundFlush`中先调用`DBImpl::PopFirstFromFlushQueue`从`DBImpl::flush_queue_`中取出`FlushRequest flush_req`（唯一的取出者），从中再取出`ColumnFamilyData`。再把这些`ColumnFamilyData`放进`bg_flush_args`，作为`DBImpl::FlushMemTablesToOutputFiles`的参数。`DBImpl::flush_queue_`里的`FlushRequest`的来源见：{% post_link Storage/"RocksDB代码分析——写入流程" %}。最后再将这些`ColumnFamilyData`给`UnrefAndTryDelete`。
 
 `DBImpl::FlushMemTablesToOutputFiles`中，如果不是atomic_flush（默认），那么一定只有一个要flush的MemTable。把`ColumnFamilyData`拿出来，作为参数传给`DBImpl::FlushMemTableToOutputFile`。
 

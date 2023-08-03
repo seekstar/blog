@@ -30,13 +30,12 @@ leader可能帮我们做了插入，这时直接返回即可。
 - 假如我们是leader（每个时刻只有一个leader）
 
 >调用`DBImpl::PreprocessWrite`
->>如果`flush_scheduler_`中有任务，那么就调用`DBImpl::ScheduleFlushes`（唯一调用者）。
+>>如果`flush_scheduler_`中有任务，就调用`DBImpl::ScheduleFlushes`（唯一调用者）。
 >>>先调用`FlushScheduler::TakeNextColumnFamily`（正常状态下唯一调用者），它是唯一从`FlushScheduler`中取出flush任务（以`ColumnFamilyData`的形式）的方法。
->>>逐个将这些取出的`ColumnFamilyData cfd`作为参数调用`DBImpl::SwitchMemtable`，将这些column family data的memory table变成immutable memory table，然后新建一个memory table。这里没有用原子操作，所以这个时候rocksdb应该通过某些方式保证了此时不会有其他parallel writer，具体没细看。
+>>>逐个将这些取出的`ColumnFamilyData cfd`作为参数调用`DBImpl::SwitchMemtable`，将这些column family data的memory table变成immutable memory table，然后新建一个memory table。这里没有用原子操作，但是其他非leader的writer应该是没有拿DB mutex的。可能这是因为其他非leader的writer都在等leader给出指示。具体没细看。
 >>>将之前取出的`ColumnFamilyData cfd`作为`DBImpl::GenerateFlushRequest`的参数，得到`FlushRequest flush_req`，再将其作为`DBImpl::SchedulePendingFlush`的参数。
->>
->>`DBImpl::SchedulePendingFlush`中，将传进来的`flush_req`加入到`DBImpl::flush_queue_`里。
->>接下来的flush流程看这里：{% post_link Storage/"RocksDB代码分析——Flush流程" %}
+>>>`DBImpl::SchedulePendingFlush`中，将给传进来的`flush_req`里的`cfd`做`cfd->Ref()`，然后加入到`DBImpl::flush_queue_`里。
+>>>接下来的flush流程看这里：{% post_link Storage/"RocksDB代码分析——Flush流程" %}
 >
 >写入WAL
 >调用`WriteBatchInternal::InsertInto`把数据插入到MemTable。
@@ -54,6 +53,6 @@ if (cfd->mem()->ShouldScheduleFlush())
     flush_scheduler_->ScheduleWork(cfd);
 ```
 
-前面提到了，在`DBImpl::WriteImpl`中作为leader时，会检查`flush_scheduler_`中有没有任务，有的话就拿出来放到`DBImpl::flush_queue_`中。
+`FlushScheduler::ScheduleWork`中，先`cfd->Ref()`，然后把cfd放进链表里。前面提到了，在`DBImpl::WriteImpl`中作为leader时，会检查`FlushScheduler flush_scheduler_`中有没有任务，有的话就拿出来放到`DBImpl::flush_queue_`中。
 
 我的问题：为什么不直接放到`DBImpl::flush_queue_`中？
