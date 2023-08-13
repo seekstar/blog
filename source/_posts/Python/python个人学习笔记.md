@@ -202,6 +202,22 @@ sorted(x.items(), key=lambda item: item[1])
 
 来源：<https://stackoverflow.com/questions/613183/how-do-i-sort-a-dictionary-by-value>
 
+### shlex
+
+可以用解析命令行参数的方式解析字符串。文档：<https://docs.python.org/3/library/shlex.html>
+
+例子：
+
+```py
+# https://stackoverflow.com/a/899314
+import shlex
+shlex.split('-o 1 --long "Some long string"')
+```
+
+```text
+['-o', '1', '--long', 'Some long string']
+```
+
 ### 其他
 
 - [Python 3 命令行参数](https://www.twle.cn/l/yufei/python30/python-30-command-line-arguments.html)

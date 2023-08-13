@@ -5,6 +5,8 @@ date: 2021-07-22 12:46:16
 
 ## 逐字符读入
 
+{% post_link Python/'python逐字符读入' %}
+
 ## 逐行读入
 
 ### stdin
