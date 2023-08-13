@@ -12,6 +12,20 @@ tags:
 
 {% post_link Other/git/'git checkout 远程分支error' %}
 
+## tag
+
+显示全部：`git tags`
+
+创建：`git tag 名字`
+
+推送：`git push origin 名字`
+
+删除：`git tag -d 名字`
+
+如果remote删除那么本地也删除：`git fetch origin --prune`
+
+删除所有本地tag: `git tag | xargs git tag -d` 来源：<https://stackoverflow.com/a/19542426>
+
 ## 删除未跟踪的文件
 
 预览有哪些未跟踪的文件
@@ -108,3 +122,9 @@ git rebase <base-commit-hash> -i
 然后第一个commit标记为`pick`，其他的都标记为`squash`，即`s`。然后退出编辑器。
 
 然后会让你编辑新的commit的message。可以全删了然后编辑新的message，然后退出编辑器，从原来的HEAD到base commit（不含）的所有commit就都被squash成了一个commit了。
+
+## 其他
+
+<https://stackoverflow.com/questions/89332/how-do-i-recover-a-dropped-stash-in-git>
+
+<https://stackoverflow.com/questions/2928584/how-to-grep-search-committed-code-in-the-git-history>
