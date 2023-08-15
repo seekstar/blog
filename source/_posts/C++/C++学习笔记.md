@@ -209,7 +209,17 @@ printf("%lu\n", strtoul("0xf", NULL, 0)); // 15
 
 ### string -> 数值
 
-可以用C++11里的`std::stoul`和`std::stoull`把string转换为unsigned long和unsigned long long：
+可以用C++11里的`std::sto*`系列把string转换为基本数据类型：
+
+| 函数 | 返回的类型 |
+| ---- | ---- |
+| `std::stoi` | int |
+| `std::stol` | long |
+| `std::stoll` | long long |
+| `std::stoul` | unsigned long |
+| `std::stoull` | unsigned long long |
+
+例子：
 
 ```cpp
 unsigned long x = std::stoul("233");
