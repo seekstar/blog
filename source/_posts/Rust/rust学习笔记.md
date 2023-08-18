@@ -127,6 +127,14 @@ fn main() {
 
 ## Crates
 
+enum_iterator: <https://docs.rs/enum-iterator/latest/enum_iterator/>
+
+可以获取enum的可能取值个数。
+
+num-derive: <https://docs.rs/num-derive/latest/num_derive/>
+
+可以把enum转成基本类型。
+
 ### serde
 
 - {% post_link Rust/crates/'rust serde deserialize borrowed member' %}
@@ -140,16 +148,6 @@ fn main() {
 - <https://github.com/serde-rs/json#operating-on-untyped-json-values>
 
 - <https://serde.rs/impl-deserialize.html>
-
-### 其他
-
-enum_iterator: <https://docs.rs/enum-iterator/latest/enum_iterator/>
-
-可以获取enum的可能取值个数。
-
-num-derive: <https://docs.rs/num-derive/latest/num_derive/>
-
-可以把enum转成基本类型。
 
 ## API guidelines
 
@@ -461,6 +459,10 @@ fn main() {
 impl Default for Status {
 ```
 
+## 其他
+
+<https://stackoverflow.com/questions/60253791/why-can-i-not-mutably-borrow-separate-fields-from-a-mutex-guard>
+
 ## RFC
 
 [Multiple Attributes in an Attribute Container](https://github.com/rust-lang/rfcs/pull/2600) (postponed)
@@ -481,9 +483,9 @@ fn last_or_push<'a>(vec: &'a mut Vec<String>) -> &'a String {
         // returning s here forces vec to be borrowed
         // for the rest of the function, even though it
         // shouldn't have to be
-        return s; 
+        return s;
     }
-    
+
     // Because vec is borrowed, this call to vec.push gives
     // an error!
     vec.push("".to_string()); // ERROR
@@ -538,3 +540,33 @@ fn main() { }
 ### 调试时不能执行复杂代码
 
 <https://stackoverflow.com/questions/68232945/execute-a-statement-while-debugging-in-rust>
+
+### Raw pointers are `!Sync` and `!Send`
+
+<https://doc.rust-lang.org/nomicon/send-and-sync.html>
+
+主要目的是防止含有裸指针的struct被自动标记为thread-safe。
+
+所以如果需要在不同线程之间共享裸指针，而且可以保证裸指针引用的部分已经做了并发控制的话，可以写一个wrapper：
+
+```rs
+struct ThreadSafePtr<T>(*mut T);
+unsafe impl<T> Send for ThreadSafePtr<T> {}
+unsafe impl<T> Sync for ThreadSafePtr<T> {}
+```
+
+但我觉得应该让raw pointer本身是thread safe的，然后在编译器层面不让含有裸指针的struct被自动标记为thread safe。
+
+相关讨论：<https://internals.rust-lang.org/t/shouldnt-pointers-be-send-sync-or/8818>
+
+### drop的时候拿的是mutable reference而不是ownership
+
+<https://stackoverflow.com/questions/30905826/why-does-drop-take-mut-self-instead-of-self>
+
+这是为了防止编译器在`drop`的最后又自动调用`drop`。
+
+如果需要在drop的时候consume某个field，可以通过把这个field放在`Option`里实现。或者把这个field用`unsafe`的`ManuallyDrop`包起来，然后在`drop`的时候`take`：<https://users.rust-lang.org/t/can-drop-handler-take-ownership-of-a-field/74301/7>
+
+我觉得最好的实现应该是让`drop`拿ownership，然后在编译器里特殊处理这个case，在`drop`的最后不再调用`drop`。但是rust核心开发者觉得这个特性需要对编译器做太多修改：<https://github.com/rust-lang/rust/issues/4330>
+
+### 如果有自定义的`Drop::drop`，就不能单独拿某个field的ownership
