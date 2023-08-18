@@ -10,13 +10,17 @@ tags:
 sudo apt install ufw
 ```
 
+安装之后默认是inactive的状态。
+
 ## 查看防火墙状态
 
 ```shell
 sudo ufw status
 ```
 
-里面会给出防火墙是不是active的，已经设置了哪些规则。
+里面会给出防火墙是不是active的。如果是active的话，还会打印出已经设置了哪些规则。
+
+如果是inactive的话，如果想要看已经添加的规则，可以`sudo ufw show added`。来源：<https://askubuntu.com/a/533664>
 
 ## Allow SSH
 
