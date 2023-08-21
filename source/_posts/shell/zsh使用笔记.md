@@ -23,6 +23,21 @@ echo "setopt no_nomatch" >> ~/.zshrc
 
 [zsh不兼容的坑-zsh:no matches found](https://www.jianshu.com/p/87d85593006e)
 
+## 自带的`rm *`提醒
+
+```shell
+$ rm -f *
+zsh: sure you want to delete all 3 files in /tmp/test [yn]?
+```
+
+明明已经用了`-f`但还是有prompt，很烦。可以这样关掉：
+
+```shell
+echo "setopt rmstarsilent" >> ~/.zshrc
+```
+
+参考：<https://github.com/ohmyzsh/ohmyzsh/issues/10268>
+
 ## 多行命令换行
 
 `Alt`+`Enter`
