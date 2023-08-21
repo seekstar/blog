@@ -12,6 +12,15 @@ tags:
 
 {% post_link Other/git/'git checkout 远程分支error' %}
 
+## remote
+
+查看remote的URL（无需联网）:
+
+```shell
+# https://stackoverflow.com/questions/4089430/how-to-determine-the-url-that-a-local-git-repository-was-originally-cloned-from
+git remote get-url origin
+```
+
 ## tag
 
 显示全部：`git tags`
