@@ -1,7 +1,7 @@
 ---
 title: RocksDB学习笔记
 date: 2023-07-28 13:52:54
-tags:
+tags: RocksDB
 ---
 
 Version是在某个瞬间各种SSTable的snapshot。
