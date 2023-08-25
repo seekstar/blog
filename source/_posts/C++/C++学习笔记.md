@@ -65,7 +65,7 @@ public:
 
 ### [clangd](https://marketplace.visualstudio.com/items?itemName=llvm-vs-code-extensions.vscode-clangd)
 
-可替代微软的C/C++插件（除了不能debug）。它可以显示auto变量的类型，在template里也能报错。默认情况下它以`clang FILE`的方式来parse文件。在有多个文件的工程中需要生成`compile_commands.json`告诉它文件是怎么编译的，它才能正确理解文件内容。几种生成的方式如下：
+它可以显示auto变量的类型，在template里也能报错。默认情况下它以`clang FILE`的方式来parse文件。在有多个文件的工程中需要生成`compile_commands.json`告诉它文件是怎么编译的，它才能正确理解文件内容。几种生成的方式如下：
 
 ----
 
@@ -94,6 +94,12 @@ clangd会自动在项目根目录下和build下面找`compile_commands.json`。�
 进阶用法：[使用Clangd提升C++代码编写体验](https://zhuanlan.zhihu.com/p/566506467)
 
 参考：<https://clangd.llvm.org/installation#project-setup>
+
+跟微软的C/C++插件相比，clangd有如下缺点：
+
+1. 不能Debug
+
+2. 对header-only的工程无效，因为header-only的工程并不编译出二进制文件，所以`compile_commands.json`里什么都没有。
 
 ### C++ TestMate
 
