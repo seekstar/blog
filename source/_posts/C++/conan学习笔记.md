@@ -88,6 +88,73 @@ def requirements(self):
 
 参考：<https://docs.conan.io/2/tutorial/creating_packages/define_package_information.html>
 
+### 例子
+
+#### 只有头文件的包 (header-only)
+
+完整工程：<https://github.com/seekstar/counter-timer-cpp>
+
+`CMakeLists.txt`:
+
+```cmake
+cmake_minimum_required(VERSION 3.15)
+project(包名 CXX)
+
+# 为了兼容git submodule
+# https://seekstar.github.io/2023/08/25/cmake-find-package兼容add-subdirectory/
+if (NOT TARGET 依赖1)
+	find_package(依赖1 CONFIG REQUIRED)
+endif()
+if (NOT TARGET 包2里的依赖2)
+	find_package(包2 CONFIG REQUIRED COMPONENTS 依赖2)
+endif()
+
+add_library(${PROJECT_NAME} INTERFACE)
+target_include_directories(${PROJECT_NAME} INTERFACE include)
+
+# https://stackoverflow.com/a/59257505
+file(GLOB_RECURSE HEADERS "include/*")
+# PUBLIC_HEADER会被install
+set_target_properties(${PROJECT_NAME} PROPERTIES PUBLIC_HEADER "${HEADERS}")
+target_link_libraries(${PROJECT_NAME}
+	INTERFACE
+		依赖1
+		依赖2
+)
+
+# 这里要设置DESTINATION，不然install的时候会直接被copy到include目录下面。
+install(TARGETS ${PROJECT_NAME} DESTINATION "include/")
+```
+
+`conanfile.py`关键部分:
+
+```py
+    # Sources are located in the same place as this recipe, copy them to the recipe
+    exports_sources = "CMakeLists.txt", "include/*"
+
+    def requirements(self):
+        self.requires("依赖1/[>=xx.xx.xx]")
+        self.requires("包2/[~xx.xx]")
+
+    def package_info(self):
+        # 让依赖这个包的其他包知道这个包对应的CMake target叫什么名字
+        self.cpp_info.set_property("cmake_target_name", "counter-timer")
+        # For header-only packages, libdirs and bindirs are not used
+        # so it's necessary to set those as empty.
+        self.cpp_info.libdirs = []
+        self.cpp_info.bindirs = []
+```
+
+#### 含多个库的包 (package with multiple libraries)
+
+<https://docs.conan.io/2/examples/conanfile/package_info/components.html#examples-conanfile-package-info-components>
+
+#### 只有头文件的含多个库的包 (header-only package with multiple libraries)
+
+例子：<https://github.com/seekstar/rcu-vector>
+
+坑点：如果库`a`是header-only的话，不能把自己（也就是`a`）放进`self.cpp_info.components['a'].libs`，因为`libs`表示依赖这个库的其他库需要链接的库，而header-only的库不能被链接。
+
 ## 生成用于编译的辅助文件
 
 ```shell
@@ -204,6 +271,13 @@ conan remote login remote名字 用户名 -p 密码
 conan upload 包名 -r=remote名
 ```
 
+注意这里只上传已经构建的版本。所以最好先构建release和debug，再把它们一起上传：
+
+```shell
+conan create . && conan create . -s build_type=Debug
+conan upload 包名 -r=remote名
+```
+
 ### 搜索包
 
 这里列出所有包：
@@ -211,54 +285,6 @@ conan upload 包名 -r=remote名
 ```shell
 conan search "*" -r=remote名
 ```
-
-## 例子
-
-### 只有头文件的包 (header-only)
-
-例子：<https://github.com/seekstar/rusty-cpp>
-
-`CMakeLists.txt`:
-
-```cmake
-cmake_minimum_required(VERSION 3.15)
-project(rusty-cpp CXX)
-
-add_library(rusty-cpp INTERFACE)
-target_include_directories(rusty-cpp INTERFACE include)
-
-# https://stackoverflow.com/a/59257505
-file(GLOB_RECURSE RUSTY_HEADERS "include/rusty/*")
-# PUBLIC_HEADER会被install
-set_target_properties(rusty-cpp PROPERTIES PUBLIC_HEADER "${RUSTY_HEADERS}")
-
-# 这里要设置DESTINATION，不然install的时候会直接被copy到include目录下面。
-install(TARGETS rusty-cpp DESTINATION "include/rusty")
-```
-
-`conanfile.py`的关键部分：
-
-```py
-def package_info(self):
-    # 让依赖这个包的其他包知道这个包对应的CMake target叫什么名字
-    self.cpp_info.set_property("cmake_target_name", "rusty-cpp")
-    # For header-only packages, libdirs and bindirs are not used
-    # so it's necessary to set those as empty.
-    self.cpp_info.libdirs = []
-    self.cpp_info.bindirs = []
-```
-
-参考：<https://docs.conan.io/2/tutorial/creating_packages/other_types_of_packages/header_only_packages.html>
-
-### 含多个库的包 (package with multiple libraries)
-
-<https://docs.conan.io/2/examples/conanfile/package_info/components.html#examples-conanfile-package-info-components>
-
-### 只有头文件的含多个库的包 (header-only package with multiple libraries)
-
-例子：<https://github.com/seekstar/rcu-vector>
-
-坑点：如果库`a`是header-only的话，不能把自己（也就是`a`）放进`self.cpp_info.components['a'].libs`，因为`libs`表示依赖这个库的其他库需要链接的库，而header-only的库不能被链接。
 
 ## 将变量传给cmake
 
