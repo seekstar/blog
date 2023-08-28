@@ -18,6 +18,8 @@ date: 2021-01-21 18:55:15
 
 CentOS的镜像一般在镜像源的`BaseOS/x86_64/iso`下面。比如`CentOS 9-stream`的ISO在这里：<https://mirrors.tuna.tsinghua.edu.cn/centos-stream/9-stream/BaseOS/x86_64/iso/>
 
+Debian后缀为DVD1的ISO可以离线安装，但是它们大多都很大。如果网络环境好的话可以考虑用netinst版本。
+
 找到要下载的镜像后，右键该链接，点击复制链接，然后到服务器上用wget下载之即可。wget 403的话也可以尝试用`curl 链接 > xxx.iso`下载。
 
 ## 安装qemu
