@@ -5,9 +5,11 @@ date: 2021-01-21 18:55:15
 
 已测试的组合：
 
-- 宿主机：Deepin、Debian 11、centos 8
-
-- 虚拟机：CentOS 8, CentOS Stream 9, Debian 11
+| 宿主机 | 虚拟机 |
+| ---- | ---- |
+| Debian 11 | CentOS 8, CentOS Stream 9, Debian 11/12 |
+| Deepin | CentOS 8 |
+| CentOS 8 | CentOS 8 |
 
 ## 下载操作系统镜像
 
