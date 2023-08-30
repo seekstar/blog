@@ -105,6 +105,28 @@ clangd会自动在项目根目录下和build下面找`compile_commands.json`。�
 
 可以运行和调试单个GTest测试。
 
+## 文档
+
+### 引用 (reference)
+
+<https://en.cppreference.com/w/cpp/language/reference>
+
+含reference collapsing等各种蛇皮操作：
+
+### Value categories
+
+<https://en.cppreference.com/w/cpp/language/value_category>
+
+glvalue (“generalized” lvalue)
+
+prvalue (“pure” rvalue)
+
+xvalue (an “eXpiring” value)
+
+lvalue
+
+rvalue
+
 ## Default move constructor
 
 如果没有自己定义的copy constructor和move constructor，而且每个member都是move constructable的，那么default move constructor就是member-wise move constructor。
