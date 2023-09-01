@@ -797,25 +797,90 @@ kill $(pidof ssh-agent)
 
 ### sed
 
-#### 模式匹配
-
 从stdin读入，将修改后的结果写入到stdout：
 
 ```shell
-sed 's/源pattern/目的pattern/g'
+sed '命令'
 ```
 
-其中`s`是指替换，`g`是全局替换，`/`是分隔符。然后sed就会逐行去找源pattern，并且替换为目的pattern。
+其中`命令`形如`s/源pattern/目的pattern/g`（全局替换）
 
 从文件读入，将修改后的结果写入到stdout：
 
 ```shell
-sed 's/源pattern/目的pattern/g' FileName
+sed '命令' FileName
 ```
 
-源pattern和目的pattern的一些例子见：{% post_link Other/Language/正则表达式学习笔记 %}
+#### 基础知识
 
-此外，sed提供了一些选项：
+[sed模式空间(pattern space)和保持空间(hold space)](https://blog.csdn.net/demon7552003/article/details/72854231)
+
+<https://stackoverflow.com/questions/12833714/the-concept-of-hold-space-and-pattern-space-in-sed>
+
+sed读取一行时，会先将其暂存到模式空间。处理完一行之后就会把模式空间中的内容打印到标准输出，然后自动清空缓存。
+
+保持空间是sed中的另外一个缓冲区，此缓冲区正如其名，不会自动清空，但也不会主动把此缓冲区中的内容打印到标准输出中。
+
+d: 删除模式空间的内容，开始下一个循环
+
+g: 复制保持空间的内容到模式空间
+
+`s/regexp/replacement/`: 在模式空间中如果匹配到了正则表达式`regexp`，就将其替换为`replacement`
+
+{% post_link Other/Language/正则表达式学习笔记 %}
+
+需要注意的是，`sed`的正则表达式中，如果用到了`(`, `)`, `|`，需要在前面放一个`\`将它们转义，例如`sed '/\(patternx\|patterny\)/p'`。来源：<https://stackoverflow.com/questions/14813145/boolean-or-in-sed-regex>
+
+#### 全局替换
+
+`sed 's/regexp/replacement/g'`
+
+其中`s`是替换命令，表示在模式空间尝试匹配正则表达式`regexp`，找到了就将其替换为`replacement`。
+
+这里的`g`不是命令，而是隶属于`s`命令的一个flag，表示全局替换，也就是说在匹配到一个之后不停下来，而是马上继续尝试匹配下一个。
+
+一些例子：
+
+- 把文件中的CRLF替换成LF
+
+`sed 's/\r//g`
+
+`\r`就是CR，将其替换成空就相当于把它删了。
+
+- 把文件中的LF替换成CRLF
+
+`sed 's/$/\r/g`
+
+`$`的意思是每行的末尾。在每行的末尾把空字符串替换成`\r`（CR），也就是插入`\r`（CR）。在linux中换行是LF，所以相当于在LF前面插入一个CR，变成CRLF。
+
+- 保留每行的最后一个单词
+
+`sed 's/.* //g`
+
+正则表达式里，点`.`几乎可以匹配任何字符，所以`.*`会尽量匹配尽量长的字符串。`/.* /`表示最长的以空格结尾的字符串。目的pattern为空，这样就相当于把每行的最长的以空格结尾的字符串删掉。所以每行只留下了最后一个单词了。
+
+- 在每个单词前插入
+
+参考：<https://blog.csdn.net/lwlfox/article/details/85065026>
+
+`sed 's/\b\S*\b/test&/g`
+
+`\b`: 单词边界
+`&`: 前面匹配的字符串
+
+- 保留部分内容的替换
+
+有点像`scanf`和`printf`的组合：
+
+<https://blog.csdn.net/scl323/article/details/84098366>
+
+#### 删除匹配行
+
+`sed '/regexp/d'`
+
+如果模式空间有可以匹配正则表达式`regexp`的子串，那么就将模式空间删除，然后继续读取下一行到模式空间。
+
+#### 常用选项
 
 `-i`: 直接修改文件（默认是输出编辑后的结果到stdout）。
 
@@ -823,13 +888,11 @@ sed 's/源pattern/目的pattern/g' FileName
 
 `-c`: 保护符号链接和硬链接（但是我的sed没有这个选项）。
 
-#### 匹配指定行
+`-n`: sed默认会将文件的每行打印出来，然后对匹配的内容进行相应的操作。`-n`表示不把文件的每行都打印出来，只对匹配的内容做相应的操作。
 
-`sed -n 起始行号[,终止行号]动作 file`
+匹配指定行：`sed -n 起始行号[,终止行号]动作 file`，动作一般是`p`，即打印(Print)。
 
-动作一般是`p`，即打印(Print)。
 
-sed默认会将文件的每行打印出来，然后对匹配的内容进行相应的操作。`-n`表示不把文件的每行都打印出来，只对匹配的内容做相应的操作。
 
 例子：
 
