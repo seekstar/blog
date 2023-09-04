@@ -47,6 +47,18 @@ sudo ufw enable
 sudo ufw disable
 ```
 
+开机自启：
+
+```shell
+sudo systemctl enable ufw
+```
+
+取消开机自启：
+
+```shell
+sudo systemctl disable ufw
+```
+
 ## 打开和关闭端口
 
 ```shell
