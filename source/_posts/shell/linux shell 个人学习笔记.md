@@ -336,6 +336,31 @@ a=(1 2 3)
 ./test.sh ${a[@]}
 ```
 
+## 进程
+
+获取当前subshell的PID：
+
+```shell
+pid=$(exec sh -c 'echo "$PPID"')
+```
+
+来源：<https://unix.stackexchange.com/a/484464>
+
+## 信号
+
+```shell
+trap 信号处理命令 信号名
+```
+
+例如：
+
+{% post_link Linux/Process/'Linux杀死所有子进程' %}
+
+```shell
+# 在脚本退出前杀死所有子进程
+trap "pkill -P $$" EXIT
+```
+
 ## 用户管理
 
 ### 创建普通用户
