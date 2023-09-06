@@ -149,6 +149,13 @@ set -g @plugin 'tmux-plugins/tmux-sensible'
 run '~/.tmux/plugins/tpm/tpm'
 ```
 
+手动安装的tmux plugin manager可以非交互式安装plugin:
+
+```shell
+# https://github.com/tmux-plugins/tpm/issues/6
+~/.tmux/plugins/tpm/scripts/install_plugins.sh
+```
+
 #### 激活Tmux Plugin Manager
 
 可以先把所有tmux窗口都关闭，然后再新开tmux的时候，新开的tmux中就会自动读取`~/.tmux.conf`，从而激活Tmux Plugin Manager。
@@ -159,6 +166,8 @@ run '~/.tmux/plugins/tpm/tpm'
 # 在已有tmux窗口里执行此命令
 tmux source ~/.tmux.conf
 ```
+
+只要在一个tmux窗口里执行它，所有已有的tmux窗口都会激活Tmux Plugin Manager。
 
 #### 安装并激活插件
 
