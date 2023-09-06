@@ -836,6 +836,10 @@ sed '命令'
 sed '命令' FileName
 ```
 
+### top
+
+`-H`: 显示单个线程。<https://serverfault.com/questions/38195/getting-a-per-thread-cpu-stats>
+
 #### 基础知识
 
 [sed模式空间(pattern space)和保持空间(hold space)](https://blog.csdn.net/demon7552003/article/details/72854231)
