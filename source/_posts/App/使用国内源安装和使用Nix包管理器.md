@@ -10,7 +10,7 @@ tags:
 
 ```shell
 # https://mirrors.tuna.tsinghua.edu.cn/help/nix/
-sh <(curl https://mirrors.tuna.tsinghua.edu.cn/nix/latest/install) --daemon --no-channel-add
+sh <(curl https://mirrors.tuna.tsinghua.edu.cn/nix/latest/install) --daemon --no-channel-add --yes
 source /etc/profile
 ```
 
