@@ -522,11 +522,21 @@ $$\mathop{\bowtie}\limits_{theta}$$
 
 来源：<https://www.oomake.com/question/703820>
 
-## 设置页边距
+## 页面
+
+### 去掉页码
+
+在导言区加入：
+
+```tex
+\pagestyle{empty}
+```
+
+### 调整页边距
 
 ```tex
 \usepackage{geometry}
-\geometry{top=1.5cm,bottom=1.5cm, left=1.5cm, right=1.5cm}
+\geometry{a4paper,left=3cm,right=3cm,top=3cm,bottom=3cm}
 ```
 
 ## 去掉段首缩进
@@ -534,6 +544,40 @@ $$\mathop{\bowtie}\limits_{theta}$$
 `\noindent`
 
 来源：[latex段落取消缩进](https://blog.csdn.net/weixin_43301333/article/details/122137471)
+
+## 字体符号
+
+作为字体的符号，不需要在公式环境。
+
+| 描述 | 代码 | usepackage |
+| ---- | ---- | ---- |
+| 锁 | `\faLock` | fontawesome |
+| 开锁 | `\faUnlock` | fontawesome |
+
+来源：<https://tug.ctan.org/info/symbols/comprehensive/symbols-letter.pdf>
+
+## 各种下划线
+
+### 直下划线
+
+中文：{% post_link Latex/'Latex中文下划线自动换行' %}
+
+英文：[用soul宏包解决Latex \underline换行问题](https://blog.csdn.net/weixin_44465434/article/details/126912203)
+
+似乎如果里面有`\ `这种东西就会报错`Reconstruction failed`，不过可以用`~`来替代。
+
+### 波浪下划线
+
+```tex
+\usepackage[normalem]{ulem}
+\uwave{text here}
+```
+
+其中`normalem`是为了防止它把`\emph`变成下划线而不是斜体。来源：<https://tex.stackexchange.com/a/396106/256676>
+
+但是似乎不能自动加hyphenation `-`换行，会导致overfull的问题。
+
+参考：[LaTeX技巧004：给文字添加下划线、波浪线等样式](https://blog.csdn.net/ProgramChangesWorld/article/details/51465154)
 
 ## 标签
 
@@ -640,21 +684,6 @@ Bibliography里URL不要用`url = {https://xxx}`的形式，要用`note = {\url{
 ```
 
 来源：<https://tex.stackexchange.com/questions/132646/how-to-remove-the-references-title>
-
-## 去掉页码
-
-在导言区加入：
-
-```tex
-\pagestyle{empty}
-```
-
-## 调整页边距
-
-```tex
-\usepackage{geometry}
-\geometry{a4paper,left=3cm,right=3cm,top=3cm,bottom=3cm}
-```
 
 ## 异常处理
 
