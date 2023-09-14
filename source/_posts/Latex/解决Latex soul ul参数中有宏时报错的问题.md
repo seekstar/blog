@@ -35,9 +35,9 @@ Use of \testc doesn't match its definition.
 
 ```tex
 \makeatletter
-\def\myul#1{
-\protected@edef\tempa{#1}
-\ul\tempa
+\def\myul#1{%
+  \protected@edef\tempa{#1}%
+  \ul\tempa%
 }
 \makeatother
 ```
@@ -48,6 +48,25 @@ Use of \testc doesn't match its definition.
 \myul{233 \testc{} 2333}
 ```
 
+注意这里面`\protected@edef`不能换成`\edef`，不然碰上`\emph`就会炸。
+
 来源：<https://tex.stackexchange.com/a/126244/256676>
 
-参考：<https://tex.stackexchange.com/questions/244694/writing-to-aux-you-cant-use-a-prefix-with-the-character>
+参考：
+
+<https://tex.stackexchange.com/questions/244694/writing-to-aux-you-cant-use-a-prefix-with-the-character>
+
+<https://en.wikibooks.org/wiki/TeX/edef>
+
+## 失败的方案
+
+```tex
+\def\myul#1{
+\def\arga{#1}
+\ul\arga
+}
+```
+
+这种方法遇到嵌套宏就不行了。
+
+来源：<https://tex.stackexchange.com/questions/496833/package-soul-underline-problem-with-macro-text>
