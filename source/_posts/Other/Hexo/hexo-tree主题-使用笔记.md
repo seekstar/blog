@@ -305,12 +305,39 @@ npm install
 
 <https://seekstar.github.io/2021/11/16/hexo-tree%E4%B8%BB%E9%A2%98%E8%AE%A9%E6%96%87%E7%AB%A0%E7%9A%84url%E4%B8%AD%E4%B8%8D%E5%90%AB%E7%9B%AE%E5%BD%95/>
 
-## 升级hexo版本
+## 升级
+
+### 升级某个包的版本
+
+以hexo为例：
 
 ```shell
 npm i hexo@latest
 hexo --version
 ```
+
+### 检查更新
+
+```shell
+npm outdated
+```
+
+或者用`npm-check-updates`:
+
+```shell
+npm i -g npm-check-updates
+ncu
+```
+
+### 升级全部
+
+```shell
+npm i -g npm-check-updates
+ncu -u
+npm i
+```
+
+来源：<https://www.freecodecamp.org/news/how-to-update-npm-dependencies/>
 
 ## 其他
 
