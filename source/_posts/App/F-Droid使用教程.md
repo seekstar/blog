@@ -42,6 +42,10 @@ F-Droid下载地址：<https://f-droid.org/>
 
 这里推荐一些F-Droid上的不错的app：
 
+## Aegis
+
+2FA, 2 Factor Authentication
+
 ## CAPod
 
 连接airpods和airports pro，可以看耳机和盒子的电量。
