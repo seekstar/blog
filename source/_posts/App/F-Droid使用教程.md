@@ -42,154 +42,13 @@ F-Droid下载地址：<https://f-droid.org/>
 
 这里推荐一些F-Droid上的不错的app：
 
-## KeePassDX
-
-密码管理软件。配合坚果云可以实现密码全平台同步。
-
-## Termux
-
-手机上的Linux命令行终端。
-
-### sshd
-
-```shell
-apt install openssh
-sshd
-```
-
-然后SSH server就会开在8022端口了。
-
-## Matrix客户端
-
-Matrix协议是一款去中心化的即时聊天协议。可以自己搭聊天服务器，可以跨服聊天。支持端到端加密。
-
-### Element
-
-官方客户端。
-
-使用教程：{% post_link App/'Element-apk使用教程' %}
-
-### FluffyChat
-
-### SchildiChat
-
-基于Element。界面跟Element很像。
-
-## Telegram FOSS
-
-去除了专有部分的完全自由开源版Telegram。
-
-## syncthing
-
-{% post_link App/'syncthing-一款p2p同步软件' %}
-
-## vanilla music
-
-GPLv3协议的音乐播放器。以m3u后缀的文本方式保存歌单，可以把歌单跟歌曲一起用syncthing同步，歌单用相对路径。但是有些歌会乱码。
-
-常用的插件：
-
-metadata fetcher
-
-lyrics search（中文歌好像很少能搜到歌词。。。）
-
-## Fennec
-
-相当于firefox国际版。去除了所有专有部分。
-
-## EinkBro
-
-为墨水屏设计的浏览器。
-
-基于Chromium。Firefox出问题的网站可以尝试用这个浏览器，比如网易云音乐网页版搜索界面。
-
-## Seafile
-
-开源云盘，可自己部署。官方提供1G的免费容量。
-
-## NextCloud
-
-开源云盘，可自己部署，但是国内没有提供商，只有国外的提供商。
-
-可以另外安装NextCloud Notes，可以替代系统自带的备忘录。
-
-## collabora
-
-相当于安卓版本的libreoffice。
-
-需要在F-Droid中添加repo：<https://www.collaboraoffice.com/downloads/fdroid/repo>
-
-缺点：pdf阅读体验极差，很卡，而且是糊的。不能打开大型txt文档。XLSX文件阅读模式不能复制，编辑模式范围选择之后会自动重新编号，不知道怎么关掉这个功能。
-
-## Email
-
-### FairEmail
-
-### K-9 Mail
-
-## Coffee
-
-临时保持屏幕常亮。要允许后台运行。
-
-## Tor Browser
-
-## 阅读器
-
-### MJ PDF reader
-
-适合看论文。
-
-### Editor
-
-读文本文件比较方便，还可以编辑。
-
-### Book Reader
-
-电子书阅读体验极佳，但是不支持滚动阅读pdf，只能翻页，而且打开中文txt也有可能乱码
-
-## SilentNotes
-
-可以加密笔记。如果用Seafile的webdav，要勾上使用Accept unsafe certificates。缺点：暂时没有linux客户端。
-
-## orgzly
-
-不错的笔记软件。但是todo list里的todo标记done之后居然直接消失了。不能redo undo。不能在笔记内部搜索。编辑过程中如果直接杀掉进程，会导致编辑内容丢失。
-
 ## CAPod
 
 连接airpods和airports pro，可以看耳机和盒子的电量。
 
-## Blue Square Speedometer
+## Coffee
 
-通过GPS测速和海拔。要等一段时间才有海拔。
-
-## Package Manager
-
-查看包名。用ADB删除系统软件时有用。
-
-## Pocket Paint
-
-画画。
-
-## Calculator++
-
-计算器。
-
-## Simple Voice Recorder
-
-录音机。
-
-## TimerDroid
-
-闹钟。但是手机关机的时候不能唤醒手机然后闹铃。
-
-## Compass
-
-指南针。可惜没有同时显示重力传感器的信息。
-
-## G-Droid
-
-另一个可以访问F-Droid的软件仓库的应用。里面有星级和评论。但是不支持F-Droid以外的软件仓库。
+临时保持屏幕常亮。要允许后台运行。
 
 ## Feeder
 
@@ -227,6 +86,153 @@ ECNS: <https://www.ecns.cn/rss/rss.xml>
 
 南方早报：<https://www.scmp.com/rss/4/feed>
 
-### Minetest
+## KeePassDX
+
+密码管理软件。配合坚果云可以实现密码全平台同步。
+
+## syncthing
+
+{% post_link App/'syncthing-一款p2p同步软件' %}
+
+## Telegram FOSS
+
+去除了专有部分的完全自由开源版Telegram。
+
+## Termux
+
+手机上的Linux命令行终端。
+
+### sshd
+
+```shell
+apt install openssh
+sshd
+```
+
+然后SSH server就会开在8022端口了。
+
+## vanilla music
+
+GPLv3协议的音乐播放器。以m3u后缀的文本方式保存歌单，可以把歌单跟歌曲一起用syncthing同步，歌单用相对路径。但是有些歌会乱码。
+
+常用的插件：
+
+metadata fetcher
+
+lyrics search（中文歌好像很少能搜到歌词。。。）
+
+## collabora
+
+相当于安卓版本的libreoffice。
+
+需要在F-Droid中添加repo：<https://www.collaboraoffice.com/downloads/fdroid/repo>
+
+缺点：pdf阅读体验极差，很卡，而且是糊的。不能打开大型txt文档。XLSX文件阅读模式不能复制，编辑模式范围选择之后会自动重新编号，不知道怎么关掉这个功能。
+
+## Blue Square Speedometer
+
+通过GPS测速和海拔。要等一段时间才有海拔。
+
+## Package Manager
+
+查看包名。用ADB删除系统软件时有用。
+
+## Pocket Paint
+
+画画。
+
+## Calculator++
+
+计算器。
+
+## Simple Voice Recorder
+
+录音机。
+
+## TimerDroid
+
+闹钟。但是手机关机的时候不能唤醒手机然后闹铃。
+
+## Compass
+
+指南针。可惜没有同时显示重力传感器的信息。
+
+## G-Droid
+
+另一个可以访问F-Droid的软件仓库的应用。里面有星级和评论。但是不支持F-Droid以外的软件仓库。
+
+## Minetest
 
 类Minecraft的开源游戏。
+
+## 浏览器
+
+### Fennec
+
+相当于firefox国际版。去除了所有专有部分。
+
+### Tor Browser
+
+### EinkBro
+
+为墨水屏设计的浏览器。
+
+基于Chromium。Firefox出问题的网站可以尝试用这个浏览器，比如网易云音乐网页版搜索界面。
+
+## Email
+
+### FairEmail
+
+### K-9 Mail
+
+## 阅读器
+
+### MJ PDF reader
+
+适合看论文。
+
+### Editor
+
+读文本文件比较方便，还可以编辑。
+
+### Book Reader
+
+电子书阅读体验极佳，但是不支持滚动阅读pdf，只能翻页，而且打开中文txt也有可能乱码
+
+## 云盘
+
+### Seafile
+
+开源云盘，可自己部署。官方提供1G的免费容量。
+
+### NextCloud
+
+开源云盘，可自己部署，但是国内没有提供商，只有国外的提供商。
+
+可以另外安装NextCloud Notes，可以替代系统自带的备忘录。
+
+## Matrix客户端
+
+Matrix协议是一款去中心化的即时聊天协议。可以自己搭聊天服务器，可以跨服聊天。支持端到端加密。
+
+### Element
+
+官方客户端。
+
+使用教程：{% post_link App/'Element-apk使用教程' %}
+
+### FluffyChat
+
+### SchildiChat
+
+基于Element。界面跟Element很像。
+
+## 笔记
+
+### SilentNotes
+
+可以加密笔记。如果用Seafile的webdav，要勾上使用Accept unsafe certificates。缺点：暂时没有linux客户端。
+
+### orgzly
+
+不错的笔记软件。但是todo list里的todo标记done之后居然直接消失了。不能redo undo。不能在笔记内部搜索。编辑过程中如果直接杀掉进程，会导致编辑内容丢失。
