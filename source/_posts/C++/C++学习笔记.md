@@ -1099,15 +1099,24 @@ int main(int argc, char **argv) {
 	desc.add_options()
 		("help", "Print help message")
 		("cleanup,c", "Empty the directories first.")
-		("format,f", po::value<std::string>(&format)->default_value("ycsb"), "Trace format: plain/ycsb")
-		("use_direct_reads", po::value<bool>(&use_direct_reads)->default_value(true), "")
-		("db_path", po::value<std::string>(&db_path)->required(), "Path to database")
-	;
+		(
+			"format,f", po::value<std::string>(&format)->default_value("ycsb"),
+			"Trace format: plain/ycsb"
+		) (
+			"use_direct_reads",
+			po::value<bool>(&use_direct_reads)->default_value(true), ""
+		) (
+			"db_path", po::value<std::string>(&db_path)->required(),
+			"Path to database"
+		) (
+			"level0_file_num_compaction_trigger", po::value<int>(),
+			"Number of files in level-0 when compactions start"
+		);
 	po::variables_map vm;
 	po::store(po::parse_command_line(argc, argv, desc), vm);
 	if (vm.count("help")) {
 		std::cerr << desc << std::endl;
-		return 1;
+		return 0;
 	}
 	po::notify(vm);
 
@@ -1117,6 +1126,10 @@ int main(int argc, char **argv) {
 	std::cerr << format << std::endl;
 	std::cerr << "use_direct_reads: " << use_direct_reads << std::endl;
 	std::cerr << "db_path: " << db_path << std::endl;
+	if (vm.count("level0_file_num_compaction_trigger")) {
+		std::cerr << vm["level0_file_num_compaction_trigger"].as<int>()
+			<< std::endl;
+	}
 	return 0;
 }
 ```
@@ -1128,11 +1141,14 @@ g++ program-options.cpp -lboost_program_options -o program-options
 
 ```text
 Available options:
-  --help                      Print help message
-  -c [ --cleanup ]            Empty the directories first.
-  -f [ --format ] arg (=ycsb) Trace format: plain/ycsb
+  --help                                Print help message
+  -c [ --cleanup ]                      Empty the directories first.
+  -f [ --format ] arg (=ycsb)           Trace format: plain/ycsb
   --use_direct_reads arg (=1)
-  --db_path arg               Path to database
+  --db_path arg                         Path to database
+  --level0_file_num_compaction_trigger arg
+                                        Number of files in level-0 when 
+                                        compactions start
 ```
 
 参考文献：<https://stackoverflow.com/questions/5395503/required-and-optional-arguments-using-boost-library-program-options>
