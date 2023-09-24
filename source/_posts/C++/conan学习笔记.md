@@ -90,6 +90,69 @@ def requirements(self):
 
 ### 例子
 
+#### 生成可执行文件的包
+
+`CMakeLists.txt`:
+
+```cmake
+cmake_minimum_required(VERSION 3.15)
+project(包名 CXX)
+
+// https://seekstar.github.io/2023/09/24/cmake打印导入的包中的warning/
+set(CMAKE_NO_SYSTEM_FROM_IMPORTED TRUE)
+
+find_package(依赖1 CONFIG REQUIRED)
+find_package(依赖2 CONFIG REQUIRED)
+
+aux_source_directory(src SRCS)
+add_executable(${PROJECT_NAME} ${SRCS})
+
+target_link_libraries(${PROJECT_NAME}
+	PUBLIC
+		依赖1
+		依赖2
+)
+```
+
+`conanfile.py`:
+
+```py
+from conan import ConanFile
+from conan.tools.cmake import CMakeToolchain, CMake, cmake_layout, CMakeDeps
+
+
+class 下划线包名Recipe(ConanFile):
+    name = "包名"
+    version = "0.1.0"
+
+    # Optional metadata
+    license = ""
+    author = "姓名 邮箱"
+    url = "https://github.com/用户名/仓库名"
+    description = ""
+    topics = ("关键词1", "关键词2", "关键词3")
+
+    # Binary configuration
+    settings = "os", "compiler", "build_type", "arch"
+
+    def requirements(self):
+        self.requires("rusty-cpp/[>=0.1.5]")
+
+        def layout(self):
+        cmake_layout(self)
+
+    def generate(self):
+        deps = CMakeDeps(self)
+        deps.generate()
+        tc = CMakeToolchain(self)
+        tc.generate()
+
+    def build(self):
+        cmake = CMake(self)
+        cmake.configure()
+        cmake.build()
+```
+
 #### 只有头文件的包 (header-only)
 
 完整工程：<https://github.com/seekstar/counter-timer-cpp>
