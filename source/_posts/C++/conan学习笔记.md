@@ -98,7 +98,7 @@ def requirements(self):
 cmake_minimum_required(VERSION 3.15)
 project(包名 CXX)
 
-// https://seekstar.github.io/2023/09/24/cmake打印导入的包中的warning/
+# https://seekstar.github.io/2023/09/24/cmake打印导入的包中的warning/
 set(CMAKE_NO_SYSTEM_FROM_IMPORTED TRUE)
 
 find_package(依赖1 CONFIG REQUIRED)
@@ -138,7 +138,7 @@ class 下划线包名Recipe(ConanFile):
     def requirements(self):
         self.requires("rusty-cpp/[>=0.1.5]")
 
-        def layout(self):
+    def layout(self):
         cmake_layout(self)
 
     def generate(self):
