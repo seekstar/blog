@@ -49,6 +49,21 @@ int main() {
 | __builtin_clz | x前导0的个数，参数为0时结果未定义 | Count Leading Zero |
 | __builtin_popcount | 1的个数 | [population count](<https://www.cnblogs.com/Martinium/archive/2013/03/01/popcount.html>) |
 
+## 格式控制符
+
+| 符号 | 含义 |
+| ---- | ---- |
+| `%d` | int |
+| `%ld` | long |
+| `%lld` | long long |
+| `%zd` | ssize_t |
+| `%u` | unsigned int |
+| `%lu` | unsigned long |
+| `%llu` | unsigned long long |
+| `%zu` | size_t |
+
+十六进制把`u`换成`x`，例如`%zx`用十六进制打印`size_t`。
+
 ## 取整
 
 | 目标 | 方法 |
