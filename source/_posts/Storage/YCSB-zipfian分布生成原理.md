@@ -242,13 +242,11 @@ i               F(i)            F_tilde(i)
 #include <random>
 #include <cassert>
 
-template <class E>
 class ZipfianGenerator {
 public:
 	ZipfianGenerator(
-		size_t n, double theta, E &&engine
-	) : engine_(std::move(engine)),
-		n_(n),
+		size_t n, double theta
+	) : n_(n),
 		alpha_(1 / (1 - theta)),
 		zeta2_(1 + pow(2.0, -theta))
 	{
@@ -259,9 +257,10 @@ public:
 		}
 		eta_ = (1 - pow(2.0 / n, 1 - theta)) / (1 - zeta2_ / zetan_);
 	}
-	size_t operator()() {
+	template <typename E>
+	size_t operator()(E &e) {
 		std::uniform_real_distribution<> dis(0.0, 1.0);
-		double u = dis(engine_);
+		double u = dis(e);
 		double uz = u * zetan_;
 		if (uz < 1)
 			return 1;
@@ -270,7 +269,6 @@ public:
 		return 1 + (size_t)(n_ * pow(eta_ * u - eta_ + 1, alpha_));
 	}
 private:
-	E engine_;
 	size_t n_;
 	double alpha_;
 	double zeta2_;
@@ -280,11 +278,12 @@ private:
 
 int main() {
 	std::random_device rd;
+	std::mt19937 e(rd());
 	size_t n = 20000000;
-	ZipfianGenerator g(n, 0.99, std::mt19937(rd()));
+	ZipfianGenerator g(n, 0.99);
 
 	for (size_t i = 0; i < n; ++i) {
-		std::cout << g() << std::endl;
+		std::cout << g(e) << std::endl;
 	}
 
 	return 0;
