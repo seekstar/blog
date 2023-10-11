@@ -43,6 +43,12 @@ sudo systemctl restart nix-daemon.service
 
 清华镜像是cache。如果命中了cache，就会显示`copying path '/nix/store/xxx' from 'https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store'...`。如果没有命中，就会显示`copying path '/nix/store/xxx' from 'https://cache.nixos.org'...`，也就是从官方源`https://cache.nixos.org`下载。
 
+镜像通常不会缓存旧版本，所以如果发现cache总是不命中，可以试试更新channel来安装最新版：
+
+```shell
+nix-channel --update
+```
+
 ## 代理
 
 设置代理可以提高未命中cache时从官方源下载的速度。
