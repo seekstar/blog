@@ -205,6 +205,15 @@ grub-mkconfig -o /boot/grub/grub.cfg
 
 进去之后可能会出现key出错的问题。可参考这里解决：<https://www.jianshu.com/p/1790e92b2189/>
 
+KDE自带Baloo，用于文件索引，非常耗费资源。如果用不着的话可以关掉它：
+
+```shell
+# https://wiki.archlinux.org/title/Baloo
+balooctl suspend
+balooctl disable
+balooctl purge
+```
+
 ## 参考文献
 
 <https://archlinuxstudio.github.io/ArchLinuxTutorial/#/>
