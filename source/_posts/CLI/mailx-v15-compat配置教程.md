@@ -94,6 +94,14 @@ Debian用`s-nail`命令：
 echo "test s-nail" | s-nail --subject="test" 接收人@163.com
 ```
 
+## 使用代理
+
+云服务器商似乎会拦截SMTP协议的流量，aliyun和AWS上邮件都发不出去。走socks5代理给一台不存在此限制的服务器上即可：
+
+```shell
+echo "test s-nail" | s-nail -Ssocks-proxy=socks5://地址:端口号 --subject="test" 接收人@163.com
+```
+
 ## 相关
 
 <https://www.digitalocean.com/community/tutorials/send-email-linux-command-line>
