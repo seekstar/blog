@@ -4,6 +4,18 @@ date: 2023-01-21 08:09:26
 tags:
 ---
 
+## 更改hostname
+
+如果直接更改`/etc/hostname`的话，终端上的hostname要重启之后才会显示为新的。另一种更好的方法是用`hostnamectl`:
+
+```shell
+hostnamectl set-hostname xxxxx
+```
+
+新的hostname会被自动写入`/etc/hostname`，而且重启终端之后显示的hostname就是新的了，不需要重启操作系统。
+
+来源：<https://www.redhat.com/sysadmin/configure-hostname-linux>
+
 ## WIFI热点
 
 使用`linux-wifi-hotspot`即可。ArchLinux安装方式：
