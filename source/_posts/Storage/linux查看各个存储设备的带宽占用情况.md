@@ -14,3 +14,9 @@ iostat 1
 # 收集一秒钟内的I/O情况，然后打印出来。第二个参数的含义是打印两次，只有第二次的才是准确的。
 iostat 1 2
 ```
+
+如果要看某个device有没有saturated，可以`iostat 1 -x`，其中`-x`的含义是`Display extended statistics.`。
+
+打印出来的`%util`列就是utilization，红了表示saturated。
+
+来源：<https://www.percona.com/blog/looking-disk-utilization-and-saturation/>
