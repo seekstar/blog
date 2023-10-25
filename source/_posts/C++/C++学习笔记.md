@@ -1159,19 +1159,11 @@ Available options:
 
 当前线程会一直阻塞到命令完成。如果想要非阻塞的话，可以在命令的最后加一个`&`，让它在后台执行。当前进程退出时这个后台进程会自动被杀掉。
 
-## 调试
-
-### 内存占用
-
-`valgrind --tools=massif 你的程序 参数...`
-
-能够知道哪些地方分配的内存最多。
-
-文档：<https://valgrind.org/docs/manual/ms-manual.html>
-
 ## 其他
 
 {% post_link C++/'C++获取日期时间戳' %}
+
+{% post_link C++/'C++内存占用分析' %}
 
 ## 已知的问题
 
