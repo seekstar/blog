@@ -4,6 +4,39 @@ date: 2023-10-25 20:43:07
 tags:
 ---
 
+## heaptrack
+
+可以打印出消耗内存最多的地方、申请内存次数最多的地方、临时申请内存最多的地方。
+
+<https://milianw.de/blog/heaptrack-a-heap-memory-profiler-for-linux.html>
+
+官方文档：
+
+<https://github.com/KDE/heaptrack>
+
+<https://github.com/KDE/heaptrack#heaptrack_print>
+
+```shell
+sudo apt install heaptrack
+```
+
+```shell
+heaptrack 可执行文件 参数...
+```
+
+```shell
+heaptrack_print xxx.gz > report
+```
+
+有几个section:
+
+- `MOST CALLS TO ALLOCATION FUNCTIONS`
+- `PEAK MEMORY CONSUMERS`
+- `MOST TEMPORARY ALLOCATIONS`
+- 最后的summary
+
+运行速度差不多是正常运行的三四倍。输出的trace虽然经过了压缩，但还是很大。
+
 ## valgrind
 
 `valgrind --tools=massif 你的程序 参数...`
@@ -68,12 +101,20 @@ Total: 0.0 MB
    --add_lib=<file>    Read additional symbols and line info from the given library
 ```
 
-但是还是跑得很慢，而且没有行号。
+但是没有行号。而且跑得很慢。这里说libtcmalloc开了heap profiling之后会让程序慢5倍以上：<https://www.brendangregg.com/FlameGraphs/memoryflamegraphs.html>
 
 ## 没试过
 
+### MTuner
+
 <https://github.com/RudjiGames/MTuner>
 
-<https://doordash.engineering/2021/04/01/examining-problematic-memory-with-bpf-perf-and-memcheck/>
+看起来似乎不支持linux
 
-<https://www.brendangregg.com/FlameGraphs/memoryflamegraphs.html>
+### memleak
+
+<https://github.com/iovisor/bcc>
+
+<https://github.com/iovisor/bcc/blob/master/tools/memleak_example.txt>
+
+好像只是打印一段时间没有被free的内存。
