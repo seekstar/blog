@@ -210,6 +210,31 @@ fi
 
 会打印出`yes`。
 
+如果要判断是否不包含：
+
+```shell
+if ! [[ 2333test233222 =~ test233 ]]; then
+	echo yes;
+fi
+```
+
+或操作：
+
+```shell
+if [[ 2333test233222 =~ abc || 2333test233222 =~ test233 ]]; then
+	echo yes;
+fi
+# yes
+```
+
+与操作：
+
+```shell
+if [[ 2333test233222 =~ abc && 2333test233222 =~ test233 ]]; then
+	echo yes;
+fi
+```
+
 ### 重定向
 
 ```shell
