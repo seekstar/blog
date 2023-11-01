@@ -630,6 +630,56 @@ humanfriendly --parse-size="2 KiB"
 
 来源：<https://stackoverflow.com/a/46373468>
 
+### 读取JSON
+
+用`jq`
+
+```shell
+# Debian
+sudo apt install jq
+# ArchLinux
+sudo pacman -S jq
+```
+
+```shell
+curl -s 'https://api.github.com/users/lambda' | jq -r '.name'
+```
+
+```text
+Brian Campbell
+```
+
+如果field不一定存在，可以用这个方式判断：
+
+```shell
+name=$(curl -s 'https://api.github.com/users/lambda' | jq -er '.name')
+if [ $? -eq 0 ]; then
+	echo $name
+else
+	echo name does not exist
+fi
+
+name1=$(curl -s 'https://api.github.com/users/lambda' | jq -er '.name1')
+if [ $? -eq 0 ]; then
+	echo $name1
+else
+	echo name1 does not exist
+fi
+```
+
+```text
+Brian Campbell
+name1 does not exist
+```
+
+```text
+○   -e / --exit-status:
+
+	Sets  the  exit status of jq to 0 if the last output values was neither false nor null, 1 if the last output value was either false or null, or 4 if no valid result was ever produced.
+```
+
+参考：<https://stackoverflow.com/a/53135202/13688160>
+
 ## 按命令
 
 ### awk
