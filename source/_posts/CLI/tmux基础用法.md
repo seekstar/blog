@@ -236,6 +236,14 @@ set -g @tnotify-custom-cmd 'echo "tmux程序跑完啦" | s-nail --subject="tmux 
 
 </details>
 
+如果要给notification带上session name，可以用`tmux display-message -p #S`:
+
+```text
+set -g @tnotify-custom-cmd 'echo "tmux $(tmux display-message -p \#S) 程序跑完啦" | s-nail --subject="tmux complete notification" 接收人@163.com'
+```
+
+参考：<https://superuser.com/a/410197>
+
 ## 存在的问题
 
 tmux会用空格填充到行末。如果直接复制tmux中的文本的话，会把后面填充的空格也复制出来。`screen`没有这个问题：<https://unix.stackexchange.com/a/333983>
