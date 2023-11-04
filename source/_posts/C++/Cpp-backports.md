@@ -9,11 +9,17 @@ tags:
 ```cpp
 #include <iostream>
 
+struct in_place_t {};
+inline constexpr in_place_t in_place{};
+
 template <typename T>
 class optional {
 public:
 	optional() : has_value_(false) {}
 	optional(T&& x) : has_value_(true), x_(std::move(x)) {}
+	optional(
+		in_place_t, Args&&... args
+	) : has_value_(true), x_(std::forward<Args>(args)...) {}
 	optional<T>& operator=(T&& x) {
 		if (has_value_)
 			x_.~T();
@@ -56,6 +62,14 @@ public:
 	}
 	bool has_value() const { return has_value_; }
 	T &value() { return x_; }
+	const T &value() const { return x_; }
+	void reset() {
+		if (has_value_) {
+			x_.~T();
+			has_value_ = false;
+		}
+	}
+
 
 private:
 	bool has_value_;
@@ -63,6 +77,11 @@ private:
 		T x_;
 	};
 };
+// https://stackoverflow.com/a/9103132/13688160
+template <typename T, typename... Args>
+optional<T> make_optional(Args &&...args) {
+	return optional<T>(in_place, std::forward<Args>(args)...);
+}
 
 class A {
 public:
@@ -93,7 +112,7 @@ int main() {
 	}
 	std::cout << "2\n";
 	{
-		optional<A> x(A(233));
+		make_optional<A>(233);
 	}
 	std::cout << "3\n";
 	{
@@ -102,19 +121,19 @@ int main() {
 	}
 	std::cout << "4\n";
 	{
-		optional<A> x(A(233));
+		auto x = make_optional<A>(233);
 		x = A(466);
 	}
 	std::cout << "5\n";
 	{
-		optional<A> x(A(233));
-		optional<A> y(A(466));
+		auto x = make_optional<A>(233);
+		auto y = make_optional<A>(466);
 		x = y;
 	}
 	std::cout << "6\n";
 	{
-		optional<A> x(A(233));
-		optional<A> y(A(466));
+		auto x = make_optional<A>(233);
+		auto y = make_optional<A>(466);
 		x = std::move(y);
 	}
 	std::cout << "7\n";
@@ -125,6 +144,11 @@ int main() {
 		std::cout << x.has_value() << ' ' << x.value() << std::endl;
 		x.value() = 466;
 		std::cout << x.has_value() << ' ' << x.value() << std::endl;
+	}
+	std::cout << "8\n";
+	{
+		auto x = make_optional<A>(233);
+		x.reset();
 	}
 	return 0;
 }
@@ -139,23 +163,20 @@ int main() {
 ~A(): 0
 ~A(): 233
 4
-~A(): 0
 ~A(): 233
 ~A(): 0
 ~A(): 466
 5
-~A(): 0
-~A(): 0
 ~A(): 233
 ~A(): 466
 ~A(): 466
 6
-~A(): 0
-~A(): 0
 ~A(): 233
 ~A(): 466
 7
 0
 1 233
 1 466
+8
+~A(): 233
 ```
