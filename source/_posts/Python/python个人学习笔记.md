@@ -266,11 +266,31 @@ pip3 install python-dateutil
 numpy.linspace(start, stop, num=50, endpoint=True, retstep=False, dtype=None, axis=0)[source]
 ```
 
-### 其他
+### json
+
+#### 字典和json字符串的转换
 
 - [python字典和JSON格式的转换](https://blog.csdn.net/sinat_36899414/article/details/77817195)
 
 `json.dumps(obj, indent='\t')`可以使用tab进行缩进。
+
+#### 从文件读取
+
+```py
+import json
+json.load(open(路径))
+```
+
+但是遇到trailing comma会报错。可以用json5: <https://stackoverflow.com/questions/23705304/can-json-loads-ignore-trailing-commas>
+
+```shell
+pip3 install json5
+```
+
+```py
+import json5
+json5.load(open(路径))
+```
 
 ## pip
 
