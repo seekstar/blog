@@ -218,6 +218,14 @@ shlex.split('-o 1 --long "Some long string"')
 ['-o', '1', '--long', 'Some long string']
 ```
 
+### 取整
+
+四舍五入：`round`
+
+向上取整：`math.ceil`
+
+向下取整：`math.floor`
+
 ### 其他
 
 - [Python 3 命令行参数](https://www.twle.cn/l/yufei/python30/python-30-command-line-arguments.html)
