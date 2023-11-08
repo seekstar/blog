@@ -20,6 +20,38 @@ tags:
 
 - [Matplotlib 放置legend(bbox_to_anchor)](https://blog.csdn.net/chichoxian/article/details/101058046)
 
+## Axes
+
+```python
+ax = plt.gca()
+```
+
+文档：<https://matplotlib.org/stable/api/axes_api.html>
+
+来源：<https://stackoverflow.com/questions/15067668/how-to-get-a-matplotlib-axes-instance>
+
+### 指定指数
+
+比如指定指数为1e-9:
+
+```python
+y_formatter = ScalarFormatter()
+y_formatter.set_powerlimits((-9, -9))
+ax.yaxis.set_major_formatter(y_formatter)
+```
+
+官方文档：<https://matplotlib.org/stable/api/ticker_api.html#matplotlib.ticker.ScalarFormatter.set_powerlimits>
+
+来源：<https://stackoverflow.com/a/77442842/13688160>
+
+设置fontsize:
+
+```python
+ax.yaxis.get_offset_text().set_fontsize(8)
+```
+
+来源：<https://stackoverflow.com/a/34228384/13688160>
+
 ## gridspec
 
 官方文档：<https://matplotlib.org/stable/api/_as_gen/matplotlib.gridspec.GridSpec.html>

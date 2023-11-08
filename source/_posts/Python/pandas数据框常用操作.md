@@ -9,9 +9,9 @@ DataFrame官方文档：<https://pandas.pydata.org/docs/reference/frame.html>
 
 新建：<https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html>
 
-{% post_link Python/'pandas判断数据框是否相等' %}
-{% post_link Python/'pandas数据框获取行数列数' %}
-{% post_link Python/'python dataframe根据列号取出列' %}
+- {% post_link Python/'pandas判断数据框是否相等' %}
+- {% post_link Python/'pandas数据框获取行数列数' %}
+- {% post_link Python/'python dataframe根据列号取出列' %}
 
 添加新列：<https://www.geeksforgeeks.org/adding-new-column-to-existing-dataframe-in-pandas/>
 
@@ -47,6 +47,21 @@ pd.concat([d, pd.DataFrame(r).T])
 test = pd.DataFrame({'col1': range(0, 10), 'col2': range(10, 20)})
 # 取出第2行到第4行：
 test[1:4]
+```
+
+## 取出满足条件的行
+
+```python
+# 选择年龄大于25岁且性别为男性的数据行
+print(df[(df['age'] > 25) & (df['gender'] == 'male')])
+```
+
+来源：<https://www.ycpai.cn/python/UcXZsYr8.html>
+
+## 取出最后一行
+
+```python
+last_row = df.iloc[-1]
 ```
 
 ## 取出多列
