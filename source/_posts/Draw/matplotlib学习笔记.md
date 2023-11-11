@@ -20,6 +20,14 @@ tags:
 
 - [Matplotlib 放置legend(bbox_to_anchor)](https://blog.csdn.net/chichoxian/article/details/101058046)
 
+## pyplot
+
+```python
+import matplotlib.pyplot as plt
+```
+
+yscale: <https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.yscale.html>
+
 ## Axes
 
 ```python
@@ -30,7 +38,17 @@ ax = plt.gca()
 
 来源：<https://stackoverflow.com/questions/15067668/how-to-get-a-matplotlib-axes-instance>
 
-### 指定指数
+### tick formatter
+
+文档：<https://matplotlib.org/stable/gallery/ticks/tick-formatters.html>
+
+例子：
+
+```python
+ax1.xaxis.set_major_formatter(lambda x, pos: str(x-5))
+```
+
+#### 指定指数
 
 比如指定指数为1e-9:
 
@@ -51,6 +69,10 @@ ax.yaxis.get_offset_text().set_fontsize(8)
 ```
 
 来源：<https://stackoverflow.com/a/34228384/13688160>
+
+## 翻转坐标轴
+
+<https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.invert_yaxis.html>
 
 ## gridspec
 

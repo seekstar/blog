@@ -33,6 +33,38 @@ for i in range(10) :
 
 在交互式环境中（如命令行形式）后面要多打一个回车才开始运行
 
+## 内置数据结构
+
+### List
+
+教程：[Python 列表(List)](https://www.runoob.com/python/python-lists.html)
+
+```python
+a = [1, 2, 3, 4]
+
+# 最后一个元素
+# 4
+a[-1]
+
+# 从index为1的元素开始的所有元素
+# [2, 3, 4]
+a[1:]
+
+# 以最后一个元素结尾（不含）的所有元素
+# [1, 2, 3]
+a[:-1]
+
+# 以倒数第二个元素结尾（不含）的所有元素
+# [1, 2]
+a[:-2]
+```
+
+### 其他
+
+- [Python教学: Python Dictionary完全教学一次搞懂](https://baijiahao.baidu.com/s?id=1694102996150591628&wfr=spider&for=pc)
+
+- [Python中Tuple（元组）](https://blog.csdn.net/wsq119/article/details/105385142)
+
 ## 类
 
 ```py
@@ -56,14 +88,6 @@ sorted(li, key = lambda item: item.c, reverse=True)
 参考：<https://stackoverflow.com/questions/35988/c-like-structures-in-python>
 
 完整教程：[Python 面向对象](https://www.runoob.com/python/python-object.html)
-
-## 内置数据结构
-
-- [Python教学: Python Dictionary完全教学一次搞懂](https://baijiahao.baidu.com/s?id=1694102996150591628&wfr=spider&for=pc)
-
-- [Python 列表(List)](https://www.runoob.com/python/python-lists.html)
-
-- [Python中Tuple（元组）](https://blog.csdn.net/wsq119/article/details/105385142)
 
 ## 输入
 
@@ -131,6 +155,17 @@ os.chdir(dname)
 ```
 
 来源：<https://stackoverflow.com/questions/1432924/python-change-the-scripts-working-directory-to-the-scripts-own-directory>
+
+### 打印到文件
+
+使用`print`的`file`参数：
+
+```py
+f = open(路径, 'w')
+print('Average %f' %average, file=f)
+```
+
+来源：<https://www.askpython.com/python/built-in-methods/python-print-to-file>
 
 ## 标准库
 
@@ -261,6 +296,49 @@ pip3 install python-dateutil
 ### numpy
 
 官方文档：<https://numpy.org/doc/stable/>
+
+#### numpy.array
+
+##### 从python list创建
+
+```python
+np.array([1, 2, 3])
+```
+
+##### 从多个python list创建一维数组
+
+如果是确定数量的list，可以用`np.concatenate`:
+
+```python
+a = [1, 2, 3]
+b = [4, 5, 6]
+np.concatenate((a, b))
+```
+
+输出：`array([1, 2, 3, 4, 5, 6])`
+
+来源：<https://stackoverflow.com/a/54773471/13688160>
+
+如果有不定数量的list，用迭代器：
+
+```python
+listOfLists = [[1, 2, 3], [4, 5, 6]]
+np.array([ elem for singleList in listOfLists for elem in singleList])
+```
+
+输出：
+
+```text
+array([1, 2, 3, 4, 5, 6])
+```
+
+来源：<https://thispointer.com/python-numpy-create-a-ndarray-from-list-tuple-or-list-of-lists-using-numpy-array/>
+
+##### 二分搜索
+
+<https://numpy.org/doc/stable/reference/generated/numpy.searchsorted.html>
+
+left相当于lower_bound, right相当于upper_bound, 默认是left。
 
 #### 矩阵操作
 
