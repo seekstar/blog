@@ -1159,6 +1159,47 @@ Available options:
 
 当前线程会一直阻塞到命令完成。如果想要非阻塞的话，可以在命令的最后加一个`&`，让它在后台执行。当前进程退出时这个后台进程会自动被杀掉。
 
+## Non-portable
+
+给线程取名字：
+
+用`pthread_setname_np`:
+
+```cpp
+pthread_setname_np(pthread_self(), "thread_name");
+```
+
+例子：
+
+```cpp
+#include <iostream>
+#include <pthread.h>
+
+int main() {
+	size_t n = 50000;
+	size_t sum = 0;
+	for (size_t i = 0; i < n; ++i) {
+		for (size_t j = 0; j < n; ++j) {
+			sum += i * j;
+		}
+	}
+	std::cout << sum << std::endl;
+	pthread_setname_np(pthread_self(), "thread_name");
+
+	sum = 0;
+	for (size_t i = 0; i < n; ++i) {
+		for (size_t j = 0; j < n; ++j) {
+			sum += i * j;
+		}
+	}
+	std::cout << sum << std::endl;
+
+	return 0;
+}
+```
+
+用`top`可以看到运行到一半线程的名字会变成`thread_name`。
+
 ## 其他
 
 {% post_link C++/'C++获取日期时间戳' %}
