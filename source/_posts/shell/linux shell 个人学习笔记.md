@@ -1053,6 +1053,12 @@ jason
 sort -u txt -o txt1
 ```
 
+### column
+
+`cat table | column -t`可以输出一个漂亮的表格。
+
+来源：<https://stackoverflow.com/a/28755377/13688160>
+
 ## 其他
 
 { post_link shell/'zsh使用笔记' }
