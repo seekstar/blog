@@ -39,14 +39,16 @@ d = pd.DataFrame({'col1': [0, 1], 'col2': [2, 3], 'col3': [4, 5]})
 pd.concat([d, pd.DataFrame(r).T])
 ```
 
-## 取出指定范围的行
+## 根据index取出行
 
-与python自带的list的语法类似：
+用`.iloc`，与python自带的list的语法类似：
 
 ```py
 test = pd.DataFrame({'col1': range(0, 10), 'col2': range(10, 20)})
 # 取出第2行到第4行：
-test[1:4]
+test.iloc[1:4]
+# 取出最后一行
+test.iloc[-1]
 ```
 
 ## 取出满足条件的行
@@ -57,12 +59,6 @@ print(df[(df['age'] > 25) & (df['gender'] == 'male')])
 ```
 
 来源：<https://www.ycpai.cn/python/UcXZsYr8.html>
-
-## 取出最后一行
-
-```python
-last_row = df.iloc[-1]
-```
 
 ## 取出多列
 
