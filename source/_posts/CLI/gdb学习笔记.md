@@ -4,6 +4,14 @@ date: 2023-10-27 16:30:12
 tags:
 ---
 
+运行带参数的程序：
+
+```shell
+gdb --args executablename arg1 arg2 arg3
+```
+
+来源：<https://stackoverflow.com/questions/6121094/how-do-i-run-a-program-with-commandline-arguments-using-gdb-within-a-bash-script>
+
 attach到正在运行的进程：
 
 ```shell
