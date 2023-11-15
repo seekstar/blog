@@ -293,6 +293,14 @@ pip3 install python-dateutil
 
 {% post_link Python/'pandas数据框常用操作' %}
 
+#### Serias
+
+官方文档：<https://pandas.pydata.org/docs/reference/api/pandas.Series.html>
+
+常用成员函数
+
+取平均：<https://pandas.pydata.org/docs/reference/api/pandas.Series.mean.html>
+
 ### numpy
 
 官方文档：<https://numpy.org/doc/stable/>

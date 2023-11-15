@@ -28,6 +28,16 @@ import matplotlib.pyplot as plt
 
 yscale: <https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.yscale.html>
 
+### 设置tick的个数
+
+比如让y轴有4个tick:
+
+```py
+plt.locator_params(axis='y', nbins=4)
+```
+
+来源：<https://stackoverflow.com/a/13418954/13688160>
+
 ## Axes
 
 ```python
