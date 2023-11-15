@@ -48,6 +48,23 @@ ax = plt.gca()
 ax1.xaxis.set_major_formatter(lambda x, pos: str(x-5))
 ```
 
+### grid
+
+官方文档：<https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.grid.html>
+
+让参考线在柱状图的柱子后面:
+
+```py
+# https://stackoverflow.com/a/68344604
+ax.set_axisbelow(True)
+```
+
+给y轴画参考线：
+
+```py
+ax.grid(axis='y')
+```
+
 #### 指定指数
 
 比如指定指数为1e-9:
@@ -74,11 +91,19 @@ ax.yaxis.get_offset_text().set_fontsize(8)
 
 <https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.invert_yaxis.html>
 
-## gridspec
+## 子图
+
+用gridspec
 
 官方文档：<https://matplotlib.org/stable/api/_as_gen/matplotlib.gridspec.GridSpec.html>
 
 官方例子：<https://matplotlib.org/stable/gallery/subplots_axes_and_figures/align_labels_demo.html#sphx-glr-gallery-subplots-axes-and-figures-align-labels-demo-py>
+
+## 调整坐标轴label与tick label之间的空隙
+
+用`labelpad`
+
+官方文档：<https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.pyplot.xlabel.html>
 
 ## 疑难杂症
 
