@@ -41,6 +41,12 @@ ps -q 进程PID -o %cpu
 52.3
 ```
 
+不过用来获取累积CPU time的秒数挺好用的：
+
+```shell
+ps -q 进程PID -o cputimes
+```
+
 同理也可以获取进程的内存占用：
 
 ```shell
@@ -55,6 +61,17 @@ ps -q 进程PID -o %cpu,%mem
 ```
 
 这个内存占用应该是瞬时的。
+
+```text
+       %cpu        %CPU      cpu utilization of the process in "##.#" format.  Currently, it is the CPU time used
+                             divided by the time the process has been running (cputime/realtime ratio), expressed
+                             as a percentage.  It will not add up to 100% unless you are lucky.  (alias pcpu).
+
+       %mem        %MEM      ratio of the process's resident set size  to the physical memory on the machine,
+                             expressed as a percentage.  (alias pmem).
+
+       cputimes    TIME      cumulative CPU time in seconds (alias times).
+```
 
 ## 参考文献
 
