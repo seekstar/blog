@@ -230,13 +230,19 @@ $$\mathop{\bowtie}\limits_{theta}$$
 \usepackage{float}
 ```
 
-### 嵌套图片
+### 子图
 
 参考：
 
 <https://blog.csdn.net/yq_forever/article/details/84796802>
 
 <https://blog.csdn.net/mifangdebaise/article/details/95871208>
+
+<https://latex-tutorial.com/subfigure-latex/>
+
+```tex
+\usepackage{subfigure}
+```
 
 ```tex
 \begin{figure}[H]
