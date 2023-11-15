@@ -612,6 +612,10 @@ int main() {
 }
 ```
 
+如果已知需要用到哪些类型的话，似乎还可以把template的定义放到cpp文件：
+
+<https://stackoverflow.com/questions/115703/storing-c-template-function-definitions-in-a-cpp-file>
+
 ## 隐藏构造函数
 
 有时会只想让特定的函数（比如`begin()`）能够返回一个类（比如迭代器），此时就需要隐藏这个类的构造函数。
