@@ -18,4 +18,4 @@ tags:
 
 来源：<https://tex.stackexchange.com/questions/385742/underline-in-mid-chinese-text>
 
-英文看这个：{% post_link Latex/'Latex英文下划线自动断字换行' %}
+英文看这个：<https://blog.csdn.net/qq_41961459/article/details/132892356>
