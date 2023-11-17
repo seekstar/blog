@@ -92,19 +92,6 @@ mean_every_n(a, 4)
 
 参考：<https://www.geeksforgeeks.org/averaging-over-every-n-elements-of-a-numpy-array/#>
 
-## percentile
-
-<https://numpy.org/doc/stable/reference/generated/numpy.percentile.html#>
-
-```py
-# 10000个0到1的随机数
-a = np.random.rand(10000)
-# 求20%分位数，即小于此数的值的数量占总数的20%
-np.percentile(a, 20)
-# 求多个分位数
-np.percentile(a, [10, 20, 30, 40, 50, 60, 70, 80, 90, 99, 99.9, 99.99])
-```
-
 ## 参考文献
 
 [python中矩阵的用法](https://www.cnblogs.com/abella/p/10207945.html)
