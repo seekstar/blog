@@ -4,6 +4,10 @@ date: 2023-10-18 19:28:00
 tags:
 ---
 
+- {% post_link Draw/'matplotlib: **kwargs: `.Text` properties can be used to control the appearance of the labels' %}
+
+- {% post_link Draw/'matplotlib: The PDF backend does not currently support the selected font' %}
+
 - {% post_link Draw/'matplotlib打印微秒' %}
 
 - {% post_link Draw/'matplotlib设置legend坐标' %}
@@ -27,6 +31,12 @@ import matplotlib.pyplot as plt
 ```
 
 yscale: <https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.yscale.html>
+
+非阻塞显示图片：`plt.show(block=False)`
+
+开始画下一张：`plt.figure()`
+
+`plt.plot(y)`的横坐标是从0开始的数组下标。
 
 ### 设置tick的个数
 
