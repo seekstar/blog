@@ -38,16 +38,6 @@ yscale: <https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.yscale.html
 
 `plt.plot(y)`的横坐标是从0开始的数组下标。
 
-### 设置tick的个数
-
-比如让y轴有4个tick:
-
-```py
-plt.locator_params(axis='y', nbins=4)
-```
-
-来源：<https://stackoverflow.com/a/13418954/13688160>
-
 ## Axes
 
 ```python
@@ -90,6 +80,7 @@ ax.grid(axis='y')
 比如指定指数为1e-9:
 
 ```python
+from matplotlib.ticker import ScalarFormatter
 y_formatter = ScalarFormatter()
 y_formatter.set_powerlimits((-9, -9))
 ax.yaxis.set_major_formatter(y_formatter)
@@ -124,6 +115,27 @@ ax.yaxis.get_offset_text().set_fontsize(8)
 用`labelpad`
 
 官方文档：<https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.pyplot.xlabel.html>
+
+## 设置tick的个数
+
+比如让y轴有4个tick:
+
+```py
+plt.locator_params(axis='y', nbins=4)
+```
+
+来源：<https://stackoverflow.com/a/13418954/13688160>
+
+很坑的是，log scale用这种方式无效，需要手动设置ticks:
+
+```py
+plt.yscale('log')
+# 设置成log scale似乎会清空ticks，所以要把设置ticks放后面
+plt.yticks([1e5, 1e6, 1e7], fontsize=8)
+# plt.yticks似乎会消除minor ticks，所以还得把它们补上
+# 其中numticks比较玄学，似乎大于3就行。这里直接设置成一个大数，就肯定不会有问题了。
+ax.yaxis.set_minor_locator(LogLocator(base=10, subs=np.arange(2, 10) * 0.1, numticks=233))
+```
 
 ## 疑难杂症
 
