@@ -6,7 +6,15 @@ tags:
 
 ## 大段随机二进制
 
-思路：先用`std::random_device`生成真随机数，用来初始化长周期随机数发生器`std::mt19937`，然后再用`std::mt19937`来不断生成随机数。代码：
+思路：先用`std::random_device`生成真随机数，用来初始化长周期随机数发生器`std::mt19937`，然后再用`std::mt19937`来不断生成随机数。
+
+生成大段随机二进制的部分C++17之后可以用这些：
+
+<https://en.cppreference.com/w/cpp/algorithm/generate>
+
+<https://en.cppreference.com/w/cpp/algorithm/generate_n>
+
+否则只能手写了。代码：
 
 ```cpp
 #include <assert.h>
