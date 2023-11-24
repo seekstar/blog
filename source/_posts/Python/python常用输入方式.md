@@ -36,6 +36,8 @@ for line in open('/path/to/file'):
 	print(line)
 ```
 
+也可以`f.readline()`读取单行。
+
 参考：<https://www.cnblogs.com/sysuoyj/archive/2012/03/14/2395789.html>
 
 ## 一次性读取并按行保存为list
