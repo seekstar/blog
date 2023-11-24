@@ -17,3 +17,44 @@ ColumnFamilyData和SuperVersion互相保存了对方的引用。在`ColumnFamily
 Get的时候如果不是在snapshot上get，那么先拿thread local的SuperVersion，再在上面Get。在`ColumnFamilyData::InstallSuperVersion`中会更新thread local SuperVersion。
 
 在hold DB mutex的情况下，可以直接调用`ColumnFamilyData::GetSuperVersion`拿最新的SuperVersion。
+
+## Secondary cache
+
+官方文档：<https://github.com/facebook/rocksdb/wiki/SecondaryCache-(Experimental)>
+
+官方讲解：<https://rocksdb.org/blog/2021/05/27/rocksdb-secondary-cache.html>
+
+### CompressedSecondaryCacheOptions (in-memory)
+
+```cpp
+  rocksdb::CompressedSecondaryCacheOptions secondary_cache_opts;
+  secondary_cache_opts.capacity = 字节数;
+  secondary_cache_opts.compression_type = CompressionType的某一项;
+  rocksdb::LRUCacheOptions lru_cache_opts;
+  lru_cache_opts.capacity = 字节数;
+  lru_cache_opts.secondary_cache =
+      NewCompressedSecondaryCache(secondary_cache_opts);
+  rocksdb::BlockBasedTableOptions table_options;
+  table_options.block_cache = rocksdb::NewLRUCache(lru_cache_opts);
+  rocksdb::Options options;
+  options.table_factory.reset(
+      rocksdb::NewBlockBasedTableFactory(table_options));
+```
+
+### RocksCachelibWrapper
+
+<https://github.com/facebook/CacheLib/blob/main/cachelib/adaptor/rocks_secondary_cache/CachelibWrapper.h>
+
+```cpp
+facebook::rocks_secondary_cache::RocksCachelibWrapper
+```
+
+可惜其中有一部分没有开源，所以无法编译：<https://github.com/facebook/CacheLib/issues/278>
+
+其实只要把`CachelibWrapper.h`和`CachelibWrapper.cpp`这两个文件拷贝到自己的project里，然后把里面引用了facebook内部代码的代码删掉即可：<https://github.com/seekstar/RocksCachelibWrapper>
+
+相关：
+
+<https://github.com/facebook/rocksdb/issues/8347>
+
+<https://github.com/facebook/CacheLib/pull/184>

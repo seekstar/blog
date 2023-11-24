@@ -21,6 +21,18 @@ tags:
 git remote get-url origin
 ```
 
+## clone
+
+指定分支
+
+```shell
+git clone -b 分支名 仓库地址
+# 如果只需要这个分支的话
+git clone -b 分支名 --single-branch 仓库地址
+```
+
+参考：[git clone 指定分支](https://blog.csdn.net/Steve_XiaoHai/article/details/130533676)
+
 ## tag
 
 显示全部：`git tags`
