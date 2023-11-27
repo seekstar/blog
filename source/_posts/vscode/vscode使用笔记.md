@@ -22,5 +22,6 @@ Language Identifiers: <https://code.visualstudio.com/docs/languages/identifiers>
 | ---- | ---- |
 | cmake | `CMakeLists.txt` |
 | jsonc | JSON with Comments |
+| markdown | Markdown |
 
 来源：<https://stackoverflow.com/questions/44831313/how-to-exclude-file-extensions-and-languages-from-format-on-save-in-vscode>
