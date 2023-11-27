@@ -92,6 +92,27 @@ mean_every_n(a, 4)
 
 参考：<https://www.geeksforgeeks.org/averaging-over-every-n-elements-of-a-numpy-array/#>
 
+## 每列除以某个向量
+
+```py
+matrix = np.array([[1, 2, 3],
+                   [4, 5, 6],
+                   [7, 8, 9]])
+vector = np.array([1, 2, 3])
+# vector.shape == (3,)，只有一个维度
+# 加一个维度
+column_vector = vector[:, np.newaxis]
+# column_vector.shape == (3, 1)
+# 这个时候做除法，numpy会自动对column_vector做broadcasting
+matrix / column_vector
+```
+
+```text
+array([[1.        , 2.        , 3.        ],
+       [2.        , 2.5       , 3.        ],
+       [2.33333333, 2.66666667, 3.        ]])
+```
+
 ## 参考文献
 
 [python中矩阵的用法](https://www.cnblogs.com/abella/p/10207945.html)

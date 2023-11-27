@@ -7,13 +7,36 @@ pandas官方文档：<https://pandas.pydata.org/docs/reference/>
 
 DataFrame官方文档：<https://pandas.pydata.org/docs/reference/frame.html>
 
-新建：<https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html>
-
 - {% post_link Python/'pandas判断数据框是否相等' %}
 - {% post_link Python/'pandas数据框获取行数列数' %}
 - {% post_link Python/'python dataframe根据列号取出列' %}
 
 添加新列：<https://www.geeksforgeeks.org/adding-new-column-to-existing-dataframe-in-pandas/>
+
+## 创建
+
+构造函数：<https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html>
+
+### 从Series list创建
+
+```py
+li = []
+li.append(pd.Series([1, 2, 3]))
+li.append(pd.Series([4, 5, 6]))
+# https://stackoverflow.com/a/57034111/13688160
+# Series相当于列向量，所以concat的方向为column
+# 然后.T转置一下
+df = pd.concat(li, axis=1).T
+# https://www.kdnuggets.com/2022/11/4-ways-rename-pandas-columns.html
+df.columns = ['a', 'b', 'c']
+df
+```
+
+```text
+   a  b  c
+0  1  2  3
+1  4  5  6
+```
 
 ## 从stdin读取
 
@@ -38,6 +61,8 @@ r = pd.Series([1, 2, 3], index = ['col1', 'col2', 'col3'])
 d = pd.DataFrame({'col1': [0, 1], 'col2': [2, 3], 'col3': [4, 5]})
 pd.concat([d, pd.DataFrame(r).T])
 ```
+
+注意，`pd.concat`会返回一个新的DataFrame，所以复杂度是`O(n)`的：<https://stackoverflow.com/a/36489724/13688160>
 
 ## 根据index取出行
 

@@ -48,6 +48,20 @@ ax = plt.gca()
 
 来源：<https://stackoverflow.com/questions/15067668/how-to-get-a-matplotlib-axes-instance>
 
+### `set_xlim`, `set_ylim`
+
+文档：
+
+<https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.set_ylim.html>
+
+<https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.set_xlim.html>
+
+设置Y轴最小值：
+
+```py
+ax.set_ylim(bottom=0)
+```
+
 ### tick formatter
 
 文档：<https://matplotlib.org/stable/gallery/ticks/tick-formatters.html>
