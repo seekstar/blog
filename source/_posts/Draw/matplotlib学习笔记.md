@@ -62,6 +62,8 @@ ax = plt.gca()
 ax.set_ylim(bottom=0)
 ```
 
+来源：<https://stackoverflow.com/a/22642641/13688160>
+
 ### tick formatter
 
 文档：<https://matplotlib.org/stable/gallery/ticks/tick-formatters.html>

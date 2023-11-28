@@ -142,3 +142,10 @@ test.groupby(test.index // 3).mean()
 ## 遍历
 
 <https://stackoverflow.com/questions/16476924/how-to-iterate-over-rows-in-a-dataframe-in-pandas>
+
+## 前缀和
+
+```py
+test = pd.DataFrame({'col1': [0, 1, 2, 3], 'col2': [4, 5, 6, 7]})
+test['col1'].cumsum()
+```

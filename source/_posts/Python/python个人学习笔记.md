@@ -137,6 +137,27 @@ print('xxx', file=sys.stderr)
 
 来源：<https://stackoverflow.com/questions/22556449/print-a-list-of-space-separated-elements>
 
+## iterator
+
+遍历：
+
+```py
+it = iter([1, 2, 3])
+while True:
+    try:
+        print(next(it))
+    except StopIteration:
+        break
+```
+
+`for`循环会自动catch `StopIteration`:
+
+```py
+it = iter([1, 2, 3])
+for x in it:
+    print(x)
+```
+
 ## 文件
 
 {% post_link Python/'python文件管理' %}
