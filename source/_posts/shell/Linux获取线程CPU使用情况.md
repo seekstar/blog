@@ -30,3 +30,5 @@ ps -eT -o tid,cputimes | awk '{if ($1 == 线程tid) print $2}'
 
        cputimes    TIME      cumulative CPU time in seconds (alias times).
 ```
+
+如果是C/C++的话，可以用clock_gettime: <https://stackoverflow.com/a/44917411/13688160>
