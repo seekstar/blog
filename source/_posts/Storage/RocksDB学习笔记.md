@@ -27,6 +27,8 @@ db->GetProperty("rocksdb.stats", &rocksdb_stats)
 
 其中Compaction Stats里每行是以该level为output level的compaction的stats，`Rn`是non output level的读取量，`Rnp1`是output level的读取量，其中`p1`应该是`plus 1`的意思。`Rn`和`Rnp1`相加就是`Read`。
 
+值得注意的是，flush到L0的I/O也被算进了L0的write里。
+
 ## Secondary cache
 
 官方文档：<https://github.com/facebook/rocksdb/wiki/SecondaryCache-(Experimental)>
