@@ -60,3 +60,5 @@ sudo apt remove liburing1 liburing-dev
 		# Deps of thriftprotocol
 		rpcmetadata
 ```
+
+或者直接link这个library: <https://github.com/seekstar/RocksCachelibWrapper>
