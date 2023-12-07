@@ -163,3 +163,7 @@ rm ~/.cache/matplotlib -rf
 ```
 
 参考：<https://stackoverflow.com/questions/42097053/matplotlib-cannot-find-basic-fonts>
+
+## 已知的问题
+
+`plt.legend`顺序似乎只能是按列的，要改成按行只能手动reorder: <https://stackoverflow.com/questions/29639973/custom-legend-in-pandas-bar-plot-matplotlib>

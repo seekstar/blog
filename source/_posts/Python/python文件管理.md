@@ -25,13 +25,11 @@ import os, shutil
 
 文档：<https://docs.python.org/3/library/os.path.html>
 
-- 判断文件是否存在
+- 判断文件是否存在 [os.path.exists](https://docs.python.org/3/library/os.path.html#os.path.exists)
 
-[os.path.exists](https://docs.python.org/3/library/os.path.html#os.path.exists)
+- 是否为目录 [os.path.isdir(path)](https://docs.python.org/3/library/os.path.html#os.path.isdir)
 
-- basename
-
-[os.path.basename](https://docs.python.org/3/library/os.path.html#os.path.basename)
+- [os.path.basename](https://docs.python.org/3/library/os.path.html#os.path.basename)
 
 ## 其他
 
