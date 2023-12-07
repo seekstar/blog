@@ -47,3 +47,5 @@ find . -type f | xargs -P 4 -I {} cp --parents {} ../d
 ```
 
 `-P`: `--max-procs`
+
+这种方法的缺点是分配给各个线程的文件总大小可能很不均匀。所以我写了mcp，先扫描目录然后尽量均匀地分配文件给各个线程：<https://github.com/light-Dedup/mcp>
