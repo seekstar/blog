@@ -63,3 +63,19 @@ sudo apt install ttf-mscorefonts-installer
 # 如果是matplotlib，还得清一下cache：https://stackoverflow.com/a/49884009
 rm ~/.cache/matplotlib -rf
 ```
+
+## 取色
+
+### xcolor
+
+点击需要取色的像素之后RBG色号会自动复制到剪切板上。
+
+### Gpick
+
+点`Pick color`然后取色即可。
+
+### 失败的尝试
+
+- deepin-picker: 没有出现在启动器里。命令行启动之后似乎没反应
+
+- kcolorpicker: 启动器和命令行都没找到
