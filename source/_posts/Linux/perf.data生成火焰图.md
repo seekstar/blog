@@ -9,8 +9,8 @@ date: 2021-09-16 10:40:41
 
 ```shell
 perf script -i perf.data > perf.unfold
-/path/to/FlameGraph/stackcollapse-perf.pl perf.unfold > perf.folded
-/path/to/FlameGraph/flamegraph.pl perf.folded > perf.svg
+$FlameGraphPath/stackcollapse-perf.pl perf.unfold > perf.folded
+$FlameGraphPath/flamegraph.pl perf.folded > perf.svg
 ```
 
 原文：<https://www.cnblogs.com/lausaa/p/12098716.html>
