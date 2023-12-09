@@ -11,15 +11,19 @@ date: 2021-09-20 10:38:42
 
 ### 安装依赖
 
-这里用nix安装，不需要root权限：
+可以用nix安装，不需要root权限：
 
 ```shell
 nix-env -iA nixpkgs.bison
 ```
 
+Nix包管理器安装和使用教程：{% post_link Distro/'使用国内源安装和使用Nix包管理器' %}
+
 ### 获取源码
 
-glibc每六个月发布类似于2.31这样的minor version，然后在这里fork出这个minor version的branch，比如`release/2.31/master`，以后的bug fix都commit到这个branch上，不再单独发布bug fix version。因此我们可以先clone glibc的repo，然后checkout到目标minor version的branch即可。我的系统上glibc版本是`2.31-13+deb11u7`，所以这里获取`2.31`的源码：
+glibc每六个月发布类似于2.31这样的minor version，然后在这里fork出这个minor version的branch，比如`release/2.31/master`，以后的bug fix都commit到这个branch上，不再单独发布bug fix version。因此我们可以先clone glibc的repo，然后checkout到目标minor version的branch即可。
+
+我的系统上glibc版本是`2.31-13+deb11u7`，所以这里获取`2.31`的源码：
 
 ```shell
 git clone https://mirrors.tuna.tsinghua.edu.cn/git/glibc.git
@@ -73,7 +77,7 @@ cd gcc
 git checkout releases/gcc-10
 ```
 
-然后下载它的依赖：
+### 下载依赖
 
 ```shell
 ./contrib/download_prerequisites
@@ -81,7 +85,7 @@ git checkout releases/gcc-10
 
 ### 用系统自带的glibc编译
 
-理论上这里使用刚刚编译的glibc编译gcc最好，但是这需要使用交叉编译的方法，太复杂了，我试了很久都没有成功。由于我们之前编译安装的glibc跟系统里自带的glibc是兼容的（多了一些bug fix），所以这里可以直接用系统自带的glibc编译。
+理论上这里使用刚刚编译的glibc编译gcc最好，但是这需要使用交叉编译的方法，太复杂了，我试了很久都没有成功。由于我们之前编译安装的glibc跟系统里自带的glibc是兼容的（只是修了一些BUG），所以这里可以直接用系统自带的glibc编译。
 
 ```shell
 mkdir -p build
@@ -108,6 +112,10 @@ export CFLAGS="-O2 -fno-omit-frame-pointer"
 export CXXFLAGS=$CFLAGS
 export LDFLAGS="-Wl,-rpath=$INSTALL_ROOT/lib -Wl,-rpath=$INSTALL_ROOT/lib64 -Wl,--dynamic-linker=$INSTALL_ROOT/lib/ld-linux-x86-64.so.2"
 ```
+
+`-Wl,-rpath`: <https://stackoverflow.com/a/6562437/13688160>
+
+`-Wl,--dynamic-linker`: [Specifying the dynamic linker / loader to be used when launching an executable on Linux](https://stackoverflow.com/a/25355236/13688160)
 
 ## 常见库的编译
 
@@ -157,10 +165,6 @@ Hello world!
 
 参考：
 
-`-Wl,-rpath`: <https://stackoverflow.com/a/6562437/13688160>
-
-`-Wl,--dynamic-linker`: [Specifying the dynamic linker / loader to be used when launching an executable on Linux](https://stackoverflow.com/a/25355236/13688160)
-
 [Where is linux-vdso.so.1 present on the file system](https://stackoverflow.com/questions/58657036/where-is-linux-vdso-so-1-present-on-the-file-system)
 
 ### 直接使用g++
@@ -193,7 +197,7 @@ Hello world!
 
 ## 不推荐：`--call-graph=dwarf`
 
-如果不想重新编译系统库的话，可以使用linux perf的`--call-graph=dwarf`，这样perf会把一部分栈内存保存下来，然后通过后处理来unwind，从而得到完整的调用栈。但是这会导致采样的时间开销和空间开销增大，所以采样频率可能要稍微调低一点。而且仍然会存在调用关系错乱的问题。
+如果不想重新编译系统库的话，可以使用linux perf的`--call-graph=dwarf`，这样perf会把一部分栈内存保存下来，然后通过后处理来unwind，从而得到调用栈。但是这种方法仍然存在调用关系错乱的问题，而且采样的时间开销和空间开销很大，采样频率需要稍微调低一点。
 
 参考文献：
 
