@@ -195,6 +195,14 @@ ldd hello
 Hello world!
 ```
 
+## 采样
+
+```shell
+perf record --call-graph=fp 命令 参数...
+```
+
+然后生成火焰图：{% post_link Linux/'perf.data生成火焰图' %}
+
 ## 不推荐：`--call-graph=dwarf`
 
 如果不想重新编译系统库的话，可以使用linux perf的`--call-graph=dwarf`，这样perf会把一部分栈内存保存下来，然后通过后处理来unwind，从而得到调用栈。但是这种方法仍然存在调用关系错乱的问题，而且采样的时间开销和空间开销很大，采样频率需要稍微调低一点。
