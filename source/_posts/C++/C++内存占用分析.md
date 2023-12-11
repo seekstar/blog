@@ -39,13 +39,21 @@ heaptrack_print xxx.gz > report
 
 ## valgrind
 
-`valgrind --tools=massif 你的程序 参数...`
+`valgrind --tool=massif 你的程序 参数...`
 
 能够知道哪些地方分配的内存最多。
 
 文档：<https://valgrind.org/docs/manual/ms-manual.html>
 
 但是valgrind会模拟出一个CPU来运行，所以运行速度会慢很多。
+
+### `Illegal instruction`
+
+可能是因为用到了本地CPU支持但是valgrind不支持的指令。调整编译选项使其编译出来的指令portable就行。
+
+例如，rocksdb `cmake`的时候加上`-DPORTABLE=ON`即可。
+
+参考：<https://wanghenshui.github.io/2019/06/02/valgrind-rocksdb.html>
 
 ## libtcmalloc
 

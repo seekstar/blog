@@ -212,3 +212,7 @@ perf record --call-graph=fp 命令 参数...
 <https://users.rust-lang.org/t/opt-level-2-removes-debug-symbols-needed-in-perf-profiling/16835/7>
 
 <https://stackoverflow.com/questions/57430338/what-do-the-perf-record-choices-of-lbr-vs-dwarf-vs-fp-do>
+
+## 相关
+
+[Consider not omitting frame pointers by default on targets with many registers](https://gcc.gnu.org/bugzilla//show_bug.cgi?id=100811)
