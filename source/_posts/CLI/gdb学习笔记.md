@@ -18,6 +18,8 @@ attach到正在运行的进程：
 gdb --pid xxx
 ```
 
+`add-symbol-file`: <https://stackoverflow.com/questions/30281766/need-to-load-debugging-symbols-for-shared-library-in-gdb>
+
 ## list / l
 
 打印当前正在运行的位置附近的代码
@@ -61,6 +63,17 @@ gdb --pid xxx
 在指定线程中执行命令。
 
 例子：`thread apply all bt`，在所有线程中执行`bt`，即打印所有线程的调用栈。
+
+## `thread`
+
+切换到`info threads`里的某一个thread。例如要选择这个thread：
+
+```text
+  10   Thread 0x7f199dffb700 (LWP 1530942) "checker"       __lll_lock_wait (futex=futex@entry=0x55aea2384ea8, 
+    private=0) at lowlevellock.c:52
+```
+
+就输入`thread 10`
 
 ## 参考文献
 

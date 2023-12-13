@@ -17,6 +17,21 @@ DataFrame官方文档：<https://pandas.pydata.org/docs/reference/frame.html>
 
 构造函数：<https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html>
 
+### 从已有列创建
+
+```py
+a = [1, 2, 3]
+b = ['x', 'y', 'z']
+pd.DataFrame({'a': a, 'b': b})
+```
+
+```text
+   a  b
+0  1  x
+1  2  y
+2  3  z
+```
+
 ### 从Series list创建
 
 ```py

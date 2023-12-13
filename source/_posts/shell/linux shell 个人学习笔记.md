@@ -739,11 +739,20 @@ seq 1 10 | awk '{s+=$1} END {print s}'
 
 ### dpkg
 
+#### 显示当前已经安装的软件
+
 ```shell
 dpkg --list
 ```
 
-显示当前已经安装的软件
+#### 查看文件由哪个包提供
+
+```shell
+$ dpkg -S /bin/ls
+coreutils: /bin/ls
+```
+
+来源：<https://askubuntu.com/a/482>
 
 ### du
 
