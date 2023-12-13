@@ -8,6 +8,8 @@ tags:
 
 可以打印出消耗内存最多的地方、申请内存次数最多的地方、临时申请内存最多的地方。
 
+运行速度差不多是正常运行的三四倍。输出的trace虽然经过了压缩，但还是很大。
+
 <https://milianw.de/blog/heaptrack-a-heap-memory-profiler-for-linux.html>
 
 官方文档：
@@ -30,12 +32,57 @@ heaptrack_print xxx.gz > report
 
 有几个section:
 
-- `MOST CALLS TO ALLOCATION FUNCTIONS`
-- `PEAK MEMORY CONSUMERS`
-- `MOST TEMPORARY ALLOCATIONS`
-- 最后的summary
+### `MOST CALLS TO ALLOCATION FUNCTIONS`
 
-运行速度差不多是正常运行的三四倍。输出的trace虽然经过了压缩，但还是很大。
+### `PEAK MEMORY CONSUMERS`
+
+会从大到小列出分配内存最多的位置：
+
+<内存大小> peak memory consumed over <数量> calls from
+分配内存的位置
+
+有很多地方会调用这个位置。所以heaptrack会根据分配内存的总大小从大到小列出调用这个位置的调用栈：
+
+<内存大小> consumed over <数量> calls from:
+调用栈1...
+<内存大小> consumed over <数量> calls from:
+调用栈2...
+<内存大小> consumed over <数量> calls from:
+调用栈3...
+...
+
+### `MOST TEMPORARY ALLOCATIONS`
+
+### 最后的summary
+
+#### peak heap memory consumption
+
+注意，这里是程序实际使用的heap memory，而不是整个heap占用的memory。如果使用的是glibc的内存分配器，可能会出现peak RSS显著大于peak heap memory consumption的情况，这可能是因为内存分配器出现了碎片化，导致程序实际使用的heap memory显著小于heap实际占用的memory：<https://blog.cloudflare.com/the-effect-of-switching-to-tcmalloc-on-rocksdb-memory-use/>
+
+可以通过把glibc的内存分配器换成tcmalloc解决。jemalloc虽然比glibc和tcmalloc快，但是在碎片化严重的情况下内存消耗比较大：<https://github.com/cms-sw/cmssw/issues/42387>
+
+rocksdb的cmake自带了使用jemalloc的选项：`WITH_JEMALLOC`，但是使用这个选项好像只会让rocksdb自己使用jemalloc，主程序似乎仍然使用glibc malloc：<https://runsisi.com/2019/10/18/jemalloc-for-shared-lib/>
+
+让整个程序使用tcmalloc或者jemalloc，最保险的方法是用`LD_PRELOAD`:
+
+```shell
+sudo apt install libtcmalloc-minimal4
+LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libtcmalloc_minimal.so.4 程序 参数...
+
+LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libjemalloc.so 程序 参数...
+```
+
+也可以不用`LD_PRELOAD`，但好像不太通用：
+
+<https://forums.gentoo.org/viewtopic-t-1056432-start-0.html>
+
+<https://stackoverflow.com/questions/40915820/override-libc-functions-without-ld-preload>
+
+#### peak RSS
+
+RSS包含了shared library占用的空间。
+
+#### total memory leaked
 
 ## valgrind
 
