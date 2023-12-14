@@ -22,6 +22,13 @@ sudo apt install texlive-latex-extra
 sudo apt install texlive-fonts-extra
 ```
 
+SIGMOD的模板不知道为什么还需要安装`texlive-xetex`:
+
+```shell
+sudo apt install texlive-xetex
+make -j$(nproc)
+```
+
 ## 中文写作
 
 测试环境：deepin 15.11
