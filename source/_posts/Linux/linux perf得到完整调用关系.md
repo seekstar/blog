@@ -134,6 +134,24 @@ make install
 cd ../..
 ```
 
+### `liburcu`
+
+官网：<https://liburcu.org/>
+
+我的Debian 11上版本是0.12.2-1，所以这里下载安装0.12.5
+
+```shell
+wget https://lttng.org/files/urcu/userspace-rcu-0.12.5.tar.bz2
+tar xjf userspace-rcu-0.12.5.tar.bz2
+cd userspace-rcu-0.12.5
+mkdir build
+cd build
+../configure --prefix=$HOME/no-omit-frame-pointer
+make -j$(nproc)
+make install
+cd ../..
+```
+
 ## 编译目标应用
 
 ### 直接使用gcc
