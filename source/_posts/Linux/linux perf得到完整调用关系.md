@@ -146,11 +146,48 @@ tar xjf userspace-rcu-0.12.5.tar.bz2
 cd userspace-rcu-0.12.5
 mkdir build
 cd build
-../configure --prefix=$HOME/no-omit-frame-pointer
+../configure --prefix=$INSTALL_ROOT
 make -j$(nproc)
 make install
 cd ../..
 ```
+
+### `boost`
+
+官网：<https://www.boost.org/>
+
+编译安装教程：<https://www.boost.org/doc/libs/1_74_0/more/getting_started/unix-variants.html#or-build-custom-binaries>
+
+```shell
+wget https://boostorg.jfrog.io/artifactory/main/release/1.74.0/source/boost_1_74_0.tar.gz
+tar xzf boost_1_74_0.tar.gz
+cd boost_1_74_0
+./bootstrap.sh --prefix=$INSTALL_ROOT
+# 用b2用我们编译的gcc
+export PATH=$INSTALL_ROOT/bin:$PATH
+```
+
+编译安装所有库：
+
+```shell
+./b2 --prefix=$INSTALL_ROOT install link=shared cflags="$CFLAGS" cxxflags="$CXXFLAGS" linkflags="$LDFLAGS"
+```
+
+也可以选择性编译安装某些库。查看有哪些库：
+
+```shell
+./b2 --show-libraries
+```
+
+编译安装某个库，比如`program_options`，加上`--with-program_options`即可：
+
+```shell
+./b2 --with-program_options --prefix=$INSTALL_ROOT install link=shared cflags="$CFLAGS" cxxflags="$CXXFLAGS" linkflags="$LDFLAGS"
+```
+
+文档写的`--with-libraries=library-name-list`应该是`bootstrap.sh`的参数，没试过。
+
+参考：<https://stackoverflow.com/questions/6945012/passing-compiler-flags-to-boost-libraries-such-as-thread-which-require-compila>
 
 ## 编译目标应用
 
