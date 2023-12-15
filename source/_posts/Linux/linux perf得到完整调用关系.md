@@ -163,7 +163,7 @@ wget https://boostorg.jfrog.io/artifactory/main/release/1.74.0/source/boost_1_74
 tar xzf boost_1_74_0.tar.gz
 cd boost_1_74_0
 ./bootstrap.sh --prefix=$INSTALL_ROOT
-# 用b2用我们编译的gcc
+# 让b2用我们编译的gcc
 export PATH=$INSTALL_ROOT/bin:$PATH
 ```
 

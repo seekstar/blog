@@ -97,6 +97,12 @@ for line in io::stdin().lines() {
 
 参考：[在 Rust 中读取文件的 4 种方法](https://blog.csdn.net/qq_29607687/article/details/125438652)
 
+## 在文件中从后往前逐行读取
+
+用crate `rev_lines`: <https://github.com/mjc-gh/rev_lines>
+
+相关讨论：<https://users.rust-lang.org/t/idiomatic-way-of-reading-a-text-file-line-by-line-in-reverse/8547>
+
 ## 其他
 
 {% post_link Rust/IO/'rust格式化打印到文件' %}

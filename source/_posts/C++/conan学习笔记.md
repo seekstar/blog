@@ -55,6 +55,10 @@ conan new cmake_lib -d name=包名 -d version=0.1.0
 
 ```py
 def requirements(self):
+    # https://semver.npmjs.com/
+    # 0.2.3, 0.2.4 等都行，但 0.1.x 和 0.3.x 不行
+    self.requires("包名/[^0.2.3]")
+    # 0.1.1, 0.1.2, 0.2.x, 0.3.x 都行
     self.requires("rusty-cpp/[>=0.1.1]")
     # 0.1.x都行
     self.requires("rcu-vector/[~0.1]")
