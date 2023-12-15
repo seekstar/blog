@@ -13,4 +13,10 @@ $FlameGraphPath/stackcollapse-perf.pl perf.unfold > perf.folded
 $FlameGraphPath/flamegraph.pl perf.folded > perf.svg
 ```
 
+`perf.unfold`可能会比`perf.data`大将近十倍。如果磁盘放不下的话，可以直接pipe进`stackcollapse-perf.pl`:
+
+```shell
+perf script -i perf.data | $FlameGraphPath/stackcollapse-perf.pl > perf.folded
+```
+
 原文：<https://www.cnblogs.com/lausaa/p/12098716.html>
