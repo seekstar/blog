@@ -156,7 +156,7 @@ cd ../..
 
 官网：<https://www.boost.org/>
 
-编译安装教程：<https://www.boost.org/doc/libs/1_74_0/more/getting_started/unix-variants.html#or-build-custom-binaries>
+编译安装教程：<https://www.boost.org/doc/libs/1_74_0/more/getting_started/unix-variants.html>
 
 ```shell
 wget https://boostorg.jfrog.io/artifactory/main/release/1.74.0/source/boost_1_74_0.tar.gz
