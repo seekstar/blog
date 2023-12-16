@@ -721,6 +721,12 @@ seq 1 10 | awk '{s+=$1} END {print s}'
 
 来源：<https://stackoverflow.com/questions/450799/shell-command-to-sum-integers-one-per-line>
 
+### column
+
+`cat table | column -t`可以输出一个漂亮的表格。
+
+来源：<https://stackoverflow.com/a/28755377/13688160>
+
 ### comm
 
 求两个有序文件中的相同行和不同行。第一列是只在第一个文件中的行，第二列是只在第二个文件中的行，第三列是两个文件都存在的行。常用命令行选项：
@@ -823,6 +829,31 @@ sudo find . -path ./media -path ./mnt -prune -o -name gsettings
 sudo find . -name b ! -path “./a/*”
 ```
 
+#### 正则
+
+`查找规则`部分：`-regex '正则表达式'`
+
+正则表达式匹配的是完整路径。
+
+例子：
+
+```shell
+find . -regex '.*/latency-[0-9]*'
+```
+
+```text
+./latency-2
+./latency-4
+./latency-3
+./latency-5
+./latency-1
+./latency-6
+./latency-7
+./latency-0
+```
+
+来源：<https://stackoverflow.com/questions/6844785/how-to-use-regex-with-find-command>
+
 ### grep
 
 - 查找当前目录下有某字符串的文件：
@@ -920,10 +951,6 @@ sed '命令'
 sed '命令' FileName
 ```
 
-### top
-
-`-H`: 显示单个线程。<https://serverfault.com/questions/38195/getting-a-per-thread-cpu-stats>
-
 #### 基础知识
 
 [sed模式空间(pattern space)和保持空间(hold space)](https://blog.csdn.net/demon7552003/article/details/72854231)
@@ -1005,8 +1032,6 @@ g: 复制保持空间的内容到模式空间
 
 匹配指定行：`sed -n 起始行号[,终止行号]动作 file`，动作一般是`p`，即打印(Print)。
 
-
-
 例子：
 
 打印第2行：`sed -n '2p' file`
@@ -1062,11 +1087,9 @@ jason
 sort -u txt -o txt1
 ```
 
-### column
+### top
 
-`cat table | column -t`可以输出一个漂亮的表格。
-
-来源：<https://stackoverflow.com/a/28755377/13688160>
+`-H`: 显示单个线程。<https://serverfault.com/questions/38195/getting-a-per-thread-cpu-stats>
 
 ## 其他
 
