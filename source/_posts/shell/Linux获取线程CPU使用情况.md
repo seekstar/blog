@@ -16,30 +16,25 @@ pidstat -p 线程tid -H -u 间隔秒数 -t | awk '{if ($4 == 线程tid) print $9
 
 ## 累积CPU time
 
-用`ps`:
+可以用`clock_gettime`得到CPU时间戳，两个CPU时间戳相减就是中间的CPU time。
 
-```shell
-ps -eT -o tid,cputimes | awk '{if ($1 == 线程tid) print $2}'
-```
-
-```text
-       tid         TID       the unique number representing a dispatchable entity (alias lwp, spid).  This value
-                             may also appear as: a process ID (pid); a process group ID (pgrp); a session ID for
-                             the session leader (sid); a thread group ID for the thread group leader (tgid); and
-                             a tty process group ID for the process group leader (tpgid).
-
-       cputimes    TIME      cumulative CPU time in seconds (alias times).
-```
-
-如果是C/C++的话，可以用`clock_gettime`得到CPU时间戳，两个CPU时间戳相减就是中间的CPU time。
-
-获取当前线程的CPU时间戳：
+### 获取当前线程的CPU时间戳
 
 ```cpp
 clock_gettime(CLOCK_THREAD_CPUTIME_ID, &currTime)
 ```
 
-获取`std::thread`的CPU时间戳：
+### 获取其他线程的CPU时间戳
+
+通过thread ID可以得到clockid:
+
+```cpp
+int pthread_getcpuclockid(pthread_t thread, clockid_t *clockid);
+```
+
+`std::thread`的thread ID可以通过`std::thread::native_handle()`得到。自己的thread ID可以通过`pthread_self()`得到。
+
+获取`std::thread`的CPU时间戳的例子：
 
 ```cpp
 #include <iostream>
@@ -118,3 +113,20 @@ int main() {
 ```
 
 参考：<https://stackoverflow.com/a/44917411/13688160>
+
+### ps (不推荐)
+
+```shell
+ps -eT -o tid,cputimes | awk '{if ($1 == 线程tid) print $2}'
+```
+
+```text
+       tid         TID       the unique number representing a dispatchable entity (alias lwp, spid).  This value
+                             may also appear as: a process ID (pid); a process group ID (pgrp); a session ID for
+                             the session leader (sid); a thread group ID for the thread group leader (tgid); and
+                             a tty process group ID for the process group leader (tpgid).
+
+       cputimes    TIME      cumulative CPU time in seconds (alias times).
+```
+
+主要问题是太耗CPU了。执行一次大约要耗费0.01秒的CPU时间。
