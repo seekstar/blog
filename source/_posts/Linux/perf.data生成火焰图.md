@@ -19,4 +19,19 @@ perf script -i perf.data | $FlameGraphPath/stackcollapse-perf.pl > perf.folded
 $FlameGraphPath/flamegraph.pl perf.folded > perf.svg
 ```
 
-原文：<https://www.cnblogs.com/lausaa/p/12098716.html>
+注意，解析`perf.data`的时候好像要读取binary里的符号，所以在解析的时候不要重新编译之类的。
+
+如果嫌perl写的`stackcollapse-perf.pl`太慢的话，可以尝试rust写的`inferno`: <https://docs.rs/inferno/latest/inferno/>
+
+```shell
+cargo install inferno
+perf script -i perf.data | inferno-collapse-perf > perf.folded
+# 默认太宽了。perl版本的宽度是1200，所以这里也设置成1200
+inferno-flamegraph --width=1200 < perf.folded > perf.svg
+```
+
+实测比perl版本快大约4倍。不过生成的`perf.svg`字太小了。
+
+## 参考文献
+
+[linux 性能分析工具 perf + FlameGraph](https://www.cnblogs.com/lausaa/p/12098716.html)
