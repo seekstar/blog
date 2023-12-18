@@ -124,10 +124,8 @@ hexo d -g
 ```shell
 git clone https://github.com/wujun234/hexo-theme-tree tree
 cd tree
-rm -rf .git
 ```
 
-不做成git子模块的原因是这个主题的header目前只能通过改动代码的方式更改。
 然后再在`_config.yml`里把默认的
 
 ```yml
@@ -160,19 +158,18 @@ links:
 
 默认有一个作者自己的项目`UidGenerator`，删掉它或者换成自己的项目。项目链接可以多放几个，但是由于手机上header长度有限，不宜过多。实际上我觉得一个都不放比较好，可以全部塞进后面提到的about页。
 
-## 开启标签和分类
+## 开启标签
 
-在`themes/tree/_config.yml`的最后把这两行取消注释：
-
-```yml
-tags: true
-categories: true
-```
-
-然后在`source`目录下执行
+在`source`目录下执行
 
 ```shell
 hexo new page "tags"
+```
+
+在`themes/tree/_config.yml`开启标签：
+
+```yml
+tags: true
 ```
 
 然后编辑`source/tags/index.md`，在`date`后面加上
@@ -193,20 +190,9 @@ layout: "tags"
 ---
 ```
 
-同样，在`source`目录下执行
+然后预览一下，就能看到右上角多了`标签`或者`Tags`。
 
-```shell
-hexo new page "categories"
-```
-
-然后编辑`source/categories/index.md`，在`date`后面加上
-
-```yml
-type: "categories"
-layout: "categories"
-```
-
-然后预览一下，就能看到右上角多了`标签`和`分类`。
+分类就不开了，因为tree主题的文件夹自带了分类功能。不开分类有助于节约header的空间。
 
 ## 开启评论，统计访问量
 
@@ -356,6 +342,16 @@ pandoc:
 ```
 
 然后`hexo clean && hexo g`使其生效。
+
+默认tab宽度是8。可以在`themes/tree/source/css/main.css`里改成4：
+
+```css
+pre{
+	tab-size: 4;
+}
+```
+
+来源：<https://matrix4f.com/Web/FrontEnd/tabsize/>
 
 ### 标题锚点
 
