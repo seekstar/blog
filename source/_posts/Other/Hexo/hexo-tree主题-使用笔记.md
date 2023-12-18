@@ -353,6 +353,13 @@ pre{
 
 来源：<https://matrix4f.com/Web/FrontEnd/tabsize/>
 
+如果发现即使清了cache tab宽度仍然是4的话，检查`public/css/main.css`是不是新版本，如果不是的话把`public`文件夹删了重新生成：
+
+```shell
+rm -r public
+hexo d -g
+```
+
 ### 标题锚点
 
 <https://github.com/seekstar/hexo-pandoc-header-anchor>
