@@ -160,16 +160,16 @@ links:
 
 ## 开启标签
 
-在`source`目录下执行
-
-```shell
-hexo new page "tags"
-```
-
 在`themes/tree/_config.yml`开启标签：
 
 ```yml
 tags: true
+```
+
+在`source`目录下执行
+
+```shell
+hexo new page "tags"
 ```
 
 然后编辑`source/tags/index.md`，在`date`后面加上
