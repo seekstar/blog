@@ -164,3 +164,25 @@ test.groupby(test.index // 3).mean()
 test = pd.DataFrame({'col1': [0, 1, 2, 3], 'col2': [4, 5, 6, 7]})
 test['col1'].cumsum()
 ```
+
+## 转dict
+
+<https://stackoverflow.com/questions/18695605/how-to-convert-a-dataframe-to-a-dictionary>
+
+```py
+df.set_index('id')
+```
+
+然后就变成了一个dict-like了，value是其他所有列。
+
+如果要得到映射到另一列的dict:
+
+```py
+df.set_index('id')['column']
+```
+
+转成真正的dict:
+
+```py
+df.set_index('id')['column'].to_dict()
+```

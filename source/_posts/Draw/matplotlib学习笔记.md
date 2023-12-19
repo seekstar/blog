@@ -48,13 +48,21 @@ ax = plt.gca()
 
 来源：<https://stackoverflow.com/questions/15067668/how-to-get-a-matplotlib-axes-instance>
 
-### `set_xlim`, `set_ylim`
+### [set_xticks](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.set_xticks.html)
 
-文档：
+Positional, required: `ticks`
 
-<https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.set_ylim.html>
+Optional: `labels` (list-like)
 
-<https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.set_xlim.html>
+### [set_xlabel](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.set_xlabel.html)
+
+跟`plt.xlabel`一样。
+
+Positional, required: `xlabel`
+
+Optional: `labelpad`, `fontsize`
+
+### [set_xlim](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.set_xlim.html), [set_ylim](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.set_ylim.html)
 
 设置Y轴最小值：
 
