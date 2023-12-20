@@ -4,7 +4,7 @@ date: 2023-11-14 21:11:30
 tags:
 ---
 
-相关：{% post_link shell/'Linux获取进程cpu使用率' %}
+相关：{% post_link shell/'Linux获取进程cpu使用情况' %}
 
 ## CPU使用率
 
