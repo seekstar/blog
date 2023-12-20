@@ -84,6 +84,26 @@ RSS包含了shared library占用的空间。
 
 #### total memory leaked
 
+### 存在的问题
+
+似乎跟tcmalloc不兼容。
+
+```shell
+LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libtcmalloc_minimal.so.4 heaptrack 命令 参数...
+heaptrack_print xxx > report
+```
+
+会报错：
+
+```text
+Trace recursion detected - corrupt data file?
+Trace recursion detected - corrupt data file?
+```
+
+而且`heaptrack*`文件特别小。应该是完全没有track到内存分配。
+
+相关：<https://github.com/microsoft/mimalloc/issues/522>
+
 ## valgrind
 
 `valgrind --tool=massif 你的程序 参数...`
@@ -114,49 +134,57 @@ sudo apt install libgoogle-perftools-dev
 sudo apt install google-perftools
 ```
 
-以`ls`为例：
-
 ```shell
-mkdir ~/profile
-LD_PRELOAD="/usr/lib/x86_64-linux-gnu/libtcmalloc.so" HEAPPROFILE=$HOME/profile/profile ls
-cd ~/profile
-google-pprof --text /usr/bin/ls profile.0001.heap
+mkdir profile
+LD_PRELOAD="/usr/lib/x86_64-linux-gnu/libtcmalloc.so" HEAPPROFILE=./profile/profile 程序 参数...
 ```
 
-然后就会打印出内存消耗最多的地方：
+默认每申请1GB内存会生成一个这样的文件：
 
-```shell
-Starting tracking the heap
-Using local file /usr/bin/ls.
-Using local file profile.0001.heap.
-Total: 0.0 MB
-     0.0  68.1%  68.1%      0.0 100.0% _obstack_begin
-     0.0  11.6%  79.8%      0.0  11.6% _nl_make_l10nflist
-     0.0   9.7%  89.5%      0.0   9.7% _nl_intern_locale_data
-     0.0   5.3%  94.9%      0.0   5.3% read_alias_file
-     0.0   4.2%  99.0%      0.0   4.2% extend_alias_table
-     0.0   0.3%  99.4%      0.0   0.3% _obstack_memory_used
-     0.0   0.3%  99.6%      0.0   0.3% __GI___strdup
-     0.0   0.3%  99.9%      0.0   0.3% __GI___strndup
-     0.0   0.1% 100.0%      0.0   0.1% set_binding_values
-     0.0   0.0% 100.0%      0.0   0.0% new_composite_name
-     0.0   0.0% 100.0%      0.0  31.4% __GI_setlocale
-     0.0   0.0% 100.0%      0.0 100.0% __libc_start_main@@GLIBC_2.2.5
-     0.0   0.0% 100.0%      0.0   0.0% __textdomain
-     0.0   0.0% 100.0%      0.0   9.5% _nl_expand_alias
-     0.0   0.0% 100.0%      0.0  31.1% _nl_find_locale
-     0.0   0.0% 100.0%      0.0   9.7% _nl_load_locale
+```text
+<prefix>.0000.heap
+<prefix>.0001.heap
+<prefix>.0002.heap
+...
 ```
 
-`google-pprof`的一些选项：
+分析一个heap文件：
 
-`--text`: 不进入interactive模式，而是直接打印报告。
+```shell
+google-pprof --text --lines 可执行文件的路径 profile.xxxx.heap
+```
+
+`--text`: 不进入interactive模式，而是直接打印报告。但是只打印内存消耗最多的地方，没有调用栈。如果加上`--stacks`，好像不会打印inline函数的调用栈，而且调用栈的打印顺序是随机的，不是按内存大小从大到小打印，看起来很难受。
+
+`--svg`: 生成`svg`文件。里面有很漂亮的调用关系。
+
+`--lines`: 输出行号
 
 ```text
    --add_lib=<file>    Read additional symbols and line info from the given library
 ```
 
-但是没有行号。而且跑得很慢。这里说libtcmalloc开了heap profiling之后会让程序慢5倍以上：<https://www.brendangregg.com/FlameGraphs/memoryflamegraphs.html>
+会打印出内存消耗最多的地方。官方的例子（没有`--lines`，所以没有行号）：
+
+```shell
+   255.6  24.7%  24.7%    255.6  24.7% GFS_MasterChunk::AddServer
+   184.6  17.8%  42.5%    298.8  28.8% GFS_MasterChunkTable::Create
+   176.2  17.0%  59.5%    729.9  70.5% GFS_MasterChunkTable::UpdateState
+   169.8  16.4%  75.9%    169.8  16.4% PendingClone::PendingClone
+    76.3   7.4%  83.3%     76.3   7.4% __default_alloc_template::_S_chunk_alloc
+    49.5   4.8%  88.0%     49.5   4.8% hashtable::resize
+   ...
+```
+
+- The first column contains the direct memory use in MB.
+
+- The fourth column contains memory use by the procedure and all of its callees.
+
+- The second and fifth columns are just percentage representations of the numbers in the first and fourth（原文是fifth，应该是写错了） columns.
+
+- The third column is a cumulative sum of the second column (i.e., the kth entry in the third column is the sum of the first k entries in the second column.)
+
+跑得很慢。这里说libtcmalloc开了heap profiling之后会让程序慢5倍以上：<https://www.brendangregg.com/FlameGraphs/memoryflamegraphs.html>
 
 ## 没试过
 
