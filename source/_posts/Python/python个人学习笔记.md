@@ -137,6 +137,14 @@ print('xxx', file=sys.stderr)
 
 来源：<https://stackoverflow.com/questions/22556449/print-a-list-of-space-separated-elements>
 
+## format
+
+打印到字符串。完整教程：<https://note.nkmk.me/en/python-format-zero-hex/>
+
+这里介绍一些常用的。
+
+保留3位小数：`assert '{:.3f}'.format(2.3) == '2.300'`
+
 ## iterator
 
 遍历：

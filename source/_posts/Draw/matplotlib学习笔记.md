@@ -10,8 +10,6 @@ tags:
 
 - {% post_link Draw/'matplotlib打印微秒' %}
 
-- {% post_link Draw/'matplotlib设置legend坐标' %}
-
 - {% post_link Draw/'matplotlib生成没有留白的图片' %}
 
 - {% post_link Draw/'matplotlib箱线图调整箱子的宽度' %}
@@ -21,8 +19,6 @@ tags:
 - [python matplotlib坐标轴刻度设置](https://blog.csdn.net/gsgbgxp/article/details/125077492)
 
 - [Python -- Matplotlib：画一条水平线或竖直线](https://blog.csdn.net/math_gao/article/details/109592302)
-
-- [Matplotlib 放置legend(bbox_to_anchor)](https://blog.csdn.net/chichoxian/article/details/101058046)
 
 ## pyplot
 
@@ -37,6 +33,16 @@ yscale: <https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.yscale.html
 开始画下一张：`plt.figure()`
 
 `plt.plot(y)`的横坐标是从0开始的数组下标。
+
+### [legend](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.legend.html)
+
+- {% post_link Draw/'matplotlib设置legend坐标' %}
+
+- [Matplotlib 放置legend(bbox_to_anchor)](https://blog.csdn.net/chichoxian/article/details/101058046)
+
+- frameon: bool, default: rcParams["legend.frameon"] (default: True)
+
+Whether the legend should be drawn on a patch (frame).
 
 ## Axes
 
@@ -71,6 +77,29 @@ ax.set_ylim(bottom=0)
 ```
 
 来源：<https://stackoverflow.com/a/22642641/13688160>
+
+### [annotate](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.annotate.html) 画箭头
+
+- `text`
+
+- `xy`: (float, float)
+
+The point (x, y) to annotate. The coordinate system is determined by xycoords.
+
+- `xytext`: (float, float), default: xy
+
+The position (x, y) to place the text at. The coordinate system is determined by textcoords.
+
+- `xycoords`, `textcoords`: default: 'data'
+
+完整列表见文档。这里放常用的。
+
+| Value | Description |
+| ---- | ---- |
+| `data` | Use the coordinate system of the object being annotated (default) |
+| `figure fraction` | Fraction of figure from lower left |
+| `subfigure fraction` | Fraction of subfigure from lower left |
+| `axes fraction` | Fraction of axes from lower left |
 
 ### tick formatter
 

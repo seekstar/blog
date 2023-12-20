@@ -875,6 +875,8 @@ grep -rn splay_safe_rs --include \*.rs
 
 来源：<https://stackoverflow.com/questions/12516937/how-can-i-grep-recursively-but-only-in-files-with-certain-extensions>
 
+`--exclude`, `--exclude-dir`: <https://www.warp.dev/terminus/grep-exclude>
+
 ### ip
 
 查看本机ip地址

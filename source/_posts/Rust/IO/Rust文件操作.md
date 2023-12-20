@@ -101,7 +101,11 @@ for line in io::stdin().lines() {
 
 用crate `rev_lines`: <https://github.com/mjc-gh/rev_lines>
 
+或者crate `rev_buf_reader`: <https://github.com/andre-vm/rev_buf_reader>
+
 相关讨论：<https://users.rust-lang.org/t/idiomatic-way-of-reading-a-text-file-line-by-line-in-reverse/8547>
+
+但是这两个crate好像都没有prefetch，导致每次读取都要卡一下。
 
 ## 其他
 
