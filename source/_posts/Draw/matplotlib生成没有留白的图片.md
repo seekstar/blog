@@ -6,13 +6,16 @@ date: 2021-01-01 16:58:05
 ```py
 plt.tight_layout(pad = 0)
 ```
+
 如果右边界没了就
+
 ```py
 plt.tight_layout(pad = 0.1)
 ```
 
 例子：
 原来的
+
 ```py
 xx = np.arange(0, 100)
 yy = xx * xx
@@ -26,6 +29,7 @@ plt.show()
 ![在这里插入图片描述](matplotlib生成没有留白的图片/20210101165344452.png)
 
 加上
+
 ```py
 xx = np.arange(0, 100)
 yy = xx * xx

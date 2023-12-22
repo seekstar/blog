@@ -44,6 +44,14 @@ yscale: <https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.yscale.html
 
 Whether the legend should be drawn on a patch (frame).
 
+### [tight_layout](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.tight_layout.html)
+
+- `pad`: float, default: 1.08. 我一般取0.1，保证图的框能显示出来：{% Draw/'matplotlib生成没有留白的图片' %}
+
+- `h_pad, w_padfloat`: default: pad
+
+Padding (height/width) between edges of adjacent subplots, as a fraction of the font size.
+
 ## Axes
 
 ```python
@@ -100,6 +108,10 @@ The position (x, y) to place the text at. The coordinate system is determined by
 | `figure fraction` | Fraction of figure from lower left |
 | `subfigure fraction` | Fraction of subfigure from lower left |
 | `axes fraction` | Fraction of axes from lower left |
+
+文档里没写的参数：
+
+- `fontsize`
 
 ### tick formatter
 
