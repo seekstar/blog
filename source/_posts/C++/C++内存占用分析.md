@@ -148,15 +148,15 @@ LD_PRELOAD="/usr/lib/x86_64-linux-gnu/libtcmalloc.so" HEAPPROFILE=./profile/prof
 ...
 ```
 
-分析一个heap文件：
+注意，生成报告的时候似乎要读取文件里的符号，所以不要重新编译之类的，不然生成的报告里的符号不对。
+
+### 生成文本报告
 
 ```shell
-google-pprof --text --lines 可执行文件的路径 profile.xxxx.heap
+google-pprof --text --lines 可执行文件的路径 profile/profile.xxxx.heap
 ```
 
-`--text`: 不进入interactive模式，而是直接打印报告。但是只打印内存消耗最多的地方，没有调用栈。如果加上`--stacks`，好像不会打印inline函数的调用栈，而且调用栈的打印顺序是随机的，不是按内存大小从大到小打印，看起来很难受。
-
-`--svg`: 生成`svg`文件。里面有很漂亮的调用关系。
+`--text`: 不进入interactive模式，而是直接打印报告。
 
 `--lines`: 输出行号
 
@@ -183,6 +183,20 @@ google-pprof --text --lines 可执行文件的路径 profile.xxxx.heap
 - The second and fifth columns are just percentage representations of the numbers in the first and fourth（原文是fifth，应该是写错了） columns.
 
 - The third column is a cumulative sum of the second column (i.e., the kth entry in the third column is the sum of the first k entries in the second column.)
+
+但是只打印内存消耗最多的地方，没有调用栈。如果加上`--stacks`，好像不会打印inline函数的调用栈，而且调用栈的打印顺序是随机的，不是按内存大小从大到小打印，看起来很难受。
+
+### 生成图片
+
+里面有很漂亮的调用关系。
+
+以svg为例：
+
+```shell
+google-pprof --svg --lines 可执行文件的路径 profile/profile.xxxx.heap > xxxx.svg
+```
+
+### 存在的问题
 
 跑得很慢。这里说libtcmalloc开了heap profiling之后会让程序慢5倍以上：<https://www.brendangregg.com/FlameGraphs/memoryflamegraphs.html>
 
