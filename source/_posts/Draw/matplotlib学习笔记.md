@@ -46,7 +46,7 @@ Whether the legend should be drawn on a patch (frame).
 
 ### [tight_layout](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.tight_layout.html)
 
-- `pad`: float, default: 1.08. 我一般取0.1，保证图的框能显示出来：{% Draw/'matplotlib生成没有留白的图片' %}
+- `pad`: float, default: 1.08.
 
 - `h_pad, w_padfloat`: default: pad
 
