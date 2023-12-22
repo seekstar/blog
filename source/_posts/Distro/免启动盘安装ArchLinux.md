@@ -146,6 +146,12 @@ systemctl enable sddm
 pacman -S --needed packagekit-qt5 packagekit appstream-qt appstream
 ```
 
+好像默认只有X11 session。如果要wayland session的话：
+
+```shell
+sudo pacman -S plasma-wayland-session
+```
+
 ## 安装一些额外包
 
 ```shell
