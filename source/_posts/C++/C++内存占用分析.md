@@ -4,6 +4,120 @@ date: 2023-10-25 20:43:07
 tags:
 ---
 
+## Max resident set size (RSS)
+
+用`getrusage`
+
+文档：<https://man7.org/linux/man-pages/man2/getrusage.2.html>
+
+```c
+#include <sys/resource.h>
+int getrusage(int who, struct rusage *usage);
+```
+
+### `who`
+
+```text
+RUSAGE_SELF
+      Return resource usage statistics for the calling process,
+      which is the sum of resources used by all threads in the
+      process.
+
+RUSAGE_CHILDREN
+      Return resource usage statistics for all children of the
+      calling process that have terminated and been waited for.
+      These statistics will include the resources used by
+      grandchildren, and further removed descendants, if all of
+      the intervening descendants waited on their terminated
+      children.
+
+RUSAGE_THREAD (since Linux 2.6.26)
+      Return resource usage statistics for the calling thread.
+      The _GNU_SOURCE feature test macro must be defined (before
+      including any header file) in order to obtain the
+      definition of this constant from <sys/resource.h>.
+```
+
+### `struct rusage`
+
+Max RSS是这个域：
+
+```shell
+long   ru_maxrss;        /* maximum resident set size */
+```
+
+单位是KiB，见<https://stackoverflow.com/a/12050966/13688160>的第一条评论。
+
+其他常用的域：
+
+```c
+struct timeval ru_utime; /* user CPU time used */
+struct timeval ru_stime; /* system CPU time used */
+```
+
+这几个域在Linux上是unmaintained状态，始终是0：
+
+```c
+long   ru_ixrss;         /* integral shared memory size */
+long   ru_idrss;         /* integral unshared data size */
+long   ru_isrss;         /* integral unshared stack size */
+```
+
+所以目前通过`getrusage`不能获得current RSS
+
+### 参考文献
+
+<https://stackoverflow.com/a/68284459/13688160>
+
+## Current resident set size (RSS)
+
+### `ps`
+
+```cpp
+std::string pid = std::to_string(getpid());
+std::string mem_command = "ps -q " + pid + " -o rss | tail -n 1";
+FILE* pipe = popen(mem_command.c_str(), "r");
+if (pipe == NULL) {
+	perror("popen");
+	rusty_panic();
+}
+rusty_assert(fgets(buf, sizeof(buf), pipe) != NULL, "buf too short");
+size_t buflen = strlen(buf);
+rusty_assert(buflen > 0);
+rusty_assert(buf[--buflen] == '\n');
+buf[buflen] = 0;
+if (-1 == pclose(pipe)) {
+	perror("pclose");
+	rusty_panic();
+}
+```
+
+`buf`里面就是字符串形式的current resident set size，单位是KiB：<https://unix.stackexchange.com/a/683319>
+
+`rusty_panic`和`rusty_assert`: <https://github.com/seekstar/rusty-cpp/blob/main/include/rusty/macro.h>
+
+## `mallinfo`
+
+文档：<https://man7.org/linux/man-pages/man3/mallinfo.3.html>
+
+glibc 2.33之后用`mallinfo2`。
+
+Debian 11是2.31，用`mallinfo`。
+
+常用的域：
+
+```text
+uordblks
+      The total number of bytes used by in-use allocations.
+      应该就是真正被应用分配的空间。
+
+fordblks
+      The total number of bytes in free blocks.
+      应该是因为fragmentation没有分配给应用也没有还给OS的空间。
+```
+
+注意，这个只对glibc malloc有用。jemalloc这两个域始终为0。
+
 ## heaptrack
 
 可以打印出消耗内存最多的地方、申请内存次数最多的地方、临时申请内存最多的地方。
@@ -59,20 +173,36 @@ heaptrack_print xxx.gz > report
 
 注意，这里是程序实际使用的heap memory，而不是整个heap占用的memory。如果使用的是glibc的内存分配器，可能会出现peak RSS显著大于peak heap memory consumption的情况，这可能是因为内存分配器出现了碎片化，导致程序实际使用的heap memory显著小于heap实际占用的memory：<https://blog.cloudflare.com/the-effect-of-switching-to-tcmalloc-on-rocksdb-memory-use/>
 
-可以通过把glibc的内存分配器换成tcmalloc解决。jemalloc虽然比glibc和tcmalloc快，但是在碎片化严重的情况下内存消耗比较大：<https://github.com/cms-sw/cmssw/issues/42387>
+可以通过把glibc的内存分配器换成tcmalloc或者jemalloc解决。jemalloc的速度好像比tcmalloc快一点：<https://github.com/cms-sw/cmssw/issues/42387>
 
 rocksdb的cmake自带了使用jemalloc的选项：`WITH_JEMALLOC`，但是使用这个选项好像只会让rocksdb自己使用jemalloc，主程序似乎仍然使用glibc malloc：<https://runsisi.com/2019/10/18/jemalloc-for-shared-lib/>
 
-让整个程序使用tcmalloc或者jemalloc，最保险的方法是用`LD_PRELOAD`:
+让整个程序使用tcmalloc或者jemalloc，最保险的方法是用`LD_PRELOAD`。
+
+tcmalloc:
 
 ```shell
 sudo apt install libtcmalloc-minimal4
 LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libtcmalloc_minimal.so.4 程序 参数...
-
-LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libjemalloc.so 程序 参数...
 ```
 
-也可以不用`LD_PRELOAD`，但好像不太通用：
+jemalloc:
+
+```shell
+MALLOC_CONF="dirty_decay_ms:0" LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libjemalloc.so 程序 参数...
+```
+
+其中`dirty_decay_ms`是用来调节页面free之后多久会还给操作系统。`0`应该是表示立即归还。
+
+来源：<https://engineering.linkedin.com/blog/2021/taming-memory-fragmentation-in-venice-with-jemalloc>
+
+文档：
+
+<https://jemalloc.net/jemalloc.3.html#opt.dirty_decay_ms>
+
+<https://android.googlesource.com/platform/external/jemalloc_new/+/6e6a93170475c05ebddbaf3f0df6add65ba19f01/TUNING.md>
+
+据说也可以不用`LD_PRELOAD`，但好像不太通用：
 
 <https://forums.gentoo.org/viewtopic-t-1056432-start-0.html>
 
