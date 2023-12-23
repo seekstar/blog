@@ -124,7 +124,6 @@ target_link_libraries(${PROJECT_NAME}
 from conan import ConanFile
 from conan.tools.cmake import CMakeToolchain, CMake, cmake_layout, CMakeDeps
 
-
 class 下划线包名Recipe(ConanFile):
     name = "包名"
     version = "0.1.0"
@@ -158,6 +157,8 @@ class 下划线包名Recipe(ConanFile):
 ```
 
 #### 只有头文件的包 (header-only)
+
+文档：<https://docs.conan.io/2/tutorial/creating_packages/other_types_of_packages/header_only_packages.html>
 
 完整工程：<https://github.com/seekstar/counter-timer-cpp>
 
@@ -193,19 +194,52 @@ target_link_libraries(${PROJECT_NAME}
 install(TARGETS ${PROJECT_NAME} DESTINATION "include/")
 ```
 
-`conanfile.py`关键部分:
+`conanfile.py`:
 
 ```py
+from conan import ConanFile
+from conan.tools.cmake import CMakeToolchain, CMake, cmake_layout, CMakeDeps
+
+class 下划线包名Recipe(ConanFile):
+    name = "包名"
+    version = "0.1.0"
+
+    # Optional metadata
+    license = ""
+    author = "姓名 邮箱"
+    url = "https://github.com/用户名/仓库名"
+    description = ""
+    topics = ("关键词1", "关键词2", "关键词3")
+
+    # Binary configuration
+    settings = "build_type"
+
     # Sources are located in the same place as this recipe, copy them to the recipe
     exports_sources = "CMakeLists.txt", "include/*"
+    # We can avoid copying the sources to the build folder in the cache
+    no_copy_source = True
 
     def requirements(self):
         self.requires("依赖1/[>=xx.xx.xx]")
         self.requires("包2/[~xx.xx]")
 
+    def layout(self):
+        cmake_layout(self)
+
+    def generate(self):
+        deps = CMakeDeps(self)
+        deps.generate()
+        tc = CMakeToolchain(self)
+        tc.generate()
+
+    def package(self):
+        cmake = CMake(self)
+        cmake.configure()
+        cmake.install()
+
     def package_info(self):
         # 让依赖这个包的其他包知道这个包对应的CMake target叫什么名字
-        self.cpp_info.set_property("cmake_target_name", "counter-timer")
+        self.cpp_info.set_property("cmake_target_name", "CMakeTarget名字")
         # For header-only packages, libdirs and bindirs are not used
         # so it's necessary to set those as empty.
         self.cpp_info.libdirs = []
@@ -251,6 +285,14 @@ Debug版本：
 ```shell
 conan create . -s build_type=Debug
 ```
+
+从local cache删除：
+
+```shell
+conan remove 包名/x.x.x@
+```
+
+详见官方文档：<https://docs.conan.io/1/reference/commands/misc/remove.html>
 
 ## `conan.lock`
 
