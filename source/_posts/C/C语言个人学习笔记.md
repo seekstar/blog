@@ -112,3 +112,24 @@ int main() {
 	return 0;
 }
 ```
+
+## 执行命令并获取输出
+
+用`popen`: <https://man7.org/linux/man-pages/man3/popen.3.html>
+
+用完记得用`pclose`关掉。
+
+```c
+FILE *pipe = popen(command, "r");
+if (pipe == NULL) {
+	perror("popen");
+	abort();
+}
+// Read pipe
+if (-1 == pclose(pipe)) {
+	perror("pclose");
+	abort();
+}
+```
+
+参考：<https://stackoverflow.com/questions/478898/how-do-i-execute-a-command-and-get-the-output-of-the-command-within-c-using-po>
