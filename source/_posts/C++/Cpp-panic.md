@@ -34,6 +34,8 @@ crash_if(233 != 332);
 crash_if(233 != 332, "%d != %d", 233, 332);
 ```
 
+也可以直接用`rusty-cpp`里的`rusty_panic`和`rusty_assert`: <https://github.com/seekstar/rusty-cpp/blob/main/include/rusty/macro.h>
+
 ## 失败经验：stacktrace
 
 上面的都只是打印了出错点的信息，但是没有打印调用栈。其实可以使用boost打印调用栈：
