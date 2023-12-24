@@ -26,7 +26,15 @@ sudo apt remove liburing1 liburing-dev
 ./contrib/build.sh -j -T
 ```
 
-编译的结果在`opt`里。
+编译结果默认存在`./opt/cachelib`里。把该目录的绝对路径存入`CACHELIB_HOME`里，然后在`~/.profile`里加入如下内容来将其头文件和库暴露出去：
+
+```shell
+export CPLUS_INCLUDE_PATH=$CACHELIB_HOME/include:$CPLUS_INCLUDE_PATH
+export LIBRARY_PATH=$CACHELIB_HOME/lib:$LIBRARY_PATH
+export LD_LIBRARY_PATH=$CACHELIB_HOME/lib:$LD_LIBRARY_PATH
+```
+
+然后`source ~/.profile`
 
 在目标项目的cmake里这么写：
 
@@ -62,3 +70,5 @@ sudo apt remove liburing1 liburing-dev
 ```
 
 或者直接link这个library: <https://github.com/seekstar/RocksCachelibWrapper>
+
+然后正常编译即可。
