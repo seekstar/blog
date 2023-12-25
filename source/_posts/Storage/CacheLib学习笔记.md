@@ -26,7 +26,36 @@ sudo apt remove liburing1 liburing-dev
 ./contrib/build.sh -j -T
 ```
 
-编译结果默认存在`./opt/cachelib`里。把该目录的绝对路径存入`CACHELIB_HOME`里，然后在`~/.profile`里加入如下内容来将其头文件和库暴露出去：
+编译结果默认存在`./opt/cachelib`里。如果要编译安装到另一个目录，比如`$HOME/opt`：
+
+```shell
+./contrib/build.sh -j -T -p $HOME/opt
+```
+
+注意，编译安装好了之后是不能移动的，因为里面有些so文件中硬编码了RUNPATH，比如：
+
+```text
+% readelf -d libthriftprotocol.so.1.0.0 | grep PATH
+ 0x000000000000001d (RUNPATH)            Library runpath: [/home/searchstar/opt/lib:/usr/local/lib]
+```
+
+移动了位置之后就会发生library not found的错误：{% post_link C/'解决找不到RUNPATH下的库的问题' %}
+
+### 存在的问题
+
+#### gcc internal error
+
+Debian 11上的gcc版本为`10.2.1 20210110`，太老了。如果出现了internal error的话，可以用`nix`安装新版本的`gcc10`：
+
+```shell
+nix-env -iA nixpkgs.gcc10
+```
+
+`nix`包管理器教程：{% post_link Distro/'使用国内源安装和使用Nix包管理器' %}
+
+## 配置环境变量
+
+把编译安装的目录的绝对路径存入`CACHELIB_HOME`里，然后在`~/.profile`里加入如下内容来将其头文件和库暴露出去：
 
 ```shell
 export CPLUS_INCLUDE_PATH=$CACHELIB_HOME/include:$CPLUS_INCLUDE_PATH
@@ -35,6 +64,8 @@ export LD_LIBRARY_PATH=$CACHELIB_HOME/lib:$LD_LIBRARY_PATH
 ```
 
 然后`source ~/.profile`
+
+## 使用
 
 在目标项目的cmake里这么写：
 

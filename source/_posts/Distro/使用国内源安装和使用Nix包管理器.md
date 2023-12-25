@@ -235,13 +235,19 @@ sysstat.out                                      67,720 x /nix/store/39wxpjmmd6m
 
 参考：<https://unix.stackexchange.com/questions/252224/how-to-find-out-which-not-installed-package-a-file-belongs-to-on-nixos>
 
-## 只用nix提供的环境
+## `nix-shell`
+
+### 只用nix提供的环境
 
 <https://github.com/NixOS/nix/issues/3820>
 
 ```shell
 nix-shell --pure
 ```
+
+### 配置文件
+
+官方文档：<https://nixos.wiki/wiki/Development_environment_with_nix-shell>
 
 ## 已知的问题
 
@@ -263,3 +269,15 @@ sudo chown $USER:$USER /nix/var/nix/{profiles,gcroots}/per-user/$USER
 可能是在`nix-env -iA`的时候`ctrl+c`导致的？反正回滚一下就行了：`nix-env --rollback`
 
 来源：<https://github.com/NixOS/nixpkgs/issues/189555>
+
+### 切换stdenv
+
+仓库里的binary是用某个stdenv编译的，所以即使切换了stdenv，仓库里的库仍然依赖另一个stdenv，导致link error。
+
+好像不太好解决：
+
+<https://discourse.nixos.org/t/how-to-override-stdenv-for-all-packages-in-mkshell/10368/16>
+
+<https://stackoverflow.com/questions/50277775/how-do-i-select-gcc-version-in-nix-shell>
+
+<https://nixos.wiki/wiki/C#Use_a_different_compiler_version>
