@@ -23,20 +23,20 @@ sudo apt remove liburing1 liburing-dev
 然后编译：
 
 ```shell
-./contrib/build.sh -j -T
+./contrib/build.sh -j
 ```
 
-编译结果默认存在`./opt/cachelib`里。如果要编译安装到另一个目录，比如`$HOME/opt`：
+编译结果默认存在`./opt/cachelib`里。如果要编译安装到另一个目录，比如`$HOME/opt/cachelib`：
 
 ```shell
-./contrib/build.sh -j -T -p $HOME/opt
+./contrib/build.sh -j -p $HOME/opt/cachelib
 ```
 
 注意，编译安装好了之后是不能移动的，因为里面有些so文件中硬编码了RUNPATH，比如：
 
 ```text
 % readelf -d libthriftprotocol.so.1.0.0 | grep PATH
- 0x000000000000001d (RUNPATH)            Library runpath: [/home/searchstar/opt/lib:/usr/local/lib]
+ 0x000000000000001d (RUNPATH)            Library runpath: [/home/searchstar/opt/cachelib/lib:/usr/local/lib]
 ```
 
 移动了位置之后就会发生library not found的错误：{% post_link C/'解决找不到RUNPATH下的库的问题' %}
