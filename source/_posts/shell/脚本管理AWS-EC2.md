@@ -33,11 +33,9 @@ region=ap-northeast-1
 
 然后进入AWS EC2 console，点击右上角的下拉框，点击里面的security credentials，在里面创建access key和对应的secret key，其中secret key只在创建的时候显示，一定要妥善保存，丢失后只能再创建一个新的。
 
-## EC2 client
+## [EC2 client](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html)
 
 官方示例：<https://boto3.amazonaws.com/v1/documentation/api/latest/guide/ec2-example-managing-instances.html>
-
-`EC2.Client`文档：<https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html>
 
 ```py
 import boto3
@@ -98,11 +96,10 @@ response = client.describe_instances(
         },
     ],  
 )
-response = response['Reservations']
-assert len(response) == 1
-response = response[0]
-instances = response['Instances']
-print(len(instances))
+reservations = response['Reservations']
+print(len(reservations))
+for reservation in reservations:
+    assert len(reservation['Instances']) == 1
 ```
 
 ## [run_instances](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2/client/run_instances.html)
@@ -140,6 +137,26 @@ print(instance['InstanceId'])
 ```
 
 但是不能设置hostname。
+
+在使用前先用下面介绍的`wait_until_exists`等待instance成功创建，不然会报instance不存在的错误。
+
+## [Instance](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2/instance/index.html)
+
+```py
+import boto3
+ec2 = boto3.resource('ec2')
+instance = ec2.Instance('id')
+```
+
+### [wait_until_exists](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2/instance/wait_until_exists.html)
+
+```py
+instance.wait_until_exists()
+```
+
+### [wait_until_running](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2/instance/wait_until_running.html)
+
+来源：<https://stackoverflow.com/questions/19054081/ec2-waiting-until-a-new-instance-is-in-running-state>
 
 ## [terminate_instances](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2/client/terminate_instances.html)
 
