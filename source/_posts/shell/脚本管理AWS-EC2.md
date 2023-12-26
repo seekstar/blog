@@ -64,9 +64,14 @@ print(json5.dumps(
 ))
 ```
 
-打印private IP:
+### 打印private IP
 
 ```py
+response = client.describe_instances(
+    InstanceIds=[
+        sys.argv[1],
+    ],  
+)
 response = response['Reservations']
 assert len(response) == 1
 response = response[0]
@@ -74,6 +79,30 @@ instances = response['Instances']
 assert len(instances) == 1
 instance = instances[0]
 print(instance['PrivateIpAddress'])
+```
+
+### 打印instance个数
+
+```py
+response = client.describe_instances(
+    Filters=[
+        {
+            'Name': 'instance-state-name',
+            'Values': [
+                'pending',
+                'running',
+                'shutting-down',
+                'stopping',
+                'stopped',
+            ]
+        },
+    ],  
+)
+response = response['Reservations']
+assert len(response) == 1
+response = response[0]
+instances = response['Instances']
+print(len(instances))
 ```
 
 ## [run_instances](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2/client/run_instances.html)
