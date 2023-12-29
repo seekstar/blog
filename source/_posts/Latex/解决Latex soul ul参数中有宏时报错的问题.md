@@ -29,6 +29,20 @@ Use of \testc doesn't match its definition.
 
 来源：<https://tex.stackexchange.com/questions/139463/how-to-make-hl-highlighting-to-automatically-place-incompatible-commands-in/139500#139500>
 
+可以做一个宏来自动化register:
+
+```tex
+\newcommand{\defmacro}[2]{%
+  \expandafter\def\csname#1\endcsname{#2}
+  \expandafter\soulregister\csname#1\endcsname7
+}
+\defmacro{test}{\emph{Test}}
+```
+
+第一个参数`#1`是`test`，所以`\csname#1\endcsname`展开之后会变成`\test`。
+
+`\expandafter\soulregister`表示先展开`\soulregister`之后的宏，所以展开之后就变成了`\soulregister\test7`。
+
 ## 提前expand
 
 这种方案需要定义一个新的宏。

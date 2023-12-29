@@ -530,6 +530,21 @@ $$\mathop{\bowtie}\limits_{theta}$$
 
 来源：<https://www.oomake.com/question/703820>
 
+### footnote
+
+表格里直接用`\footnote`的话footnote并不会出现。需要使用`tablefootnote`：
+
+```tex
+\usepackage{tablefootnote}
+
+\begin{table}[h!]
+\begin{tabular}{|c|c|c|}
+\hline
+xxx\tablefootnote{Maximum allowed IOPS of gp3}
+\end{tabular}
+\end{table}
+```
+
 ## 页面
 
 ### 去掉页码
@@ -670,6 +685,42 @@ mpirun -n 20 ./xhpl
 左单引号（键盘上1左边那个）`` ` ``
 
  左双引号（按两下键盘上1左边的按键）``` `` ```
+
+## 不加粗
+
+```tex
+\textnormal{xxx}
+```
+
+来源：<https://tex.stackexchange.com/a/225273>
+
+## 从多处引用footnote
+
+```tex
+Text with first footnote\footnote{\label{note1}This is the labeled footnote}
+and more text with a second footnote\footnote{here}.
+
+In this new paragraph we have a reference to the first
+footnote\footnotemark[\ref{note1}].
+```
+
+这个不行，`\footnotemark[\ref{note1}]`会报错。来源：<https://tex.stackexchange.com/a/35044>
+
+但是这个可以：
+
+```text
+\usepackage{footmisc}
+
+Text with first footnote\footnote{\label{note1}This is the labeled footnote}
+and more text with a second footnote\footnote{here}.
+
+In this new paragraph we have a reference to the first
+footnote\footref{note1}.
+```
+
+来源：<https://tex.stackexchange.com/a/74668>
+
+`footmisc`和`scrextend`都提供`footref`，但是`\usepackage{scrextend}`会报错`Command \@subtitlefont already defined.`。所以这里用`footmisc`。
 
 ## Bibliography
 
