@@ -39,10 +39,10 @@ tags:
 
 ## 安装hexo
 
-Linux上可以用npm安装：
+可以用npm安装：
 
 ```shell
-sudo npm install hexo-cli -g
+npm install hexo-cli -g
 ```
 
 ## 初始化博客
@@ -58,7 +58,7 @@ hexo init
 ## 预览
 
 ```shell
-hexo g && hexo s
+hexo s -g
 ```
 
 就会编译并且在本地`4000`端口开一个网站
@@ -140,11 +140,11 @@ theme: tree
 
 然后预览一下就可以看到主题换了。
 
-主题的配置说明详见`themes/tree/README.md`。下面介绍一些常用的。
+在blog根目录新建`_config.tree.yml`，放tree theme的配置文件。主题的配置说明详见`themes/tree/README.md`。下面介绍一些常用的。
 
 ## 修改header
 
-通过`themes/tree/_config.yml`里的`links`配置：
+通过`_config.tree.yml`里的`links`配置：
 
 ```yaml
 links:
@@ -160,7 +160,7 @@ links:
 
 ## 开启标签
 
-在`themes/tree/_config.yml`开启标签：
+在`_config.tree.yml`开启标签：
 
 ```yml
 tags: true
@@ -201,7 +201,7 @@ layout: "tags"
 注册一下`leancloud`：<https://www.leancloud.cn/>
 点击免费试用，然后注册就好了。有一定的免费额度。
 
-登陆进去之后可以切换中文，然后`创建应用`，应用名称随便，我的是`blog`，类别选`开发版`，创建好了之后点进去，点击左边`设置`里的`应用keys`，把AppID和AppKey放到`themes/tree/_config.yml`里，并且把`enableComment`和`enableCounter`都设置成`true`
+登陆进去之后可以切换中文，然后`创建应用`，应用名称随便，我的是`blog`，类别选`开发版`，创建好了之后点进去，点击左边`设置`里的`应用keys`，把AppID和AppKey放到`_config.tree.yml`里，并且把`enableComment`和`enableCounter`都设置成`true`
 
 ```yml
 # valine 
@@ -224,11 +224,11 @@ valine:
 
 ## 修改底部版权开始年份
 
-`themes/tree/_config.yml`里的`siteStartYear: 2019`修改成你想要的年份。结束年份会自己计算出来。
+`_config.tree.yml`里的`siteStartYear: 2019`修改成你想要的年份。结束年份会自己计算出来。
 
 ## 更改网站图标
 
-将自己的网站图标（文件名不要跟默认的`favicon.ico`相同）放进`source`文件夹里。假如文件名是`seekstar.ico`，那么就可以通过`https://博客网站/seekstar.ico`访问到这个图标。然后更改`themes/tree/_config.yml`：
+将自己的网站图标（文件名不要跟默认的`favicon.ico`相同）放进`source`文件夹里。假如文件名是`seekstar.ico`，那么就可以通过`https://博客网站/seekstar.ico`访问到这个图标。然后更改`_config.tree.yml`：
 
 ```yaml
 # 改成自己的图标文件名，比如 /seekstar.ico
