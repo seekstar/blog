@@ -4,6 +4,14 @@ date: 2020-04-20 15:14:35
 tags:
 ---
 
+## inkscape
+
+很专业，但是入门有点难。
+
+有对齐辅助线和等距辅助线，但是不默认开启，要用的话需要手动开一下。
+
+我的 {% post_link Draw/'inkscape学习笔记' %}
+
 ## draw.io
 
 普通绘图、流程图等。
@@ -35,4 +43,4 @@ linux版可以去掉网格直接截图。
 
 ## libreoffice impress, libreoffice draw
 
-没有等距辅助线。
+有对齐辅助线和对齐吸附功能。但是没有等距辅助线。
