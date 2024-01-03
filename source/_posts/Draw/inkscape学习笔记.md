@@ -83,6 +83,38 @@ A4宽度是210mm
 
 ①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳㉑㉒㉓㉔㉕㉖㉗㉘㉙㉚㉛㉜㉝㉞㉟㊱㊲㊳㊴㊵㊶㊷㊸㊹㊺㊻㊼㊽㊾㊿
 
+## 图标（符号）
+
+inkscape内置了一些图标。在菜单栏选择 对象 -> 符号 即可在右边打开符号选择窗口。在下拉框里选择`所有符号集`，然后在搜索框里即可搜索想要的符号。注意，如果语言是中文，而且这个符号有中文名，那必须搜中文才能搜到这个图标。下面是一些常用的符号。
+
+| 符号 | 中文名 |
+| 照相机 | 照片（应该是翻译错了）|
+
+找到了需要的图标之后把它拖到绘图区即可。
+
+此外，还可以给inkscape安装额外的图标：<https://github.com/PanderMusubi/inkscape-open-symbols#how-do-i-install-inkscape-open-symbols>
+
+- Debian
+
+```shell
+sudo apt install inkscape-open-symbols
+```
+
+- Arch Linux
+
+```shell
+yay -S inkscape-open-symbols-git
+```
+
+然后重启inkscape即可。
+
+常用的符号：
+
+| 符号 | 搜索关键词 |
+| 锁 | lock |
+
+原文：[Use Font Awesome in Inkscape](https://superuser.com/a/1219878)
+
 ## 存在的问题
 
 [Markers / Arrow Heads don't use stroke gradient](https://gitlab.com/inkscape/inbox/-/issues/6730)
