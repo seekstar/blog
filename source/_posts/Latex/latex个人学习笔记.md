@@ -722,6 +722,96 @@ footnote\footref{note1}.
 
 `footmisc`和`scrextend`都提供`footref`，但是`\usepackage{scrextend}`会报错`Command \@subtitlefont already defined.`。所以这里用`footmisc`。
 
+## 圆圈编号
+
+原文：<https://tex.stackexchange.com/a/8473/256676>
+
+### `\textcircled`
+
+原文：<https://tex.stackexchange.com/a/8553/256676>
+
+```tex
+\textcircled{\small{1}}
+\textcircled{\small{2}}
+\textcircled{\small{3}}
+\textcircled{\small{4}}
+\textcircled{\small{5}}
+\textcircled{\small{6}}
+\textcircled{\small{7}}
+\textcircled{\small{8}}
+\textcircled{\small{9}}
+\textcircled{\small{10}}
+\textcircled{\small{11}}
+\textcircled{\small{22}}
+\textcircled{\small{33}}
+\textcircled{\small{44}}
+\textcircled{\small{55}}
+\textcircled{\small{66}}
+\textcircled{\small{77}}
+\textcircled{\small{88}}
+\textcircled{\small{99}}
+fg
+```
+
+![](latex个人学习笔记/202401022349.png)
+
+### tikz
+
+基于[Ch'en Meng的回答]，把`sep`改成了0.5pt，参数外面套了一层`\small`，从而变得更紧凑：
+
+```tex
+\usepackage{tikz}
+\newcommand{\smallcircled}[2][]{%
+  \tikz[baseline=(char.base)]{%
+    \node[shape = circle, draw, inner sep = 0.5pt]
+    (char) {\phantom{\ifblank{#1}{\small{#2}}{\small{#1}}}};%
+    \node at (char.center) {\makebox[0pt][c]{\small{#2}}};}}
+\robustify{\smallcircled}
+```
+
+因为reputation不够所以没有把这个贴上去。
+
+测试代码：
+
+```tex
+% 10是占位符，让所有圆圈大小一样。
+\smallcircled[10]{1}
+\smallcircled[10]{2}
+\smallcircled[10]{3}
+\smallcircled[10]{4}
+\smallcircled[10]{5}
+\smallcircled[10]{6}
+\smallcircled[10]{7}
+\smallcircled[10]{8}
+\smallcircled[10]{9}
+\smallcircled[10]{10}
+\smallcircled[10]{11}
+\smallcircled[10]{22}
+\smallcircled[10]{33}
+\smallcircled[10]{44}
+\smallcircled[10]{55}
+\smallcircled[10]{66}
+\smallcircled[10]{77}
+\smallcircled[10]{88}
+\smallcircled[10]{99}
+fg
+```
+
+效果：
+
+![](latex个人学习笔记/202401022316.png)
+
+### `\ding`
+
+```tex
+\usepackage{pifont}
+
+% 1到10空心圆圈
+\ding{172}--\ding{181}
+```
+
+缺点是只有1到10。
+
 ## Bibliography
 
 ### URL
