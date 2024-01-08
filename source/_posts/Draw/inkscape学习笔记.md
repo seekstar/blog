@@ -41,9 +41,7 @@ tab键可以从最底层遍历到最顶层的对象。按住alt然后多按几�
 
 菜单栏 -> 文件 -> 文档属性
 
-A4宽度是210mm
-
-如果是双栏的论文，作单栏的图可以把宽度调成100mm
+如果是双栏的论文，作单栏的图可以把宽度调成85mm
 
 ## 矩形
 
@@ -79,9 +77,25 @@ A4宽度是210mm
 
 ## 圆圈编号
 
-可以直接复制进去：<https://www.sohu.com/a/668072464_121124316>
+可以直接复制进去
+
+- 白圈数字
 
 ①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳㉑㉒㉓㉔㉕㉖㉗㉘㉙㉚㉛㉜㉝㉞㉟㊱㊲㊳㊴㊵㊶㊷㊸㊹㊺㊻㊼㊽㊾㊿
+
+- 小写字母
+
+ⓐⓑⓒⓓⓔⓕⓖⓗⓘⓙⓚⓛⓜⓝⓞⓟⓠⓡⓢⓣⓤⓥⓦⓧⓨⓩ
+
+- 大写字母
+
+ⒶⒷⒸⒹⒺⒻⒼⒽⒾⒿⓀⓁⓂⓃⓄⓅⓆⓇⓈⓉⓊⓋⓌⓍⓎⓏ
+
+- 来源
+
+[如何输入带黑圈的1-100 的特殊符号？快快收藏这3个小技巧！](https://www.sohu.com/a/668072464_121124316)
+
+[值得收藏：阿拉伯数字符号、带圈数字符号、罗马数字序号、常用序号编号输入法](https://niuchao.com/blog/cc901a86a409da183d6b8bb35d0c0972.html)
 
 ## 图标（符号）
 
@@ -114,6 +128,21 @@ yay -S inkscape-open-symbols-git
 | 锁 | lock |
 
 原文：[Use Font Awesome in Inkscape](https://superuser.com/a/1219878)
+
+## hatch
+
+用这里提供的pattern：<https://inkscape.org/~henkjan_nl/%E2%98%85patterns-for-mechanical-drawings-in-inkscape>
+
+这里提供的安装方法：[Alternate install method](https://github.com/zirafa/inkscape-hatch-patterns/issues/5)
+
+```shell
+wget https://raw.githubusercontent.com/seekstar/inkscape-hatch-patterns/paint-server/paint/hatch-patterns.svg
+cp hatch-patterns.svg ~/.config/inkscape/paint/
+```
+
+然后关闭再重新打开inkscape。点击菜单栏里的`对象` -> 绘画服务器，`Hatch Patterns`里的就是新安装的hatch patterns。
+
+hatch太密的话，pdf缩小来看的时候会变成一坨黑的。所以我一般用`Hatch 1.7`系列，疏密刚刚好。
 
 ## 存在的问题
 
