@@ -125,7 +125,9 @@ yay -S inkscape-open-symbols-git
 常用的符号：
 
 | 符号 | 搜索关键词 |
+| ---- | ---- |
 | 锁 | lock |
+| 垃圾桶 | trash |
 
 原文：[Use Font Awesome in Inkscape](https://superuser.com/a/1219878)
 
@@ -143,6 +145,10 @@ cp hatch-patterns.svg ~/.config/inkscape/paint/
 然后关闭再重新打开inkscape。点击菜单栏里的`对象` -> 绘画服务器，`Hatch Patterns`里的就是新安装的hatch patterns。
 
 hatch太密的话，pdf缩小来看的时候会变成一坨黑的。所以我一般用`Hatch 1.7`系列，疏密刚刚好。
+
+## Gray Scale
+
+视图 -> 灰度
 
 ## 存在的问题
 

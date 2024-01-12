@@ -937,6 +937,10 @@ locate name
 kill $(pidof ssh-agent)
 ```
 
+### rm
+
+`-d`: 当目录为空时才删除目录。
+
 ### sed
 
 从stdin读入，将修改后的结果写入到stdout：
