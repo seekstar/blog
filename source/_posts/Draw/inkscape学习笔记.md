@@ -146,7 +146,7 @@ cp hatch-patterns.svg ~/.config/inkscape/paint/
 
 hatch太密的话，pdf缩小来看的时候会变成一坨黑的。所以我一般用`Hatch 1.7`系列，疏密刚刚好。
 
-## Gray Scale
+## 预览灰度打印结果
 
 视图 -> 灰度
 
