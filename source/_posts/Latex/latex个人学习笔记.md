@@ -232,13 +232,7 @@ $$\mathop{\bowtie}\limits_{theta}$$
 
 ### 子图
 
-参考：
-
-<https://blog.csdn.net/yq_forever/article/details/84796802>
-
-<https://blog.csdn.net/mifangdebaise/article/details/95871208>
-
-<https://latex-tutorial.com/subfigure-latex/>
+#### `subfigure`
 
 ```tex
 \usepackage{subfigure}
@@ -259,6 +253,16 @@ $$\mathop{\bowtie}\limits_{theta}$$
 
 ![在这里插入图片描述](latex个人学习笔记/2020041521054974.png)
 两张图片就被放在一起了。如果用单张图片的方式则会使得两张图片之间的间隔很大。
+
+注：subfigure是obsolete package，已被subfig和subcaption替代：<https://ctan.org/pkg/subfigure>
+
+参考：
+
+<https://blog.csdn.net/yq_forever/article/details/84796802>
+
+<https://blog.csdn.net/mifangdebaise/article/details/95871208>
+
+<https://latex-tutorial.com/subfigure-latex/>
 
 ### 绕排
 

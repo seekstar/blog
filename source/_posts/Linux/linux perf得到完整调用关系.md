@@ -191,6 +191,10 @@ export PATH=$INSTALL_ROOT/bin:$PATH
 
 ## 编译目标应用
 
+### CMake项目
+
+export上面说的编译选项后就可以照常编译了。
+
 ### 直接使用gcc
 
 `hello.c`:

@@ -45,5 +45,7 @@ date: 2021-04-29 18:45:08
 ```
 
 ![在这里插入图片描述](Latex子表并列放置/20210429184336642.png)
-参考文献：
+
+## 参考文献
+
 <https://tex.stackexchange.com/questions/2832/how-can-i-have-two-tables-side-by-side>
