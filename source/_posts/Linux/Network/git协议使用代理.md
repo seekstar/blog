@@ -17,7 +17,23 @@ Host github.com
 
 注意这里的`netcat`有些教程里是写的`nc`，但是这是不合适的，因为`nc`在debian系中指向`ncat`，而在CentOS中指向`netcat`，两者是不同的。
 
-而`netcat`其实也有很多个变种。在Debian系和CentOS中默认是OpenBSD netcat，而在Arch Linux中好像默认是GNU Netcat。这里使用的是OpenBSD netcat，在Arch Linux中可以通过安装`openbsd-netcat`来从默认的GNU Netcat切换到OpenBSD netcat。参考：<https://wiki.archlinux.org/title/Network_tools#Netcat>
+而`netcat`其实也有很多个变种。在Debian系和CentOS中默认是OpenBSD netcat，而在Arch Linux中好像默认是GNU Netcat。这里使用的是OpenBSD netcat，安装方法：
+
+- Arch Linux
+
+```shell
+sudo pacman -S openbsd-netcat
+```
+
+参考：<https://wiki.archlinux.org/title/Network_tools#Netcat>
+
+- Debian
+
+```shell
+sudo apt install netcat-openbsd
+```
+
+可以用`nc.openbsd`来指定使用OpenBSD netcat。
 
 `man netcat`:
 
