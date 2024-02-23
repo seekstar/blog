@@ -796,12 +796,17 @@ du -hd 1 --all 目录 | sort -h
 
 ```text
 find [目录] [查找规则] [查找完后执行的action]
-查找规则：
--name 根据文件名查找（精确查找）
--iname 不区分大小写
 ```
 
-例子
+#### 查找规则
+
+- `-name`: 根据文件名查找（精确查找）
+
+- `-iname`: 不区分大小写
+
+- `!`: 逻辑取反，比如`\! -name "xxx"`就是查找名字跟`xxx`不匹配的项
+
+#### 查找示例
 
 - 在当前目录下找到所有名字为input.txt的文件并将其放入回收站
 
@@ -855,6 +860,11 @@ find . -regex '.*/latency-[0-9]*'
 来源：<https://stackoverflow.com/questions/6844785/how-to-use-regex-with-find-command>
 
 ### grep
+
+```text
+       -v, --invert-match
+              Invert the sense of matching, to select non-matching lines.
+```
 
 - 查找当前目录下有某字符串的文件：
 

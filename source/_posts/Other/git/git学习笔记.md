@@ -12,6 +12,14 @@ tags:
 
 - {% post_link Other/git/'git checkout 远程分支error' %}
 
+## 取消add
+
+```shell
+git reset
+```
+
+来源：<https://stackoverflow.com/questions/348170/how-do-i-undo-git-add-before-commit>
+
 ## remote
 
 查看remote的URL（无需联网）:

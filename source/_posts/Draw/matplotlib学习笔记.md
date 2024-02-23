@@ -62,6 +62,12 @@ ax = plt.gca()
 
 来源：<https://stackoverflow.com/questions/15067668/how-to-get-a-matplotlib-axes-instance>
 
+### [tick_params](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.tick_params.html)
+
+```shell
+ax.tick_params(axis='y', which='major', labelsize=8)
+```
+
 ### [set_xticks](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.set_xticks.html)
 
 Positional, required: `ticks`
@@ -76,6 +82,10 @@ Positional, required: `xlabel`
 
 Optional: `labelpad`, `fontsize`
 
+- `loc`: {'left', 'center', 'right'}, default: rcParams["xaxis.labellocation"] (default: 'center')
+
+比方说如果xlabel超过了右边界，可以设置`loc='right'`来让它与右边界对齐，就不会超过右边界了。
+
 ### [set_xlim](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.set_xlim.html), [set_ylim](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.set_ylim.html)
 
 设置Y轴最小值：
@@ -85,6 +95,12 @@ ax.set_ylim(bottom=0)
 ```
 
 来源：<https://stackoverflow.com/a/22642641/13688160>
+
+### [set_yscale](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.set_yscale.html)
+
+```py
+ax.set_yscale('log')
+```
 
 ### [annotate](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.annotate.html) 画箭头
 
@@ -113,6 +129,14 @@ The position (x, y) to place the text at. The coordinate system is determined by
 
 - `fontsize`
 
+### [ticklabel_format](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.ticklabel_format.html)
+
+比如把tick设置成$\times 10^4$：
+
+```py
+ax.ticklabel_format(style='sci', scilimits=(4, 4), useMathText=True)
+```
+
 ### tick formatter
 
 文档：<https://matplotlib.org/stable/gallery/ticks/tick-formatters.html>
@@ -121,6 +145,14 @@ The position (x, y) to place the text at. The coordinate system is determined by
 
 ```python
 ax1.xaxis.set_major_formatter(lambda x, pos: str(x-5))
+```
+
+### [set_label_coords](https://matplotlib.org/stable/api/_as_gen/matplotlib.axis.Axis.set_label_coords.html)
+
+例子：
+
+```py
+ax.xaxis.set_label_coords(0.1, -0.19)
 ```
 
 ### grid
@@ -174,6 +206,17 @@ ax.yaxis.get_offset_text().set_fontsize(8)
 官方文档：<https://matplotlib.org/stable/api/_as_gen/matplotlib.gridspec.GridSpec.html>
 
 官方例子：<https://matplotlib.org/stable/gallery/subplots_axes_and_figures/align_labels_demo.html#sphx-glr-gallery-subplots-axes-and-figures-align-labels-demo-py>
+
+常用：
+
+```py
+figure = plt.figure(dpi = 300, figsize = (xx, xx), constrained_layout=True)
+gs = gridspec.GridSpec(1, 3, figure=figure)
+```
+
+其中`constrained_layout`比`tight_layout`更好。
+
+`plt.figure`参数：<https://matplotlib.org/stable/api/figure_api.html#matplotlib.figure.Figure>
 
 ## 调整坐标轴label与tick label之间的空隙
 

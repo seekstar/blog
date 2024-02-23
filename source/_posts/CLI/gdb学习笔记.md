@@ -75,6 +75,20 @@ gdb --pid xxx
 
 就输入`thread 10`
 
+## `-ex gdb命令`
+
+执行一条gdb命令。比如让gdb立即执行命令：`gdb -ex run --args 命令 参数...`
+
+来源：<https://stackoverflow.com/questions/2119564/how-to-automatically-run-the-executable-in-gdb>
+
+如果还需要让命令正常退出时gdb也退出，但是命令异常时暂停：
+
+```shell
+gdb -ex='set confirm on' -ex='set pagination off' -ex=run -ex=quit --args 命令 参数...
+```
+
+来源：<https://stackoverflow.com/a/8657833>
+
 ## 参考文献
 
 <https://sourceware.org/gdb/download/onlinedocs/gdb/Threads.html>

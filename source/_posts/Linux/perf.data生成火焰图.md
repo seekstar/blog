@@ -30,7 +30,13 @@ perf script -i perf.data | inferno-collapse-perf > perf.folded
 inferno-flamegraph --width=1200 < perf.folded > perf.svg
 ```
 
-实测比perl版本快大约4倍。不过生成的`perf.svg`字太小了。
+实测比perl版本快大约4倍。不过生成的`perf.svg`字太小了。可以用`inferno`生成`perf.folded`，再用`flamegraph.pl`来画火焰图：
+
+```shell
+cargo install inferno
+perf script -i perf.data | inferno-collapse-perf > perf.folded
+$FlameGraphPath/flamegraph.pl perf.folded > perf.svg
+```
 
 ## 参考文献
 

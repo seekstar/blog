@@ -236,13 +236,28 @@ set -g @tnotify-custom-cmd 'echo "tmux程序跑完啦" | s-nail --subject="tmux 
 
 </details>
 
-如果要给notification带上session name，可以用`tmux display-message -p #S`:
+如果要给notification带上session name，可以这样:
 
 ```text
 set -g @tnotify-custom-cmd 'echo "tmux $(tmux display-message -p \#S) 程序跑完啦" | s-nail --subject="tmux complete notification" 接收人@163.com'
 ```
 
 参考：<https://superuser.com/a/410197>
+
+```shell
+tty=$(tty)
+for s in $(tmux list-sessions -F '#{session_name}' 2>/dev/null); do
+    tmux list-panes -F '#{pane_tty} #{session_name}' -t "$s"
+done | grep "$tty " | awk '{print $2}'
+```
+
+来源：<https://superuser.com/a/1202709/1677998>
+
+注意是`grep "$tty "`，原答案的`grep "$tty"`会混淆`/dev/pts/1`和`/dev/pts/12`。可惜reputation不够，不能comment。
+
+不要用数字的session name，不然`tmux list-panes -F '#{pane_tty} #{session_name}' -t 数字`会把`数字`看作是window编号而不是name。
+
+直接运行`session-name.sh`可以。但是在tmux-notify里就不行。
 
 ## 存在的问题
 

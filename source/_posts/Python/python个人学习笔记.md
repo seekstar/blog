@@ -59,9 +59,42 @@ a[:-1]
 a[:-2]
 ```
 
-### 其他
+### 字典
 
-- [Python教学: Python Dictionary完全教学一次搞懂](https://baijiahao.baidu.com/s?id=1694102996150591628&wfr=spider&for=pc)
+[Python教学: Python Dictionary完全教学一次搞懂](https://baijiahao.baidu.com/s?id=1694102996150591628&wfr=spider&for=pc)
+
+#### 遍历
+
+```py
+likes = {"color": "blue", "fruit": "apple", "pet": "dog"}
+for key in likes:
+    print(key)
+```
+
+输出：
+
+```text
+color
+fruit
+pet
+```
+
+```py
+for (key, value) in likes.items():
+    print(key, value)
+```
+
+输出：
+
+```text
+color blue
+fruit apple
+pet dog
+```
+
+来源：<https://realpython.com/iterate-through-dictionary-python/>
+
+### 其他
 
 - [Python中Tuple（元组）](https://blog.csdn.net/wsq119/article/details/105385142)
 
@@ -196,7 +229,19 @@ print('Average %f' %average, file=f)
 
 来源：<https://www.askpython.com/python/built-in-methods/python-print-to-file>
 
+## Exceptions
+
+Built-in Exceptions: <https://docs.python.org/3/library/exceptions.html>
+
+常用的：
+
+- [FileNotFoundError](https://docs.python.org/3/library/exceptions.html#FileNotFoundError)
+
 ## 标准库
+
+### `io`
+
+<https://stackoverflow.com/questions/39823303/python3-print-to-string>
 
 ### 时间
 
