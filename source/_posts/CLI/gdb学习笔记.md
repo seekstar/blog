@@ -89,6 +89,30 @@ gdb -ex='set confirm on' -ex='set pagination off' -ex=run -ex=quit --args 命令
 
 来源：<https://stackoverflow.com/a/8657833>
 
+## core dump
+
+系统可能默认禁用了core dump:
+
+```shell
+ulimit -c
+```
+
+返回0说明不允许core dump。要启用core dump，可以在当前shell里把它设置成unlimited:
+
+```shell
+ulimit -c unlimited
+```
+
+然后在同一个shell里运行程序时再出现segfault就会dump core。
+
+然后就可以用gdb来解析这个core file:
+
+```shell
+gdb executable core-file
+```
+
+来源：<https://www.bogotobogo.com/cplusplus/debugging_core_memory_dump_segmentation_fault_gdb.php>
+
 ## 参考文献
 
 <https://sourceware.org/gdb/download/onlinedocs/gdb/Threads.html>
