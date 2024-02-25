@@ -187,6 +187,47 @@ int main() {
 }
 ```
 
+坑点是map的`piecewise_construct`似乎是无条件的，也就是说就算是插入失败了也会先construct这个node再将其destruct。例子：
+
+```cpp
+#include <iostream>
+#include <map>
+#include <cassert>
+#include <tuple>
+
+class A {
+public:
+	A(int x) : x_(x) {
+		std::cout << "Constructing " << x_ << std::endl;
+	}
+	~A() { std::cout << "Destructing " << x_ << std::endl; }
+private:
+	int x_;
+};
+
+int main() {
+	std::map<int, A> m;
+
+	auto ret = m.emplace(std::piecewise_construct, std::make_tuple(1), std::make_tuple(1));
+	assert(ret.second == true);
+	ret = m.emplace(std::piecewise_construct, std::make_tuple(1), std::make_tuple(233));
+	assert(ret.second == false);
+	std::cout << std::endl;
+
+	return 0;
+}
+```
+
+输出：
+
+```text
+Constructing 1
+Constructing 233
+Destructing 233
+
+Destructing 1
+```
+
 ## 字符串和数值相互转化
 
 参考：<https://blog.csdn.net/lxj434368832/article/details/78874108>
