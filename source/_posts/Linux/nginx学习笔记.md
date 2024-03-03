@@ -32,3 +32,11 @@ server {
 <https://stackoverflow.com/questions/28130841/removing-start-of-path-from-nginx-proxy-pass>
 
 [Remove path prefix during proxy_pass](https://mailman.nginx.org/pipermail/nginx/2016-February/049856.html)
+
+## 存在的问题
+
+## client_max_body_size
+
+文档：<https://nginx.org/en/docs/http/ngx_http_core_module.html#client_max_body_size>
+
+stream块好像也会检查body size，但是`client_max_body_size`只支持http块，不支持stream块。
