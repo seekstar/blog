@@ -534,6 +534,12 @@ date +%Y%m%d%X%N
 date +%s%N
 ```
 
+### 时间戳转时间字符串
+
+```shell
+date --date='@2147483647'
+```
+
 ### 查看端口占用情况
 
 参考：<https://jingyan.baidu.com/article/656db9183861cde381249c87.html>
