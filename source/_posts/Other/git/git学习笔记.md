@@ -71,6 +71,32 @@ git clean -df
 
 来源：<https://koukia.ca/how-to-remove-local-untracked-files-from-the-current-git-branch-571c6ce9b6b1>
 
+## stash
+
+暂存更改：
+
+```shell
+git stash
+```
+
+列出所有stash:
+
+```shell
+git stash list
+```
+
+应用并删除最近的stash:
+
+```shell
+git stash pop
+```
+
+删除指定stash:
+
+```shell
+git stash drop stash@{0}
+```
+
 ## cherry-pick
 
 ### 指定commit
