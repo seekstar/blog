@@ -1245,6 +1245,80 @@ int main() {
 
 用`top`可以看到运行到一半线程的名字会变成`thread_name`。
 
+## 让template function接受const lvalue reference
+
+这样是不行的：
+
+```cpp
+#include <iostream>
+
+struct A {
+	A() {}
+	A(const A &) = delete;
+	A &operator=(const A &) = delete;
+};
+
+template <typename T>
+void func(T a) {}
+
+int main() {
+	A a;
+	const A &aa = a;
+	func(aa);
+
+	return 0;
+}
+```
+
+`T`会deduce成`A`，然后报错：
+
+```text
+forward.cpp: In function ‘int main()’:
+forward.cpp:15:13: 错误：使用了被删除的函数‘A::A(const A&)’
+   15 |         func(aa);
+      |         ~~~~^~~~
+forward.cpp:5:9: 附注：在此声明    5 |         A(const A &) = delete;
+      |         ^
+forward.cpp:10:13: 附注：  初始化‘void func(T) [with T = A]’的实参 1
+   10 | void func(T a) {}
+      |           ~~^
+```
+
+可以把template function的参数类型定义成forwarding reference `T &&`:
+
+```cpp
+#include <iostream>
+
+struct A {
+	A() {}
+	A(const A &) = delete;
+	A &operator=(const A &) = delete;
+};
+
+template <typename T>
+void func(T &&a) {}
+
+int main() {
+	A a;
+	const A &aa = a;
+	func(aa);
+
+	return 0;
+}
+```
+
+它似乎是基于这样的规则：
+
+```text
+T & && = T &
+T && & = T &
+T && && = T &&
+```
+
+当把`const A &`传进去时，由于`const A & && = const A &`，所以`T`被deduce成了`const A &`。当把`A &&`传进去时，由于`A && && = A &&`，所以`T`被deduce成了`A &&`。
+
+关于forwarding reference（也有人叫它universal reference），详见：<https://isocpp.org/blog/2012/11/universal-references-in-c11-scott-meyers>
+
 ## 其他
 
 {% post_link C++/'C++获取日期时间戳' %}
