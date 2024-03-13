@@ -69,3 +69,11 @@ facebook::rocks_secondary_cache::RocksCachelibWrapper
 <https://github.com/facebook/rocksdb/issues/8347>
 
 <https://github.com/facebook/CacheLib/pull/184>
+
+## Snapshot
+
+官方文档：<https://github.com/facebook/rocksdb/wiki/Snapshot>
+
+RocksDB的snapshot相当于对当时的DB状态做一个快照。在take snapshot时，将当前sequence number保存下来。在snapshot上读取的时候，忽略sequence number大于snapshot的sequence number的record。
+
+在flush和compaction时，如果一个record对某个snapshot是可见的，即使在有新版本的情况下也会保留它。
