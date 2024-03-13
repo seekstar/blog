@@ -12,12 +12,23 @@ sshname表示在`.ssh/config`里的名字，可以是IP地址。
 
 ## 服务器
 
-### 安装VNC server
+### TigerVNC
 
-debian系:
+TigerVNC会创建一个新的桌面环境。
+
+#### 安装
+
+Debian 12:
 
 ```shell
-sudo apt install tightvncserver
+sudo apt install tigervnc-standalone-server
+```
+
+卸载
+
+```shell
+sudo apt remove tigervnc-standalone-server
+sudo apt autoremove
 ```
 
 Centos 8:
@@ -26,13 +37,59 @@ Centos 8:
 sudo yum install tigervnc-server.x86_64
 ```
 
-### 启动VNC server
+#### 设置密码
 
 ```shell
-vncserver
+vncpasswd
 ```
 
-`Would you like to enter a view-only password (y/n)?`选`n`，因为我们要用ssh隧道连接，所以不需要设置密码。
+#### 启动
+
+```shell
+Xvnc :1 PasswordFile=$HOME/.vnc/passwd
+```
+
+```shell
+tigervncserver
+```
+
+或者指定号码：
+
+```shell
+tigervncserver :1
+```
+
+#### 关闭
+
+```shell
+tigervncserver -kill :1
+```
+
+### TightVNC
+
+#### 安装VNC server
+
+debian系:
+
+```shell
+sudo apt install tightvncserver
+```
+
+#### 设置 / 重置 密码
+
+```shell
+vncpasswd
+```
+
+#### 启动VNC server
+
+```shell
+vncserver -localhost
+```
+
+`-localhost`表示只接受localhost的连接。
+
+`Would you like to enter a view-only password (y/n)?`选`n`。
 
 `New 'X' desktop is L1707:1`，表示新建的桌面在`:1`，端口号为`5901`。
 
@@ -55,13 +112,37 @@ Starting applications specified in /home/searchstar/.vnc/xstartup
 Log file is /home/searchstar/.vnc/L1707:1.log
 ```
 
-### 关闭VNC server
+#### 关闭VNC server
 
 使用完毕后可以关掉VNC server的session：
 
 ```shell
 vncserver -kill :1
 ```
+
+### X11VNC
+
+X11VNC把当前显示器的内容共享出去。但对于没有显示器的机器，分辨率会很低：<https://www.reddit.com/r/linuxquestions/comments/5y80m0/higher_resolutions_with_x11vnc_on_headless_box/>
+
+参考：<https://wiki.archlinux.org/title/X11vnc>
+
+```shell
+sudo apt install x11vnc
+```
+
+创建密码文件`~/.vnc/passwd`：
+
+```shell
+x11vnc -storepasswd
+```
+
+```shell
+x11vnc -display :0 -localhost -usepw -forever -geometry 1920x1080
+```
+
+`-localhost`: 只允许localhost的连接请求
+`-usepw`: 使用`~/.vnc/passwd`里的密码
+`-forever`: 在第一个client退出后也继续监听
 
 ## 客户端
 
@@ -104,14 +185,14 @@ Debian系：
 
 ```shell
 sudo apt install xtightvncviewer
-vncviewer localhost:1
+vncviewer :1
 ```
 
 ArchLinux:
 
 ```shell
 sudo pacman -S tigervnc
-vncviewer localhost:1
+vncviewer :1
 ```
 
 MacOS: `brew install tigervnc-viewer`，然后打开tigervnc，在弹出的窗口里输入`localhost:1`即可。
@@ -120,6 +201,12 @@ MacOS: `brew install tigervnc-viewer`，然后打开tigervnc，在弹出的窗�
 就是任务栏没了。。。
 
 当然显示出来是一片灰色也是正常的。
+
+指定分辨率：
+
+```shell
+vncviewer :1 -geometry=1280x720
+```
 
 ### 在终端中执行GUI程序
 
