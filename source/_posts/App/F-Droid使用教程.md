@@ -54,6 +54,12 @@ F-Droid下载地址：<https://f-droid.org/>
 
 临时保持屏幕常亮。要允许后台运行。
 
+## Fcitx5 for Android
+
+开箱即用的输入法。长按地球图标就可以切换到别的输入法，比如KeePassDX的Magikeyboard（用来填写密码）。
+
+可惜不能在设备间同步词库。
+
 ## Feeder
 
 RSS阅读器。订阅源可以在rsshub找，比如联合早报：<https://docs.rsshub.app/traditional-media.html#lian-he-zao-bao>
@@ -92,7 +98,7 @@ ECNS: <https://www.ecns.cn/rss/rss.xml>
 
 ## KeePassDX
 
-密码管理软件。配合坚果云可以实现密码全平台同步。
+密码管理软件。配合坚果云可以实现密码全平台同步。建议在手机系统中启用KeePassDX的Magikeyboard用来填写密码。如果手机自带的输入法不支持快速切换到别的输入法的话，建议使用[Fcitx5 for Android](#fcitx5-for-android)。
 
 ## syncthing
 
