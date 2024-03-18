@@ -150,7 +150,13 @@ synclient HorizScrollDelta=$((-$old_value))
 ## 锁屏
 
 ```shell
+# ArchLinux
 sudo pacman -S xfce4-screensaver
+# Debian
+sudo apt install xfce4-screensaver
+```
+
+```shell
 nohup xfce4-screensaver &
 ```
 
