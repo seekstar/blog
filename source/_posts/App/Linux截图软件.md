@@ -8,6 +8,12 @@ tags:
 
 我觉得最好用。但是没人维护了。
 
+## spectacle
+
+KDE应用。可以截取当前活动窗口，也可以截取矩形区域。
+
+在KDE的快捷键设置的列表里如果没有spectacle的话，可以选择`Add New` -> `Applications`，然后在里面选中spectacle，即可把spectacle加进去。
+
 ## shutter
 
 界面有点像windows的截图工具。可以自动识别窗口。截图之后自动保存到剪切板。但是不能像deepin-screenshot那样在自动识别窗口模式拖动切换到选区模式。
@@ -17,7 +23,11 @@ tags:
 全平台，可以添加箭头之类的。
 运行之后会在状态栏出现一个火焰图标，然后点一下就可以截屏了。
 
-缺点：不能直接选中窗口：<https://github.com/flameshot-org/flameshot/issues/5>
+缺点：
+
+不能直接选中窗口：<https://github.com/flameshot-org/flameshot/issues/5>
+
+KDE 6下选区的时候屏幕内容会缩小到左上角，而且会把鼠标也截进去。
 
 ## deepin-screen-recorder
 
