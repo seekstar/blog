@@ -3,6 +3,19 @@ title: Linux pdf编辑软件
 date: 2021-10-10 10:17:04
 ---
 
+## PDF Arranger
+
+可以旋转pdf
+
+```shell
+# Flatpak
+flatpak install pdfarranger
+# ArchLinux
+sudo pacman -S pdfarranger
+```
+
+来源：<https://askubuntu.com/questions/409880/how-to-save-a-rotated-pdf-file>
+
 ## libreoffice draw
 
 可以画直线、曲线、圆圈、方框，插入文本框，有的PDF甚至可以直接编辑原有的字。
