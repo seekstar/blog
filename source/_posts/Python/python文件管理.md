@@ -9,17 +9,7 @@ date: 2021-07-22 14:34:19
 import os, shutil
 ```
 
-其中`shutil`是`shell util`的缩写。
-
-- 创建目录
-`os.makedirs`，相当于shell里的`mkdir -p`，但是如果已经存在则会报错。
-`os.makedirs(dirname, exist_ok = True)`使得即使目录存在也不报错。
-
-- 复制文件
-`shutil.copyfile`
-
-- 移动
-`shutil.move`
+其中`shutil`是`shell util`的缩写。官方文档：<https://docs.python.org/3/library/shutil.html>
 
 ## `os.path`
 
@@ -30,6 +20,35 @@ import os, shutil
 - 是否为目录 [os.path.isdir(path)](https://docs.python.org/3/library/os.path.html#os.path.isdir)
 
 - [os.path.basename](https://docs.python.org/3/library/os.path.html#os.path.basename)
+
+## cd
+
+`os.chdir(path)`
+
+它只是libc的`chdir`的一个wrapper，行为类似于`cd -P`，在路径中有symbolic link的时候可能会有问题。
+
+```text
+      -P        use the physical directory structure without following
+                symbolic links: resolve symbolic links in DIR before
+                processing instances of `..'
+```
+
+参考：<https://bugs.python.org/issue29635>
+
+## 创建目录
+
+[os.mkdir](https://docs.python.org/3/library/os.html#os.mkdir)
+
+`os.makedirs`，相当于shell里的`mkdir -p`，但是如果已经存在则会报错。
+`os.makedirs(dirname, exist_ok=True)`使得即使目录存在也不报错。
+
+## 复制文件
+
+`shutil.copyfile`
+
+## 移动
+
+`shutil.move`
 
 ## 其他
 

@@ -273,6 +273,16 @@ factorial(10)
 #### 简单执行命令
 
 ```py
+os.system('命令 参数...')
+```
+
+返回值是OS-dependant：<https://stackoverflow.com/questions/6466711/what-is-the-return-value-of-os-system-in-python>
+
+可以用[os.waitstatus_to_exitcode](https://docs.python.org/3/library/os.html#os.waitstatus_to_exitcode)来将返回值变成exit code。如果正常退出，exit code就是0。
+
+#### 带参数命令
+
+```py
 import subprocess
 subprocess.call(['./executable', arg1, arg2])
 ```
