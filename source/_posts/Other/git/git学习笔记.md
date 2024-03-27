@@ -12,6 +12,20 @@ tags:
 
 - {% post_link Other/git/'git checkout 远程分支error' %}
 
+## 查看unstaged changes
+
+```shell
+git diff
+```
+
+包含untracked file：
+
+```shell
+git add -N . && git diff
+```
+
+来源：<https://stackoverflow.com/a/857696/13688160>
+
 ## 取消add
 
 ```shell
@@ -96,6 +110,35 @@ git stash pop
 ```shell
 git stash drop stash@{0}
 ```
+
+查看指定stash:
+
+```shell
+# 输出类似于git commit
+git stash show stash@{0} 
+```
+
+用patch的格式打印指定stash：
+
+```shell
+# -p: --patch
+git stash show stash@{0} -p
+```
+
+可以保存为patch:
+
+```shell
+# -p: --patch
+git stash show stash@{0} -p > xxx.patch
+```
+
+使用patch:
+
+```shell
+git apply --3way /path/to/xxx.patch
+```
+
+`--3way`: <https://stackoverflow.com/a/47756467/13688160>
 
 ## cherry-pick
 
