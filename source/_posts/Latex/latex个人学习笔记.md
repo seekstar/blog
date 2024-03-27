@@ -232,7 +232,17 @@ $$\mathop{\bowtie}\limits_{theta}$$
 
 ### 子图
 
-#### `subfigure`
+#### `subcaption`
+
+教程：<https://latex-tutorial.com/subfigure-latex/>
+
+默认似乎是label和text都是粗体。如果不想这样可以显式让subcaption是正常字体：
+
+```tex
+\usepackage[labelfont=normalfont,textfont=normalfont]{subcaption}
+```
+
+#### (obsolete) `subfigure`
 
 ```tex
 \usepackage{subfigure}
@@ -815,6 +825,22 @@ fg
 ```
 
 缺点是只有1到10。
+
+## 一行放多个独立的Figure或Table
+
+用minipage:
+
+<https://stackoverflow.com/questions/76292519/figure-and-table-in-the-same-line>
+
+<https://tex.stackexchange.com/questions/127379/is-it-possible-to-use-subcaption-inside-a-minipage>
+
+这个不管用：<https://tex.stackexchange.com/questions/6850/table-and-figure-side-by-side-with-independent-captions>
+
+相关：
+
+<https://tex.stackexchange.com/questions/6472/parbox-vs-minipage-differences-in-applicability>
+
+<https://ftp.yz.yamagata-u.ac.jp/pub/CTAN/macros/latex/contrib/subfig/subfig.pdf>
 
 ## Bibliography
 
