@@ -31,7 +31,7 @@ date: 2021-06-01 23:43:52
 这里换成中科大源。
 编辑`/etc/apt/sources.list`，把内容替换成：
 
-```
+```text
 deb http://mirrors.ustc.edu.cn/debian stable main contrib non-free
 # deb-src http://mirrors.ustc.edu.cn/debian stable main contrib non-free
 deb http://mirrors.ustc.edu.cn/debian stable-updates main contrib non-free
@@ -88,13 +88,13 @@ debian10是buster。
 
 然后在`/etc/apt/sources.list`里加上
 
-```
+```text
 deb http://httpredir.debian.org/debian/ debian版本代号 main contrib non-free
 ```
 
 比如debian10就是
 
-```
+```text
 deb http://httpredir.debian.org/debian/ buster main contrib non-free
 ```
 
@@ -113,6 +113,18 @@ sudo apt install firmware-iwlwifi
 ## 没有声音
 
 <https://blog.csdn.net/chuanjizhen6999/article/details/101013021>
+
+## 更改locale
+
+使用`update-locale`: <https://manpages.ubuntu.com/manpages/jammy/man8/update-locale.8.html>
+
+例如把locale改成`en_US.UTF-8`:
+
+```shell
+sudo update-locale LANG=en_US.UTF-8
+```
+
+然后退出重进就行了。
 
 ## 存在的一些问题
 

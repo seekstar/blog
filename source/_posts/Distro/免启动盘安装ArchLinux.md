@@ -174,8 +174,8 @@ ArchLinux没有默认的locale，所以一定要设置locale，否则之后运�
 ```shell
 echo -e "en_US.UTF-8 UTF-8\nzh_CN.UTF-8 UTF-8" >> /etc/locale.gen && locale-gen
 # https://wiki.archlinux.org/title/Locale
-#sudo localectl set-locale LANG=en_US.UTF-8
-echo LANG=en_US.UTF-8 > /etc/locale.conf
+# /etc/locale.conf
+sudo localectl set-locale LANG=en_US.UTF-8
 # https://wiki.archlinux.org/title/Locale#My_system_is_still_using_wrong_language
 #rm ~/.config/plasma-localerc
 ```
