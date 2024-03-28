@@ -242,6 +242,16 @@ $$\mathop{\bowtie}\limits_{theta}$$
 \usepackage[labelfont=normalfont,textfont=normalfont]{subcaption}
 ```
 
+让子图的caption偏移指定距离：
+
+```tex
+\captionsetup[subfigure]{oneside,margin={0.8cm,0cm}}
+\begin{subfigure}{0.3\textwidth}
+...
+```
+
+来源：[How to move the caption of a subfigure right?](https://latex.org/forum/viewtopic.php?t=28543)
+
 #### (obsolete) `subfigure`
 
 ```tex
@@ -841,6 +851,22 @@ fg
 <https://tex.stackexchange.com/questions/6472/parbox-vs-minipage-differences-in-applicability>
 
 <https://ftp.yz.yamagata-u.ac.jp/pub/CTAN/macros/latex/contrib/subfig/subfig.pdf>
+
+## 指定fontsize
+
+`\fontsize{size}{skip}\selectfont This is <size>pt text`
+
+例子：
+
+```text
+\fontsize{12}{14}\selectfont This is 12pt text.
+```
+
+一般来说`skip`设置为大约`1.2 * size`: <https://tex.stackexchange.com/a/48277>
+
+来源：
+
+<https://www.quora.com/How-can-I-change-the-font-size-of-captions-in-LaTeX>
 
 ## Bibliography
 
