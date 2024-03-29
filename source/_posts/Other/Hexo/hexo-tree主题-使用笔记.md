@@ -276,7 +276,7 @@ hexo new '博客标题'
 
 ```shell
 # 源码
-git clone git@gitee.com:searchstar/blog.git
+git clone --recursive git@gitee.com:searchstar/blog.git
 cd blog
 # 网站
 git clone git@github.com:seekstar/seekstar.github.io.git .deploy_git
