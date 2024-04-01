@@ -80,9 +80,18 @@ Autodriver: Unable to exec at line 277: No such file or directory
 Autodriver: Error killing user processes at line 365
 ```
 
-## 改大`VM_ULIMIT_USER_PROC`
+## `Tango/config.py`
 
-`autolab-docker/Tango/config.py`里`VM_ULIMIT_USER_PROC`默认100，太小了。改大一些：
+更改了之后重启docker即可生效：
+
+```shell
+sudo docker compose stop
+sudo docker compose up -d
+```
+
+### 改大`VM_ULIMIT_USER_PROC`
+
+`VM_ULIMIT_USER_PROC`默认100，太小了。改大一些：
 
 ```py
 VM_ULIMIT_USER_PROC = 10000
@@ -90,7 +99,7 @@ VM_ULIMIT_USER_PROC = 10000
 
 太小的话分配太多`std::async`会失败，然后似乎会fall back到单线程模式。
 
-## SIGXFSZ
+### `VM_ULIMIT_FILE_SIZE`
 
 如果autograde的时候报了这个错：
 
@@ -98,11 +107,6 @@ VM_ULIMIT_USER_PROC = 10000
 Error running link command: SIGXFSZ
 ```
 
-说明编译产生的文件大小超限了。在`Tango/config.py`里把`VM_ULIMIT_FILE_SIZE`设置大一些（默认100MiB），然后重启docker即可：
-
-```shell
-sudo docker compose stop
-sudo docker compose up -d
-```
+说明编译产生的文件大小超限了。在`Tango/config.py`里把`VM_ULIMIT_FILE_SIZE`设置大一些（默认100MiB）
 
 注意，`VM_ULIMIT_FILE_SIZE`似乎是用32 bit integer存的，所以值一定要小于4G，不然会溢出。
