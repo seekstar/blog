@@ -80,6 +80,16 @@ Autodriver: Unable to exec at line 277: No such file or directory
 Autodriver: Error killing user processes at line 365
 ```
 
+## 改大`VM_ULIMIT_USER_PROC`
+
+`autolab-docker/Tango/config.py`里`VM_ULIMIT_USER_PROC`默认100，太小了。改大一些：
+
+```py
+VM_ULIMIT_USER_PROC = 10000
+```
+
+太小的话分配太多`std::async`会失败，然后似乎会fall back到单线程模式。
+
 ## SIGXFSZ
 
 如果autograde的时候报了这个错：

@@ -123,7 +123,17 @@ tar -cvf FileName.tar files
 其中files可以是文件夹名，也可以是表示文件的正则表达式（如*.jpg）
 c: 压缩(compress)
 
-尤其要注意，上面的files不要使用绝对路径如/usr/share/fonts，甚至~/backup也不行（因为”\~“会被翻译成/home/用户名）。tar加入文件时会把文件的相对位置也加进去，解压出来的文件都根据它们的相对位置放到解压到的目录。因此进行压缩时要cd到要压缩的文件或文件夹所在目录。
+尤其要注意，tar加入文件时会把文件的相对位置也加进去，解压出来的文件都根据它们的相对位置放到解压到的目录。因此进行压缩时要cd到要压缩的文件或文件夹所在目录。
+
+也可以用`-C`选项让tar先cd到对应目录再将文件打包。例如要将`dir1`和`dir2`下面的所有文件和目录都打包在一起（不打包`dir1`和`dir2`本身），可以这样：
+
+```shell
+tar -cvf name.tar -C dir1 . -C ../dir2 .
+```
+
+`-C dir1`表示先cd到`dir1`，`.`表示把当前目录下所有文件都打包，然后`-C ../dir2`表示再`cd ../dir2`，然后`.`表示把当前目录下所有文件都打包。
+
+来源：<https://unix.stackexchange.com/questions/703696/creating-a-tar-gz-archive-of-multiple-directories-of-different-locations-tar>
 
 ## .gz
 

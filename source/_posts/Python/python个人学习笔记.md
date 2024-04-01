@@ -395,7 +395,11 @@ pip3 install python-dateutil
 
 - [python字典和JSON格式的转换](https://blog.csdn.net/sinat_36899414/article/details/77817195)
 
-`json.dumps(obj, indent='\t')`可以使用tab进行缩进。
+```py
+import json
+# 使用tab进行缩进。
+json.dumps(obj, indent='\t')
+```
 
 #### 从文件读取
 
