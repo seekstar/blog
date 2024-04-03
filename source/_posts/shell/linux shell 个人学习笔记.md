@@ -715,7 +715,7 @@ name1 does not exist
 
 ### awk
 
-[Linux awk 命令](https://m.runoob.com/linux/linux-comm-awk.html)
+[Linux awk 命令](https://www.runoob.com/linux/linux-comm-awk.html)
 
 [AWK 条件语句与循环](https://www.runoob.com/w3cnote/awk-if-loop.html)
 

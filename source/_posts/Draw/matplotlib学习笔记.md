@@ -247,7 +247,15 @@ ax.yaxis.set_minor_locator(LogLocator(base=10, subs=np.arange(2, 10) * 0.1, numt
 
 ## 疑难杂症
 
-在安装了`ttf-mscorefonts-installer`的情况下`matplotlib`找不到Times New Roman:
+### `Matplotlib is currently using agg, which is a non-GUI backend, so cannot show the figure.`
+
+```shell
+sudo apt install python3-tk
+```
+
+来源：<https://stackoverflow.com/questions/56656777/userwarning-matplotlib-is-currently-using-agg-which-is-a-non-gui-backend-so>
+
+### 在安装了`ttf-mscorefonts-installer`的情况下`matplotlib`找不到Times New Roman
 
 ```shell
 sudo apt install msttcorefonts -qq

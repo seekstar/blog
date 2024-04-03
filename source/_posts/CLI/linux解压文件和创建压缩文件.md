@@ -392,6 +392,22 @@ tar xjf name.tar.bz2
 pbzip2 -cdp线程数 b.tar.bz2 | tar -xC DirName
 ```
 
+## zstd
+
+### 解压
+
+到当前文件夹：
+
+```shell
+unzstd name.zst
+```
+
+到指定目录：
+
+```shell
+unzstd name.zst -o name
+```
+
 ## 参考文献
 
 <https://www.cnblogs.com/sinsenliu/p/9369729.html>
