@@ -149,6 +149,32 @@ num-derive: <https://docs.rs/num-derive/latest/num_derive/>
 
 - <https://serde.rs/impl-deserialize.html>
 
+### clap
+
+官方文档：<https://docs.rs/clap/latest/clap/>
+
+derive的用法：<https://docs.rs/clap/latest/clap/_derive/index.html>
+
+#### `#[arg(...)]`
+
+##### `short`
+
+自动取field name的首字母作为参数名。
+
+也可以`short = 'x'`指定参数名。
+
+##### `default_value_t`
+
+```text
+default_value_t [= <expr>]
+```
+
+`_t`后缀应该是type的意思。
+
+#### Positional arguments
+
+不指定`short`之类的，默认就是positional argument。
+
 ## API guidelines
 
 ### Generic reader/writer functions take R: Read and W: Write by value (C-RW-VALUE)

@@ -117,6 +117,8 @@ else
 fi
 ```
 
+另外，`-s`表示文件存在且不为空。来源：<https://stackoverflow.com/questions/9964823/how-to-check-if-a-file-is-empty-in-bash>
+
 #### 判断文件权限
 
 | 代码 | 含义 |
@@ -892,6 +894,10 @@ grep -rn splay_safe_rs --include \*.rs
 来源：<https://stackoverflow.com/questions/12516937/how-can-i-grep-recursively-but-only-in-files-with-certain-extensions>
 
 `--exclude`, `--exclude-dir`: <https://www.warp.dev/terminus/grep-exclude>
+
+- 正则: `-E`
+
+里面不支持`\d`之类的，只支持`[0-9]`
 
 ### ip
 

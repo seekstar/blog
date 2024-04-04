@@ -140,6 +140,32 @@ git apply --3way /path/to/xxx.patch
 
 `--3way`: <https://stackoverflow.com/a/47756467/13688160>
 
+## `git log`
+
+### 查看所有commit的列表
+
+```shell
+git log
+```
+
+### 查看某文件的commit历史
+
+```shell
+git log --all --full-history -- <path-to-file>
+```
+
+P.S. 可以是已经删除的文件。路径是相对shell的工作目录的相对路径。
+
+来源：<https://stackoverflow.com/questions/7203515/how-to-find-a-deleted-file-in-the-project-commit-history>
+
+### 查看某一个commit的diff
+
+```shell
+git show <commit-id>
+```
+
+原文：<https://stackoverflow.com/questions/1157818/how-can-i-show-what-a-commit-did>
+
 ## cherry-pick
 
 ### 指定commit
@@ -220,6 +246,22 @@ git rebase <base-commit-hash> -i
 然后第一个commit标记为`pick`，其他的都标记为`squash`，即`s`。然后退出编辑器。
 
 然后会让你编辑新的commit的message。可以全删了然后编辑新的message，然后退出编辑器，从原来的HEAD到base commit（不含）的所有commit就都被squash成了一个commit了。
+
+## 恢复某一被删除的文件
+
+先用前面介绍的方法查看这个文件的commit历史：
+
+```shell
+git log --all --full-history -- <path-to-file>
+```
+
+找到删除这个文件的commit hash，然后checkout这个文件到它的前一个commit：
+
+```shell
+git checkout <deletion commit hash>~1 -- <filename>
+```
+
+来源：<https://www.git-tower.com/learn/git/faq/restoring-deleted-files>
 
 ## 其他
 

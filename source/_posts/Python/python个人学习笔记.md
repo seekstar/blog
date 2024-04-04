@@ -337,6 +337,12 @@ shlex.split('-o 1 --long "Some long string"')
 ['-o', '1', '--long', 'Some long string']
 ```
 
+### `getopt`
+
+用法跟C语言的`getopt`差不多。
+
+参考：[Python 3 命令行参数](https://www.twle.cn/l/yufei/python30/python-30-command-line-arguments.html)
+
 ### 取整
 
 四舍五入：`round`
@@ -346,8 +352,6 @@ shlex.split('-o 1 --long "Some long string"')
 向下取整：`math.floor`
 
 ### 其他
-
-- [Python 3 命令行参数](https://www.twle.cn/l/yufei/python30/python-30-command-line-arguments.html)
 
 - [python 生成随机数的三种方法](https://blog.csdn.net/robert_chen1988/article/details/82887820)
 
