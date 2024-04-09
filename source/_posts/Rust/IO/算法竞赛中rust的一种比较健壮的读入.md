@@ -4,28 +4,26 @@ date: 2020-08-25 23:53:13
 tags:
 ---
 
-以PAT 甲级1004为例
+以PAT 甲级1004为例：<https://pintia.cn/problem-sets/994805342720868352/exam/problems/994805521431773184?type=7&page=0>
 
 关键部位
 
 ```rust
 fn main() {
-    loop {
-        let mut input = String::new();
-        if 0 == io::stdin().read_line(&mut input).unwrap() {
-            break;
-        }
-        let input = input.trim();
-        if input.len() == 0 {
+    let mut buf = String::new();
+    while io::stdin().read_line(&mut buf).unwrap() > 0 {
+        let line = buf.trim();
+        if line.len() == 0 {
             continue;
         }
-        let mut s = input.split_whitespace();
+        let mut s = line.split_whitespace();
         let n: usize = s.next().unwrap().parse().unwrap();
         if 0 == n {
             break;
         }
         let m: usize = s.next().unwrap().parse().unwrap();
         work(n, m);
+        buf.clear();
     }
 }
 ```
@@ -38,6 +36,7 @@ fn main() {
 ps: 还可以用BufReader加速stdin读取：<https://seekstar.github.io/2021/11/17/rust%E7%94%A8bufreader%E5%8A%A0%E9%80%9Fstdin%E8%AF%BB%E5%8F%96/>
 
 完整代码：
+
 ```rust
 use std::io;
 use std::cmp;
@@ -78,22 +77,20 @@ fn work(n: usize, m: usize) {
 }
 
 fn main() {
-    loop {
-        let mut input = String::new();
-        if 0 == io::stdin().read_line(&mut input).unwrap() {
-            break;
-        }
-        let input = input.trim();
-        if input.len() == 0 {
+    let mut buf = String::new();
+    while io::stdin().read_line(&mut buf).unwrap() > 0 {
+        let line = buf.trim();
+        if line.len() == 0 {
             continue;
         }
-        let mut s = input.split_whitespace();
+        let mut s = line.split_whitespace();
         let n: usize = s.next().unwrap().parse().unwrap();
         if 0 == n {
             break;
         }
         let m: usize = s.next().unwrap().parse().unwrap();
         work(n, m);
+        buf.clear();
     }
 }
 ```
