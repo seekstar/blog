@@ -30,7 +30,9 @@ fi
 #### 判断某环境变量是否存在
 
 参考：https://blog.csdn.net/blade2001/article/details/7243143?utm_source=blogxgwz3
-~~上面的文章好像写反了~~
+
+上面的文章好像写反了
+
 例子：判断环境变量DISPLAY是否存在（若不存在说明没有提供显示设备）
 
 ```shell
@@ -62,7 +64,7 @@ if [ ! $DISPLAY ]; then
 
 参考：<https://www.cyberciti.biz/faq/linux-unix-shell-check-if-directory-empty/>
 
-#### 大小判断
+#### 整数的大小判断
 
 参考：
 <https://blog.csdn.net/shang_feng_wei/article/details/90378017>
@@ -92,6 +94,16 @@ if [[ $# = 0 || $# > 2 ]]; then
 ```text
 if [ $# = 0 -o $# -gt 2 ]; then
 ```
+
+#### 浮点数的大小判断
+
+```shell
+if awk "BEGIN {exit !(1.234 >= .233)}"; then
+    echo "yes"
+fi
+```
+
+来源：<https://stackoverflow.com/a/45591665/13688160>
 
 #### 判断文件类型
 

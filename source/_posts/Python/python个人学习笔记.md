@@ -21,6 +21,8 @@ date: 2020-03-22 00:16:52
 
 - [Python ASCII码与字符的相互转换](https://blog.csdn.net/beautiful77moon/article/details/88873261)
 
+- 动态参数：<https://realpython.com/python-kwargs-and-args/>
+
 ### for循环
 
 0到9循环：

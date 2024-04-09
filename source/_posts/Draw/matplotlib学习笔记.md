@@ -34,6 +34,8 @@ yscale: <https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.yscale.html
 
 ### 散点图 [plt.scatter](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.scatter.html)
 
+交互式散点图：<https://mpld3.github.io/examples/scatter_tooltip.html>
+
 ### 折线图 [plt.plot](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.plot.html)
 
 `plt.plot(y)`的横坐标是从0开始的数组下标。
