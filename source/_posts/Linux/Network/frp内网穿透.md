@@ -108,3 +108,33 @@ nohup supervisorctl restart frpc &
 ```
 
 参考文献：[Supervisor使用详解](https://www.jianshu.com/p/0b9054b33db3)
+
+## 多用户
+
+fp-multiuser: <https://github.com/gofrp/fp-multiuser>
+
+frpc.toml:
+
+```toml
+serverAddr = ""
+serverPort = 7000
+user = ""
+metadatas.token = ""
+
+[[proxies]]
+name = "ssh"
+type = "tcp"
+localIP = "127.0.0.1"
+localPort =
+remotePort =
+```
+
+参考：
+
+[配置文件切换到 toml 后，不支持meta_token参数](https://github.com/fatedier/frp/issues/3672)
+
+<https://github.com/fatedier/frp/blob/dev/doc/server_plugin.md#metadata>
+
+还可以用frp_plugin_allowed_ports限制每个user能映射到的端口：<https://github.com/Parmicciano/frp_plugin_allowed_ports>
+
+还有其他插件：<https://github.com/gofrp/plugin>
