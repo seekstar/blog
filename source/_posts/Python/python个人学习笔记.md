@@ -17,7 +17,7 @@ date: 2020-03-22 00:16:52
 
 - [Python assert 断言函数](https://www.cnblogs.com/hezhiyao/p/7805278.html)
 
-- [判断python变量是否存在？](https://www.pynote.net/archives/1681)
+- [判断python变量是否存在？](https://www.squash.io/how-to-check-if-a-variable-exists-in-python/)
 
 - [Python ASCII码与字符的相互转换](https://blog.csdn.net/beautiful77moon/article/details/88873261)
 
@@ -286,10 +286,16 @@ os.system('命令 参数...')
 
 ```py
 import subprocess
-subprocess.call(['./executable', arg1, arg2])
+subprocess.run(['./executable', arg1, arg2])
 ```
 
-来源：<https://stackoverflow.com/questions/5788891/execute-a-file-with-arguments-in-python-shell>
+文档：<https://docs.python.org/3/library/subprocess.html#subprocess.run>
+
+#### 可kill的命令
+
+用`subprocess.Popen`: <https://stackoverflow.com/questions/43322201/how-to-kill-process-which-created-by-python-os-system>
+
+文档：<https://docs.python.org/3/library/subprocess.html#popen-constructor>
 
 #### 获取命令输出
 
@@ -423,6 +429,85 @@ pip3 install json5
 ```py
 import json5
 json5.load(open(路径))
+```
+
+### func_timeout
+
+<https://github.com/kata198/func_timeout>
+
+`func_timeout`的原理是开一个新的线程执行函数，timeout之后会raise exception，然后开一个新线程来join，所以timeout之后子线程可能会继续输出：
+
+```py
+from func_timeout import func_timeout, FunctionTimedOut
+import os
+
+def test():
+    for _ in range(0, 2):
+        os.system('for i in $(seq 1 2); do sleep 1; echo test; done')
+
+try:
+    func_timeout(1.5, test)
+except FunctionTimedOut:
+    print('Timeout')
+except Exception as e:
+    # Code to handle any other exception
+    print("An error occurred: {}".format(str(e)))
+```
+
+输出：
+
+```text
+test
+Timeout
+test
+```
+
+如果需要等待join完成，需要使用`StoppableThread`：<https://htmlpreview.github.io/?https://raw.githubusercontent.com/kata198/func_timeout/master/doc/func_timeout.StoppableThread.html>
+
+```py
+from func_timeout import FunctionTimedOut
+from func_timeout.StoppableThread import StoppableThread
+import subprocess
+
+def test():
+    try:
+        for _ in range(0, 2):
+            process = subprocess.Popen(['bash', '-c', 'for i in $(seq 1 2); do sleep 1; echo test; done'])
+            # We must wait with timeout, otherwise it won't respond to external exceptions.
+            # https://stackoverflow.com/a/631605/13688160
+            process.wait(timeout=23333333)
+    except FunctionTimedOut:
+        try:
+            # It seems to be okay even if process.wait is completed
+            process.kill()
+        except NameError:
+            pass
+
+def test_timeout(seconds):
+    worker = StoppableThread(target=test)
+    worker.start()
+    worker.join(timeout=seconds)
+    if worker.is_alive():
+        print('Timeout')
+        worker.stop(exception=FunctionTimedOut)
+        worker.join()
+    print('Joined')
+
+test_timeout(1.5)
+test_timeout(4.5)
+```
+
+输出：
+
+```text
+test
+Timeout
+Joined
+test
+test
+test
+test
+Joined
 ```
 
 ## pip
