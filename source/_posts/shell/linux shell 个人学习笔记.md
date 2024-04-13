@@ -733,6 +733,16 @@ name1 does not exist
 
 [AWK 条件语句与循环](https://www.runoob.com/w3cnote/awk-if-loop.html)
 
+#### 内置函数
+
+完整列表：<https://www.runoob.com/w3cnote/awk-built-in-functions.html>
+
+常用的：
+
+- `length [(String)]`
+
+返回 String 参数指定的字符串的长度（字符形式）。如果未给出 String 参数，则返回整个记录的长度（$0 记录变量）。
+
 #### 求和
 
 ```shell

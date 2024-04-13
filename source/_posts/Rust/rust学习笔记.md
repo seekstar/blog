@@ -167,6 +167,20 @@ num-derive: <https://docs.rs/num-derive/latest/num_derive/>
 
 - <https://serde.rs/impl-deserialize.html>
 
+#### 指定field名字
+
+```rs
+#[derive(Deserialize)]
+struct Info {
+    #[serde(rename = "num-run-op")]
+    num_run_op: usize,
+}
+```
+
+这样读json的时候就会把json里的`num-run-op`映射到`num_run_op`。
+
+文档：<https://serde.rs/field-attrs.html>
+
 ### clap
 
 官方文档：<https://docs.rs/clap/latest/clap/>
