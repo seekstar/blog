@@ -74,6 +74,12 @@ ax = plt.gca()
 ax.tick_params(axis='y', which='major', labelsize=8)
 ```
 
+### [set_title](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.set_title.html)
+
+Positional, required: `label`
+
+Optional: `fontdict`
+
 ### [set_xticks](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.set_xticks.html)
 
 Positional, required: `ticks`

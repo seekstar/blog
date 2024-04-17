@@ -751,6 +751,24 @@ seq 1 10 | awk '{s+=$1} END {print s}'
 
 来源：<https://stackoverflow.com/questions/450799/shell-command-to-sum-integers-one-per-line>
 
+#### 打印到stderr
+
+```awk
+print "Serious error detected!" > "/dev/stderr"
+```
+
+官方文档：<https://www.gnu.org/software/gawk/manual/html_node/Special-FD.html>
+
+#### [exit](https://www.gnu.org/software/gawk/manual/html_node/Exit-Statement.html)
+
+```awk
+exit [return code]
+```
+
+#### [next](https://www.gnu.org/software/gawk/manual/html_node/Next-Statement.html)
+
+立即停止处理当前record，开始处理下一个record。
+
 ### column
 
 `cat table | column -t`可以输出一个漂亮的表格。

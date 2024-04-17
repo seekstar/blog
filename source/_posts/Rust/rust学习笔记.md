@@ -78,9 +78,13 @@ rm ~/.cargo/.package-cache
 
 ### 排序
 
-复杂度稳定的排序用`sort_by`：<https://doc.rust-lang.org/std/primitive.slice.html#method.sort_by>
+排序分为不稳定排序和稳定排序。稳定排序是指相等的元素会保持它们的相对位置不变，不稳定排序不保证这一点。
 
-复杂度不稳定但是常数小的排序用`sort_unstable_by`：<https://doc.rust-lang.org/std/primitive.slice.html#method.sort_unstable_by>
+稳定排序用`sort_by`：<https://doc.rust-lang.org/std/primitive.slice.html#method.sort_by>
+
+不稳定排序用`sort_unstable_by`：<https://doc.rust-lang.org/std/primitive.slice.html#method.sort_unstable_by>
+
+它们的最坏时间复杂度都是$O(n \log(n))$
 
 ### Entry API
 
