@@ -100,6 +100,29 @@ ECNS: <https://www.ecns.cn/rss/rss.xml>
 
 密码管理软件。配合坚果云可以实现密码全平台同步。建议在手机系统中启用KeePassDX的Magikeyboard用来填写密码。如果手机自带的输入法不支持快速切换到别的输入法的话，建议使用[Fcitx5 for Android](#fcitx5-for-android)。
 
+## ntfy
+
+在手机上接收ntfy通知。
+
+ntfy是一套消息推送机制，可以用命令行往手机/电脑上推送通知。官网：<https://ntfy.sh/>
+
+首先选一个topic name，比方说`searchstar`，然后在app上点击加号，输入`searchstar`，然后点击`SUBSCRIBE`，就开始监听这个topic。
+
+然后在命令行里对这个topic发送通知：
+
+```shell
+curl -d "Hello world" ntfy.sh/searchstar
+```
+
+手机上就能收到通知了。
+
+电脑端没有native desktop app，但是可以安装progressive web app (PWA)，官方教程：<https://docs.ntfy.sh/subscribe/pwa/>。教程里漏了一点，安装web app的时候是打开<https://ntfy.sh/app>然后安装。
+
+打开web app之后要先允许notification，这样通知才能推送到桌面。可以让它开机自启，这样就不会错过通知了。存在的问题：
+
+1. 不知道为什么设置里的Background notifications没有用，把web app关掉之后就收不到通知了。
+2. 不支持在Linux上显示未读消息数：<https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/How_to/Display_badge_on_app_icon>
+
 ## syncthing
 
 {% post_link App/'syncthing-一款p2p同步软件' %}
