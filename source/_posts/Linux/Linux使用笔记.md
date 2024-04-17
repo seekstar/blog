@@ -79,3 +79,44 @@ rm ~/.cache/matplotlib -rf
 - deepin-picker: 没有出现在启动器里。命令行启动之后似乎没反应
 
 - kcolorpicker: 启动器和命令行都没找到
+
+## sshfs
+
+如果卡住了：
+
+```shell
+# https://superuser.com/a/943452/1677998
+sudo supervisorctl stop sshfs-public
+pkill -9 sshfs
+fusermount -u ~/sshfs/public
+sudo supervisorctl start sshfs-public
+```
+
+`man sshfs`:
+
+```text
+       For  a  more  automatic  solution, one can use the -o ServerAliveInterval=15 option mentioned above, which
+       will drop the connection after not receiving a response for 3 * 15 = 45 seconds from the remote  host.  By
+       also  supplying -o reconnect, one can ensure that the connection is re-established as soon as possible af‐
+       terwards. As before, this will naturally lead to loss of data that was in the process  of  being  read  or
+       written at the time when the connection was interrupted.
+```
+
+所以也可以这样：
+
+```shell
+[program:sshfs-public]
+command=sshfs -f -o reconnect,ConnectTimeout=5,ServerAliveInterval=5 charlie:/path/to/dir /home/searchstar/sshfs/public
+autostart=true
+autorestart=true
+startretries=99999999
+stderr_logfile=/tmp/sshfs-public-stderr.log
+stdout_logfile=/tmp/sshfs-public-stdout.log
+user=searchstar
+```
+
+```text
+       -f     do not daemonize, stay in foreground.
+```
+
+参考：<https://unix.stackexchange.com/questions/14143/what-is-a-better-way-to-deal-with-server-disconnects-of-sshfs-mounts>
