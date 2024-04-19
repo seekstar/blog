@@ -129,6 +129,17 @@ response = client.run_instances(
     SecurityGroupIds=[
         'string',
     ],
+    TagSpecifications=[
+        {
+            'ResourceType': 'instance',
+            'Tags': [
+                {
+                    'Key': 'Name',
+                    'Value': '实例名',
+                },
+            ],
+        },
+    ],
     EbsOptimized=True,
 )
 assert len(response['Instances']) == 1
@@ -136,7 +147,7 @@ instance = response['Instances'][0]
 print(instance['InstanceId'])
 ```
 
-但是不能设置hostname。
+但是似乎不能设置hostname。
 
 在使用前先用下面介绍的`wait_until_exists`等待instance成功创建，不然会报instance不存在的错误。
 
