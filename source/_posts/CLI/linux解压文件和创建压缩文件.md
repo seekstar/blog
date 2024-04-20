@@ -396,17 +396,43 @@ pbzip2 -cdp线程数 b.tar.bz2 | tar -xC DirName
 
 ### 解压
 
-到当前文件夹：
+解压为当前文件夹下的`FileName`：
 
 ```shell
-unzstd name.zst
+unzstd FileName.zst
 ```
+
+也可以解压多个文件：
+
+```shell
+unzstd FileName1.zst FileName2.zst
+```
+
+会解压为`FileName1`和`FileName2`。
 
 到指定目录：
 
 ```shell
-unzstd name.zst -o name
+unzstd FileName.zst -o path/file
 ```
+
+### 压缩
+
+压缩为`FileName.zst`：
+
+```shell
+zstd FileName
+# 多线程
+zstdmt FileName
+```
+
+也可以压缩多个文件：
+
+```shell
+zstdmt FileName1 FileName2
+```
+
+会压缩为`FileName1.zst`和`FileName2.zst`。
 
 ## 参考文献
 
