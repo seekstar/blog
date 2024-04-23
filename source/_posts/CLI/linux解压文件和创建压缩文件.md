@@ -402,6 +402,12 @@ pbzip2 -cdp线程数 b.tar.bz2 | tar -xC DirName
 unzstd FileName.zst
 ```
 
+输出到stdout:
+
+```shell
+unzstd FileName.zst --stdout
+```
+
 也可以解压多个文件：
 
 ```shell
@@ -418,21 +424,21 @@ unzstd FileName.zst -o path/file
 
 ### 压缩
 
-压缩为`FileName.zst`：
+压缩为`path/FileName.zst`：
 
 ```shell
-zstd FileName
+zstd path/FileName
 # 多线程
-zstdmt FileName
+zstdmt path/FileName
 ```
 
 也可以压缩多个文件：
 
 ```shell
-zstdmt FileName1 FileName2
+zstdmt path/FileName1 path/FileName2
 ```
 
-会压缩为`FileName1.zst`和`FileName2.zst`。
+会压缩为`path/FileName1.zst`和`path/FileName2.zst`。
 
 ## 参考文献
 

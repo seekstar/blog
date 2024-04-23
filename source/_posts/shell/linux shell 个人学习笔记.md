@@ -375,6 +375,31 @@ a=(1 2 3)
 ./test.sh ${a[@]}
 ```
 
+#### 生成序列
+
+```shell
+a=($(seq 1 4))
+echo "${a[@]}"
+```
+
+```text
+1 2 3 4
+```
+
+参考：<https://stackoverflow.com/questions/39267836/create-an-array-with-a-sequence-of-numbers-in-bash>
+
+#### 新增元素
+
+```shell
+a=(1 2 3)
+a+=(4 5)
+echo "${a[@]}"
+```
+
+```text
+1 2 3 4 5
+```
+
 ## 进程
 
 获取当前subshell的PID：
@@ -912,6 +937,16 @@ find . -regex '.*/latency-[0-9]*'
 ```text
        -v, --invert-match
               Invert the sense of matching, to select non-matching lines.
+       -m NUM, --max-count=NUM
+              Stop reading a file after NUM matching lines.  If  the  input  is  standard
+              input  from a regular file, and NUM matching lines are output, grep ensures
+              that the standard input is positioned to just after the last matching  line
+              before exiting, regardless of the presence of trailing context lines.  This
+              enables a calling process to resume a search.  When grep  stops  after  NUM
+              matching  lines,  it  outputs  any  trailing context lines.  When the -c or
+              --count option is also used, grep does not output a count greater than NUM.
+              When  the  -v  or  --invert-match  option  is  also  used, grep stops after
+              outputting NUM non-matching lines.
 ```
 
 - 查找当前目录下有某字符串的文件：

@@ -13,6 +13,10 @@ date: 2021-10-12 20:59:05
 如果想要动态的格式控制字符串，可以试试strfmt:
 <https://github.com/vitiral/strfmt>
 
+## 固定宽度左边补零
+
+{% post_link Rust/IO/'rust print固定宽度左边补零' %}
+
 ## 浮点数打印时忽略浮点误差
 
 rust不支持`%g`:
