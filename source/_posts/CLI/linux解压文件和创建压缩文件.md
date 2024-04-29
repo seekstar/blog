@@ -394,6 +394,12 @@ pbzip2 -cdp线程数 b.tar.bz2 | tar -xC DirName
 
 ## zstd
 
+通用选项：
+
+```text
+       •   --no-progress: do not display the progress bar, but keep all other messages.
+```
+
 ### 解压
 
 解压为当前文件夹下的`FileName`：

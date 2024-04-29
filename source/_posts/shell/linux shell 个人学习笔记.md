@@ -722,15 +722,13 @@ Brian Campbell
 如果field不一定存在，可以用这个方式判断：
 
 ```shell
-name=$(curl -s 'https://api.github.com/users/lambda' | jq -er '.name')
-if [ $? -eq 0 ]; then
+if name=$(curl -s 'https://api.github.com/users/lambda' | jq -er '.name'); then
 	echo $name
 else
 	echo name does not exist
 fi
 
-name1=$(curl -s 'https://api.github.com/users/lambda' | jq -er '.name1')
-if [ $? -eq 0 ]; then
+if name1=$(curl -s 'https://api.github.com/users/lambda' | jq -er '.name1'); then
 	echo $name1
 else
 	echo name1 does not exist
@@ -750,6 +748,12 @@ name1 does not exist
 
 参考：<https://stackoverflow.com/a/53135202/13688160>
 
+如果是读取带有特殊字符的域，加上引号即可：
+
+```shell
+db_size=$(jq -r ".\"db-size\"" < stats.json)
+```
+
 ## 按命令
 
 ### awk
@@ -757,6 +761,8 @@ name1 does not exist
 [Linux awk 命令](https://www.runoob.com/linux/linux-comm-awk.html)
 
 [AWK 条件语句与循环](https://www.runoob.com/w3cnote/awk-if-loop.html)
+
+坑点：如果变量不存在，awk不会报错，而是会把这个变量解析成0：<https://stackoverflow.com/questions/49447987/testing-a-non-existent-variable-in-awk>
 
 #### 内置函数
 
@@ -809,6 +815,27 @@ exit [return code]
 - `-3`: 不输出第三列
 
 参考：<https://unix.stackexchange.com/questions/28865/list-the-difference-and-overlap-between-two-plain-data-set>
+
+### cut
+
+```text
+       -d, --delimiter=DELIM
+              use DELIM instead of TAB for field delimiter
+
+       -f, --fields=LIST
+              select  only these fields;  also print any line that contains no delimiter character, unless the -s option is speci‐
+              fied
+
+       -s, --only-delimited
+              do not print lines not containing delimiters
+```
+
+典型用法：
+
+```shell
+# 用空格分隔，打印第二个field
+echo "hello world" | cut -sd" " -f2
+```
 
 ### diff
 

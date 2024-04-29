@@ -69,6 +69,8 @@ rm ~/.cargo/.package-cache
 
 ## 标准库
 
+<https://stackoverflow.com/questions/45384928/is-there-any-way-to-look-up-in-hashset-by-only-the-value-the-type-is-hashed-on>
+
 ### 字符串成员函数
 
 - trim
@@ -149,11 +151,17 @@ pub fn sync_channel<T>(bound: usize) -> (SyncSender<T>, Receiver<T>)
 
 ## Crates
 
-enum_iterator: <https://docs.rs/enum-iterator/latest/enum_iterator/>
+### [dyn_struct](https://docs.rs/dyn_struct/latest/dyn_struct/)
+
+<https://www.reddit.com/r/rust/comments/qbj84o/dyn_struct_create_types_whose_size_is_determined/>
+
+<https://github.com/nolanderc/dyn_struct>
+
+### [enum_iterator](https://docs.rs/enum-iterator/latest/enum_iterator/)
 
 可以获取enum的可能取值个数。
 
-num-derive: <https://docs.rs/num-derive/latest/num_derive/>
+### [num-derive](https://docs.rs/num-derive/latest/num_derive/)
 
 可以把enum转成基本类型。
 
@@ -199,6 +207,10 @@ derive的用法：<https://docs.rs/clap/latest/clap/_derive/index.html>
 
 也可以`short = 'x'`指定参数名。
 
+##### `long`
+
+自动把field name的下划线替换为`-`作为参数名。也可以`long = "xxx"`指定参数名。
+
 ##### `default_value_t`
 
 ```text
@@ -210,6 +222,10 @@ default_value_t [= <expr>]
 #### Positional arguments
 
 不指定`short`之类的，默认就是positional argument。
+
+#### Optional auguments
+
+把参数定义成`Option<类型>`即可。
 
 ## API guidelines
 
@@ -524,6 +540,8 @@ impl Default for Status {
 ## 其他
 
 <https://stackoverflow.com/questions/60253791/why-can-i-not-mutably-borrow-separate-fields-from-a-mutex-guard>
+
+<https://stackoverflow.com/questions/28185854/how-do-i-test-crates-with-no-std>
 
 ## RFC
 
