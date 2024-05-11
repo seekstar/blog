@@ -68,11 +68,15 @@ rm ~/.cache/matplotlib -rf
 
 ### xcolor
 
-点击需要取色的像素之后RBG色号会自动复制到剪切板上。
+点击需要取色的像素之后RBG色号会自动复制到剪切板上。不支持wayland。
 
 ### Gpick
 
-点`Pick color`然后取色即可。
+点`Pick color`然后取色即可。不支持wayland。
+
+### 其他不支持wayland的
+
+- gcolor3
 
 ### 失败的尝试
 

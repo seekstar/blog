@@ -349,6 +349,15 @@ SLICED_ARRAY=(${ARRAY_NAME[@]:m:n})
 
 参考：<https://stackoverflow.com/questions/1335815/how-to-slice-an-array-in-bash>
 
+#### 长度
+
+```shell
+a=(1 2 3 4)
+echo ${#a[@]}
+```
+
+来源：<https://stackoverflow.com/a/1886483/13688160>
+
 #### 命令行参数
 
 命令行参数也是数组，用法跟上面的差不多：

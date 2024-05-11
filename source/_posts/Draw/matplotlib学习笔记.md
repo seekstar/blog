@@ -36,6 +36,16 @@ yscale: <https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.yscale.html
 
 交互式散点图：<https://mpld3.github.io/examples/scatter_tooltip.html>
 
+#### legend
+
+要用`Line2D`画: <https://stackoverflow.com/questions/47391702/how-to-make-a-colored-markers-legend-from-scratch>
+
+调整宽度用`legend`的参数`handlelength`:
+
+<https://stackoverflow.com/questions/66809947/matplotlib-change-length-of-legend-lines>
+
+<https://stackoverflow.com/questions/20048352/how-to-adjust-the-size-of-matplotlib-legend-box>
+
 ### 折线图 [plt.plot](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.plot.html)
 
 `plt.plot(y)`的横坐标是从0开始的数组下标。

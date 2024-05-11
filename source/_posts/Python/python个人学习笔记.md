@@ -61,6 +61,14 @@ a[:-1]
 a[:-2]
 ```
 
+truncate:
+
+```py
+del l[100:]
+```
+
+来源：<https://stackoverflow.com/questions/4838504/how-do-i-truncate-a-list>
+
 ### 字典
 
 [Python教学: Python Dictionary完全教学一次搞懂](https://baijiahao.baidu.com/s?id=1694102996150591628&wfr=spider&for=pc)
