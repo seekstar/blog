@@ -124,3 +124,15 @@ user=searchstar
 ```
 
 参考：<https://unix.stackexchange.com/questions/14143/what-is-a-better-way-to-deal-with-server-disconnects-of-sshfs-mounts>
+
+## 限制进程的内存占用
+
+```shell
+systemd-run --user --scope -p MemoryMax=字节数 命令 参数...
+```
+
+可以用`-E 环境变量=值`来设置执行命令时的环境变量。例如可以让进程使用tcmalloc:
+
+```shell
+systemd-run --user -E LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libtcmalloc_minimal.so.4 --scope -p MemoryMax=字节数 命令 参数...
+```

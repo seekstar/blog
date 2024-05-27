@@ -147,9 +147,15 @@ The position (x, y) to place the text at. The coordinate system is determined by
 | `subfigure fraction` | Fraction of subfigure from lower left |
 | `axes fraction` | Fraction of axes from lower left |
 
-文档里没写的参数：
+其他参数传给了Text。常用的：
 
 - `fontsize`
+
+- `weight`
+
+常用值：`bold`
+
+参考：<https://stackoverflow.com/questions/36162414/how-to-add-bold-annotated-text-to-a-plot>
 
 ### [ticklabel_format](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.ticklabel_format.html)
 
@@ -216,6 +222,38 @@ ax.yaxis.get_offset_text().set_fontsize(8)
 ```
 
 来源：<https://stackoverflow.com/a/34228384/13688160>
+
+## [colorbar](https://matplotlib.org/stable/api/colorbar_api.html#module-matplotlib.colorbar)
+
+<https://matplotlib.org/stable/users/explain/colors/colormapnorms.html>
+
+例子：
+
+```py
+import numpy as np
+import matplotlib.pyplot as plt 
+from matplotlib import cm, colors
+
+ax = plt.gca()
+cmap = plt.get_cmap('coolwarm')
+
+# need to normalize because color maps are defined in [0, 1]
+norm = colors.TwoSlopeNorm(1, vmin=0, vmax=5)
+
+norm_cmap = cm.ScalarMappable(norm=norm, cmap=cmap)
+
+for i in np.linspace(0, 5, 100):
+    plt.scatter(i, i, color=norm_cmap.to_rgba(i))
+cb = plt.colorbar(norm_cmap, ax=ax, ticks=[0, 0.5, 1, 2, 3, 4, 5])
+cb.ax.tick_params(labelsize=8)
+plt.show()
+```
+
+参考：
+
+<https://stackoverflow.com/questions/73510185/how-to-add-colorbar-in-matplotlib>
+
+<https://stackoverflow.com/questions/29074820/how-do-i-change-the-font-size-of-ticks-of-matplotlib-pyplot-colorbar-colorbarbas>
 
 ## 翻转坐标轴
 

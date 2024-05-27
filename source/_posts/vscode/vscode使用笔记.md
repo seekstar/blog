@@ -25,3 +25,11 @@ Language Identifiers: <https://code.visualstudio.com/docs/languages/identifiers>
 | markdown | Markdown |
 
 来源：<https://stackoverflow.com/questions/44831313/how-to-exclude-file-extensions-and-languages-from-format-on-save-in-vscode>
+
+## 切换字体
+
+默认的字体不行，`1`和`l`都分不清。可以在`Editor: Font Family`里更改字体，推荐`Hack`：
+
+```text
+'Hack', 'monospace', monospace
+```

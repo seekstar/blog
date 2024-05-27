@@ -95,6 +95,11 @@ zip FileName.zip -r DirName
 
 参考网站：http://www.linuxdiyf.com/view_154669.html
 
+```text
+       -h, --dereference
+              Follow symlinks; archive and dump the files they point to.
+```
+
 ### 解压到当前目录
 
 ```shell

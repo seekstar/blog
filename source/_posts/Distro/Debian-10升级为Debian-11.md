@@ -22,8 +22,7 @@ deb http://mirrors.ustc.edu.cn/debian-security/ stable-security main non-free co
 
 ```shell
 sudo apt update
-sudo apt upgrade
-# 或者 sudo apt full-upgrade?
+sudo apt full-upgrade
 ```
 
 验证一下是不是升级成功了：
