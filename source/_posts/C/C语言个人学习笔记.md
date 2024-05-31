@@ -64,6 +64,14 @@ int main() {
 
 十六进制把`u`换成`x`，例如`%zx`用十六进制打印`size_t`。
 
+此外，`uint64_t`之类的类型的格式控制符可以用`inttypes.h`里的`PRIxxx`宏：<https://en.cppreference.com/w/c/types/integer>
+
+常用的：
+
+| 类型 | 宏 |
+| ---- | ---- |
+| `uint64_t` | `PRIu64` |
+
 ## 取整
 
 | 目标 | 方法 |
