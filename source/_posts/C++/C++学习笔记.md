@@ -127,6 +127,24 @@ lvalue
 
 rvalue
 
+## `std::cout`
+
+```cpp
+std::cout.width(8); //设置输出宽度
+std::cout.fill(‘0’); //多余空格用0填充
+std::cout.setf(std::ios::right); //设置对齐方式
+```
+
+或者临时设置：
+
+```cpp
+std::cout << std::setw(8) << std::setfill(‘0’)
+```
+
+其他常见的：
+
+- [std::dec, std::hex, std::oct](https://en.cppreference.com/w/cpp/io/manip/hex)
+
 ## Default move constructor
 
 如果没有自己定义的copy constructor和move constructor，而且每个member都是move constructable的，那么default move constructor就是member-wise move constructor。

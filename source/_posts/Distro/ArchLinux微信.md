@@ -4,6 +4,19 @@ date: 2023-12-22 15:17:11
 tags:
 ---
 
+## flatpak
+
+原生微信。
+
+```shell
+flatpak install com.tencent.WeChat
+flatpak run com.tencent.WeChat
+```
+
+也可以从系统的启动器里启动。
+
+{% post_link App/'flatpak教程' %}
+
 ## deepin-wine-wechat
 
 ```shell
@@ -54,6 +67,16 @@ yay -S wechat-uos
 不能直接发送剪切板里的图片，要保存到文件，再用发送文件的方式发送。
 
 但是奇怪的是发送svg文件会失败，显示红色感叹号，但是发送其他文件就正常。
+
+## com.qq.weixin.spark
+
+`3.9.10deepin1-1`
+
+源好像无了，安装不了：
+
+```text
+==> 错误： 无法下载 https://cdn.d.store.deepinos.org.cn/store/chat/com.qq.weixin.spark/com.qq.weixin.spark_3.9.10deepin1_all.deb
+```
 
 ## electronic-wechat-uos-bin
 

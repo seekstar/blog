@@ -543,6 +543,16 @@ impl Default for Status {
 
 <https://stackoverflow.com/questions/28185854/how-do-i-test-crates-with-no-std>
 
+## Unstable features
+
+### [generic_const_exprs](https://github.com/rust-lang/rust/issues/76560)
+
+需要的项目：
+
+<https://github.com/seekstar/counter-timer-cpp>
+
+配合`array-macro`可以用array存timer而不是`Vec`。
+
 ## RFC
 
 [Multiple Attributes in an Attribute Container](https://github.com/rust-lang/rfcs/pull/2600) (postponed)

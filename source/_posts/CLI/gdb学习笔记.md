@@ -75,6 +75,16 @@ gdb --pid xxx
 
 就输入`thread 10`
 
+## 断点
+
+官方文档：<https://sourceware.org/gdb/current/onlinedocs/gdb.html/Set-Breaks.html#Set-Breaks>
+
+设置断点：`break` / `b`
+
+默认在当前行设置断点。后面也可以加断点的具体位置。
+
+删除所有断点：`clear`
+
 ## `-ex gdb命令`
 
 执行一条gdb命令。比如让gdb立即执行命令：`gdb -ex run --args 命令 参数...`
