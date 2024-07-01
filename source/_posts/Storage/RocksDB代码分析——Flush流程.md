@@ -16,13 +16,22 @@ tags: RocksDB
 
 `DBImpl::FlushMemTablesToOutputFiles`中，如果不是atomic_flush（默认），那么一定只有一个要flush的MemTable。把`ColumnFamilyData`拿出来，作为参数传给`DBImpl::FlushMemTableToOutputFile`。
 
->构造`FlushJob flush_job`，然后执行`flush_job.Run`，也就是调用`FlushJob::Run`
->>调用`FlushJob::WriteLevel0Table`，把MemTable写入到L0层。在里面会先把DB锁解开，写入完成之后再锁上。
+>构造`FlushJob flush_job`
+>`flush_job.PickMemTable()`，把MemTable的`VersionEdit`存在`FlushJob::edit_`里。
+>`flush_job.Run`，也就是调用`FlushJob::Run`
+>>调用`FlushJob::WriteLevel0Table`
+>>>`db_mutex_->Unlock();`
+>>>`BuildTable`
+>>>`db_mutex_->Lock();`
+>>>`edit_->AddFile`。这个`edit_`实际上是MemTable的VersionEdit
+>>
 >>调用`MemTableList::TryInstallMemtableFlushResults`
 >>>将被flush的memory table的`flush_completed_`标记为`true`。
->>>从老到新把所有`flush_completed_`的immutable memory table都通过`VersionSet::LogAndApply` commit。
+>>>从老到新把所有`flush_completed_`的immutable memory table的`VersionEdit`存进`edit_list`，然后通过`VersionSet::LogAndApply` commit这些edit，里面调用`VersionSet::ProcessManifestWrites`。
+>>>>调用`VersionBuilder::Apply`，里面调用`VersionBuilder::Rep::Apply`，里面调用`VersionBuilder::Rep::ApplyFileAddition`，最终将file_number存到`VersionBuilder::Rep::levels_[level].added_files`里。
+>>>>调用`VersionBuilder::SaveTo`，里面调用`VersionBuilder::Rep::SaveTo`，里面调用`VersionBuilder::Rep::SaveSSTFilesTo`，先对`VersionBuilder::Rep::levels_[level].added_files`排序，L0的SSTable用`NewestFirstBySeqNo`排序，其他的用`BySmallestKey`排序，然后跟老version里已有的SSTable merge到一个新的version。
 >
->然后把`ColumnFamilyData`作为参数调用`DBImpl::InstallSuperVersionAndScheduleWork`。
+>把`ColumnFamilyData`作为参数调用`DBImpl::InstallSuperVersionAndScheduleWork`。
 >>因为把MemTable写入到L0层之后总是会想要把这些SSTable给compact到L1层，所以接下来准备schedule compaction。
 >>把`ColumnFamilyData`作为参数调用`DBImpl::SchedulePendingCompaction`
 >>>将`ColumnFamilyData`传给`DBImpl::AddToCompactionQueue`，从而将其加入到`DBImpl::compaction_queue_`中。
