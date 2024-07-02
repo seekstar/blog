@@ -60,6 +60,24 @@ yscale: <https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.yscale.html
 
 Whether the legend should be drawn on a patch (frame).
 
+### [text](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.text.html)
+
+Positional, required:
+
+- `x, y`: float
+
+- `s`: str
+
+Optional:
+
+- `fontsize`
+
+- `transform`
+
+The default transform specifies that text is in data coords.
+
+`transform=ax.transAxes`: in axis coords. (0, 0) is lower-left and (1, 1) is upper-right.
+
 ### [tight_layout](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.tight_layout.html)
 
 - `pad`: float, default: 1.08.
