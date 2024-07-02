@@ -214,6 +214,13 @@ git submodule update --remote
 git submodule update --init
 ```
 
+更改submodule的URL：直接编辑`.gitmodules`，然后
+
+```shell
+git submodule sync --recursive
+git submodule update --init
+```
+
 删除submodule比较麻烦：
 
 ```shell
