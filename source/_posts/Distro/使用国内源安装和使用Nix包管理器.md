@@ -152,6 +152,18 @@ Categories=Network;FileTransfer;
 
 然后就可以在启动器里找到`Seafile`了，点击之即可运行。
 
+2024.07.03 Update: 现在好像可以直接运行seafile-applet了：
+
+```text
+[Desktop Entry]
+Name=Seafile
+Comment=Seafile desktop sync client
+Exec=seafile-applet
+Icon=seafile
+Type=Application
+Categories=Network;FileTransfer;
+```
+
 ## 卸载Nix包管理器
 
 安装完之后安装程序给出的提示，没有试过：

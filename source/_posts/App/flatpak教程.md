@@ -135,7 +135,7 @@ flatpak install shadowsocks
 
 ### Seafile
 
-云盘客户端。但是flatpak版本没有单点登录。
+云盘客户端。但是截至`9.0.6`，flatpak版本没有单点登录。而且高分屏下窗口很小。
 
 ### drawio
 

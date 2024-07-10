@@ -279,7 +279,7 @@ plt.show()
 
 ## 子图
 
-用gridspec
+### gridspec
 
 官方文档：<https://matplotlib.org/stable/api/_as_gen/matplotlib.gridspec.GridSpec.html>
 
@@ -295,6 +295,10 @@ gs = gridspec.GridSpec(1, 3, figure=figure)
 其中`constrained_layout`比`tight_layout`更好。
 
 `plt.figure`参数：<https://matplotlib.org/stable/api/figure_api.html#matplotlib.figure.Figure>
+
+### `plt.subplot`
+
+共用坐标轴：[Shared axis](https://matplotlib.org/stable/gallery/subplots_axes_and_figures/shared_axis_demo.html)
 
 ## 调整坐标轴label与tick label之间的空隙
 

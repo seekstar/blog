@@ -23,12 +23,13 @@ Nix包管理器安装和使用教程：{% post_link Distro/'使用国内源安�
 
 glibc每六个月发布类似于2.31这样的minor version，然后在这里fork出这个minor version的branch，比如`release/2.31/master`，以后的bug fix都commit到这个branch上，不再单独发布bug fix version。因此我们可以先clone glibc的repo，然后checkout到目标minor version的branch即可。
 
-我的系统上glibc版本是`2.31-13+deb11u7`，所以这里获取`2.31`的源码：
+debian 12上glibc版本是`2.36-9+deb12u7`，所以应该获取`2.36`的源码。
+debian 11上glibc版本是`2.31-13+deb11u7`，应该获取`2.31`的源码。
 
 ```shell
 git clone https://mirrors.tuna.tsinghua.edu.cn/git/glibc.git
 cd glibc
-git checkout release/2.31/master
+git checkout release/2.36/master
 ```
 
 ### 编译
@@ -61,12 +62,14 @@ libpthread.so.0
 
 gcc的功能更新会更新major version，后面的minor version都是bug fix version，官方文档：<https://gcc.gnu.org/develop.html>
 
-我的系统上的gcc版本是`10.2.1`，所以这里编译安装它的最新bug fix版本`10.5.0`:
+debian 12 上的gcc版本是`12.2.0-14`，这里应该编译安装它的最新bug fix版本`12.4.0`。
+debian 11 上的gcc版本是`10.2.1`，这里应该编译安装它的最新bug fix版本`10.5.0`。
 
 ```shell
-wget https://mirrors.tuna.tsinghua.edu.cn/gnu/gcc/gcc-10.5.0/gcc-10.5.0.tar.gz
-tar xzf gcc-10.5.0.tar.gz
-cd gcc-10.5.0
+version=12.4.0
+wget https://mirrors.tuna.tsinghua.edu.cn/gnu/gcc/gcc-$version/gcc-$version.tar.gz
+tar xzf gcc-$version.tar.gz
+cd gcc-$version
 ```
 
 或者也可以用git获取最新的bug fix版本：
@@ -77,7 +80,13 @@ cd gcc
 git checkout releases/gcc-10
 ```
 
-### 下载依赖
+### 安装依赖
+
+```shell
+sudo apt install libgmp-dev libmpfr-dev libmpc-dev 
+```
+
+或者自动下载安装依赖：
 
 ```shell
 ./contrib/download_prerequisites
@@ -111,6 +120,7 @@ export CXX=$INSTALL_ROOT/bin/g++
 export CFLAGS="-O2 -fno-omit-frame-pointer"
 export CXXFLAGS=$CFLAGS
 export LDFLAGS="-Wl,-rpath=$INSTALL_ROOT/lib -Wl,-rpath=$INSTALL_ROOT/lib64 -Wl,--dynamic-linker=$INSTALL_ROOT/lib/ld-linux-x86-64.so.2"
+unset LD_LIBRARY_PATH
 ```
 
 `-Wl,-rpath`: <https://stackoverflow.com/a/6562437/13688160>
@@ -138,12 +148,14 @@ cd ../..
 
 官网：<https://liburcu.org/>
 
-我的Debian 11上版本是0.12.2-1，所以这里下载安装0.12.5
+Debian 12上版本是`0.13.2-1`，所以这里应该下载安装0.13.3
+Debian 11上版本是`0.12.2-1`，所以这里应该下载安装0.12.5
 
 ```shell
-wget https://lttng.org/files/urcu/userspace-rcu-0.12.5.tar.bz2
-tar xjf userspace-rcu-0.12.5.tar.bz2
-cd userspace-rcu-0.12.5
+version=0.13.3
+wget https://lttng.org/files/urcu/userspace-rcu-$version.tar.bz2
+tar xjf userspace-rcu-$version.tar.bz2
+cd userspace-rcu-$version
 mkdir build
 cd build
 ../configure --prefix=$INSTALL_ROOT
@@ -156,11 +168,13 @@ cd ../..
 
 官网：<https://www.boost.org/>
 
+Debian 11和Debian 12的版本都是`1.74.0.3`，所以这里应该安装`1.74.0`。
+
 编译安装教程：<https://www.boost.org/doc/libs/1_74_0/more/getting_started/unix-variants.html>
 
 ```shell
-wget https://boostorg.jfrog.io/artifactory/main/release/1.74.0/source/boost_1_74_0.tar.gz
-tar xzf boost_1_74_0.tar.gz
+wget https://archives.boost.io/release/1.74.0/source/boost_1_74_0.tar.bz2
+tar xjf boost_1_74_0.tar.bz2
 cd boost_1_74_0
 ./bootstrap.sh --prefix=$INSTALL_ROOT
 # 让b2用我们编译的gcc
@@ -188,6 +202,56 @@ export PATH=$INSTALL_ROOT/bin:$PATH
 文档写的`--with-libraries=library-name-list`应该是`bootstrap.sh`的参数，没试过。
 
 参考：<https://stackoverflow.com/questions/6945012/passing-compiler-flags-to-boost-libraries-such-as-thread-which-require-compila>
+
+### `xxhash`
+
+```shell
+wget https://github.com/Cyan4973/xxHash/archive/refs/tags/v0.8.2.tar.gz
+tar xzf v0.8.2.tar.gz
+cd xxHash-0.8.2/
+make -j$(nproc)
+make install PREFIX=$INSTALL_ROOT
+cd ..
+```
+
+### `liburing`
+
+Debian 12上的版本是`2.3-3`，所以应该安装`2.3`。
+
+```shell
+wget https://git.kernel.dk/cgit/liburing/snapshot/liburing-2.3.tar.bz2
+tar xjf liburing-2.3.tar.bz2
+cd liburing-2.3/
+./configure --prefix=$INSTALL_ROOT
+make -j$(nproc)
+make install
+cd ..
+```
+
+### `tbb`
+
+```shell
+wget https://github.com/oneapi-src/oneTBB/archive/refs/tags/v2021.13.0.tar.gz
+tar xzf v2021.13.0.tar.gz
+cd oneTBB-2021.13.0/
+mkdir build
+cd build
+cmake .. -DCMAKE_INSTALL_PREFIX=$INSTALL_ROOT -DTBB_TEST=OFF
+make -j$(nproc)
+make install
+cd ..
+```
+
+## （可选）打包`no-omit-frame-pointer`编译环境
+
+可以在一台机器上把`no-omit-frame-pointer`的编译器和常见库都编译好，然后打包到别的机器上使用。但是要注意在目标机器解压后需要修改一下rpath：
+
+```shell
+cd no-omit-frame-pointer
+find . -name "lib*.so*" -exec patchelf {} --set-rpath "$(pwd)/lib:$(pwd)/lib64" \;
+```
+
+参考：{% post_link C/'解决找不到RUNPATH下的库的问题' %}
 
 ## 编译目标应用
 
