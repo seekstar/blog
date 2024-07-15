@@ -242,6 +242,8 @@ favicon: /favicon.ico
 默认的渲染器是`hexo-renderer-marked`，没有语法高亮，而且有BUG，行内代码有时候会被处理成行间代码，然后全乱了。所以需要更换渲染器。[hexo-renderer-markdown-it](https://github.com/hexojs/hexo-renderer-markdown-it)比较流行，但是不支持Latex风格的数学公式。所以这里把渲染器换成[hexo-renderer-pandoc](https://github.com/hexojs/hexo-renderer-pandoc)：
 
 ```shell
+sudo apt install -y pandoc
+
 npm uninstall hexo-renderer-marked
 npm install hexo-renderer-pandoc --save
 ```
@@ -272,7 +274,15 @@ hexo new '博客标题'
 
 ## 换一台机器写博客
 
-把gitee上的博客源码仓库clone下来，再把网站的仓库clone到源码仓库的`.deploy_git`下。然后`npm install`，然后就可以正常`hexo g && hexo s`预览和`hexo d -g`部署了。比如我的：
+先安装依赖：
+
+```shell
+sudo apt install -y pandoc
+npm install hexo-cli -g
+pip3 install panflute
+```
+
+然后把gitee上的博客源码仓库clone下来，再把网站的仓库clone到源码仓库的`.deploy_git`下。然后`npm install`，然后就可以正常`hexo g && hexo s`预览和`hexo d -g`部署了。比如我的：
 
 ```shell
 # 源码

@@ -781,7 +781,7 @@ fg
 
 ### tikz
 
-基于[Ch'en Meng的回答]，把`sep`改成了0.5pt，参数外面套了一层`\small`，从而变得更紧凑：
+基于[Ch'en Meng的回答](https://tex.stackexchange.com/a/218842)，把`sep`改成了0.5pt，参数外面套了一层`\small`，从而变得更紧凑：
 
 ```tex
 \usepackage{tikz}
@@ -876,8 +876,7 @@ Bibliography里URL不要用`url = {https://xxx}`的形式，要用`note = {\url{
 
 ### 不cite也列出参考文献
 
-`\nocite{xxx}`来强制列出单个参考文献。`\nocite{*}`强制列出所有参
-考文献。
+`\nocite{xxx}`来强制列出单个参考文献。`\nocite{*}`强制列出所有参考文献。
 
 来源：<https://tex.stackexchange.com/questions/17653/how-to-list-all-bibliography-entries-without-citing>
 
