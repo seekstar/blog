@@ -840,6 +840,24 @@ fg
 
 用minipage:
 
+```tex
+\begin{figure*}[t!]
+\begin{minipage}[b]{.475\linewidth}
+	\centering
+	\includegraphics[width=\textwidth]{example-image}
+    \vspace{-0.3cm}
+	\caption{XXX}
+\end{minipage}
+\hfill
+\begin{minipage}[b]{.475\linewidth}
+	\centering
+	\includegraphics[width=\textwidth]{example-image}
+    \vspace{-0.3cm}
+	\caption{XXX}
+\end{minipage}
+\end{figure*}
+```
+
 <https://stackoverflow.com/questions/76292519/figure-and-table-in-the-same-line>
 
 <https://tex.stackexchange.com/questions/127379/is-it-possible-to-use-subcaption-inside-a-minipage>
