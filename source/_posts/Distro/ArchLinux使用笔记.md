@@ -4,9 +4,9 @@ date: 2024-07-23 15:12:24
 tags:
 ---
 
-{% post_link Distro/'免启动盘安装ArchLinux' %}
+- {% post_link Distro/'免启动盘安装ArchLinux' %}
 
-{% post_link Distro/'ArchLinux-TLP' %}
+- {% post_link Distro/'ArchLinux-TLP' %}
 
 ## 安装NVIDIA驱动
 
