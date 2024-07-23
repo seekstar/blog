@@ -249,6 +249,31 @@ Built-in Exceptions: <https://docs.python.org/3/library/exceptions.html>
 
 ## 标准库
 
+### [bisect](https://docs.python.org/3/library/bisect.html) 二分
+
+#### `bisect_left`
+
+类似于C++的`std::lower_bound`，找第一个大于等于的。
+
+```py
+bisect.bisect_left(a, x, lo=0, hi=len(a), *, key=None)
+```
+
+#### 坑点：`pandas.Series`不能用`bisect`
+
+`pandas.Series`重载了`[]`运算符，所以不能用`bisect`二分：<https://stackoverflow.com/questions/73757757/python-bisect-and-pandas-dataframe-keyerror>
+
+需要用它自带的[searchsorted](https://pandas.pydata.org/pandas-docs/version/0.17.0/generated/pandas.Series.searchsorted.html)二分：
+
+```py
+x = pd.Series([1, 2, 3])
+x.searchsorted(4)
+```
+
+```text
+3
+```
+
 ### `io`
 
 <https://stackoverflow.com/questions/39823303/python3-print-to-string>

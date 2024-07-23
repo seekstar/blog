@@ -86,6 +86,8 @@ sudo mkdir -p /etc/pacman.d/
 sudo bash -c "echo \"Server = https://mirrors.tuna.tsinghua.edu.cn/archlinux/\\\$repo/os/\\\$arch\" > /etc/pacman.d/mirrorlist"
 ```
 
+在国外的话可以使用worldwide源：`https://geo.mirror.pkgbuild.com/$repo/os/$arch`。参考：<https://archlinux.org/mirrorlist/all/https/>
+
 ## 分区并挂载
 
 ```shell

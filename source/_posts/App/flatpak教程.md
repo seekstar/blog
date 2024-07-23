@@ -133,6 +133,28 @@ flatpak install shadowsocks
 
 <https://forums.zotero.org/discussion/87285/export-bibtex-to-clipboard>
 
+### Steam
+
+#### 解决steam字体在高分屏下过小的问题
+
+```shell
+flatpak install com.github.tchx84.Flatseal
+```
+
+然后在启动器里打开`Flatseal`，在`Environment`里加上：
+
+```shell
+STEAM_FORCE_DESKTOPUI_SCALING=2
+```
+
+3000x2000的屏幕分辨率建议用`2`。
+
+参考：
+
+<https://superuser.com/questions/1762685/font-size-in-flatpak-obs>
+
+<https://forum.manjaro.org/t/steam-fontsize-to-small-the-solution/142572/7>
+
 ### Seafile
 
 云盘客户端。但是截至`9.0.6`，flatpak版本没有单点登录。而且高分屏下窗口很小。
