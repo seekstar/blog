@@ -12,6 +12,8 @@ tags:
 
 - {% post_link Other/git/'git checkout 远程分支error' %}
 
+- {% post_link Other/git/'免密码用https协议clone-private-github-repo' %}
+
 ## 查看unstaged changes
 
 ```shell
