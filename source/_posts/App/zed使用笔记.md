@@ -39,6 +39,14 @@ sudo pacman -S vulkan-intel
 curl -f https://zed.dev/install.sh | ZED_CHANNEL=preview sh
 ```
 
+然后`ctrl+shift+p` -> `projects: open remote` -> `New Server`
+
+如果服务器端的`zed`下载卡住的话，可以新开一个终端ssh到服务器，然后在上面手动把服务端下载下来：
+
+```shell
+curl https://zed.dev/install.sh | bash
+```
+
 ## 目前的问题
 
 - 只有git blame，没有vscode那样的git功能。
