@@ -12,9 +12,10 @@ tags:
 
 ## 安装`gh`
 
-Debian:
-
 ```shell
+# ArchLinux
+sudo pacman -S github-cli
+# Debian
 sudo apt install gh
 ```
 

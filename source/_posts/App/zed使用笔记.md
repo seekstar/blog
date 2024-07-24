@@ -52,3 +52,5 @@ curl https://zed.dev/install.sh | bash
 - 只有git blame，没有vscode那样的git功能。
 
 - 不能preview markdown
+
+- formatter似乎不能在remote用: <https://github.com/zed-industries/zed/issues/13527>
