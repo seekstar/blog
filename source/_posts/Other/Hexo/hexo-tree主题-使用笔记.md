@@ -222,6 +222,26 @@ valine:
 
 注意，评论和访问量都是以博客的url作为key的，所以如果博客的url变了（如重命名），那评论和访问量都会清空。要是可以在创建博文的时候生成一个类似uuid的东西，然后以uuid作为key就好了（我为什么这么菜）。
 
+## 邮件提醒
+
+官方文档：<https://valine.js.org/notify.html>
+
+但是官方文档里推荐的<https://github.com/zhaojun1998/Valine-Admin>看起来已经无人维护了，部署会出错：
+
+```text
+build failed: npm WARN deprecated request@2.88.2: request has been deprecated, see https://github.com/request/request/issues/3142 npm WARN deprecated superagent@3.8.3: Please upgrade to v9.0.0+ as we have fixed a public vulnerability with formidable dependency. Note that v9.0.0+ requires Node.js v14.18.0+. See https://github.com/ladjs/superagent/pull/1800 for insight. This project is supported and maintained by the team at Forward Email @ https://forwardemail.net npm WARN deprecated formidable@1
+```
+
+而且这个repo连issue都没有。
+
+修复方法：<https://github.com/DesertsP/Valine-Admin/issues/151>
+
+也可以直接用这个：<https://github.com/Druadach/Valine-Admin>
+
+按照readme里的步骤部署即可。
+
+环境变量里可以指定`TO_EMAIL`，提醒邮件就会发送给这个邮箱。如果不指定`TO_EMAIL`，提醒邮件是发送给`SMTP_USER`。
+
 ## 修改底部版权开始年份
 
 `_config.tree.yml`里的`siteStartYear: 2019`修改成你想要的年份。结束年份会自己计算出来。
