@@ -66,6 +66,7 @@ sudo sysctl -w net.ipv4.ip_forward=1
 将它的名字存入`$spacename`，以后需要绕过wireguard的进程就在这个netns里运行：
 
 ```shell
+# spacename不要含有数字，因为veth的两个端口的名字似乎只有末尾可以有数字。
 spacename=全局唯一的名字
 sudo ip netns add $spacename
 ```

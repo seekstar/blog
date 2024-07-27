@@ -3,6 +3,15 @@ title: virsh终端访问虚拟机并联网
 date: 2021-08-08 05:18:41
 ---
 
+## 安装
+
+```shell
+# Debian 12
+sudo apt install -y libvirt-daemon libvirt-clients
+```
+
+## 配置权限
+
 如果要使用KVM的话，首先要让普通用户使用libvirt时能使用KVM：
 
 {% post_link Linux/vm/'libvirt让普通用户能用kvm' %}
@@ -24,9 +33,9 @@ date: 2021-08-08 05:18:41
   <cpu mode='host-passthrough' migratable='off'>
     <cache mode='passthrough'/>
   </cpu>
-  <os>  
+  <os>
     <type arch='x86_64'>hvm</type>
-  </os> 
+  </os>
   <devices>
     // 这里有的发行版是 /usr/bin/qemu-system-x86_64
     <emulator>/usr/libexec/qemu-kvm</emulator>
