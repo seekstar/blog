@@ -21,8 +21,20 @@ Host C
 
 然后在A机器上直接`ssh C`即可免密码登录C。
 
+如果是IPv6，要这样：
+
+```text
+Host D
+        HostName 在B视角下的IPv6地址
+        ProxyCommand ssh -W "[%h]":在B视角下的端口 B
+        User D上的用户名
+        IdentityFile 本地的ssh私钥路径
+```
+
 参考：
 
 [内网穿透](https://hotarugali.github.io/2022/02/19/Technique/Net/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/#2-2-SSH-%E8%B7%B3%E6%9D%BF)
 
 <https://serverfault.com/questions/906298/ssh-proxycommand-with-same-password>
+
+<https://superuser.com/questions/1674913/how-to-configure-proxycommand-in-ssh-config-in-macos-to-support-ipv6>
