@@ -186,7 +186,7 @@ sysctl -w net.ipv6.conf.all.forwarding=1
 
 ### 为veth的两端设置私有IPv6地址
 
-`fd00::/8`是私有的IPv6地址块：<https://en.wikipedia.org/wiki/Private_network>。所以我们可以将`${spacename}veth1`的IP设置为`fd00::1/64 dev`，将`${spacename}veth2`的IP设置为`fd00::2/64 dev`：
+`fd00::/8`是私有的IPv6地址块：<https://en.wikipedia.org/wiki/Private_network>。所以我们可以将`${spacename}veth1`的IP设置为`fd00::1/64`，将`${spacename}veth2`的IP设置为`fd00::2/64`：
 
 ```shell
 ip -6 addr add fd00::1/64 dev ${spacename}veth1
