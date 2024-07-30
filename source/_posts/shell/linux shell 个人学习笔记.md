@@ -8,191 +8,15 @@ date: 2020-02-05 18:10:23
 
 ## 语法
 
+bash支持所有POSIX shell的语法：{% post_link shell/'POSIX-shell学习笔记' %}
+
+下面的是不在POSIX标准里的特性。
+
 ### 条件判断
 
 `man bash`，然后搜索`CONDITIONAL EXPRESSIONS`，可以看到完整的列表。
 
-#### if elif else
-
-参考：<https://blog.csdn.net/u014783674/article/details/24474001>
-
-```shell
-#!/bin/bash
-if [ condition1 ]; then
-	# Do something
-elif [ condition2 ]; then
-	# Do something
-else
-	# Do something
-fi
-```
-
-#### 判断某环境变量是否存在
-
-参考：https://blog.csdn.net/blade2001/article/details/7243143?utm_source=blogxgwz3
-
-上面的文章好像写反了
-
-例子：判断环境变量DISPLAY是否存在（若不存在说明没有提供显示设备）
-
-```shell
-if [ $DISPLAY ]; then
-	# DISPLAY存在
-else
-	# DISPLAY不存在
-fi
-```
-
-或者
-
-```shell
-if [ ! $DISPLAY ]; then
-```
-
-表示`如果$DISPLAY不存在`
-
-#### 字符串
-
-| 功能 | 例子 |
-| ---- | ---- |
-| 为空 | `[ -z "$1" ]` 或者 `[ ! "$1" ]` |
-| 非空 | `[ -n "$1" ]` 或者 `[ "$1" ]` |
-| 相等 | `[ "$1" == "$2" ]` |
-| 不相等 | `[ "$1" != "$2" ]` |
-
-所以如果判断目录是否非空，可以这样：`if [ "$(ls -A xxx)" ]`
-
-参考：<https://www.cyberciti.biz/faq/linux-unix-shell-check-if-directory-empty/>
-
-#### 整数的大小判断
-
-参考：
-<https://blog.csdn.net/shang_feng_wei/article/details/90378017>
-<https://www.jb51.net/article/56553.htm>
-<https://blog.csdn.net/HappyRocking/article/details/90609554#1_70>
-
-| 代码 | 含义 | 例子 |
-| ---- | ---- | ---- |
-| -eq | = | `[ $1 -eq 2 ]` |
-| -ne | != | `[ $1 -ne 2 ]` |
-| -le | <= | `[ $1 -le 2 ]` |
-| -lt | < | `[ $1 -lt 2 ]` |
-| -ge | >= | `[ $1 -ge 2 ]` |
-| -gt | > | `[ $1 -gt 2 ]` |
-| -a | && | `[ $1 -gt 0 -a $1 -lt 10 ]` |
-| -o | \|\| | `[ $1 -lt 0 -o $1 -gt 10 ]` |
-
-其中`-eq`和`-ne`可以分别用`=`和`!=`替换。
-
-如果想像C语言那样进行条件判断，可以使用`[[]]`。
-例如下面这两句都表示`如果参数的个数等于０或者大于２`
-
-```text
-if [[ $# = 0 || $# > 2 ]]; then
-```
-
-```text
-if [ $# = 0 -o $# -gt 2 ]; then
-```
-
-#### 浮点数的大小判断
-
-```shell
-if awk "BEGIN {exit !(1.234 >= .233)}"; then
-    echo "yes"
-fi
-```
-
-来源：<https://stackoverflow.com/a/45591665/13688160>
-
-#### 判断文件类型
-
-来源：<https://jingyan.baidu.com/article/95c9d20d5ac536ec4e7561ad.html>
-
-```shell
-#!/bin/bash
-if [ -z $1 ]; then      #如果没有输入参数，也就是第一个参数的字符串长度为0
-    :                          #空语句
-else
-	if [ -e $1 ]; then       #如果文件存在的话
-		if [ -f $1 ]; then   #如果文件是个普通文件？
-			echo $1" is a text file."
-		elif [ -d $1 ]; then #如果文件是个目录文件？
-			echo $1" is a directory."
-		elif [ -c $1 ]; then #如果文件是个字符设备？
-			echo $1" is a char device."
-		elif [ -b $1 ]; then #如果文件是个块设备？
-			echo $1" is a block device."
-		else #否则
-			echo $1" is unknow file."
-	fi
-fi
-```
-
-另外，`-s`表示文件存在且不为空。来源：<https://stackoverflow.com/questions/9964823/how-to-check-if-a-file-is-empty-in-bash>
-
-#### 判断文件权限
-
-| 代码 | 含义 |
-| ---- | ---- |
-| -r | 存在且可读 |
-| -w | 存在且可写 |
-| -x | 存在且可执行 |
-
-参考：<https://stackoverflow.com/questions/10319652/check-if-a-file-is-executable>
-
-### 函数
-
-参考：<https://www.runoob.com/linux/linux-shell-func.html>
-
-#### 定义
-
-```shell
-function FunctionName {
-	do_some_thing_here
-	return Interger
-}
-```
-
-其中`function`可以省略，也可以不return。
-参数用法与脚本类似。（`$#`表个数，`$1, $9, ${10}`表具体参数)
-
-#### 使用
-
-```shell
-FunctionName par1 par2 par3
-```
-
-### 循环
-
-#### while
-
-参考：<https://wiki.jikexueyuan.com/project/shell-tutorial/shell-while-loop.html>
-
-```shell
-while Command
-do
-   Statement(s) to be executed if Command is true
-done
-```
-
-或者
-
-```shell
-while [ Condition ]; do
-	Statement(s) to be executed if Condition is true
-done
-```
-
-也可以对命令返回值取反，比如
-
-```shell
-while ! Command; do
-	Statement(s) to be executed if Command is false
-done
-```
-
-#### for
+### for
 
 参考：<https://blog.csdn.net/astraylinux/article/details/7016212>
 
@@ -248,44 +72,11 @@ if [[ 2333test233222 =~ abc && 2333test233222 =~ test233 ]]; then
 	echo yes;
 fi
 ```
-
 ### 重定向
 
 ```shell
-# 将`stdout`重定向到`stdout.txt`
-Command > stdout.txt
-# 将`stderr`重定向到`stderr.txt`
-Command 2> stderr.txt
-# 将stderr重定向到stdout
-Command 2>&1
-# 将stderr和stdout都重定向到一个文件
-# 参考：<https://blog.csdn.net/u011630575/article/details/52151995>
-Command > shell.log 2>&1
+# 等价于 Command > shell.log 2>&1
 Command &> shell.log
-# 将`stdin`重定向到`stdin.txt`
-Command < stdin.txt
-# 将Command1的stdout输入到Command2的stdin
-Command1 | Command2 # 例如 echo 'whoami' | bash，可以让bash执行whoami。
-
-```
-
-#### 将多行字面量作为stdin
-
-```text
-Command <<标记
-第一行
-第二行
-...
-标记
-```
-
-例如：
-
-```shell
-bash <<EOF
-whoami
-echo 2333
-EOF
 ```
 
 ### 数组
@@ -321,15 +112,18 @@ echo "${ARRAY_NAME[*]}"
 例如：
 
 ```shell
+arg_num() {
+	echo $#
+}
 a=(1 "2   3")
-# bash 相当于 echo 1 2   3
-# zsh 相当于 echo 1 "2   3"
-echo ${a[@]}
-echo ${a[*]}
-# 相当于 echo 1 "2   3"
-echo "${a[@]}"
-# 相当于 echo "1 2   3"
-echo "${a[*]}"
+# bash 相当于 arg_num 1 2   3
+# zsh 相当于 arg_num 1 "2   3"
+arg_num ${a[@]}
+arg_num ${a[*]}
+# 相当于 arg_num 1 "2   3"
+arg_num "${a[@]}"
+# 相当于 arg_num "1 2   3"
+arg_num "${a[*]}"
 ```
 
 #### 访问slice
@@ -360,28 +154,19 @@ echo ${#a[@]}
 
 #### 命令行参数
 
-命令行参数也是数组，用法跟上面的差不多：
-
-```shell
-# 访问某参数
-echo $2
-# 所有参数
-echo $@
-echo $*
-# 从第m个参数开始一直取到末尾
-echo ${@:m}
-# 从第m个参数开始取n个参数
-echo ${@:m:n}
-# 参数个数（不含$0）
-echo $#
-```
-
 当数组被用于命令行参数时，会被展开成一个个参数：
 
 ```shell
 # 等价于./test.sh 1 2 3
 a=(1 2 3)
 ./test.sh ${a[@]}
+```
+
+```shell
+# 从第m个参数开始一直取到末尾
+echo ${@:m}
+# 从第m个参数开始取n个参数
+echo ${@:m:n}
 ```
 
 #### 生成序列
@@ -407,31 +192,6 @@ echo "${a[@]}"
 
 ```text
 1 2 3 4 5
-```
-
-## 进程
-
-获取当前subshell的PID：
-
-```shell
-pid=$(exec sh -c 'echo "$PPID"')
-```
-
-来源：<https://unix.stackexchange.com/a/484464>
-
-## 信号
-
-```shell
-trap 信号处理命令 信号名
-```
-
-例如：
-
-{% post_link Linux/Process/'Linux杀死所有子进程' %}
-
-```shell
-# 在脚本退出前杀死所有子进程
-trap "pkill -P $$" EXIT
 ```
 
 ## 用户管理
@@ -501,20 +261,6 @@ sudo usermod -aG GroupName UserName
 ```shell
 grep GroupName /etc/group
 ```
-
-## `set`
-
-bash可以用`set`来设置一些模式。
-
-### 子命令返回值不为0时退出
-
-`set -e`
-
-但是要注意的是，对于用管道连接起来的几个命令，最终的exit code似乎是管道里的最后一个命令。例如对于`command A | command B`，如果`command A`出错返回非0，但是`command B`正常退出，那么这个组合命令的exit code会被设置成0，这样`set -e`就不会生效。
-
-如果要让被管道组合起来命令中任何一个命令返回非0都会退出，则需要加上`set -o pipefail`，其效果是将exit code赋值为被管道组合起来的命令中最后一个返回非0值的命令。
-
-来源：[Get exit status of process that's piped to another](https://unix.stackexchange.com/a/73180/453838)
 
 ## 按应用
 

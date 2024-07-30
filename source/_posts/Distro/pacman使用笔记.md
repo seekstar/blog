@@ -20,7 +20,15 @@ pacman -Si 包名
 
 ### `-R`: 移除某包
 
-`-s`: recursive，同时移除该包的依赖。例如A依赖B依赖C，那么`pacman -Rs A`会同时移除A B C。
+一般用`sudo pacman -Rs 包名`:
+
+```text
+-s, --recursive
+	Remove each target specified including all of their dependencies, provided that (A) they are not required by other
+	packages; and (B) they were not explicitly installed by the user. This operation is recursive and analogous to a
+	backwards --sync operation, and it helps keep a clean system without orphans. If you want to omit condition (B), pass
+	this option twice.
+```
 
 `-c`: cascade，同时移除依赖该包的其他包。例如A依赖B依赖C，那么`pacman -Rc C`会同时移除A B C。
 
