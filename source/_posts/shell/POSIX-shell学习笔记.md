@@ -355,7 +355,7 @@ trap 'kill -TERM -$!; echo exit 1; exit 1' TERM
 wait
 ```
 
-详情请参考：{% post_link Linux/Process/'Linux shell向进程组发信号' %}
+详情请参考：{% post_link Linux/Process/'Linux-shell向进程组发信号' %}
 
 ## `wait`
 
