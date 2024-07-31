@@ -338,7 +338,7 @@ kill -TERM $pid
 
 ```sh
 #!/usr/bin/env sh
-(sleep 100000) &
+sleep 100000 &
 pid=$!
 trap 'kill -TERM $pid; echo exit 1; exit 1' TERM
 wait
@@ -346,6 +346,57 @@ wait
 
 再执行上面的命令，这个脚本就可以被顺利杀死了。
 
+如果是pipeline命令，直接将其放入后台的话，`$!`只是pipeline里的最后进程，将其杀掉只会导致pipeline前面的进程变成孤儿进程。为了一次性将整个pipeline杀死，可以用`setsid`将其放入一个单独的进程组里，然后向整个进程组发信号：
+
+```sh
+#!/usr/bin/env sh
+setsid sh -c "sleep 10 | sleep 10" &
+trap 'kill -TERM -$!; echo exit 1; exit 1' TERM
+wait
+```
+
+详情请参考：{% post_link Linux/Process/'Linux shell向进程组发信号' %}
+
+## `wait`
+
+如果不带参数，就是等待所有后台任务完成。
+
+也可以等待一个特定进程：`wait <PID>`
+
+bash中可以`wait -n`来等待任意一个后台任务完成，但POSIX标准中没有这个。
+
+在POSIX shell中如果要等待多个任务中的任意一个完成，然后把其他的杀掉，可以这样：
+
+```sh
+#!/usr/bin/env sh
+sleep 10 &
+sleep 3 &
+# "wait -n" is not available in POSIX
+trap "exit 1" CHLD
+trap "pkill -P $$; exit 1" EXIT
+wait
+```
+
+其中`$$`是当前shell的PID，`pkill -P $$`表示把父进程是当前shell的所有进程杀掉。
+
+来源：<https://unix.stackexchange.com/a/231678>
+
+也可以把它们都放进一个process group里，最后一起杀掉：
+
+```sh
+#!/usr/bin/env sh
+setsid sh -c "
+	sleep 10 &
+	sleep 3 &
+	trap \"kill -TERM -\$\$\" CHLD
+	wait
+"
+```
+
+但是这个方法因为会把自己杀掉，所以会打印一行`Terminated`。
+
 ## 存在的问题
 
-不支持数组。
+- 不支持数组
+
+- 不支持`wait -n`
