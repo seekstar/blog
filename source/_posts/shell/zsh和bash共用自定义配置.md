@@ -11,6 +11,7 @@ tags:
 不过要注意每次启动`bash`都会读取`~/.bashrc`。为了避免重复`export`环境变量，我们可以让它只在login的时候`source ~/.profile`：
 
 ```bash
+# https://unix.stackexchange.com/a/26782
 if shopt -q login_shell; then
 	source ~/.profile
 fi
