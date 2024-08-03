@@ -22,3 +22,26 @@ fi
 ```bash
 source ~/.profile
 ```
+
+## vscode
+
+vscode的integrated terminal在启动的时候不会`source ~/.profile`。如果参照这里的方法：<https://stackoverflow.com/a/67843008>，把它变成一个login shell，那连接到remote上的时候`code`命令就没用了。
+
+```json
+  "terminal.integrated.profiles.linux": {
+    "bash": {
+      "path": "bash",
+      // login shell. Make it source ~/.profile
+      "icon": "terminal-bash",
+      "args": ["-l"]
+    }
+  },
+```
+
+但是vscode的integrated shell会设置一个环境变量`VSCODE_SHELL_INTEGRATION=1`，这个环境变量是不会继承到子进程的，所以我们可以在`~/.bashrc`里加上以下内容，使`bash`只在vscode integrated shell里`source ~/.profile`：
+
+```sh
+if [ $VSCODE_SHELL_INTEGRATION ]; then
+	. ~/.profile
+fi
+```
