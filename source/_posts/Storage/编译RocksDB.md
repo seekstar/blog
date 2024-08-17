@@ -29,7 +29,7 @@ cmake .. -DCMAKE_BUILD_TYPE=Release -DUSE_RTTI=true
 # 全部编译
 make -j$(nproc)
 # 只编译静态库
-make -j$(nproc) librocksdb.a
+make -j$(nproc) rocksdb
 # 只编译动态库
 make -j$(nproc) rocksdb-shared
 ```
