@@ -4,6 +4,18 @@ date: 2022-01-01 14:29:37
 tags: RocksDB
 ---
 
+## CMake
+
+```cmake
+target_link_directories(${PROJECT_NAME} PUBLIC ${ROCKSDB_LIB})
+target_link_libraries(${PROJECT_NAME}
+        PUBLIC
+                librocksdb.a
+)
+```
+
+## Makefile
+
 照抄官方给的实例里的Makefile：<https://github.com/facebook/rocksdb/blob/main/examples/Makefile>
 
 稍微改一点：
