@@ -73,6 +73,48 @@ flatpak remotes
 
 密码管理器。要把apt安装的旧版卸载之后，Deepin启动器上的才会变成flatpak的版本。
 
+### Plots
+
+`com.github.alexhuntley.Plots`
+
+<https://github.com/alexhuntley/Plots>
+
+`Plots`是一款非常简单的函数作图工具，直接输入表达式即可。可以是只含x的表达式，也可以是一个含x和y的等式。
+
+可以定义一些常量，然后在之后的表达式里使用这个常量。例如先输入`s=1.747`，再输入`k=0.0819`，最后输入：
+
+$$\frac{1}{s}(1+kxs)^{-1-\frac{1}{k}}$$
+
+对应函数的曲线就会画出来了。
+
+#### 存在的问题
+
+<https://github.com/alexhuntley/Plots/issues/146>
+
+不支持中文locale。会报错：
+
+```text
+        Using the fallback 'C' locale.
+Traceback (most recent call last):
+  File "/app/bin/plots", line 8, in <module>
+    sys.exit(main())
+  File "/app/lib/python3.10/site-packages/plots/__init__.py", line 22, in main
+    plots.Plots().run(sys.argv)
+  File "/app/lib/python3.10/site-packages/plots/plots.py", line 42, in __init__
+    plots.i18n.bind()
+  File "/app/lib/python3.10/site-packages/plots/i18n.py", line 26, in bind
+    locale.setlocale(locale.LC_ALL, "")
+  File "/usr/lib/python3.10/locale.py", line 620, in setlocale
+    return _setlocale(category, locale)
+locale.Error: unsupported locale setting
+```
+
+解决方法是用命令行指定locale：
+
+```shell
+flatpak run --env=LC_ALL="en_US.UTF-8" com.github.alexhuntley.Plots
+```
+
 ### Thunderbird
 
 Mozilla出品的邮件客户端。
