@@ -20,6 +20,7 @@ fi
 有些发行版在用ssh登录时如果`~/.bash_profile`存在则会调用它而不是`~/.profile`。所以我们也可以在`~/.bash_profile`里：
 
 ```bash
+[[ -f ~/.bashrc ]] && . ~/.bashrc
 source ~/.profile
 ```
 
