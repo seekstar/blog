@@ -11,15 +11,17 @@ date: 2020-02-10 15:40:32
 
 ```shell
 # pdflatex
-sudo apt install texlive-latex-base
+sudo apt install -y texlive-latex-base
 # biblatex.sty
-sudo apt install texlive-bibtex-extra
+sudo apt install -y texlive-bibtex-extra
 # xkeyval.sty
-sudo apt install texlive-latex-recommended
+sudo apt install -y texlive-latex-recommended
 # xstring.sty
-sudo apt install texlive-latex-extra
+sudo apt install -y texlive-latex-extra
 # libertine
-sudo apt install texlive-fonts-extra
+sudo apt install -y texlive-fonts-extra
+# algorithm.sty
+sudo apt install -y texlive-science
 ```
 
 SIGMOD的模板不知道为什么还需要安装`texlive-xetex`:
