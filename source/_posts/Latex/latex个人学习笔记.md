@@ -907,6 +907,25 @@ Bibliography里URL不要用`url = {https://xxx}`的形式，要用`note = {\url{
 
 来源：<https://tex.stackexchange.com/questions/132646/how-to-remove-the-references-title>
 
+## 定理和证明
+
+```tex
+\usepackage{amsthm}
+\newtheorem{theorem}{Theorem}
+```
+
+```tex
+\begin{theorem}
+定理内容。会变成斜体字。
+\end{theorem}
+
+\begin{proof}
+证明。
+\end{proof}
+```
+
+参考：<https://tex.stackexchange.com/a/150206/256676>
+
 ## 异常处理
 
 ### `textbf{}`加粗对英文无效
