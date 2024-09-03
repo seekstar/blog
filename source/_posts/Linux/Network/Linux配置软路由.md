@@ -21,7 +21,7 @@ ip link set up dev $indev
 ip addr add $prefix.1/24 dev $indev
 ```
 
-但网线拔下来之后这个IP就会消失。可以参考这个设置永久静态IP：{% post_link 'Linux/Network/deepin设置静态IP' %}，不过不需要设置`gateway`和`dns-nameserver`。
+但网线拔下来之后这个IP就会消失。可以参考下面的`开机自启`设置永久静态IP。
 
 ## 配置DHCP
 
@@ -92,4 +92,68 @@ sysctl -w net.ipv6.conf.$indev.accept_ra=2
 
 ip6tables -t nat -A POSTROUTING -o $outdev -j MASQUERADE
 ip6tables -t filter -A FORWARD -i $indev -o $outdev -j ACCEPT
+```
+
+## 开机自启
+
+```shell
+cat >> /etc/network/interfaces <<EOF
+allow-hotplug $indev
+iface $indev inet static
+	address $prefix.1
+	netmask 255.255.255.0
+iface end1 inet6 static
+	address $prefix6::1
+	netmask 64
+EOF
+
+sudo systemctl restart networking
+
+systemctl enable isc-dhcp-server
+
+cat >> /etc/sysctl.conf <<EOF
+net.ipv4.ip_forward=1
+net.ipv6.conf.$indev.addr_gen_mode=0
+net.ipv6.conf.all.forwarding=1
+net.ipv6.conf.$indev.accept_ra=2
+EOF
+sysctl -p
+
+sudo apt install -y iptables-persistent
+# https://serverfault.com/a/714348
+# :<NAME> <DEFAULT_POLICY> [<PACKET_COUNT>:<BYTE_COUNT>]
+# PACKET_COUNT和BYTE_COUNT不重要，这里全部设置为0
+cat > /etc/iptables/rules.v4 <<EOF
+*nat
+:PREROUTING ACCEPT [0:0]
+:INPUT ACCEPT [0:0]
+:OUTPUT ACCEPT [0:0]
+:POSTROUTING ACCEPT [0:0]
+-A POSTROUTING -s 10.233.233.0/24 -o end0 -j MASQUERADE
+COMMIT
+
+*filter
+:INPUT ACCEPT [0:0]
+:FORWARD ACCEPT [0:0]
+:OUTPUT ACCEPT [0:0]
+-A FORWARD -i end1 -o end0 -j ACCEPT
+COMMIT
+EOF
+
+cat > /etc/iptables/rules.v6 <<EOF
+*filter
+:INPUT ACCEPT [0:0]
+:FORWARD ACCEPT [0:0]
+:OUTPUT ACCEPT [0:0]
+-A FORWARD -i end1 -o end0 -j ACCEPT
+COMMIT
+
+*nat
+:PREROUTING ACCEPT [0:0]
+:INPUT ACCEPT [0:0]
+:OUTPUT ACCEPT [0:0]
+:POSTROUTING ACCEPT [0:0]
+-A POSTROUTING -o end0 -j MASQUERADE
+COMMIT
+EOF
 ```
