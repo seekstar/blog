@@ -13,13 +13,15 @@ indev=end1
 prefix=10.233.233
 ```
 
-## 配置出口网口IP
+## 配置入口网口IP
 
 ```shell
 #nmcli dev set $indev managed no
 ip link set up dev $indev
 ip addr add $prefix.1/24 dev $indev
 ```
+
+但网线拔下来之后这个IP就会消失。可以参考这个设置永久静态IP：{% post_link 'Linux/Network/deepin设置静态IP' %}，不过不需要设置`gateway`和`dns-nameserver`。
 
 ## 配置DHCP
 

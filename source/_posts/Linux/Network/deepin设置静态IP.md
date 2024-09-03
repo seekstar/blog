@@ -6,13 +6,17 @@ date: 2021-08-14 19:00:46
 `/etc/network/interfaces`里：
 
 ```text
-# enp0s2 是网卡名称
-auto enp0s2
+# https://unix.stackexchange.com/a/128662/453838
+allow-hotplug enp0s2
 iface enp0s2 inet static
-address 10.249.44.127
-netmask 255.255.248.0
-gateway 10.249.40.1
-dns-nameserver 10.248.98.30
+	address 10.249.44.127
+	netmask 255.255.248.0
+	gateway 10.249.40.1
+	dns-nameserver 10.248.98.30
+# https://askubuntu.com/questions/616856/how-do-i-add-an-additional-ipv6-address-to-etc-network-interfaces
+iface end1 inet6 static
+        address fd00:1::1
+        netmask 64
 ```
 
 网卡名字和当前子网掩码可以通过`ip addr`看。
@@ -24,10 +28,8 @@ dns-nameserver 10.248.98.30
 重启网络：
 
 ```shell
-sudo /etc/init.d/networking restart
+sudo systemctl restart networking
 ```
-
-如果失败了，就直接重启机器吧。
 
 参考文献：
 [Deepin设置静态IP](https://www.cnblogs.com/javayanglei/p/13305285.html)
