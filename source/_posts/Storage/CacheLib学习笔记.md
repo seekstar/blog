@@ -61,45 +61,81 @@ nix-env -iA nixpkgs.gcc10
 export CPLUS_INCLUDE_PATH=$CACHELIB_HOME/include:$CPLUS_INCLUDE_PATH
 export LIBRARY_PATH=$CACHELIB_HOME/lib:$LIBRARY_PATH
 export LD_LIBRARY_PATH=$CACHELIB_HOME/lib:$LD_LIBRARY_PATH
+export CMAKE_PREFIX_PATH=$CACHELIB_HOME/lib/cmake:$CMAKE_PREFIX_PATH
 ```
 
 然后`source ~/.profile`
 
 ## 使用
 
-在目标项目的cmake里这么写：
+官方文档：<https://cachelib.org/docs/>
+
+### CMake
+
+官方文档里似乎没写。
 
 ```cmake
+find_package(cachelib REQUIRED)
+
+target_link_libraries(${PROJECT_NAME}
 	PRIVATE
-		# 这些是静态链接库，所以是PRIVATE
-		cachelib_allocator
-		cachelib_navy
-		cachelib_common
-		cachelib_shm
-
-	PUBLIC
-		# 这些是动态链接库，所以是PUBLIC
-
-		# Deps of cachelib_allocator
-		numa
-		folly
-		thriftprotocol
-
-		# Deps of cachelib_navy
-		boost_context
-
-		# Deps of cachelib_shm
-		rt
-
-		# Deps of folly
-		fmt
-		double-conversion
-		glog
-
-		# Deps of thriftprotocol
-		rpcmetadata
+		cachelib
+)
 ```
 
-或者直接link这个library: <https://github.com/seekstar/RocksCachelibWrapper>
+```shell
+# Additional "FindXXX.cmake" files are here (e.g. FindSodium.cmake)
+CLCMAKE="$workspace/CacheLib/cachelib/cmake"
+CMAKE_PARAMS="-DCMAKE_MODULE_PATH='$CLCMAKE'"
 
-然后正常编译即可。
+mkdir -p build
+cd build
+cmake .. -DCMAKE_BUILD_TYPE=RelWithDebInfo $CMAKE_PARAMS
+make
+cd ..
+```
+
+### 头文件
+
+```cpp
+#include <cachelib/allocator/CacheAllocator.h>
+```
+
+### `Hybrid Cache`
+
+```cpp
+  facebook::cachelib::LruAllocator::Config lruConfig;
+  facebook::cachelib::LruAllocator::NvmCacheConfig nvmConfig;
+  nvmConfig.navyConfig.setBlockSize(4096);
+  nvmConfig.navyConfig.setSimpleFile(
+      options.db_paths[0].path + "/cachelib",
+      cachelib_size,
+      true /*truncateFile*/);
+  nvmConfig.navyConfig.blockCache().setRegionSize(16 * 1024 * 1024);
+  lruConfig.enableNvmCache(nvmConfig);
+  lruConfig.setAccessConfig({/*bucketsPower*/ 25, /*locksPower*/ 10})
+      .validate();
+  facebook::cachelib::LruAllocator cache(lruConfig);
+  auto poolId =
+    cache.addPool("default_pool", cache.getCacheMemoryStats().ramCacheSize);
+```
+
+`bucketsPower`默认是10，也就是默认1024个bucket，`locksPower`默认是5，也就是32个lock，都太小了，一定要手动调成更大的值。`bucketsPower`取值教程：<https://cachelib.org/docs/Cache_Library_User_Guides/Configure_HashTable#choosing-a-good-value>
+
+### 常用方法
+
+`allocate(poolId, key, value_size)`: 返回`WriteHandle`
+
+`WriteHandle::getMemory`, `WriteHandle::getSize`: value的内存起始地址和大小。可以用`memcpy`之类的往这块内存里面写东西。但好像不能更改大小。
+
+`insertOrReplace(WriteHandle)`
+
+`find(key)`: 返回`ReadHandle`
+
+`findToWrite`: 返回`WriteHandle`
+
+检查`ReadHandle`或者`WriteHandle`是否有效：`if (handle) {`
+
+`ReadHandle::getMemory`, `ReadHandle::getSize`: value的内存起始地址和大小。只读。
+
+`remove(key)`

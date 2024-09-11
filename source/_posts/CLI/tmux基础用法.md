@@ -93,6 +93,12 @@ set-window-option -g mode-keys vi
 
 复制模式中，虽然不再显示新的输出，但是其实程序仍然在跑，在退出复制模式后新的输出就会显示出来。
 
+## Sessions List view
+
+`ctrl+b s`
+
+可以用箭头快速浏览所有session，按`enter`进入当前正在浏览的session。
+
 ## 插件
 
 建议使用Tmux Plugin Manager管理插件：<https://github.com/tmux-plugins/tpm>
