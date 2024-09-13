@@ -56,7 +56,9 @@ P.S. 收到了`#archlinux-cn:nichi.co`群的`undefined`用户的确认。
 
 aur安装的seafile更新失败了。
 
-试试nix的seafile？
+flatpak的seafile没有单点登录。
+
+可以用nix的seafile，在x11下需要用`nixGL seafile-applet`才能启动。
 
 #### vscodium-bin
 

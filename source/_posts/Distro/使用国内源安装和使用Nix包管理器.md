@@ -152,7 +152,7 @@ Categories=Network;FileTransfer;
 
 然后就可以在启动器里找到`Seafile`了，点击之即可运行。
 
-2024.07.03 Update: 现在好像可以直接运行seafile-applet了：
+2024.07.03 Update: wayland下好像可以直接运行seafile-applet：
 
 ```text
 [Desktop Entry]
