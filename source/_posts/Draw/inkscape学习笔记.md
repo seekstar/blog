@@ -133,18 +133,16 @@ yay -S inkscape-open-symbols-git
 
 ## hatch
 
-用这里提供的pattern：<https://inkscape.org/~henkjan_nl/%E2%98%85patterns-for-mechanical-drawings-in-inkscape>
-
-这里提供的安装方法：[Alternate install method](https://github.com/zirafa/inkscape-hatch-patterns/issues/5)
-
 ```shell
-wget https://raw.githubusercontent.com/seekstar/inkscape-hatch-patterns/paint-server/paint/hatch-patterns.svg
-cp hatch-patterns.svg ~/.config/inkscape/paint/
+wget https://raw.githubusercontent.com/seekstar/inkscape-hatch-patterns/master/paint/HatchPatterns.svg
+cp HatchPatterns.svg ~/.config/inkscape/paint/
 ```
 
 然后关闭再重新打开inkscape。点击菜单栏里的`对象` -> 绘画服务器，`Hatch Patterns`里的就是新安装的hatch patterns。
 
-hatch太密的话，pdf缩小来看的时候会变成一坨黑的。所以我一般用`Hatch 1.7`系列，疏密刚刚好。
+hatch默认是黑色的。改变hatch的颜色：`Extensions > Colour > Replace colour`，在`Color to replace`处选择要替换掉的颜色，也就是黑色`000000ff`，然后在`New color`处填入要替换成的颜色，然后点击`Apply`即可。矩形的黑色边框也会变成新颜色，需要手动在`Stroke paint`处把边框颜色改回来。
+
+参考：<https://graphicdesign.stackexchange.com/questions/15580/how-can-i-color-a-pattern-in-inkscape>
 
 ## 预览灰度打印结果
 

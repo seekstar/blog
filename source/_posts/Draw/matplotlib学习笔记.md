@@ -50,15 +50,33 @@ yscale: <https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.yscale.html
 
 `plt.plot(y)`的横坐标是从0开始的数组下标。
 
-### [legend](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.legend.html)
+### [`plt.legend`](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.legend.html)
 
 - {% post_link Draw/'matplotlib设置legend坐标' %}
 
 - [Matplotlib 放置legend(bbox_to_anchor)](https://blog.csdn.net/chichoxian/article/details/101058046)
 
-- frameon: bool, default: rcParams["legend.frameon"] (default: True)
+- `frameon`: bool, default: rcParams["legend.frameon"] (default: True)
 
 Whether the legend should be drawn on a patch (frame).
+
+- `handletextpad`: float, default: `0.8`
+
+The pad between the legend handle and text, in font-size units.
+
+- `columnspacing`: float, default: `2.0`
+
+The spacing between columns, in font-size units.
+
+### ['plt.ylabel'](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.ylabel.html)
+
+- `loc`: {'bottom', 'center', 'top'}, default: `center`
+
+其他参数传给了Text。常用的：
+
+- `y`
+
+可以微调高度
 
 ### [text](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.text.html)
 
@@ -193,6 +211,29 @@ ax.ticklabel_format(style='sci', scilimits=(4, 4), useMathText=True)
 ax1.xaxis.set_major_formatter(lambda x, pos: str(x-5))
 ```
 
+#### 指定指数
+
+比如指定指数为1e-9:
+
+```python
+from matplotlib.ticker import ScalarFormatter
+y_formatter = ScalarFormatter()
+y_formatter.set_powerlimits((-9, -9))
+ax.yaxis.set_major_formatter(y_formatter)
+```
+
+官方文档：<https://matplotlib.org/stable/api/ticker_api.html#matplotlib.ticker.ScalarFormatter.set_powerlimits>
+
+来源：<https://stackoverflow.com/a/77442842/13688160>
+
+设置fontsize:
+
+```python
+ax.yaxis.get_offset_text().set_fontsize(8)
+```
+
+来源：<https://stackoverflow.com/a/34228384/13688160>
+
 ### [set_label_coords](https://matplotlib.org/stable/api/_as_gen/matplotlib.axis.Axis.set_label_coords.html)
 
 例子：
@@ -217,29 +258,6 @@ ax.set_axisbelow(True)
 ```py
 ax.grid(axis='y')
 ```
-
-#### 指定指数
-
-比如指定指数为1e-9:
-
-```python
-from matplotlib.ticker import ScalarFormatter
-y_formatter = ScalarFormatter()
-y_formatter.set_powerlimits((-9, -9))
-ax.yaxis.set_major_formatter(y_formatter)
-```
-
-官方文档：<https://matplotlib.org/stable/api/ticker_api.html#matplotlib.ticker.ScalarFormatter.set_powerlimits>
-
-来源：<https://stackoverflow.com/a/77442842/13688160>
-
-设置fontsize:
-
-```python
-ax.yaxis.get_offset_text().set_fontsize(8)
-```
-
-来源：<https://stackoverflow.com/a/34228384/13688160>
 
 ## [colorbar](https://matplotlib.org/stable/api/colorbar_api.html#module-matplotlib.colorbar)
 
