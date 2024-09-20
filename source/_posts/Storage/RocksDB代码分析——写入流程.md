@@ -30,7 +30,9 @@ leader可能帮我们做了插入，这时直接返回即可。
 - 假如我们是leader（每个时刻只有一个leader）
 
 >调用`DBImpl::PreprocessWrite`
+>
 >>如果`flush_scheduler_`中有任务，就调用`DBImpl::ScheduleFlushes`（唯一调用者）。
+>>
 >>>先调用`FlushScheduler::TakeNextColumnFamily`（正常状态下唯一调用者），它是唯一从`FlushScheduler`中取出flush任务（以`ColumnFamilyData`的形式）的方法。
 >>>逐个将这些取出的`ColumnFamilyData cfd`作为参数调用`DBImpl::SwitchMemtable`，将这些column family data的memory table变成immutable memory table，然后新建一个memory table。这里没有用原子操作，但是其他非leader的writer应该是没有拿DB mutex的。可能这是因为其他非leader的writer都在等leader给出指示。具体没细看。
 >>>将之前取出的`ColumnFamilyData cfd`作为`DBImpl::GenerateFlushRequest`的参数，得到`FlushRequest flush_req`，再将其作为`DBImpl::SchedulePendingFlush`的参数。
