@@ -172,10 +172,6 @@ pacman -Qdt
 
 ## 其他
 
-- {% post_link Distro/'pacman查看可更新包' %}
-
-- {% post_link Distro/'pacman查看命令由哪个包提供' %}
-
 - {% post_link Distro/'pacman查看未安装的包内的文件' %}
 
 - {% post_link Distro/'pacman清理软件包缓存' %}
