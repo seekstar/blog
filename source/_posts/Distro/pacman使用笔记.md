@@ -4,9 +4,7 @@ date: 2022-07-30 11:58:48
 tags:
 ---
 
-## 命令行选项
-
-### `-S, --sync`：源里的包
+## `-S, --sync`：源里的包
 
 ```shell
 # 安装或升级某包
@@ -18,7 +16,7 @@ pacman -S --needed 包名
 pacman -Si 包名
 ```
 
-### `-R`: 移除某包
+## `-R`: 移除某包
 
 一般用`sudo pacman -Rs 包名`:
 
@@ -34,7 +32,60 @@ pacman -Si 包名
 
 参考：[pacman: cascade vs. recursive](https://bbs.archlinux.org/viewtopic.php?id=21470)
 
-### `-Q`: 查看已安装的包
+## `-F, --files`: Query the files database
+
+首先需要更新一下file database:
+
+```shell
+pacman -Fy
+```
+
+一般用来查看命令由哪个包提供。比如查看`dig`命令由哪个包提供。有两种方法：
+
+```shell
+pacman -F dig
+```
+
+输出：
+
+```text
+extra/bind 9.16.25-1
+    usr/bin/dig
+community/epic4 2.10.10-2
+    usr/share/epic/script/dig
+```
+
+这个方法可以自己写正则表达式匹配，可能比较灵活一点：
+
+```shell
+pacman -Fl | grep -e "/dig$"
+```
+
+`-e`: 使用正则表达式。
+
+`$`: 匹配行末。
+
+输出：
+
+```text
+bind usr/bin/dig
+epic4 usr/share/epic/script/dig
+```
+
+## 所以安装`bind`
+
+```shell
+sudo pacman -S bind
+dig -v
+```
+
+```text
+DiG 9.18.0
+```
+
+参考：[manjaro pacman查看已安装命令隶属于哪个包(arch应该也行)](https://blog.csdn.net/LoveZoeAyo/article/details/107096964)
+
+## `-Q`: 查看已安装的包
 
 ```shell
 # 所有包
@@ -57,6 +108,27 @@ pacman -Qo 相对路径或绝对路径
 [pacman常用命令](https://hustlei.github.io/2018/11/msys2-pacman.html)
 
 [How to find which package holds a file?](https://bbs.archlinux.org/viewtopic.php?id=90635)
+
+### `-Qu`: 查看可更新包
+
+先更新源，获取最新应用的列表：
+
+```shell
+sudo pacman -Sy
+```
+
+查询可更新包：
+
+```shell
+pacman -Qu
+```
+
+yay同理：
+
+```shell
+yay -Sy
+yay -Qu
+```
 
 ## 查看某包被哪些包依赖
 
