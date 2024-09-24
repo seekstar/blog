@@ -144,7 +144,7 @@ Aborted
 [Desktop Entry]
 Name=Seafile
 Comment=Seafile desktop sync client
-Exec=nixGL seafile-applet
+Exec=/home/用户名/.nix-profile/bin/nixGL seafile-applet
 Icon=seafile
 Type=Application
 Categories=Network;FileTransfer;
