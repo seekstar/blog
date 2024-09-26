@@ -340,7 +340,7 @@ kill -TERM $pid
 #!/usr/bin/env sh
 sleep 100000 &
 pid=$!
-trap 'kill -TERM $pid; echo exit 1; exit 1' TERM
+trap "kill -TERM $pid; echo exit 1; exit 1" TERM
 wait
 ```
 
@@ -351,7 +351,7 @@ wait
 ```sh
 #!/usr/bin/env sh
 setsid sh -c "sleep 10 | sleep 10" &
-trap 'kill -TERM -$!; echo exit 1; exit 1' TERM
+trap "kill -TERM -$!; echo exit 1; exit 1" TERM
 wait
 ```
 
