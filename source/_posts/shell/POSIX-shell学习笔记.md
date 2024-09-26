@@ -381,7 +381,23 @@ wait
 
 来源：<https://unix.stackexchange.com/a/231678>
 
-也可以把它们都放进一个process group里，最后一起杀掉：
+如果是带pipeline的复杂命令，需要这样：
+
+```sh
+#!/usr/bin/env sh
+(
+    setsid sh -c "sleep 10 | sleep 10" &
+    trap "kill -TERM -$!" TERM
+    wait
+) &
+sleep 3 &
+# "wait -n" is not available in POSIX
+trap "exit 1" CHLD
+trap "pkill -P $$; exit 1" EXIT
+wait
+```
+
+{% spoiler （不推荐）把它们都放进一个process group里，最后一起杀掉 %}
 
 ```sh
 #!/usr/bin/env sh
@@ -394,6 +410,8 @@ setsid sh -c "
 ```
 
 但是这个方法因为会把自己杀掉，所以会打印一行`Terminated`。
+
+{% endspoiler %}
 
 ## 存在的问题
 
