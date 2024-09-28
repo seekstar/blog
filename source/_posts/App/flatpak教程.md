@@ -143,12 +143,6 @@ PDF编辑软件。
 
 p2p下载客户端。支持多种p2p链接。
 
-### Shadowsocks-Qt5
-
-```shell
-flatpak install shadowsocks
-```
-
 ### 国际版Minecraft
 
 `com.mojang.Minecraft`
