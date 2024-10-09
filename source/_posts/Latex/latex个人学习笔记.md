@@ -638,8 +638,7 @@ xxx\tablefootnote{Maximum allowed IOPS of gp3}
 代入(\ref{t1})中，得
 ```
 
-![在这里插入图片描述](latex个人学习笔记/20200411111358519.png)
-![在这里插入图片描述](latex个人学习笔记/202004111114168.png)
+也可以用`\cref`引用标签，会带上描述。比如假如label是个图片，那么`\cref{label}`就会显示为`Figure 1`。
 
 ## 插入超链接
 
