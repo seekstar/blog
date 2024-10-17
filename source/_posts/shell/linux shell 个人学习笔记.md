@@ -571,6 +571,16 @@ exit [return code]
 
 参考：<https://unix.stackexchange.com/questions/28865/list-the-difference-and-overlap-between-two-plain-data-set>
 
+### cp
+
+把指定文件夹下面的所有文件和目录复制到另一个文件夹：
+
+```shell
+cp -a source/. dest
+```
+
+来源：<https://askubuntu.com/a/86891>
+
 ### cut
 
 ```text
