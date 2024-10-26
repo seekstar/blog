@@ -67,7 +67,73 @@ flatpak remotes
 
 <https://seekstar.github.io/2022/01/06/flatpak%E5%BA%94%E7%94%A8%E8%AE%BE%E7%BD%AE%E4%BB%A3%E7%90%86/>
 
-## 一些可以用flatpak安装的软件
+## 闭源软件
+
+flatpak很适合用来安装闭源软件，因为闭源软件的行为不可控，而flatpak可以将闭源软件的活动范围限制在一个沙箱中。
+
+### QQ
+
+`com.qq.QQ`
+
+### 微信
+
+`com.tencent.WeChat`
+
+### Steam
+
+`com.valvesoftware.Steam`
+
+#### 解决steam字体在高分屏下过小的问题
+
+```shell
+flatpak install com.github.tchx84.Flatseal
+```
+
+然后在启动器里打开`Flatseal`，在`Environment`里加上：
+
+```shell
+STEAM_FORCE_DESKTOPUI_SCALING=2
+```
+
+3000x2000的屏幕分辨率建议用`2`。
+
+参考：
+
+<https://superuser.com/questions/1762685/font-size-in-flatpak-obs>
+
+<https://forum.manjaro.org/t/steam-fontsize-to-small-the-solution/142572/7>
+
+### 腾讯会议
+
+`com.tencent.wemeet`
+
+### Zoom
+
+`us.zoom.Zoom`
+
+会议软件。
+
+### 国际版Minecraft
+
+`com.mojang.Minecraft`
+
+### spotify
+
+音乐软件
+
+### WPS
+
+国产办公软件。但是flatpak上只有英文版的，而且不能登录，不能用输入法。
+
+## 开源软件
+
+有些开源软件在发行版的软件源里没有或者版本太旧，这时可以考虑使用flatpak安装。
+
+### 思源笔记
+
+`org.b3log.siyuan`
+
+本地化的笔记。支持webdav同步。
 
 ### KeePassXC
 
@@ -131,27 +197,9 @@ PDF编辑软件。
 
 相关：<https://seekstar.github.io/2021/02/04/linux%E8%8D%89%E7%A8%BF%E7%BA%B8%E8%BD%AF%E4%BB%B6mypaint/>
 
-### Zoom
-
-会议软件。
-
-### spotify
-
-音乐软件
-
 ### Motrix
 
 p2p下载客户端。支持多种p2p链接。
-
-### 国际版Minecraft
-
-`com.mojang.Minecraft`
-
-### Clash for Windows
-
-`io.github.Fndroid.clash_for_windows`
-
-别被名字骗了，现在支持Linux了。
 
 ### LibreOffice
 
@@ -168,28 +216,6 @@ p2p下载客户端。支持多种p2p链接。
 <https://www.zotero.org/support/creating_bibliographies#quick_copy>
 
 <https://forums.zotero.org/discussion/87285/export-bibtex-to-clipboard>
-
-### Steam
-
-#### 解决steam字体在高分屏下过小的问题
-
-```shell
-flatpak install com.github.tchx84.Flatseal
-```
-
-然后在启动器里打开`Flatseal`，在`Environment`里加上：
-
-```shell
-STEAM_FORCE_DESKTOPUI_SCALING=2
-```
-
-3000x2000的屏幕分辨率建议用`2`。
-
-参考：
-
-<https://superuser.com/questions/1762685/font-size-in-flatpak-obs>
-
-<https://forum.manjaro.org/t/steam-fontsize-to-small-the-solution/142572/7>
 
 ### Seafile
 
@@ -239,10 +265,6 @@ flatpak install io.github.NhekoReborn.Nehko
 
 包名是`org.telegram.desktop`。需要注销重新登录才能在deepin启动器里找到。需要配置代理，用`flatpak run --command=sh`的方法好像没用，貌似要在应用内设置代理。
 
-### 腾讯会议
-
-包名是`com.tencent.wemeet`。启动器里打不开，但是可以通过`flatpak run com.tencent.wemeet`打开。
-
 ### torbrowser-launcher
 
 launcher能打开，但是在系统启动器死活打不开tor browser。。。
@@ -272,7 +294,3 @@ launcher能打开，但是在系统启动器死活打不开tor browser。。。
 在浏览器里没法把自己设置为默认浏览器了。但是一般可以在系统设置里手动设置。Deepin是在`设置->默认程序->网页`。
 
 我这里一开始是正常的，但是过了几天之后显示就出问题了。
-
-### WPS
-
-国产办公软件。但是flatpak上只有英文版的，而且不能登录。
