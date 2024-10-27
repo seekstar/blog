@@ -579,6 +579,8 @@ xxx\tablefootnote{Maximum allowed IOPS of gp3}
 \pagestyle{empty}
 ```
 
+如果只需要去掉前几页的页码：[目录页和摘要页不设置页码](https://blog.csdn.net/weixin_42141390/article/details/110250250)
+
 ### 调整页边距
 
 ```tex
