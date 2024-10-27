@@ -27,7 +27,13 @@ ip addr add $prefix.1/24 dev $indev
 
 ```shell
 apt install isc-dhcp-server
-cp /etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd.conf.$(date +%s%N)
+
+# 我们不需要IPv6的DHCP，因为IPv6有Router Advertisements
+# https://tomsalmon.eu/2020/02/isc-dhcp-server-disable-dhcpv6-debian-9/
+mv /etc/default/isc-dhcp-server /etc/default/isc-dhcp-server.$(date +%s%N)
+echo INTERFACESv4=\"$indev\" > /etc/default/isc-dhcp-server
+
+mv /etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd.conf.$(date +%s%N)
 
 cat > /etc/dhcp/dhcpd.conf <<EOF
 option domain-name-servers 223.6.6.6;
