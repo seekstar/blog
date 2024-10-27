@@ -11,7 +11,7 @@ tags: 学习笔记
 
 ## 技巧
 
-1. 在enumerate中的item后换行用\par，这样与正文之间会有一条缝隙。
+1. 在enumerate中的item后换行用`\par`，这样与正文之间会有一条缝隙。
 ![在这里插入图片描述](latex个人学习笔记/20200402205824533.png)
 如果使用`\\`换行则标题与正文之间没有缝隙，很难看
 ![在这里插入图片描述](latex个人学习笔记/20200402205909906.png)
@@ -930,6 +930,12 @@ Bibliography里URL不要用`url = {https://xxx}`的形式，要用`note = {\url{
 ```
 
 参考：<https://tex.stackexchange.com/a/150206/256676>
+
+## 其他
+
+`\ \par`可以避免换行时underfull warning
+
+取消section前编号: `\section*{...}`
 
 ## 异常处理
 
