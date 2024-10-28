@@ -899,11 +899,44 @@ fg
 
 Bibliography里URL不要用`url = {https://xxx}`的形式，要用`note = {\url{https://xxx}}`的形式，因为有些论文模板不认前者。
 
+让URL自动换行：
+
+```tex
+% https://tex.stackexchange.com/questions/3033/forcing-linebreaks-in-url
+\PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
+\def\UrlBreaks{%
+  \do\/%
+  \do\a\do\b\do\c\do\d\do\e\do\f\do\g\do\h\do\i\do\j\do\k\do\l%
+     \do\m\do\n\do\o\do\p\do\q\do\r\do\s\do\t\do\u\do\v\do\w\do\x\do\y\do\z%
+  \do\A\do\B\do\C\do\D\do\E\do\F\do\G\do\H\do\I\do\J\do\K\do\L%
+     \do\M\do\N\do\O\do\P\do\Q\do\R\do\S\do\T\do\U\do\V\do\W\do\X\do\Y\do\Z%
+  \do0\do1\do2\do3\do4\do5\do6\do7\do8\do9\do=\do/\do.\do:%
+  \do\*\do\-\do\~\do\'\do\"\do\-}
+\Urlmuskip=0mu plus 0.1mu
+```
+
+让URL使用跟正文一样的字体：
+
+```tex
+\renewcommand{\UrlFont}{\normalfont}
+```
+
 ### 不cite也列出参考文献
 
 `\nocite{xxx}`来强制列出单个参考文献。`\nocite{*}`强制列出所有参考文献。
 
 来源：<https://tex.stackexchange.com/questions/17653/how-to-list-all-bibliography-entries-without-citing>
+
+## 指定字体
+
+### Linux Libertine
+
+```tex
+% https://www.tug.org/FontCatalogue/linuxlibertine/
+\usepackage{libertine}
+\usepackage{libertinust1math}
+\usepackage[T1]{fontenc}
+```
 
 ### 去掉标题
 
