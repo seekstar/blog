@@ -26,7 +26,25 @@ gdb --pid xxx
 
 ## print / p
 
-打印变量的值
+打印变量的值：
+
+```text
+p 变量
+```
+
+以数组的方式打印指针：
+
+```text
+p *array@len
+```
+
+用16进制打印：
+
+```text
+p/x *array@len
+```
+
+来源：<https://stackoverflow.com/a/64055978>
 
 ## backtrace / bt
 

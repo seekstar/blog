@@ -4,6 +4,28 @@ date: 2023-03-22 20:28:45
 tags:
 ---
 
+## Debug: attach到某个进程
+
+安装插件：`WebFreak`的`Native Debug`
+
+在`.vscode/launch.json`里：
+
+```json
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Attach to PID",
+            "type": "gdb",
+            "request": "attach",
+            "target": "要attach到的PID",
+            "cwd": "${workspaceRoot}",
+            "valuesFormatting": "parseText"
+        }
+    ]
+}
+```
+
 ## 只对特定语言开启保存时自动格式化
 
 例如只对js开启保存时自动格式化：
