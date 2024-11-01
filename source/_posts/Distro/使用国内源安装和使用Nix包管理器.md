@@ -94,7 +94,16 @@ sudo systemctl restart nix-daemon.service
 
 安装：`nix-env -iA 源.包名`
 
+查看已经安装的包：`nix-env -q`
+
 卸载：`nix-env -e 包名`
+
+升级包：
+
+```shell
+nix-channel --update
+nix-env -u 包名
+```
 
 一些`nix-env`的选项：
 
@@ -105,6 +114,8 @@ sudo systemctl restart nix-daemon.service
 - `-e`: `--uninstall`
 
 - `-q`: `--query`。默认`--installed`，即只查询已安装的包。也可以加上`-a`，即`--availble`，`nix-env -qa`表示打印源的所有包的列表，`nix-env -qa xxx`表示搜索。但是这个好慢，而且还不能模糊搜索，不如在这里搜索：<https://search.nixos.org/packages>
+
+- `-u`: `--upgrade`
 
 垃圾回收：`nix-collect-garbage -d`。
 
