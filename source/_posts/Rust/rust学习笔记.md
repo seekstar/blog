@@ -67,6 +67,15 @@ rm ~/.cargo/.package-cache
 
 <https://stackoverflow.com/questions/47565203/cargo-build-hangs-with-blocking-waiting-for-file-lock-on-the-registry-index-a#answer-53066206>
 
+### publish
+
+[Publishing on crates.io](https://doc.rust-lang.org/cargo/reference/publishing.html)
+
+```shell
+cargo login
+cargo publish
+```
+
 ## 标准库
 
 <https://stackoverflow.com/questions/45384928/is-there-any-way-to-look-up-in-hashset-by-only-the-value-the-type-is-hashed-on>
@@ -114,7 +123,7 @@ fn pop(m: &mut BTreeMap<u32, Vec<u32>>, key: u32) -> Option<u32> {
         btree_map::Entry::Vacant(_) => {
             None
         }
-    }    
+    }
 }
 fn main() {
     let mut m: BTreeMap<u32, Vec<u32>> = BTreeMap::new();
@@ -592,7 +601,7 @@ error[E0502]: cannot borrow `*vec` as mutable because it is also borrowed as imm
 2  |     if let Some(s) = vec.last() { // borrows vec
    |                      ---------- immutable borrow occurs here
 ...
-6  |         return s; 
+6  |         return s;
    |                - returning this value requires that `*vec` is borrowed for `'a`
 ...
 11 |     vec.push("".to_string()); // ERROR
@@ -607,9 +616,9 @@ error[E0502]: cannot borrow `*vec` as mutable because it is also borrowed as imm
 fn last_or_push<'a>(vec: &'a mut Vec<String>) -> &'a String {
     if !vec.is_empty() {
         let s = vec.last().unwrap(); // borrows vec
-        return s; // extends the borrow 
+        return s; // extends the borrow
     }
-    
+
     // In this branch, the borrow has never happened, so even
     // though it is extended, it doesn't cover this call;
     // the code compiles.

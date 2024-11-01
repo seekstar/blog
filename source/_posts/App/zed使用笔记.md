@@ -60,12 +60,27 @@ chmod +x zed-remote-server-stable-linux-x86_64
 
 ## 常用快捷键
 
-完整的快捷键列表：<https://zed.dev/docs/key-bindings>。这里面`⌘`对应`ctrl`
+完整的快捷键列表：<https://zed.dev/docs/key-bindings>。注意，这里面`⌘`对应`ctrl`而不是Super/Win键。
+
+完整的默认快捷键配置：<https://github.com/zed-industries/zed/blob/main/assets/keymaps/default-macos.json>
 
 | Command | Target | Default shortcut |
 | ---- | ---- | ---- |
 | `Toggle focus` | `Terminal Panel` | `` ctrl+` `` |
 | `Toggle filters` | `Project Search`，在项目中全局搜索 | `ctrl+shift+f` |
+
+`Newline below`默认的快捷键是`⌘ + Enter`，在Linux上本来对应`ctrl+Enter`。但这个快捷键被`assistant::InlineAssist`占用了。所以需要在`~/.config/zed/keymap.json`里手动指定一下：
+
+```json
+[
+  {
+    "context": "Editor",
+    "bindings": {
+      "ctrl-enter": "editor::NewlineBelow"
+    }
+  }
+]
+```
 
 ## 目前的问题
 

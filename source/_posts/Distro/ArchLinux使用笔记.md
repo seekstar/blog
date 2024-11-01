@@ -17,7 +17,7 @@ tags:
 然后执行`nvidia-smi`，有这种输出就说明安装成功了：
 
 ```text
-Sat Dec 10 11:54:20 2022       
+Sat Dec 10 11:54:20 2022
 +-----------------------------------------------------------------------------+
 | NVIDIA-SMI 525.60.11    Driver Version: 525.60.11    CUDA Version: 12.0     |
 |-------------------------------+----------------------+----------------------+
@@ -29,7 +29,7 @@ Sat Dec 10 11:54:20 2022
 | N/A   74C    P0    50W /  N/A |     67MiB /  4096MiB |     94%      Default |
 |                               |                      |                  N/A |
 +-------------------------------+----------------------+----------------------+
-                                                                               
+
 +-----------------------------------------------------------------------------+
 | Processes:                                                                  |
 |  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
@@ -161,3 +161,11 @@ yay -S wechat-uos
 根目录权限有时会变成777。可能是AUR里的`wps-office-cn`导致的：<https://aur.archlinux.org/packages/wps-office-cn?O=40#comment-836049>。可以用flatpak安装国际版的WPS。教程：{% post_link App/'flatpak教程' %}
 
 权限修复教程：{% post_link Distro/'ArchLinux修复系统目录和文件的权限' %}
+
+## Wayland存在的一些问题
+
+ArchLinux在某次升级之后就默认wayland了，但会导致一些问题。如果有需要的话可以在登录界面的左上角选择X11 session。
+
+- 腾讯会议无法共享屏幕。
+
+- keepass桌面客户端不能执行auto-type：<https://keepass.info/help/kb/autotype_wayland.html>
