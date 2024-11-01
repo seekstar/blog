@@ -58,6 +58,15 @@ chmod +x zed-remote-server-stable-linux-x86_64
 
 然后再在zed里尝试连接到服务器就好了。
 
+## 常用快捷键
+
+完整的快捷键列表：<https://zed.dev/docs/key-bindings>。这里面`⌘`对应`ctrl`
+
+| Command | Target | Default shortcut |
+| ---- | ---- | ---- |
+| `Toggle focus` | `Terminal Panel` | `` ctrl+` `` |
+| `Toggle filters` | `Project Search`，在项目中全局搜索 | `ctrl+shift+f` |
+
 ## 目前的问题
 
 - remote上只能通过`Open Folder`来打开工程，不能像vscode一样在terminal里`zed folder`来打开。
@@ -65,6 +74,8 @@ chmod +x zed-remote-server-stable-linux-x86_64
 - 只有git blame，没有vscode那样的git功能。
 
 - formatter似乎不能在remote用: <https://github.com/zed-industries/zed/issues/13527>
+
+- 不能隐藏terminal panel
 
 ## 已经解决的问题
 
