@@ -660,3 +660,143 @@ unsafe impl<T> Sync for ThreadSafePtr<T> {}
 我觉得最好的实现应该是让`drop`拿ownership，然后在编译器里特殊处理这个case，在`drop`的最后不再调用`drop`。但是rust核心开发者觉得这个特性需要对编译器做太多修改：<https://github.com/rust-lang/rust/issues/4330>
 
 ### 如果有自定义的`Drop::drop`，就不能单独拿某个field的ownership
+
+### Copy一个struct的mutable reference field时会mutable borrow这个struct
+
+例如：
+
+```rs
+struct S<'a> {
+    m: &'a mut i32,
+}
+impl<'a> S<'a> {
+    fn f1<'b>(&'b mut self) -> &'a mut i32 {
+        let new_m: &'a mut i32 = self.m;
+        new_m
+    }
+}
+fn f2(m: &mut i32) -> &mut i32 {
+    let mut s = S { m };
+    s.f1()
+}
+fn main() {
+    let mut m = 2;
+    *f2(&mut m) = 3;
+    println!("{}", m);
+}
+```
+
+会报错：
+
+```text
+error: lifetime may not live long enough
+ --> test.rs:6:20
+  |
+4 | impl<'a> S<'a> {
+  |      -- lifetime `'a` defined here
+5 |     fn f1<'b>(&'b mut self) -> &'a mut i32 {
+  |           -- lifetime `'b` defined here
+6 |         let new_m: &'a mut i32 = self.m;
+  |                    ^^^^^^^^^^^ type annotation requires that `'b` must outlive `'a`
+  |
+  = help: consider adding the following bound: `'b: 'a`
+
+error: aborting due to 1 previous error
+```
+
+显然我们不能改成`'b: 'a`，因为`s`是个局部变量，它的生命周期`'b`比`'a`短。
+
+出现这个报错的原因是`let new_m = self.m`并不是单纯的copy，而是将`*self.m`的写入权限转让给了`new_m`。而编译器需要保证在写入权限交还给`self`前，`self`不能再被读或者写。于是编译器就让`new_m` mutable reference了`self`，这样就可以利用borrow机制保证这一点。而`new_m` mutable reference `self`就需要保证`self`活得比`new_m`长。
+
+我认为我们可以引入一个新概念：`mutability transfer`。在`let new_m = self.m`时，我们说`the mutability of self is transferred to new_m`。当一个object的状态处于`mutable transferred`时，不允许读写之。这样就避免了影响`new_m`的lifetime。
+
+目前遇到这种情况，只能让`f1` consume `self`：
+
+```rs
+struct S<'a> {
+    m: &'a mut i32,
+}
+impl<'a> S<'a> {
+    fn f1(self) -> &'a mut i32 {
+        let new_m: &'a mut i32 = self.m;
+        new_m
+    }
+}
+fn f2(m: &mut i32) -> &mut i32 {
+    let s = S { m };
+    s.f1()
+}
+fn main() {
+    let mut m = 2;
+    *f2(&mut m) = 3;
+    println!("{}", m);
+}
+```
+
+值得注意的是，copy一个immutable reference field是真正的copy，不需要reference整个struct，所以不会有这个问题。例如下面这段代码就可以通过编译：
+
+```rs
+struct S<'a> {
+    m: &'a i32,
+}
+impl<'a> S<'a> {
+    fn f1<'b>(&'b self) -> &'a i32 {
+        let new_m: &'a i32 = self.m;
+        new_m
+    }
+}
+fn f2(m: &i32) -> &i32 {
+    let s = S { m };
+    s.f1()
+}
+fn main() {
+    let m = 2;
+    println!("{}", f2(&m));
+}
+```
+
+但是，如果把`S::m`改成`mutable reference`:
+
+```rs
+struct S<'a> {
+    m: &'a mut i32,
+}
+impl<'a> S<'a> {
+    fn f1<'b>(&'b self) -> &'a i32 {
+        let new_m: &'a i32 = self.m;
+        new_m
+    }
+}
+fn f2(m: &mut i32) -> &i32 {
+    let s = S { m };
+    s.f1()
+}
+fn main() {
+    let mut m = 2;
+    println!("{}", f2(&mut m));
+}
+```
+
+即使是copy成一个immutable reference，也需要转让写入权限，所以就需要reference整个`self`，从而导致跟上面一样的lifetime的问题：
+
+```text
+error: lifetime may not live long enough
+ --> test.rs:6:20
+  |
+4 | impl<'a> S<'a> {
+  |      -- lifetime `'a` defined here
+5 |     fn f1<'b>(&'b self) -> &'a i32 {
+  |           -- lifetime `'b` defined here
+6 |         let new_m: &'a i32 = self.m;
+  |                    ^^^^^^^ type annotation requires that `'b` must outlive `'a`
+  |
+  = help: consider adding the following bound: `'b: 'a`
+
+error: aborting due to 1 previous error
+```
+
+这时也只能通过让`f1` consume `self`来解决问题：
+
+```rs
+fn f1<'b>(self) -> &'a i32 {
+```
