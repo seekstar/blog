@@ -51,7 +51,10 @@ session is restarted.
 flatpak search xxx
 flatpak install xxx
 flatpak uninstall xxx
-flatpak list # 列出已安装的包
+# 删除没有被任何application使用的runtime和extension
+flatpak uninstall --unused
+# 列出已安装的包
+flatpak list
 flatpak run 包名(比如com.jgraph.drawio.desktop)
 # 查看源列表
 flatpak remotes
