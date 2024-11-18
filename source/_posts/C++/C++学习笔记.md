@@ -260,9 +260,9 @@ C字符串是以`\0`结尾的`const char *`。
 
 ```c
 int       atoi( const char* str );
-	(1) 	
+	(1)
 long      atol( const char* str );
-	(2) 	
+	(2)
 long long atoll( const char* str );
 	(3) 	(since C++11)
 ```
@@ -501,22 +501,22 @@ int main() {
 输出：
 
 ```text
-123 
+123
 position: 1
 length: 3
-456 
+456
 position: 2
 length: 3
-789 
+789
 position: 4
 length: 3
-452 
+452
 position: 2
 length: 3
 
-123 
-456 
-789 
+123
+456
+789
 452
 ```
 
@@ -1210,7 +1210,7 @@ Available options:
   --use_direct_reads arg (=1)
   --db_path arg                         Path to database
   --level0_file_num_compaction_trigger arg
-                                        Number of files in level-0 when 
+                                        Number of files in level-0 when
                                         compactions start
 ```
 
@@ -1345,4 +1345,8 @@ T && && = T &&
 
 ## 已知的问题
 
-不能O(1)地实现`std::vector<char>`和`std::string`的互相转换。
+## 不能O(1)地实现`std::vector<char>`和`std::string`的互相转换。
+
+## 无法把成员变量的初始化推迟到constructor body
+
+<https://stackoverflow.com/questions/2464296/is-it-possible-to-defer-member-initialization-to-the-constructor-body>

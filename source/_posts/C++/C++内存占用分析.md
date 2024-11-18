@@ -252,6 +252,18 @@ Trace recursion detected - corrupt data file?
 
 参考：<https://wanghenshui.github.io/2019/06/02/valgrind-rocksdb.html>
 
+### 内存泄漏分析
+
+```shell
+valgrind --leak-check=full --log-file=valgrind.txt executable args...
+```
+
+- `--leak-check=full`: each individual leak will be shown in detail.
+
+- （可选）`--log-file=文件路径`: 将valgrind的输出写到指定文件。
+
+参考：<https://stackoverflow.com/questions/5134891/how-do-i-use-valgrind-to-find-memory-leaks>
+
 ## libtcmalloc
 
 官方文档：<https://goog-perftools.sourceforge.net/doc/heap_profiler.html>
