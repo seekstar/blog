@@ -4,7 +4,7 @@ date: 2023-02-23 21:37:44
 tags:
 ---
 
-XFCE是一款轻量级桌面环境，但是上手并不容易。本文以ArchLinux上的XFCE为例介绍其基础用法。
+XFCE是一款轻量级桌面环境，但是上手并不容易。本文介绍其基础用法。
 
 ## 安装
 
@@ -29,6 +29,10 @@ sudo systemctl set-default graphical.target
 ```
 
 参考：[Centos7更改默认启动桌面（或命令行）模式](https://www.shuzhiduo.com/A/mo5k1m8Ezw/)
+
+## 调整缩放
+
+{% post_link App/'xfce高分屏缩放' %}
 
 ## 设置快捷键
 
@@ -59,7 +63,10 @@ sudo pacman -S --needed pipewire-pulse
 ### 网络管理
 
 ```shell
+# ArchLinux
 sudo pacman -S --needed network-manager-applet
+# Deepin V23
+sudo apt install network-manager-gnome
 ```
 
 然后启动`nm-applet`：`nohup nm-applet &`，托盘中就会出现网络管理的托盘项了。logout再login之后它会被自动启动。
@@ -173,6 +180,13 @@ nohup xfce4-screensaver &
 ```shell
 # ArchLinux
 sudo pacman -S xfce4-clipman-plugin
+# Deepin V23
+sudo apt install xfce4-clipman
+```
+
+```shell
+# Deepin V23
+nohup xfce4-clipman &
 ```
 
 弹出所有剪切板历史的命令：
