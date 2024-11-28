@@ -40,3 +40,9 @@ apt-rdepends -r package_name
 `--state-follow=Installed --state-show=Installed`: 只查看已安装的包。例如：查看哪些已安装的包依赖这个包：`apt-rdepends -r package_name --state-follow=Installed --state-show=Installed`
 
 参考：[如何查询摸个版本包的依赖关系和被依赖关系](https://blog.csdn.net/weixin_56286468/article/details/131572964)
+
+## 查看手动安装的包
+
+```shell
+apt-mark showmanual
+```
