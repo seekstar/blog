@@ -6,6 +6,8 @@ tags:
 
 ## 安装
 
+### 官方脚本
+
 ```shell
 # stable版本。升级也是这个命令
 curl -f https://zed.dev/install.sh | sh
@@ -13,18 +15,34 @@ curl -f https://zed.dev/install.sh | sh
 curl -f https://zed.dev/install.sh | ZED_CHANNEL=preview sh
 ```
 
-官方脚本安装的zed的命令名字就叫`zed`。
+安装的zed的命令名字就叫`zed`。
 
-也可以用包管理器安装，不过好像只能安装stable版本：
+### flatpak
+
+```shell
+flatpak install dev.zed.Zed
+```
+
+### `pacman`
 
 ```shell
 # ArchLinux。命令名字叫zeditor
 sudo pacman -S zed
-# Nix。目前只有unstable channel有
+```
+
+### Nix
+
+```shell
+# 目前只有unstable channel有
+nix-channel --update
 nix-env -iA nixpkgs.zed-editor
 ```
 
-然后输入命令`zed`或者`zeditor`就可以打开zed编辑器。如果报错`VulkanError(ERROR_INCOMPATIBLE_DRIVER)`，则需要根据自己的硬件配置安装相应的`vulkan`包。
+会调用cargo编译一堆东西
+
+## `VulkanError`
+
+输入命令`zed`或者`zeditor`就可以打开zed编辑器。如果报错`VulkanError(ERROR_INCOMPATIBLE_DRIVER)`，则需要根据自己的硬件配置安装相应的`vulkan`包。
 
 例如我用的是Intel集显，那么就安装`vulkan-intel`:
 
@@ -47,13 +65,13 @@ sudo pacman -S vulkan-intel
 3. 手动下载server。首先在github上找到要下载的版本：<https://github.com/zed-industries/zed/releases>，然后在服务器上手动下载：
 
 ```shell
-version=v0.159.7
+version=0.163.2
 channel=stable
 cd ~/.zed_server/
-wget https://github.com/zed-industries/zed/releases/download/$version/zed-remote-server-linux-x86_64.gz
+wget https://github.com/zed-industries/zed/releases/download/v$version/zed-remote-server-linux-x86_64.gz
 gzip -d zed-remote-server-linux-x86_64.gz
-mv zed-remote-server-linux-x86_64 zed-remote-server-$channel-linux-x86_64
-chmod +x zed-remote-server-stable-linux-x86_64
+mv zed-remote-server-linux-x86_64 zed-remote-server-$channel-$version
+chmod +x zed-remote-server-$channel-$version
 ```
 
 然后再在zed里尝试连接到服务器就好了。
@@ -86,7 +104,7 @@ chmod +x zed-remote-server-stable-linux-x86_64
 
 - remote上只能通过`Open Folder`来打开工程，不能像vscode一样在terminal里`zed folder`来打开。
 
-- 只有git blame，没有vscode那样的git功能。
+- 只有git blame，没有vscode那样的git功能。可以先用lazygit凑活一下。
 
 - formatter似乎不能在remote用: <https://github.com/zed-industries/zed/issues/13527>
 
