@@ -106,7 +106,7 @@ deb https://mirrors.tuna.tsinghua.edu.cn/debian-security bullseye-security main 
 `/etc/apt/sources.list.d/armbian.list`:
 
 ```text
-deb http://apt.armbian.com bullseye main bullseye-utils bullseye-desktop
+deb https://mirrors.tuna.tsinghua.edu.cn/armbian bullseye main bullseye-utils bullseye-desktop
 ```
 
 ```shell
