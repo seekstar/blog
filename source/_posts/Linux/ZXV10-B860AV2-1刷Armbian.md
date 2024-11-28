@@ -122,3 +122,33 @@ chmod +s /usr/bin/sudo
 chown root:root -R /etc/sudoers.d/
 chmod 700 -R /var/lib/sudo/lectured/
 ```
+
+## 升级Debian 11到Debian 12
+
+`/etc/apt/sources.list`:
+
+```text
+deb http://mirrors.tuna.tsinghua.edu.cn/debian bookworm main contrib non-free
+deb http://mirrors.tuna.tsinghua.edu.cn/debian bookworm-updates main contrib non-free
+deb http://mirrors.tuna.tsinghua.edu.cn/debian bookworm-backports main contrib non-free
+deb https://mirrors.tuna.tsinghua.edu.cn/debian-security bookworm-security main contrib non-free
+```
+
+`/etc/apt/sources.list.d/armbian.list`:
+
+```text
+deb https://mirrors.tuna.tsinghua.edu.cn/armbian bookworm main bookworm-utils bookworm-desktop
+```
+
+可能需要把`armbian-config.list`删掉，不然`apt update`可能会报未签名的错。反正里面的`armbian-config`大概用不上：
+
+```shell
+sudo mv armbian-config.list /root/armbian-config.list-$(date +%s%N)
+```
+
+然后就可以更新了（可能会断网，最好在tmux里跑）：
+
+```shell
+sudo apt update
+sudo apt dist-upgrade
+```
