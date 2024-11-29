@@ -8,7 +8,9 @@ Deepin V23
 
 ## 换源
 
-官方源很慢。可以换成清华源。
+官方源很慢。镜像列表：<https://www.deepin.org/zh/mirrors/packages/>
+
+可以换成清华源。
 
 `/etc/apt/sources.list`
 
