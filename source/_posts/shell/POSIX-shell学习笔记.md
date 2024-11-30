@@ -369,11 +369,11 @@ bash中可以`wait -n`来等待任意一个后台任务完成，但POSIX标准�
 
 ```sh
 #!/usr/bin/env sh
-sleep 10 &
-sleep 3 &
 # "wait -n" is not available in POSIX
 trap "exit 1" CHLD
 trap "pkill -P $$; exit 1" EXIT
+sleep 10 &
+sleep 3 &
 wait
 ```
 
@@ -385,16 +385,36 @@ wait
 
 ```sh
 #!/usr/bin/env sh
+# "wait -n" is not available in POSIX
+trap "exit 1" CHLD
+trap "pkill -P $$; exit 1" EXIT
 (
     setsid sh -c "sleep 10 | sleep 10" &
     trap "kill -TERM -$!" TERM
     wait
 ) &
 sleep 3 &
-# "wait -n" is not available in POSIX
-trap "exit 1" CHLD
-trap "pkill -P $$; exit 1" EXIT
 wait
+```
+
+但是需要注意的是，`$$`在subshell中会被展开为shell的PID，而不是subshell的PID。因此如果在subshell中，需要这样：
+
+```sh
+#!/usr/bin/env sh
+(
+	# https://unix.stackexchange.com/a/484464
+	pid=$(exec sh -c 'echo "$PPID"')
+	# "wait -n" is not available in POSIX
+	trap "exit 1" CHLD
+	trap "pkill -P $pid; exit 1" EXIT
+	(
+		setsid sh -c "sleep 10 | sleep 10" &
+		trap "kill -TERM -$!" TERM
+		wait
+	) &
+	sleep 3 &
+	wait
+)
 ```
 
 {% spoiler （不推荐）把它们都放进一个process group里，最后一起杀掉 %}
