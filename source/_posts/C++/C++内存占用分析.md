@@ -140,8 +140,15 @@ sudo apt install heaptrack
 heaptrack 可执行文件 参数...
 ```
 
+常用参数：
+
+```text
+-l [ --print-leaks ] [=arg(=1)] (=0)
+      Print backtraces to leaked memory allocations.
+```
+
 ```shell
-heaptrack_print xxx.gz > report
+heaptrack_print -l 1 xxx.gz > report
 ```
 
 有几个section:
@@ -164,6 +171,10 @@ heaptrack_print xxx.gz > report
 <内存大小> consumed over <数量> calls from:
 调用栈3...
 ...
+
+### `MEMORY LEAKS`
+
+如果开启了`--print-leaks`就会打印这个section。heaptrack只知道哪些内存最终没有被释放，并不知道这些内存具体是怎么泄漏的。所以在这个section中，heaptrack列出没有被释放的这些内存是在哪里分配的。
 
 ### `MOST TEMPORARY ALLOCATIONS`
 
