@@ -330,7 +330,7 @@ sleep 1000000
 ```sh
 ./test.sh &
 pid=$!
-sleep 1 
+sleep 1
 kill -TERM $pid
 ```
 
@@ -432,6 +432,54 @@ setsid sh -c "
 但是这个方法因为会把自己杀掉，所以会打印一行`Terminated`。
 
 {% endspoiler %}
+
+## `case`
+
+```shell
+case 表达式 in
+	正则1)
+		命令...
+		;;
+	正则2)
+		命令...
+		;;
+	正则3|正则4)
+		命令...
+		;;
+	*)
+		默认命令...
+		;;
+esac
+```
+
+## Conditional substitution
+
+```shell
+${VAR:+内容}
+```
+
+如果VAR存在，它就会展开成`内容`，如果VAR不存在，就展开成空的。
+
+跟case配合可以实现往`PATH`里添加路径：
+
+```shell
+append_path () {
+    case ":$PATH:" in
+        *:"$1":*)
+            ;;
+        *)
+            PATH="${PATH:+$PATH:}$1"
+    esac
+}
+```
+
+如果`PATH`不存在，`${PATH:+$PATH:}$1`就展开为`$1`，如果`PATH`存在，就展开为`$PATH:$1`。
+
+## unset
+
+文档：<https://pubs.opengroup.org/onlinepubs/009696699/utilities/unset.html>
+
+默认是`unset`环境变量。但如果是要unset函数，要用`unset -f`。
 
 ## 存在的问题
 
