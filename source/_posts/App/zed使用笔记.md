@@ -106,10 +106,10 @@ chmod +x zed-remote-server-$channel-$version
 
 - 只有git blame，没有vscode那样的git功能。可以先用lazygit凑活一下。
 
-- formatter似乎不能在remote用: <https://github.com/zed-industries/zed/issues/13527>
-
 - 不能隐藏terminal panel
 
 ## 已经解决的问题
 
 - 不能preview markdown
+
+- formatter不能在remote用: <https://github.com/zed-industries/zed/issues/13527>
