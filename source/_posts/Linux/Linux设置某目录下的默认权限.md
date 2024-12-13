@@ -4,6 +4,13 @@ date: 2022-11-16 21:18:52
 tags:
 ---
 
+首先安装`setfacl`:
+
+```shell
+# Debian
+sudo apt install acl
+```
+
 （可选）首先设置`setgid`，使得在这个目录下新建的文件和目录都继承这个目录的组：
 
 ```shell

@@ -100,6 +100,34 @@ chmod +x zed-remote-server-$channel-$version
 ]
 ```
 
+## `settings.json`
+
+官方文档：<https://zed.dev/docs/configuring-zed>
+
+### 常用配置项
+
+- [soft_wrap](https://zed.dev/docs/configuring-zed#soft-wrap)
+
+### 按语言配置
+
+例子：
+
+```json
+{
+  ...
+  "languages": {
+    "Markdown": {
+      "tab_size": 4,
+      "hard_tabs": true,
+      "soft_wrap": "editor_width"
+    }
+  }
+  ...
+}
+```
+
+支持的语言列表：<https://zed.dev/docs/languages>
+
 ## 目前的问题
 
 - remote上只能通过`Open Folder`来打开工程，不能像vscode一样在terminal里`zed folder`来打开。
