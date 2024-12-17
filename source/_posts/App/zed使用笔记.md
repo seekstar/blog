@@ -61,11 +61,11 @@ sudo pacman -S vulkan-intel
 如果服务器端的`zed`下载卡住的话，可以新开一个终端ssh到服务器，然后在上面手动把服务端下载下来：
 
 1. `ps -ef | grep zed`，把所有之前`zed`自动创建的下载进程杀掉。
-2. 删除以前没下载完的文件：`rm ~/.zed_server/*`
-3. 手动下载server。首先在github上找到要下载的版本：<https://github.com/zed-industries/zed/releases>，然后在服务器上手动下载：
+2. 删除以前没下载完的文件：`rm ~/.zed_server/*.gz`
+3. 手动下载server：
 
 ```shell
-version=0.163.2
+version=0.165.4
 channel=stable
 cd ~/.zed_server/
 wget https://github.com/zed-industries/zed/releases/download/v$version/zed-remote-server-linux-x86_64.gz
