@@ -31,7 +31,7 @@ flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flat
 会有这样一个提示：
 
 ```shell
-Note that the directories 
+Note that the directories
 
 '/var/lib/flatpak/exports/share'
 '/home/searchstar/.local/share/flatpak/exports/share'
@@ -138,9 +138,31 @@ STEAM_FORCE_DESKTOPUI_SCALING=2
 
 本地化的笔记。支持webdav同步。
 
+### Inkscape
+
+`org.inkscape.Inkscape`
+
+矢量绘图软件。
+
 ### KeePassXC
 
 密码管理器。要把apt安装的旧版卸载之后，Deepin启动器上的才会变成flatpak的版本。
+
+### LibreOffice
+
+`org.libreoffice.LibreOffice`
+
+里面的`LibreOffice Draw`是很棒的PDF编辑工具。
+
+### MyPaint
+
+可以当草稿纸用。但是写多了字之后会很卡。
+
+相关：<https://seekstar.github.io/2021/02/04/linux%E8%8D%89%E7%A8%BF%E7%BA%B8%E8%BD%AF%E4%BB%B6mypaint/>
+
+### Motrix
+
+p2p下载客户端。支持多种p2p链接。
 
 ### Plots
 
@@ -193,22 +215,6 @@ Mozilla出品的邮件客户端。
 PDF编辑软件。
 
 相关：<https://seekstar.github.io/2021/10/10/linux-pdf%E7%BC%96%E8%BE%91%E8%BD%AF%E4%BB%B6/>
-
-### MyPaint
-
-可以当草稿纸用。但是写多了字之后会很卡。
-
-相关：<https://seekstar.github.io/2021/02/04/linux%E8%8D%89%E7%A8%BF%E7%BA%B8%E8%BD%AF%E4%BB%B6mypaint/>
-
-### Motrix
-
-p2p下载客户端。支持多种p2p链接。
-
-### LibreOffice
-
-`org.libreoffice.LibreOffice`
-
-里面的`LibreOffice Draw`是很棒的PDF编辑工具。
 
 ### Zotero
 
