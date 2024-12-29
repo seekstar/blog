@@ -10,6 +10,10 @@ date: 2021-06-15 22:47:51
 - {% post_link App/Linux在PDF中插入文字 插入文字 %}
 - {% post_link Draw/inkscape裁剪 裁剪 %}
 
+## 更改语言
+
+`Edit` -> `Preferences` -> 选中`Interface`，`Language`设置在右边。默认是`系统默认`。
+
 ## P1 界面和基本图
 
 选择工具：快捷键`s`
@@ -147,6 +151,12 @@ hatch默认是黑色的。改变hatch的颜色：`Extensions > Colour > Replace 
 ## 预览灰度打印结果
 
 视图 -> 灰度
+
+## 大括号
+
+先画两条对称的直线，然后选中一条直线，点击上面的`Add curve handles`，然后调整圆点位置即可。
+
+具体参考：<https://graphicdesign.stackexchange.com/a/86348>
 
 ## 存在的问题
 
