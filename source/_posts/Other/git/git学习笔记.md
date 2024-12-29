@@ -142,6 +142,20 @@ git apply --3way /path/to/xxx.patch
 
 `--3way`: <https://stackoverflow.com/a/47756467/13688160>
 
+## 恢复某个被删除的stash
+
+```shell
+git log --graph --oneline --decorate $(git fsck --no-reflog | awk '/dangling commit/ {print $3}')
+```
+
+找到了之后：
+
+```shell
+git stash apply stash的哈希
+```
+
+来源：<https://stackoverflow.com/questions/89332/how-do-i-recover-a-dropped-stash-in-git>
+
 ## `git log`
 
 ### 查看所有commit的列表
@@ -273,7 +287,5 @@ git checkout <deletion commit hash>~1 -- <filename>
 来源：<https://www.git-tower.com/learn/git/faq/restoring-deleted-files>
 
 ## 其他
-
-<https://stackoverflow.com/questions/89332/how-do-i-recover-a-dropped-stash-in-git>
 
 <https://stackoverflow.com/questions/2928584/how-to-grep-search-committed-code-in-the-git-history>

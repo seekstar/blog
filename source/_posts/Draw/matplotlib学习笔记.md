@@ -60,6 +60,10 @@ yscale: <https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.yscale.html
 
 Whether the legend should be drawn on a patch (frame).
 
+- `handlelength`: float, default: `2.0`
+
+The length of the legend handles, in font-size units.
+
 - `handletextpad`: float, default: `0.8`
 
 The pad between the legend handle and text, in font-size units.
@@ -67,6 +71,16 @@ The pad between the legend handle and text, in font-size units.
 - `columnspacing`: float, default: `2.0`
 
 The spacing between columns, in font-size units.
+
+#### 增加线宽
+
+```py
+legend = plt.legend()
+for line in legend.get_lines():
+    line.set_linewidth(1.0)
+```
+
+来源：<https://stackoverflow.com/a/48296983/13688160>
 
 ### ['plt.ylabel'](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.ylabel.html)
 
