@@ -65,7 +65,7 @@ sudo pacman -S vulkan-intel
 3. 手动下载server：
 
 ```shell
-version=0.165.4
+version=0.168.2
 channel=stable
 cd ~/.zed_server/
 wget https://github.com/zed-industries/zed/releases/download/v$version/zed-remote-server-linux-x86_64.gz

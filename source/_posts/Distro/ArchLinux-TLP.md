@@ -20,6 +20,15 @@ sudo systemctl enable NetworkManager-dispatcher.service
 sudo systemctl start NetworkManager-dispatcher.service
 ```
 
+临时把电池充满电：
+
+```shell
+# BAT0是内置电池
+sudo tlp setcharge 65 100 BAT0
+```
+
+`man tlp`里写`sudo tlp fullcharge BAT0`也可以临时把电池充满，但是在我的Matebook X pro上好像不太管用。。。
+
 参考：
 
 [如何在Linux中使用TLP快速增加和优化笔记本电脑的电池寿命？](https://www.bilibili.com/read/cv10529669/)

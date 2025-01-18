@@ -32,11 +32,12 @@ tags: 学习笔记
 
 [Latex常用数学符号输入方法](https://jingyan.baidu.com/article/4b52d702df537efc5c774bc9.html)
 
-#### 杂项
+[LaTeX 对号和错号](https://blog.csdn.net/xovee/article/details/122179352)
+
+#### 数学
 
 | 名字 | 符号 | 代码 | 备注 |
 | ---- | ---- | ---- | ---- |
-| 自然连接 | $\bowtie$ | \\bowtie | [latex如何输入自然连接 ⋈](https://zhidao.baidu.com/question/616102177995456132.html) |
 | 并且 | $\wedge$ | \\wedge | |
 | 或者 | $\vee$ | \\vee | |
 | 并 | $\cup$ | \\cup | [Latex——交集、并集](https://blog.csdn.net/qq_36825778/article/details/102627703) |
@@ -53,6 +54,12 @@ tags: 学习笔记
 | 所以 | $\therefore$ | `\therefore` | [如何用LaTeX打出"因为"-∵、"所以"∴？](https://zhuanlan.zhihu.com/p/263053868) |
 | 数学期望 | $\mathbb{E}$ | `\mathbb{E}` | [Blackboard bold](https://en.wikipedia.org/wiki/Blackboard_bold) |
 | 正态分布 | $\mathcal{N}$ | `\mathcal{N}` | [`\mathcal`](https://proofwiki.org/wiki/Symbols:%5Cmathcal)是Latex用来写花体字(calligraphic)的内置指令 |
+
+#### 杂项
+
+| 名字 | 符号 | 代码 | 备注 |
+| ---- | ---- | ---- | ---- |
+| 自然连接 | $\bowtie$ | \\bowtie | [latex如何输入自然连接 ⋈](https://zhidao.baidu.com/question/616102177995456132.html) |
 | 波浪线 | $\sim$ | `\sim` | [latex 波浪线 ~](https://blog.csdn.net/robert_chen1988/article/details/78004436) |
 
 #### 各种箭头
@@ -666,25 +673,25 @@ xxx\tablefootnote{Maximum allowed IOPS of gp3}
 在`\maketitle`后面设定默认的代码样式。下面是适合黑白打印的设定：
 
 ```tex
-	\lstset{ %  
-		backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}  
+	\lstset{ %
+		backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
 		basicstyle=\ttfamily,			 %ttfamily is consolas
-		breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace  
-		breaklines=true,                 % sets automatic line breaking  
-		deletekeywords={...},            % if you want to delete keywords from the given language  
-		escapeinside={\%*}{*)},          % if you want to add LaTeX within your code  
-		extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8  
-		keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)  
-		morekeywords={*,...},            % if you want to add more keywords to the set  
-		numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)  
-		numbersep=5pt,                   % how far the line-numbers are from the code  
+		breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+		breaklines=true,                 % sets automatic line breaking
+		deletekeywords={...},            % if you want to delete keywords from the given language
+		escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+		extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+		keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+		morekeywords={*,...},            % if you want to add more keywords to the set
+		numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+		numbersep=5pt,                   % how far the line-numbers are from the code
 		numberstyle=\ttfamily,
-		rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))  
-		showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'  
-		showstringspaces=false,          % underline spaces within strings only  
-		showtabs=false,                  % show tabs within strings adding particular underscores  
-		stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered  
-		tabsize=4,                       % sets default tabsize to 2 spaces  
+		rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+		showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+		showstringspaces=false,          % underline spaces within strings only
+		showtabs=false,                  % show tabs within strings adding particular underscores
+		stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
+		tabsize=4,                       % sets default tabsize to 2 spaces
 		columns=fullflexible,
     }
 ```

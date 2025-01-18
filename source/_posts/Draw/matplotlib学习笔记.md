@@ -281,7 +281,7 @@ ax.grid(axis='y')
 
 ```py
 import numpy as np
-import matplotlib.pyplot as plt 
+import matplotlib.pyplot as plt
 from matplotlib import cm, colors
 
 ax = plt.gca()
@@ -357,6 +357,14 @@ plt.yticks([1e5, 1e6, 1e7], fontsize=8)
 # plt.yticks似乎会消除minor ticks，所以还得把它们补上
 # 其中numticks比较玄学，似乎大于3就行。这里直接设置成一个大数，就肯定不会有问题了。
 ax.yaxis.set_minor_locator(LogLocator(base=10, subs=np.arange(2, 10) * 0.1, numticks=233))
+```
+
+## 设置tick和坐标轴的间距
+
+来源：<https://stackoverflow.com/questions/2969867/how-do-i-add-space-between-the-ticklabels-and-the-axes>
+
+```py
+ax.tick_params(axis='y', which='major', pad=0.1)
 ```
 
 ## 疑难杂症
