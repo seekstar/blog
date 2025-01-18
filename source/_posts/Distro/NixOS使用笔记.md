@@ -96,6 +96,19 @@ sudo nixos-rebuild switch
 	services.desktopManager.plasma6.enable = true;
 ```
 
+### GNOME
+
+```nix
+	environment.systemPackages = with pkgs; [
+		# Need enable in "Extensions" of GNOME
+                gnomeExtensions.tray-icons-reloaded
+	];
+
+	# Enable the GNOME Desktop Environment.
+	services.xserver.displayManager.gdm.enable = true;
+	services.xserver.desktopManager.gnome.enable = true;
+```
+
 ### 中文输入法
 
 官方文档：<https://nixos.wiki/wiki/Fcitx5>
@@ -117,4 +130,12 @@ sudo nixos-rebuild switch
 	xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-kde ];
 	xdg.portal.enable = true;
 	services.flatpak.enable = true;
+```
+
+### 代理
+
+```nix
+	# Configure network proxy if necessary
+	networking.proxy.default = "http://127.0.0.1:端口/";
+	networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 ```
