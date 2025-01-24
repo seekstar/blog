@@ -64,6 +64,9 @@ sudo systemctl disable ufw
 ```shell
 sudo ufw allow <端口>
 sudo ufw delete allow <端口>
+# https://askubuntu.com/a/712917
+sudo ufw allow from AAA.BBB.CCC.DDD/EE to any port 11200:11299 proto tcp
+sudo ufw allow from AAA.BBB.CCC.DDD/EE to any port 11200:11299 proto udp
 ```
 
 ## 允许从某IP连接到某端口

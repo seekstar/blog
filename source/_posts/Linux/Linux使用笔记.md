@@ -29,6 +29,17 @@ yay -S linux-wifi-hotspot
 
 ## KDE Connect
 
+### 向局域网开放端口
+
+确保手机和电脑处于同一个局域网下。这里假设局域网的网段是`192.168.0.0/24`
+
+如果电脑在使用防火墙，比如UFW，需要向局域网开放KDE connect使用的端口：
+
+```shell
+sudo ufw allow from 192.168.0.0/24 to any port 1714:1764 proto udp
+sudo ufw allow from 192.168.0.0/24 to any port 1714:1764 proto tcp
+```
+
 ### 控制媒体播放
 
 可以用手机控制电脑上的媒体播放，比如前进和后退等。把电脑连在电视上的时候比较有用。
