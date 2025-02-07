@@ -14,7 +14,7 @@ tags:
 
 官方文档：<https://nixos.org/manual/nixos/stable/#sec-upgrading>
 
-比如升级到24.11，首先升级到
+比如升级到24.11
 
 ```shell
 # sudo nix-channel --add https://channels.nixos.org/nixos-24.11 nixos
@@ -83,7 +83,8 @@ sudo nixos-rebuild switch --upgrade
 修改之后要rebuild才能生效：
 
 ```shell
-sudo nixos-rebuild switch
+# 一般建议rebuild的时候把整个系统的组件版本升级到最新，防止出现兼容性问题
+sudo nixos-rebuild switch --upgrade
 ```
 
 ### KDE
@@ -101,7 +102,7 @@ sudo nixos-rebuild switch
 ```nix
 	environment.systemPackages = with pkgs; [
 		# Need enable in "Extensions" of GNOME
-                gnomeExtensions.tray-icons-reloaded
+		gnomeExtensions.tray-icons-reloaded
 	];
 
 	# Enable the GNOME Desktop Environment.
@@ -138,4 +139,13 @@ sudo nixos-rebuild switch
 	# Configure network proxy if necessary
 	networking.proxy.default = "http://127.0.0.1:端口/";
 	networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+```
+
+### 中文字体
+
+```nix
+	environment.systemPackages = with pkgs; [
+		# sans表示sans serif，即无衬线字体。粗体使用的就是无衬线字体
+		noto-fonts-cjk-sans
+	];
 ```
