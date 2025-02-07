@@ -49,6 +49,10 @@ date: 2021-08-13 19:35:48
 
 `FF6600`: 橘黄色
 
+关于无法选中文字并拖动的问题：
+
+<https://www.gimpusers.com/forums/gimp-user/20473-trouble-selecting-and-moving-text>
+
 ## 其他
 
 - {% post_link Draw/'GIMP移动图层到指定位置' %}
