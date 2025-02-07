@@ -149,3 +149,5 @@ sudo nixos-rebuild switch --upgrade
 		noto-fonts-cjk-sans
 	];
 ```
+
+注销再重新登录之后才生效。
