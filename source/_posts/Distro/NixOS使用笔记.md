@@ -14,12 +14,32 @@ tags:
 
 官方文档：<https://nixos.org/manual/nixos/stable/#sec-upgrading>
 
-比如升级到24.11
+一般情况下升级软件版本：
+
+```shell
+sudo nixos-rebuild switch --upgrade
+```
+
+如果要升级系统版本号，比如升级到24.11：
 
 ```shell
 # sudo nix-channel --add https://channels.nixos.org/nixos-24.11 nixos
 sudo nix-channel --add https://mirrors.tuna.tsinghua.edu.cn/nix-channels/nixos-24.11 nixos
 sudo nixos-rebuild switch --upgrade
+```
+
+每次`nixos-rebuild`会产生一个generation，便于以后回滚。这些generation引用了老版本软件，所以会阻止它们被GC掉。所以如果不需要回滚的话可以把老的generation删掉。
+
+列出所有generation：
+
+```shell
+nixos-rebuild list-generations
+```
+
+只保留最新的generation，并且删除旧版本软件：
+
+```shell
+sudo nix-collect-garbage -d
 ```
 
 ## `configuration.nix`
@@ -59,8 +79,6 @@ sudo nixos-rebuild switch --upgrade
 
 	networking.networkmanager.enable = true;
 
-	nixpkgs.config.allowUnfree = true;
-
 	environment.systemPackages = with pkgs; [
 		python3
 		vim # The Nano editor is also installed by default.
@@ -83,8 +101,7 @@ sudo nixos-rebuild switch --upgrade
 修改之后要rebuild才能生效：
 
 ```shell
-# 一般建议rebuild的时候把整个系统的组件版本升级到最新，防止出现兼容性问题
-sudo nixos-rebuild switch --upgrade
+sudo nixos-rebuild switch
 ```
 
 ### KDE
@@ -100,10 +117,10 @@ sudo nixos-rebuild switch --upgrade
 ### GNOME
 
 ```nix
-	environment.systemPackages = with pkgs; [
+	#environment.systemPackages = with pkgs; [
 		# Need enable in "Extensions" of GNOME
 		gnomeExtensions.tray-icons-reloaded
-	];
+	#];
 
 	# Enable the GNOME Desktop Environment.
 	services.xserver.displayManager.gdm.enable = true;
@@ -144,10 +161,22 @@ sudo nixos-rebuild switch --upgrade
 ### 中文字体
 
 ```nix
-	environment.systemPackages = with pkgs; [
+	#environment.systemPackages = with pkgs; [
 		# sans表示sans serif，即无衬线字体。粗体使用的就是无衬线字体
 		noto-fonts-cjk-sans
-	];
+	#];
 ```
 
 注销再重新登录之后才生效。
+
+## 允许安装非自由软件
+
+```nix
+	nixpkgs.config.allowUnfree = true;
+```
+
+然后把要安装的包名写在`environment.systemPackages = with pkgs; [`里面。常用的包：
+
+### wechat-uos
+
+要用命令行`wechat-uos`启动。。。
