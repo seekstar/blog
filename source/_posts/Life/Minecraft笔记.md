@@ -146,3 +146,47 @@ tags:
 ### 半自动骨粉全作物
 
 <https://www.bilibili.com/video/BV1Kb411U7kX>
+
+## 地图编辑器
+
+### MCA Selector
+
+区块编辑器。可以删除不怎么用的区块，减少存档磁盘占用。
+
+#### Linux
+
+建议用Nix包管理器安装：
+
+```shell
+nix-env -iA nixpkgs.mcaselector
+```
+
+然后在终端运行`mcaselector`即可。
+
+直接运行它的jar包会报JavaFX缺失的错误，不知道怎么修。
+
+#### 文档
+
+<https://github.com/Querz/mcaselector/wiki>
+
+拖动：按住中键
+
+### Amulet
+
+#### Windows
+
+直接下载即可：<https://github.com/Amulet-Team/Amulet-Map-Editor/releases>
+
+#### Linux
+
+```shell
+pip3 install amulet-map-editor
+```
+
+然后终端运行`amulet_map_editor`
+
+在Linux上按钮会闪：<https://github.com/Amulet-Team/Amulet-Map-Editor/issues/127>
+
+#### 快捷键
+
+`tab`在2D编辑器（俯视）和3D编辑器之间切换。
