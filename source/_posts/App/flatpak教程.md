@@ -120,10 +120,6 @@ STEAM_FORCE_DESKTOPUI_SCALING=2
 
 `com.mojang.Minecraft`
 
-### spotify
-
-音乐软件
-
 ### WPS
 
 国产办公软件。但是flatpak上只有英文版的，而且不能登录，不能用输入法。
@@ -303,3 +299,25 @@ launcher能打开，但是在系统启动器死活打不开tor browser。。。
 在浏览器里没法把自己设置为默认浏览器了。但是一般可以在系统设置里手动设置。Deepin是在`设置->默认程序->网页`。
 
 我这里一开始是正常的，但是过了几天之后显示就出问题了。
+
+### 音乐软件
+
+#### QQ音乐
+
+`com.qq.QQmusic`
+
+只能听，不能下载歌曲
+
+#### spotify
+
+`com.spotify.Client`
+
+好像不会自动使用系统代理，要手动设置代理。
+
+就算充了premium，也只能缓存歌曲，不能下载成mp3：<https://community.spotify.com/t5/Content-Questions/Can-I-download-music-to-my-MP3-player/td-p/322028>
+
+#### 网易云音乐
+
+`com.netease.CloudMusic`
+
+无法登录

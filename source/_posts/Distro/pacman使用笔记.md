@@ -99,6 +99,9 @@ pacman -Ql 包名
 # 查看文件由哪个包提供
 # https://bbs.archlinux.org/viewtopic.php?id=90635
 pacman -Qo 相对路径或绝对路径
+# packages that were not found in the sync database(s)
+# 一般用来找AUR软件包: https://bbs.archlinux.org/viewtopic.php?id=136032
+pacman -Qm
 ```
 
 这里面也包括用yay安装的包。
