@@ -116,6 +116,12 @@ STEAM_FORCE_DESKTOPUI_SCALING=2
 
 会议软件。
 
+### Baidu Netdisk
+
+`com.baidu.NetDisk`
+
+只能看到`Downloads`, `Documents`, `Desktop`, `Music`, `Pictures`, `Videos`这几个路径，所以上传文件的时候要先把文件放到这些目录，然后才能拖拽上传。
+
 ### 国际版Minecraft
 
 `com.mojang.Minecraft`
