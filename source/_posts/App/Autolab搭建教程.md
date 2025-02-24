@@ -1,5 +1,5 @@
 ---
-title: autolab搭建教程
+title: Autolab搭建教程
 date: 2024-03-24 16:54:48
 tags:
 ---
