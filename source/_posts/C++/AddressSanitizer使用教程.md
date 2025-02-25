@@ -37,5 +37,5 @@ LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libasan.so.8 命令 参数...
 
 ```shell
 # https://stackoverflow.com/questions/42851670/how-to-generate-core-dump-on-addresssanitizer-error
-export ASAN_OPTIONS=abort_on_error=1
+export ASAN_OPTIONS="abort_on_error=1:disable_coredump=0"
 ```
