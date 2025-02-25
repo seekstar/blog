@@ -4,7 +4,9 @@ date: 2024-03-24 16:54:48
 tags:
 ---
 
-主要照着官方文档配置：<https://docs.docker.com/compose/install/linux/#install-using-the-repository>
+我自己写的一键脚本：<https://github.com/seekstar/deploy-autolab>
+
+官方文档：<https://docs.docker.com/compose/install/linux/#install-using-the-repository>
 
 这里主要讲一些坑点。
 
