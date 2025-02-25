@@ -110,3 +110,7 @@ Error running link command: SIGXFSZ
 说明编译产生的文件大小超限了。在`Tango/config.py`里把`VM_ULIMIT_FILE_SIZE`设置大一些（默认100MiB）
 
 注意，`VM_ULIMIT_FILE_SIZE`似乎是用32 bit integer存的，所以值一定要小于4G，不然会溢出。
+
+## 使用教程
+
+{% post_link App/'Autolab使用教程' %}
