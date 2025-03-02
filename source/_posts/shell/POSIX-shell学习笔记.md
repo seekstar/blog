@@ -234,6 +234,46 @@ shift [n]
 
 `n`似乎默认是1。
 
+## 把变量展开成多个参数
+
+如果确保参数中没有空格，可以这样：
+
+```shell
+arg_num() {
+	# 参数个数（不含$0）
+	echo $#
+}
+args="a b"
+# 相当于arg_num a b
+arg_num $args
+```
+
+注意，引号会被原样传递：
+
+```shell
+args="\"a  b\""
+# 相当于arg_num '"a' 'b"'
+arg_num $args
+```
+
+所以如果某个参数中有空格，那么不能用上面的方式，而是要这样：
+
+```shell
+args="\"a  b\"  \"c  d\""
+eval "set -- $args"
+# eval会执行set -- "a  b"  "c  d"，将$1设置成"a  b"，将$2设置成"c  d"
+# 相当于arg_num "$1" "$2", 即arg_num "a  b" "c  d"
+arg_num "$@"
+```
+
+```text
+       set [{ -options | +options | -- }] arg ...
+              To change the  positional  parame‐
+              ters  without  changing  any options, use “--” as the first argument to set.
+              If no args are present, the set command will clear all the positional  para‐
+              meters (equivalent to executing “shift $#”.)
+```
+
 ## Command substitution
 
 把命令的输出会保存到变量：
