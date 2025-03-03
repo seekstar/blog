@@ -148,6 +148,12 @@ nix-env -uA nixpkgs.tor-browser
 { allowUnfree = true; }
 ```
 
+### vscode
+
+```shell
+nix-env -iA nixpkgs.vscode
+```
+
 ### WPS中文版
 
 ```shell
