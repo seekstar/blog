@@ -102,7 +102,14 @@ sudo systemctl restart nix-daemon.service
 
 ```shell
 nix-channel --update
-nix-env -u 包名
+nix-env -uA 包名
+```
+
+升级所有包：
+
+```shell
+nix-channel --update
+nix-env -u
 ```
 
 一些`nix-env`的选项：
@@ -121,6 +128,16 @@ nix-env -u 包名
 
 ```text
 -d (--delete-old) deletes  all  old  generations of all profiles in /nix/var/nix/profiles by invoking nix-env --delete-generations old on all profiles (of course, this makes rollbacks to previous configurations impossible)
+```
+
+参考：[Nix 详解（一） 像传统包管理器一样使用 Nix](https://www.rectcircle.cn/posts/nix-1-package-manager/)
+
+## 常用开源软件
+
+### Tor Browser
+
+```shell
+nix-env -uA nixpkgs.tor-browser
 ```
 
 ## 允许安装闭源软件
