@@ -123,6 +123,20 @@ nix-env -u 包名
 -d (--delete-old) deletes  all  old  generations of all profiles in /nix/var/nix/profiles by invoking nix-env --delete-generations old on all profiles (of course, this makes rollbacks to previous configurations impossible)
 ```
 
+## 允许安装闭源软件
+
+根据输出提示，在`~/.config/nixpkgs/config.nix`（如果没有就创建）里设置：
+
+```text
+{ allowUnfree = true; }
+```
+
+### WPS中文版
+
+```shell
+nix-env -iA nixpkgs.wpsoffice-cn
+```
+
 ## 运行OpenGL程序
 
 在非NixOS中运行需要OpenGL的程序需要wrapper：<https://nixos.wiki/wiki/Nixpkgs_with_OpenGL_on_non-NixOS>
@@ -173,32 +187,6 @@ Exec=seafile-applet
 Icon=seafile
 Type=Application
 Categories=Network;FileTransfer;
-```
-
-## 卸载Nix包管理器
-
-安装完之后安装程序给出的提示，没有试过：
-
-```text
-Uninstalling nix:
-1. Delete the systemd service and socket units                                       
-
-  sudo systemctl stop nix-daemon.socket
-  sudo systemctl stop nix-daemon.service
-  sudo systemctl disable nix-daemon.socket
-  sudo systemctl disable nix-daemon.service
-  sudo systemctl daemon-reload
-2. Delete the files Nix added to your system:
-
-  sudo rm -rf /etc/nix /nix /root/.nix-profile /root/.nix-defexpr /root/.nix-channels $HOME/.nix-profile $HOME/.nix-defexpr $HOME/.nix-channels
-```
-
-## 允许安装闭源软件
-
-根据输出提示，在`~/.config/nixpkgs/config.nix`（如果没有就创建）里设置：
-
-```text
-{ allowUnfree = true; }
 ```
 
 ## 安装和使用库
@@ -304,3 +292,21 @@ sudo chown $USER:$USER /nix/var/nix/{profiles,gcroots}/per-user/$USER
 <https://stackoverflow.com/questions/50277775/how-do-i-select-gcc-version-in-nix-shell>
 
 <https://nixos.wiki/wiki/C#Use_a_different_compiler_version>
+
+## 卸载Nix包管理器
+
+安装完之后安装程序给出的提示，没有试过：
+
+```text
+Uninstalling nix:
+1. Delete the systemd service and socket units                                       
+
+  sudo systemctl stop nix-daemon.socket
+  sudo systemctl stop nix-daemon.service
+  sudo systemctl disable nix-daemon.socket
+  sudo systemctl disable nix-daemon.service
+  sudo systemctl daemon-reload
+2. Delete the files Nix added to your system:
+
+  sudo rm -rf /etc/nix /nix /root/.nix-profile /root/.nix-defexpr /root/.nix-channels $HOME/.nix-profile $HOME/.nix-defexpr $HOME/.nix-channels
+```

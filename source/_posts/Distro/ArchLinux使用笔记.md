@@ -76,9 +76,11 @@ aur的vscodium-bin似乎跟visual-studio-code-bin不兼容：
 /usr/lib/debug/.build-id/f3/a26db3f1c4644e02d50fa102282631595594df 同时存在于 'visual-studio-code-bin-debug' 和 'vscodium-bin-debug'
 /usr/lib/debug/.build-id/f3/a26db3f1c4644e02d50fa102282631595594df.debug 同时存在于 'visual-studio-code-bin-debug' 和 'vscodium-bin-debug'
 
-## 微信
+## 常用软件的安装
 
-### flatpak
+### 微信
+
+#### flatpak
 
 原生微信。
 
@@ -91,7 +93,7 @@ flatpak run com.tencent.WeChat
 
 {% post_link App/'flatpak教程' %}
 
-### deepin-wine-wechat
+#### deepin-wine-wechat
 
 ```shell
 yay -S deepin-wine-wechat
@@ -132,29 +134,15 @@ EOF
 
 第一次启动可能会报一个serious bug的错，不用管，再启动一次就好了。
 
-### wechat-uos
+### WPS
+
+flatpak里只有英文版，建议用nix安装中文版：
 
 ```shell
-yay -S wechat-uos
+nix-env -iA nixpkgs.wpsoffice-cn
 ```
 
-不能直接发送剪切板里的图片，要保存到文件，再用发送文件的方式发送。
-
-但是奇怪的是发送svg文件会失败，显示红色感叹号，但是发送其他文件就正常。
-
-### com.qq.weixin.spark
-
-`3.9.10deepin1-1`
-
-源好像无了，安装不了：
-
-```text
-==> 错误： 无法下载 https://cdn.d.store.deepinos.org.cn/store/chat/com.qq.weixin.spark/com.qq.weixin.spark_3.9.10deepin1_all.deb
-```
-
-### electronic-wechat-uos-bin
-
-非官方客户端，可能会被封号：<https://bbs.deepin.org/en/post/247302>
+教程：{% post_link Distro/'使用国内源安装和使用Nix包管理器' %}
 
 ## 修复系统目录和文件的权限
 

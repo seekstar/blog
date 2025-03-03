@@ -126,10 +126,6 @@ STEAM_FORCE_DESKTOPUI_SCALING=2
 
 `com.mojang.Minecraft`
 
-### WPS
-
-国产办公软件。但是flatpak上只有英文版的，而且不能登录，不能用输入法。
-
 ### 音乐软件
 
 #### QQ音乐
