@@ -46,35 +46,7 @@ Sat Dec 10 11:54:20 2022
 
 孤立包其实就是orphan，也就是没有Maintainer。
 
-P.S. 收到了`#archlinux-cn:nichi.co`群的`undefined`用户的确认。
-
 尽量不要安装aur上的软件包，因为包的维护者往往不是官方，而且安装脚本有root权限，不安全。
-
-### 有问题的包
-
-#### seafile
-
-aur安装的seafile更新失败了。
-
-flatpak的seafile没有单点登录。
-
-可以用nix的seafile，在x11下需要用`nixGL seafile-applet`才能启动。
-
-#### vscodium-bin
-
-aur的vscodium-bin似乎跟visual-studio-code-bin不兼容：
-
-错误：无法提交处理 (有冲突的文件)
-/usr/lib/debug/.build-id/09/ff65463755b887e71c59f7b68228e92a84bd46 同时存在于 'visual-studio-code-bin-debug' 和 'vscodium-bin-debug'
-/usr/lib/debug/.build-id/09/ff65463755b887e71c59f7b68228e92a84bd46.debug 同时存在于 'visual-studio-code-bin-debug' 和 'vscodium-bin-debug'
-/usr/lib/debug/.build-id/15/1f079fb274bc8b986bddea21c82a6b2ce21690 同时存在于 'visual-studio-code-bin-debug' 和 'vscodium-bin-debug'
-/usr/lib/debug/.build-id/15/1f079fb274bc8b986bddea21c82a6b2ce21690.debug 同时存在于 'visual-studio-code-bin-debug' 和 'vscodium-bin-debug'
-/usr/lib/debug/.build-id/c1/1c9bc818110b2370d9992f885037b7a1f74378 同时存在于 'visual-studio-code-bin-debug' 和 'vscodium-bin-debug'
-/usr/lib/debug/.build-id/c1/1c9bc818110b2370d9992f885037b7a1f74378.debug 同时存在于 'visual-studio-code-bin-debug' 和 'vscodium-bin-debug'
-/usr/lib/debug/.build-id/c7/dd943c9a2f9568fcd82fa7baddb1f22f38fb22 同时存在于 'visual-studio-code-bin-debug' 和 'vscodium-bin-debug'
-/usr/lib/debug/.build-id/c7/dd943c9a2f9568fcd82fa7baddb1f22f38fb22.debug 同时存在于 'visual-studio-code-bin-debug' 和 'vscodium-bin-debug'
-/usr/lib/debug/.build-id/f3/a26db3f1c4644e02d50fa102282631595594df 同时存在于 'visual-studio-code-bin-debug' 和 'vscodium-bin-debug'
-/usr/lib/debug/.build-id/f3/a26db3f1c4644e02d50fa102282631595594df.debug 同时存在于 'visual-studio-code-bin-debug' 和 'vscodium-bin-debug'
 
 ## 常用软件的安装
 
