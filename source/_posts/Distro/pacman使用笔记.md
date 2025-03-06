@@ -102,6 +102,8 @@ pacman -Qo 相对路径或绝对路径
 # packages that were not found in the sync database(s)
 # 一般用来找AUR软件包: https://bbs.archlinux.org/viewtopic.php?id=136032
 pacman -Qm
+# 查找不是任何包的依赖的包
+pacman -Qqt
 ```
 
 这里面也包括用yay安装的包。
