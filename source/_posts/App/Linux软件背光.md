@@ -40,4 +40,4 @@ xrandr --output HDMI-1 --brightness 0.3
 xrandr --output HDMI-1 --brightness 1
 ```
 
-注意，以上方法可能只在X11上有效。
+注意，以上方法只在X11上有效。
