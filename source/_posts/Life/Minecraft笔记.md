@@ -249,6 +249,12 @@ sudo pacman -S prismlauncher
 
 Instance的路径：`~/.local/share/PrismLauncher/instances/`
 
+### 使用独显
+
+设置 -> Minecraft -> 微调 -> 使用独显
+
+然后在游戏内按F3，在`Display:`部分就能看到独显了。
+
 ## MOD
 
 ### Litematica

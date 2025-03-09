@@ -323,6 +323,8 @@ pid=$(exec sh -c 'echo "$PPID"')
 
 `set -e`
 
+相当于在每条命令后面加上了`|| exit $?`
+
 但是要注意的是，对于用管道连接起来的几个命令，最终的exit code似乎是管道里的最后一个命令。例如对于`command A | command B`，如果`command A`出错返回非0，但是`command B`正常退出，那么这个组合命令的exit code会被设置成0，这样`set -e`就不会生效。
 
 bash支持`set -o pipefail`，其效果是将exit code赋值为被管道组合起来的命令中最后一个返回非0值的命令，这样被管道组合起来命令中任何一个命令返回非0都会退出。
