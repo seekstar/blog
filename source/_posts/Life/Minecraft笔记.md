@@ -290,7 +290,7 @@ Instance的路径：`~/.local/share/PrismLauncher/instances/`
 替换：<被替换的方块>
 ```
 
-然后按`执行操作`的快捷键，我是`Enter`。然后选区内
+然后按`执行操作`的快捷键，我是`Enter`。
 
 参考：[基于模式4的替换投影方块状态【mc投影litematica模组教程】](https://www.bilibili.com/video/BV1434y1V7ev)
 
