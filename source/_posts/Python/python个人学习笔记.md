@@ -378,6 +378,38 @@ shlex.split('-o 1 --long "Some long string"')
 ['-o', '1', '--long', 'Some long string']
 ```
 
+### [argparse](https://docs.python.org/3/library/argparse.html)
+
+基础用法：
+
+```py
+import argparse
+parser = argparse.ArgumentParser()
+parser.add_argument('-a')
+parser.add_argument('-s', type=int)
+parser.add_argument('-k', type=float, required=True)
+parser.add_argument('-R', type=int, required=True)
+parser.add_argument('--print-a', action='store_true')
+# Long argument with optional value
+parser.add_argument('--export-policy', nargs='?', default=False)
+args = parser.parse_args()
+
+# str or None
+a = args.a
+# int or None
+s = args.s
+# float
+k = args.k
+# int
+R = args.R
+# bool
+print_a = args.print_a
+# False if not in command line
+# None if --export-policy
+# str if --export-policy=str
+export_policy = args.export_policy
+```
+
 ### `getopt`
 
 用法跟C语言的`getopt`差不多。
