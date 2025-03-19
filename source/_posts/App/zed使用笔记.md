@@ -132,11 +132,11 @@ chmod +x zed-remote-server-$channel-$version
 
 - remote上只能通过`Open Folder`来打开工程，不能像vscode一样在terminal里`zed folder`来打开。
 
-- 只有git blame，没有vscode那样的git功能。可以先用lazygit凑活一下。
-
 - 不能隐藏terminal panel
 
 ## 已经解决的问题
+
+- 只有git blame，没有vscode那样的git功能。
 
 - 不能preview markdown
 
