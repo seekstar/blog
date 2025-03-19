@@ -134,9 +134,11 @@ chmod +x zed-remote-server-$channel-$version
 
 - 不能隐藏terminal panel
 
+- 不能在不同设备之间同步设置
+
 ## 已经解决的问题
 
-- 只有git blame，没有vscode那样的git功能。
+- 只有git blame，没有vscode那样的git功能。Update: v0.177开始有git integration了。
 
 - 不能preview markdown
 
