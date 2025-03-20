@@ -46,14 +46,6 @@ syncthing cli config folders <folder-ID> devices list
 syncthing cli config folders 9sf9n-jh2yz devices add --device-id <device-ID>
 ```
 
-## 坑点
-
-### 手机的同步目录的目录种类是`只发送`
-
-如果尝试修改，会提示当前系统只支持`只发送`。我用的是鸿蒙系统，在系统里把默认存储改到存储卡，然后就可以把目录种类改成`发送和接收`了。
-
-此外，千万别覆盖，不然远端的文件会全部被删掉。。。
-
 ### `$HOME is undefined`
 
 在使用`supervisor`实现开启自动启动syncthing时，可能会失败，然后在日志里可能会发现这个错误信息。这是因为`supervisor`不会自动设置`HOME`等环境变量，但是syncthing又需要。这时只需要在conf里加上一行这个：
@@ -66,10 +58,18 @@ environment=HOME="/home/your_name"
 
 来源：<http://supervisord.org/subprocess.html#subprocess-environment>
 
-### 鸿蒙杀后台太快
-
-从syncthing界面离开几秒钟之后，鸿蒙就会自动终止其网络传输。可以试试关掉syncthing的自动管理，换成手动管理，然后设置成允许后台活动。然后为了其耗电太快，将其设置成只在交流电下使用。
-
 ### 远程机器上设置GUI密码之后浏览器连不上了
 
 不知道为啥。重启syncthing即可。
+
+## 手机端
+
+这里主要讲一些坑点。
+
+### 手机的同步目录的目录种类是`只发送`
+
+如果尝试修改，会提示当前系统只支持`只发送`。我用的是鸿蒙系统，在系统里把默认存储改到存储卡，然后就可以把目录种类改成`发送和接收`了。
+
+### 鸿蒙杀后台太快
+
+从syncthing界面离开几秒钟之后，鸿蒙就会自动终止其网络传输。可以试试关掉syncthing的自动管理，换成手动管理，然后设置成允许后台活动。然后因为其耗电太快，将其设置成只在交流电下使用。

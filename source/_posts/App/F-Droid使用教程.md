@@ -123,9 +123,11 @@ curl -d "Hello world" ntfy.sh/searchstar
 1. 不知道为什么设置里的Background notifications没有用，把web app关掉之后就收不到通知了。
 2. 不支持在Linux上显示未读消息数：<https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/How_to/Display_badge_on_app_icon>
 
-## syncthing
+## Syncthing
 
-{% post_link App/'syncthing-一款p2p同步软件' %}
+Syncthing-Fork
+
+教程：{% post_link App/'syncthing-一款p2p同步软件' %}
 
 ## Telegram FOSS
 
