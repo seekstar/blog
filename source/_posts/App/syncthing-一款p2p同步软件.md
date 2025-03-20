@@ -32,7 +32,7 @@ syncthing cli config devices list
 syncthing cli config devices <device-ID> delete
 # 查看接收到的连接请求的device ID
 syncthing cli show pending devices
-# 添加另一台设备。注意，如果另一台设备是手机的话，还需要在手机上手动添加这台设备。
+# 添加另一台设备。另一台设备会收到连接请求，同意即可。注意，手机端的连接请求在通知栏，而不是在app里。
 syncthing cli config devices add --device-id <device-ID>
 # 列出已知的folder
 syncthing cli config folders list
