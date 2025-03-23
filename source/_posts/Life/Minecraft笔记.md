@@ -296,6 +296,46 @@ Instance的路径：`~/.local/share/PrismLauncher/instances/`
 
 #### 参考
 
+[投影详细教学](https://www.mcmod.cn/post/1308.html)
+
 [我的世界模组(litematica)保姆级教程-操作篇](https://www.bilibili.com/video/BV1m24y1F7o8)
 
 [一顿饭学会Litematica常规操作](https://www.bilibili.com/video/BV1yk4y1y7Cj)
+
+## 光影
+
+主流光影基本上要么依赖Optifine要么依赖Iris。
+
+Iris只支持Fabric和Neoforge: <https://www.curseforge.com/minecraft/mc-mods/irisshaders/files/all?page=1&pageSize=20>
+
+所以如果整合包用的是Forge（比如RLCraft），就只能用Optifine了。
+
+Optifine是闭源的，可能由于重分发许可的问题只能从官网下载：<https://optifine.net/downloads>
+
+找到自己的Minecraft版本之后，点击`Mirror`下载，把OptiFine_xxx.jar放到mods文件夹下面即可。
+
+参考: <https://prismlauncher.org/wiki/getting-started/installing-optifine/#installing-optifine-on-top-of-a-modloader>
+
+### BSL Sharders
+
+这里以目前的最新版v8.4.02.2为例。
+
+视频设置 -> 光影 -> 选中BSL_xxx.zip -> 光影设置
+
+#### 解决雾蒙蒙的问题
+
+```text
+Environment --- Fog --- Overworld Fog Density, Nether Density, End Density 全部调成0
+             |- Weather Opacity 调到最低
+Camera --- Bloom 关
+```
+
+#### 解决中午沙子晃眼睛的问题
+
+```text
+Color --- Lighting Color --- Light (Day) --- Intensity 调到 1.1
+```
+
+#### 参考
+
+[渣机最爱光影BSL新版去白内障设置方法-我的世界](https://www.bilibili.com/video/BV1pV4y1r7Kg)
