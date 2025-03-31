@@ -142,6 +142,7 @@ FunctionName() { # 这里是花括号
 如果不想修改全局变量的话，就让整个函数在一个subshell里：
 
 ```sh
+# https://stackoverflow.com/a/18600920/13688160
 a=1
 FunctionName() ( # 这里是圆括号
 	a=233 # 修改的是全局变量在本地的拷贝，全局变量的值保持不变
