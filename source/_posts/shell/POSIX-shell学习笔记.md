@@ -128,14 +128,30 @@ fi
 
 ### 定义
 
+如果想要修改全局变量的话：
+
 ```sh
-FunctionName() {
+a=1
+FunctionName() { # 这里是花括号
+	a=233 # 修改了全局变量
 	do_some_thing_here
 	return Interger
 }
 ```
 
+如果不想修改全局变量的话，就让整个函数在一个subshell里：
+
+```sh
+a=1
+FunctionName() ( # 这里是圆括号
+	a=233 # 修改的是全局变量在本地的拷贝，全局变量的值保持不变
+	do_some_thing_here
+	return Interger
+)
+```
+
 也可以不return。
+
 参数用法与脚本类似。`$#`表个数，`$1, $9, ${10}`表具体参数。
 
 ### 使用
