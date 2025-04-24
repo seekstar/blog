@@ -20,7 +20,7 @@ source /etc/profile
 
 ```text
 ---- sudo execution ------------------------------------------------------------
-I am executing:                                                                      
+I am executing:
 
     $ sudo HOME=/root NIX_SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt /nix/store/lsr79q5xqd9dv97wn87x12kzax8s8i1s-nix-2.13.2/bin/nix-channel --update nixpkgs
 
@@ -164,10 +164,10 @@ nix-env -iA nixpkgs.wpsoffice-cn
 
 在非NixOS中运行需要OpenGL的程序需要wrapper：<https://nixos.wiki/wiki/Nixpkgs_with_OpenGL_on_non-NixOS>
 
-可以用nixGL来运行这些程序：<https://github.com/guibou/nixGL>。安装：
+可以用nixGL来运行这些程序：<https://github.com/nix-community/nixGL>。安装：
 
 ```shell
-nix-channel --add https://github.com/guibou/nixGL/archive/main.tar.gz nixgl && nix-channel --update
+nix-channel --add https://github.com/nix-community/nixGL/archive/main.tar.gz nixgl && nix-channel --update
 nix-env -iA nixgl.auto.nixGLDefault   # or replace `nixGLDefault` with your desired wrapper
 ```
 
@@ -186,11 +186,11 @@ Could not initialize GLX
 Aborted
 ```
 
-用`nixGL seafile-applet`运行就正常。可以创建一个desktop文件`~/.local/share/applications/seafile-client.desktop`:
+用`nixGL seafile-applet`运行就正常。可以创建一个desktop文件`~/.local/share/applications/seafile-nixGL.desktop`:
 
 ```text
 [Desktop Entry]
-Name=Seafile
+Name=Seafile-nixGL
 Comment=Seafile desktop sync client
 Exec=/home/用户名/.nix-profile/bin/nixGL seafile-applet
 Icon=seafile
@@ -210,6 +210,13 @@ Exec=seafile-applet
 Icon=seafile
 Type=Application
 Categories=Network;FileTransfer;
+```
+
+2025.04.25 Update: 使用NVIDIA显卡的时候，`nixGL seafile-applet`可能仍然会报错。可以强制让它使用Intel集显：
+
+```shell
+nix-env -iA nixgl.auto.nixGLNvidia
+nixGLIntel seafile-applet
 ```
 
 ## 安装和使用库
@@ -322,7 +329,7 @@ sudo chown $USER:$USER /nix/var/nix/{profiles,gcroots}/per-user/$USER
 
 ```text
 Uninstalling nix:
-1. Delete the systemd service and socket units                                       
+1. Delete the systemd service and socket units
 
   sudo systemctl stop nix-daemon.socket
   sudo systemctl stop nix-daemon.service

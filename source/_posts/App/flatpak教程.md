@@ -146,7 +146,7 @@ STEAM_FORCE_DESKTOPUI_SCALING=2
 
 `com.netease.CloudMusic`
 
-无法登录
+好像连不上网络。Flatseal里看到已经给了网络权限，不知道怎么回事。
 
 ## 开源软件
 

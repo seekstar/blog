@@ -4,6 +4,12 @@ date: 2025-02-09 16:40:02
 tags:
 ---
 
+## 快捷键
+
+[我的世界：6种快捷键用法，游戏自带一键整理和连点器？](https://www.bilibili.com/video/BV1aR4y1V7U6)
+
+鼠标中键：在创造模式下按住鼠标中键拖动物品可以按组复制
+
 ## 常用命令
 
 - 永昼: `gamerule doDaylightCycle false`
