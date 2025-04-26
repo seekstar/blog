@@ -219,6 +219,18 @@ nix-env -iA nixgl.auto.nixGLNvidia
 nixGLIntel seafile-applet
 ```
 
+也可以创建一个desktop文件`~/.local/share/applications/seafile-nixGLIntel.desktop`:
+
+```text
+[Desktop Entry]
+Name=Seafile-nixGLIntel
+Comment=Seafile desktop sync client
+Exec=/home/searchstar/.nix-profile/bin/nixGLIntel seafile-applet
+Icon=seafile
+Type=Application
+Categories=Network;FileTransfer;
+```
+
 ## 安装和使用库
 
 Nix的设计理念是只将应用暴露给用户，而不将库暴露给用户：<https://nixos.wiki/wiki/FAQ#I_installed_a_library_but_my_compiler_is_not_finding_it._Why.3F>。我认为这是为了支持在一个系统中同时安装多个版本的库。
