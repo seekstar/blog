@@ -152,6 +152,8 @@ nix-env -uA nixpkgs.tor-browser
 
 ```shell
 nix-env -iA nixpkgs.vscode
+# ArchLinux上的启动器好像不会显示nix安装的应用，只能手动链接一下
+ln -s ~/.nix-profile/share/applications/code.desktop ~/.local/share/applications/
 ```
 
 ### WPS中文版
