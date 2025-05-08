@@ -22,6 +22,12 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 rustup toolchain install nightly
 ```
 
+查看已安装的toolchain:
+
+```shell
+rustup show
+```
+
 参考：
 
 <https://rust-lang.github.io/rustup/basics.html#keeping-rust-up-to-date>
@@ -29,6 +35,12 @@ rustup toolchain install nightly
 <https://rust-lang.github.io/rustup/concepts/channels.html>
 
 <https://stackoverflow.com/questions/66681150/how-to-tell-cargo-to-use-nightly>
+
+## 卸载
+
+```shell
+rustup self uninstall
+```
 
 ## cargo
 

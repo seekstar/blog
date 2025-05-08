@@ -126,6 +126,12 @@ STEAM_FORCE_DESKTOPUI_SCALING=2
 
 `com.mojang.Minecraft`
 
+### WPS国际版
+
+`com.wps.Office`
+
+英文界面，不能登录帐号，没有云同步。但是可以正常显示中文。
+
 ### 音乐软件
 
 #### QQ音乐

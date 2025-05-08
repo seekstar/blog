@@ -124,7 +124,7 @@ nix-env -u
 
 - `-u`: `--upgrade`
 
-垃圾回收：`nix-collect-garbage -d`。
+垃圾回收：`nix-collect-garbage -d`
 
 ```text
 -d (--delete-old) deletes  all  old  generations of all profiles in /nix/var/nix/profiles by invoking nix-env --delete-generations old on all profiles (of course, this makes rollbacks to previous configurations impossible)
@@ -159,6 +159,8 @@ nix-env -iA nixpkgs.vscode
 ```shell
 nix-env -iA nixpkgs.wpsoffice-cn
 ```
+
+可以登录帐号，有云同步。但是界面和文档内容显示都有问题。
 
 ## 运行OpenGL程序
 
