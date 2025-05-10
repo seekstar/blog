@@ -286,6 +286,14 @@ git checkout <deletion commit hash>~1 -- <filename>
 
 来源：<https://www.git-tower.com/learn/git/faq/restoring-deleted-files>
 
+## 把某个文件回退到某个版本
+
+```shell
+git checkout c5f567 -- file1/to/restore file2/to/restore
+```
+
+来源：<https://stackoverflow.com/a/215731/13688160>
+
 ## 其他
 
 <https://stackoverflow.com/questions/2928584/how-to-grep-search-committed-code-in-the-git-history>
