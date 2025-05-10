@@ -126,6 +126,12 @@ nix-env -iA nixpkgs.wpsoffice-cn
 
 ArchLinux在某次升级之后就默认wayland了，但会导致一些问题。如果有需要的话可以在登录界面的左上角选择X11 session。
 
-- 腾讯会议无法共享屏幕。
+- keepass桌面客户端不能执行auto-type，因为wayland没有提供向另一个窗口发送keypress的API：<https://keepass.info/help/kb/autotype_wayland.html>
 
-- keepass桌面客户端不能执行auto-type：<https://keepass.info/help/kb/autotype_wayland.html>
+相关issue: [Support Auto-Type on Wayland](https://github.com/keepassxreboot/keepassxc/issues/2281)
+
+相关PR: [Wayland autotype implementation (using xdg-desktop-portal)](https://github.com/keepassxreboot/keepassxc/pull/10905)
+
+已解决的问题：
+
+- 腾讯会议无法共享屏幕。
