@@ -118,6 +118,26 @@ The default transform specifies that text is in data coords.
 
 Padding (height/width) between edges of adjacent subplots, as a fraction of the font size.
 
+### [savefig](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.savefig.html)
+
+Positional, required:
+
+- `fname`: str or path-like
+
+Optional:
+
+- `metadata`: dict
+
+PDF可用metadata: <https://matplotlib.org/stable/api/backend_pdf_api.html#matplotlib.backends.backend_pdf.PdfPages>
+
+`metadata={'CreationDate': None}`: 在PDF中不保存CreationDate，从而使得数据相同时生成的PDF也相同。
+
+参考：
+
+[PDF file generation is not deterministic - results in different outputs on the same input](https://github.com/matplotlib/matplotlib/issues/6317/)
+
+<https://matplotlib.org/2.1.1/users/whats_new.html#reproducible-ps-pdf-and-svg-output>
+
 ## Axes
 
 ```python
