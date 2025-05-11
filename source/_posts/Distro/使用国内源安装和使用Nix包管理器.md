@@ -132,6 +132,18 @@ nix-env -u
 
 参考：[Nix 详解（一） 像传统包管理器一样使用 Nix](https://www.rectcircle.cn/posts/nix-1-package-manager/)
 
+## 加入`XDG_DATA_DIRS`
+
+在`~/.profile`中：
+
+```shell
+export XDG_DATA_DIRS="$HOME/.nix-profile/share:$XDG_DATA_DIRS"
+```
+
+然后注销再重新登录。这样桌面的启动器里才能看到安装的Nix软件。
+
+来源：<https://www.reddit.com/r/NixOS/comments/ofmzb9/no_desktop_icons_for_nix_packages/>
+
 ## 常用开源软件
 
 ### Tor Browser
