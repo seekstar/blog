@@ -8,7 +8,7 @@ tags:
 
 ## 安装conda
 
-教程：{% post_link 'shell/conda使用笔记.md' %}
+教程：{% post_link 'CLI/conda使用笔记' %}
 
 试一下有没有用：
 
