@@ -534,6 +534,19 @@ append_path () {
 
 如果`PATH`不存在，`${PATH:+$PATH:}$1`就展开为`$1`，如果`PATH`存在，就展开为`$PATH:$1`。
 
+同理，也可以往`PATH`的前面添加路径：
+
+```shell
+prepend_path () {
+    case ":$PATH:" in
+        *:"$1":*)
+            ;;
+        *)
+            PATH="$1${PATH:+:$PATH}"
+    esac
+}
+```
+
 ## unset
 
 文档：<https://pubs.opengroup.org/onlinepubs/009696699/utilities/unset.html>
