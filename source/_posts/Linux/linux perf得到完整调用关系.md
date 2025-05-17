@@ -83,7 +83,7 @@ git checkout releases/gcc-10
 ### 安装依赖
 
 ```shell
-sudo apt install libgmp-dev libmpfr-dev libmpc-dev 
+sudo apt install libgmp-dev libmpfr-dev libmpc-dev
 ```
 
 或者自动下载安装依赖：
@@ -242,6 +242,22 @@ make install
 cd ..
 ```
 
+### `libfmt`
+
+Debian12上的版本是`9.1.0`
+
+```shell
+wget https://github.com/fmtlib/fmt/archive/refs/tags/9.1.0.tar.gz
+tar xzf 9.1.0.tar.gz
+cd fmt-9.1.0/
+mkdir build
+cd build
+cmake .. -DBUILD_SHARED_LIBS=ON -DCMAKE_INSTALL_PREFIX=$INSTALL_ROOT
+make -j$(nproc)
+make install
+cd ..
+```
+
 ## （可选）打包`no-omit-frame-pointer`编译环境
 
 可以在一台机器上把`no-omit-frame-pointer`的编译器和常见库都编译好，然后打包到别的机器上使用。但是要注意在目标机器解压后需要修改一下rpath：
@@ -264,10 +280,10 @@ export上面说的编译选项后就可以照常编译了。
 `hello.c`:
 
 ```c
-#include <stdio.h>                                                                 
-int main() {                                                                       
-        printf("Hello world!\n");                                                      
-        return 0;                                                                      
+#include <stdio.h>
+int main() {
+        printf("Hello world!\n");
+        return 0;
 }
 ```
 
