@@ -559,6 +559,8 @@ $$\mathop{\bowtie}\limits_{theta}$$
 
 用`@{}`，例如去掉左边的边距：`\begin{tabular}{@{}lr}`，去掉右边的边距：`\begin{tabular}{lr@{}}`，去掉两边的边距：`\begin{tabular}{@{}lr@{}}`。
 
+也可以把`@{}`换成`@{\hspace{1.4mm}}`来指定边距。
+
 来源：<https://www.oomake.com/question/703820>
 
 ### footnote
