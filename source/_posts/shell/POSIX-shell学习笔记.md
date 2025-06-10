@@ -88,7 +88,18 @@ fi
 
 ### 判断文件类型
 
-来源：<https://jingyan.baidu.com/article/95c9d20d5ac536ec4e7561ad.html>
+`man dash`，搜`test expression`
+
+| | |
+| ---- | ---- |
+| -b | 块设备 |
+| -c | 字符设备 |
+| -d | 目录 |
+| -e | 路径存在 |
+| -f | 普通文件 |
+| -h | 符号链接 |
+
+例子：
 
 ```sh
 #!/usr/bin/env sh
