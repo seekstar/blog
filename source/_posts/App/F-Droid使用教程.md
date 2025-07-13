@@ -4,7 +4,9 @@ date: 2021-12-29 13:12:44
 tags:
 ---
 
-F-Droid下载地址：<https://f-droid.org/>
+先尝试从官网下载安装F-Droid：<https://f-droid.org/>
+
+如果打不开的话，再尝试从清华源下载：<https://mirrors.tuna.tsinghua.edu.cn/fdroid/archive/org.fdroid.fdroid_1020051.apk>
 
 默认的官方源太慢了。建议更换清华源。官方教程：<https://mirrors.tuna.tsinghua.edu.cn/help/fdroid/>
 
