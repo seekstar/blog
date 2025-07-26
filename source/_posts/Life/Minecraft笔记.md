@@ -383,3 +383,9 @@ Color --- Lighting Color --- Light (Day) --- Intensity 调到 1.1
 #### 参考
 
 [渣机最爱光影BSL新版去白内障设置方法-我的世界](https://www.bilibili.com/video/BV1pV4y1r7Kg)
+
+## 信标
+
+多个信标可以重复利用其底下的矿物方块。合并的金字塔不需要对称。6（2×3）个信标的金字塔需要244个矿物方块，它的基座为10×11。
+
+来源：<https://zh.minecraft.wiki/w/%E4%BF%A1%E6%A0%87>
