@@ -21,10 +21,10 @@ bash支持所有POSIX shell的语法：{% post_link shell/'POSIX-shell学习笔�
 参考：<https://blog.csdn.net/astraylinux/article/details/7016212>
 
 ```shell
-for ((i=0; i<10; ++i))  
-do  
-    echo $i  
-done  
+for ((i=0; i<10; ++i))
+do
+    echo $i
+done
 ```
 
 注意是双括号。
@@ -87,6 +87,18 @@ Command &> shell.log
 
 ```shell
 ARRAY_NAME=(element_1st element_2nd element_Nth)
+```
+
+#### 新增元素
+
+```shell
+a=(1 2 3)
+a+=(4 5)
+echo "${a[@]}"
+```
+
+```text
+1 2 3 4 5
 ```
 
 #### 访问某个下标的元素
@@ -181,18 +193,6 @@ echo "${a[@]}"
 ```
 
 参考：<https://stackoverflow.com/questions/39267836/create-an-array-with-a-sequence-of-numbers-in-bash>
-
-#### 新增元素
-
-```shell
-a=(1 2 3)
-a+=(4 5)
-echo "${a[@]}"
-```
-
-```text
-1 2 3 4 5
-```
 
 ## 用户管理
 
