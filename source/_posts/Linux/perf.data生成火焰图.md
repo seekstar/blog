@@ -21,19 +21,50 @@ $FlameGraphPath/flamegraph.pl perf.folded > perf.svg
 
 注意，解析`perf.data`的时候好像要读取binary里的符号，所以在解析的时候不要重新编译之类的。
 
+## inferno
+
 如果嫌perl写的`stackcollapse-perf.pl`太慢的话，可以尝试rust写的`inferno`: <https://docs.rs/inferno/latest/inferno/>
+
+### 安装
+
+任选其一
+
+#### cargo
 
 ```shell
 cargo install inferno
+```
+
+#### nix
+
+```shell
+nix-env -iA nixpkgs.inferno
+```
+
+### 使用
+
+#### 生成`perf.folded`
+
+```shell
 perf script -i perf.data | inferno-collapse-perf > perf.folded
+```
+
+实测比perl版本快大约4倍。
+
+#### 画火焰图（不推荐）
+
+```shell
 # 默认太宽了。perl版本的宽度是1200，所以这里也设置成1200
 inferno-flamegraph --width=1200 < perf.folded > perf.svg
 ```
 
-实测比perl版本快大约4倍。不过生成的`perf.svg`字太小了。可以用`inferno`生成`perf.folded`，再用`flamegraph.pl`来画火焰图：
+生成的`perf.svg`字太小了。
+
+#### 建议的用法
+
+用`inferno`生成`perf.folded`，再用`flamegraph.pl`来画火焰图：
 
 ```shell
-cargo install inferno
 perf script -i perf.data | inferno-collapse-perf > perf.folded
 $FlameGraphPath/flamegraph.pl perf.folded > perf.svg
 ```
