@@ -9,22 +9,22 @@
     "server": "hexo server"
   },
   "hexo": {
-    "version": "6.3.0"
+    "version": "7.3.0"
   },
   "dependencies": {
-    "hexo": "^6.3.0",
+    "hexo": "^7.3.0",
     "hexo-asset-image-fixed": "^0.0.6",
     "hexo-deployer-git": "^4.0.0",
-    "hexo-filter-mathjax": "^0.9.0",
+    "hexo-filter-mathjax": "^0.9.1",
     "hexo-generator-archive": "^2.0.0",
     "hexo-generator-category": "^2.0.0",
-    "hexo-generator-index": "^3.0.0",
+    "hexo-generator-index": "^4.0.0",
     "hexo-generator-sitemap": "^3.0.1",
     "hexo-generator-tag": "^2.0.0",
     "hexo-pandoc-header-anchor": "^1.0.2",
     "hexo-reference": "https://github.com/seekstar/hexo-reference#upgrade-hexo-util",
     "hexo-renderer-ejs": "^2.0.0",
-    "hexo-renderer-pandoc": "^0.4.0",
+    "hexo-renderer-pandoc": "^0.5.0",
     "hexo-server": "^3.0.0",
     "hexo-sliding-spoiler": "^1.2.1"
   }
