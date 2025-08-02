@@ -12,7 +12,7 @@ tags:
 
 官方完整教程：<https://wiki.archlinux.org/title/NVIDIA>
 
-只要卡不是太老，一般情况下，如果用的是stable内核(`linux`)，就安装`nvidia`，如果用的是LTS内核(`linux-lts`)，就安装`nvidia-lts`。包里自带了把`nouveau`屏蔽掉的配置文件，因此重启即可。
+只要卡不是太老，一般情况下，如果用的是stable内核(`linux`)，就安装`nvidia`，如果用的是LTS内核(`linux-lts`)，就安装`nvidia-lts`。包里自带了把`nouveau`屏蔽掉的配置文件，因此重启即可。`Turing (NV160/TUXXX)`之后的卡也可以装`nvidia-open`或`nvidia-open-lts`。
 
 然后执行`nvidia-smi`，有这种输出就说明安装成功了：
 
@@ -49,6 +49,15 @@ Sat Dec 10 11:54:20 2022
 尽量不要安装aur上的软件包，因为包的维护者往往不是官方，而且安装脚本有root权限，不安全。
 
 ## 常用软件的安装
+
+### Seafile
+
+可以使用linglong安装：
+
+```shell
+sudo pacman -S --needed linyaps
+ll-cli install com.seafile-gui.linyaps
+```
 
 ### 微信
 
