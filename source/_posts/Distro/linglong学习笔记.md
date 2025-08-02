@@ -39,6 +39,12 @@ ll-cli run 包名
 ll-cli install com.seafile-gui.linyaps
 ```
 
+### WPS
+
+```shell
+ll-cli install cn.wps.wps-office
+```
+
 ### 网易云音乐
 
 ```shell
