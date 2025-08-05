@@ -8,22 +8,13 @@ tags:
 
 ## 代码风格
 
-### 函数返回值类型后置
+### 长类型返回值后置
 
 C++11引入了函数返回值类型后置的写法(trailing return type)：<https://en.wikipedia.org/wiki/Trailing_return_type>
 
+如果返回值类型很长的话，可以选择后置：
+
 ```cpp
-auto func(int i, int j, int k) -> int {
-	printf("2333");
-	return 2333;
-}
-
-auto func(
-	int i, int j, int k, int a, int b, int c, int d, int e, int f, int g, int h
-) -> int {
-	return 2333;
-}
-
 auto func(
 	int i, int j, int k
 ) -> AVeryVeryLoooooooooooooooooooooooooooooooooooooooooooongType {
@@ -124,85 +115,6 @@ auto func(int i, int j, int k)
 注意C++中`std::weak_ordering::equivalent`不代表比较的双方可互相替换。而`std::strong_ordering::equivalent`代表比较的双方可以互相替换。
 
 `PartialOrd` -> `std::partial_order` (since C++20)
-
-## Move-only object
-
-一个典型的move-only class：
-
-```cpp
-class A {
-public:
-	A(int v);
-	A(const A&) = delete;
-	A& operator=(const A&) = delete;
-	A(A&& a);
-	A& operator=(A&& a);
-};
-```
-
-例子：
-
-```cpp
-#include <iostream>
-using namespace std;
-class A {
-public:
-	A(int v) : v_(v) {}
-	A(const A&) = delete;
-	A& operator=(const A&) = delete;
-	A(A&& a) : v_(a.v_) {}
-	A& operator=(A&& a) {
-		v_ = a.v_;
-		return *this;
-	}
-	int V() const { return v_; }
-private:
-	int v_;
-};
-int main() {
-	A a(1);
-	std::cout << a.V() << std::endl;
-	a = A(2);
-	std::cout << a.V() << std::endl;
-	return 0;
-}
-```
-
-尤其要注意的是，C++中moved object仍然要析构，因此在move constructor和move assignment operator中一定要把旧的object相关状态清空，从而使其析构函数成为空操作。
-
-可以用vscode clang-tidy静态检查是否使用了moved value：`bugprone-use-after-move`。教程：{% post_link vscode/'vscode-clang-tidy' %}
-
-## 不使用构造函数
-
-使用`New`等static member function来构造，而将构造函数隐藏起来：
-
-```cpp
-#include <iostream>
-class A {
-public:
-	A(const A&) = delete;
-	A& operator=(const A&) = delete;
-	A(A&& a) { std::cout << "Moving\n"; }
-	A& operator=(A&& a) { std::cout << "Move assigning\n"; return *this; }
-	~A() { std::cout << "Deconstructing\n"; }
-	static A New() { return A(); }
-private:
-	A() { std::cout << "Constructing\n"; }
-};
-int main() {
-	A a = A::New();
-	return 0;
-}
-```
-
-输出：
-
-```text
-Constructing
-Deconstructing
-```
-
-可以看到只构造和析构了一次，实际上没有move assignment，所以跟使用构造函数的方法相比没有任何性能损失。
 
 ## `Option` -> `std::optional`
 
