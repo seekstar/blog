@@ -178,20 +178,15 @@ if (NOT TARGET 包2里的依赖2)
 endif()
 
 add_library(${PROJECT_NAME} INTERFACE)
+target_compile_features(${PROJECT_NAME} INTERFACE cxx_std_17)
 target_include_directories(${PROJECT_NAME} INTERFACE include)
-
-# https://stackoverflow.com/a/59257505
-file(GLOB_RECURSE HEADERS "include/*")
-# PUBLIC_HEADER会被install
-set_target_properties(${PROJECT_NAME} PROPERTIES PUBLIC_HEADER "${HEADERS}")
 target_link_libraries(${PROJECT_NAME}
 	INTERFACE
 		依赖1
 		依赖2
 )
 
-# 这里要设置DESTINATION，不然install的时候会直接被copy到include目录下面。
-install(TARGETS ${PROJECT_NAME} DESTINATION "include/")
+install(DIRECTORY include/ DESTINATION "include")
 ```
 
 `conanfile.py`:
