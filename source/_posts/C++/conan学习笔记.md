@@ -426,7 +426,7 @@ conan search "*" -r=remote名
 ### 测试
 
 ```shell
-conan test test_package 包名/版本
+conan test test_package 包名/版本 --build missing
 ```
 
 其中`包名/版本`不可忽略。感觉应该默认为当前包的最新版本。
