@@ -117,6 +117,16 @@ EOF
 
 第一次启动可能会报一个serious bug的错，不用管，再启动一次就好了。
 
+### QQ
+
+flatpak的版本经常会显示一片空白，可能GPU的兼容性有问题。可以用linglong安装：
+
+
+```shell
+sudo pacman -S --needed linyaps
+sudo ll-cli install linux.qq.com
+```
+
 ### WPS
 
 flatpak里只有英文版，建议用nix安装中文版：
