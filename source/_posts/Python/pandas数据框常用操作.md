@@ -58,7 +58,7 @@ df
 直接把`sys.stdin`当file输入进去即可：
 
 ```py
-latencies = pd.read_table(sys.stdin, names=['operation', 'latency(ns)'], delim_whitespace=True)
+latencies = pd.read_table(sys.stdin, names=['operation', 'latency(ns)'], sep=r'\s+')
 ```
 
 来源：<https://stackoverflow.com/questions/18495846/pandas-data-from-stdin>
