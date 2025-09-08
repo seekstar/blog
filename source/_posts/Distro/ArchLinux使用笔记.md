@@ -145,7 +145,23 @@ nix-env -iA nixpkgs.wpsoffice-cn
 
 ## Wayland存在的一些问题
 
-ArchLinux在某次升级之后就默认wayland了，但会导致一些问题。如果有需要的话可以在登录界面的左上角选择X11 session。
+ArchLinux在某次升级之后就默认wayland了，但会导致一些问题。
+
+### 可解决
+
+- Electron应用如vscode无法使用输入法
+
+解决方案：在`/etc/environment`里加入一行：
+
+```text
+ELECTRON_OZONE_PLATFORM_HINT=auto
+```
+
+然后重启（注销重新登录好像没用）
+
+### 暂时无法解决
+
+如果有需要的话可以在登录界面的左上角选择X11 session。
 
 - keepass桌面客户端不能执行auto-type，因为wayland没有提供向另一个窗口发送keypress的API：<https://keepass.info/help/kb/autotype_wayland.html>
 
@@ -153,6 +169,6 @@ ArchLinux在某次升级之后就默认wayland了，但会导致一些问题。�
 
 相关PR: [Wayland autotype implementation (using xdg-desktop-portal)](https://github.com/keepassxreboot/keepassxc/pull/10905)
 
-已解决的问题：
+### 已解决
 
 - 腾讯会议无法共享屏幕。
