@@ -143,23 +143,30 @@ nix-env -iA nixpkgs.wpsoffice-cn
 
 权限修复教程：{% post_link Distro/'ArchLinux修复系统目录和文件的权限' %}
 
-## Wayland存在的一些问题
+## Wayland
 
-ArchLinux在某次升级之后就默认wayland了，但会导致一些问题。
-
-### 可解决
-
-- Electron应用如vscode无法使用输入法
-
-解决方案：在`/etc/environment`里加入一行：
+ArchLinux在某次升级之后就默认wayland了。需要更改`/etc/environment`来确保输入法可以正常使用：
 
 ```text
+# For XWayland applications such as WeChat
+XMODIFIERS=@im=fcitx
+# For Electron applications such as vscode
 ELECTRON_OZONE_PLATFORM_HINT=auto
 ```
 
 然后重启（注销重新登录好像没用）
 
-### 暂时无法解决
+不要设置这几个环境变量，它们与wayland不兼容：GTK_IM_MODULE，QT_IM_MODULE，SDL_IM_MODULE。
+
+如果设置了`GTK_IM_MODULE`或者`QT_IM_MODULE`，会出现这个问题：<https://fcitx-im.org/wiki/FAQ#Candidate_window_is_blinking_under_wayland_with_Fcitx_5>
+
+参考：<https://fcitx-im.org/wiki/Using_Fcitx_5_on_Wayland>
+
+### Failed to connect to Wayland display
+
+由于我们全局设置了`ELECTRON_OZONE_PLATFORM_HINT=auto`，因此flatpak里支持wayland的软件会使用wayland模式启动。但是flatpak默认又不允许软件访问wayland socket，因此如果一个图形界面的包没有在manifest里声明访问wayland socket的权限，就会在`flatpak run`的时候会报错：`Failed to connect to Wayland display: No such file or directory`。解决方法是在flatseal里手动打开这个包的`socket=wayland`选项。
+
+### 暂时无法解决的问题
 
 如果有需要的话可以在登录界面的左上角选择X11 session。
 
@@ -169,6 +176,6 @@ ELECTRON_OZONE_PLATFORM_HINT=auto
 
 相关PR: [Wayland autotype implementation (using xdg-desktop-portal)](https://github.com/keepassxreboot/keepassxc/pull/10905)
 
-### 已解决
+### 已解决的问题
 
 - 腾讯会议无法共享屏幕。
