@@ -19,7 +19,7 @@ DataFrame官方文档：<https://pandas.pydata.org/docs/reference/frame.html>
 
 ### 从已有列创建
 
-```py
+```python
 a = [1, 2, 3]
 b = ['x', 'y', 'z']
 pd.DataFrame({'a': a, 'b': b})
@@ -116,6 +116,23 @@ test[['col2', 'col1']]
 1     3     1
 ```
 
+## 取出并删除某列
+
+```py
+test = pd.DataFrame({'col1': [0, 1], 'col2': [2, 3], 'col3': [4, 5]})
+print(test.pop('col1'))
+print(test)
+```
+
+```text
+0    0
+1    1
+Name: col1, dtype: int64
+   col2  col3
+0     2     4
+1     3     5
+```
+
 ## 求均值
 
 <https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.mean.html>
@@ -185,4 +202,44 @@ df.set_index('id')['column']
 
 ```py
 df.set_index('id')['column'].to_dict()
+```
+
+## 按照某个有序field合并数据框
+
+类似于数据库里的JOIN：
+
+```py
+d1 = pd.DataFrame({'a': [1, 2], 'b': [1, 2]})
+d2 = pd.DataFrame({'a': [2, 3], 'b': [2, 3]})
+pd.merge_ordered(d1, d2, on='a', how='outer')
+```
+
+输出：
+
+```text
+   a  b_x  b_y
+0  1  1.0  NaN
+1  2  2.0  2.0
+2  3  NaN  3.0
+```
+
+同名的列会加上后缀。所以建议在merge前把其他列名改成全局唯一的：
+
+```py
+d1 = d1.rename(columns={'b': 'b1'})
+d2 = d2.rename(columns={'b': 'b2'})
+pd.merge_ordered(d1, d2, on='a', how='outer')
+```
+
+```text
+   a   b1   b2
+0  1  1.0  NaN
+1  2  2.0  2.0
+2  3  NaN  3.0
+```
+
+如果要把`NaN`转成`0`：
+
+```py
+pd.merge_ordered(d1, d2, on='a', how='outer').fillna(0)
 ```
