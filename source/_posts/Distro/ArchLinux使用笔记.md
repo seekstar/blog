@@ -154,7 +154,7 @@ XMODIFIERS=@im=fcitx
 ELECTRON_OZONE_PLATFORM_HINT=auto
 ```
 
-然后重启（注销重新登录好像没用）
+然后重启或者注销重新登录。
 
 不要设置这几个环境变量，它们与wayland不兼容：GTK_IM_MODULE，QT_IM_MODULE，SDL_IM_MODULE。
 
