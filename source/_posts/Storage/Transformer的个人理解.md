@@ -56,9 +56,11 @@ X输出给下一层
 对输入矩阵`X`，首先将它跟$W_Q$, $W_K$, $W_V$相乘，得到`Q`, `K`, `V`：
 
 $$
-Q = X \times W_Q \\
-K = X \times W_K \\
-V = X \times W_V
+\begin{aligned}
+Q &= X \times W_Q \\
+K &= X \times W_K \\
+V &= X \times W_V
+\end{aligned}
 $$
 
 `Q`表示query，其中第i行可以理解成第i行对应的token正在寻找什么。
@@ -69,15 +71,13 @@ $$
 
 然后计算自注意力
 
-$$
-\mathrm{Attention}(Q, K, V) = \mathrm{softmax}(Q \times K^T / \sqrt{d_k}) \times V
-$$
+$$\mathrm{Attention}(Q, K, V) = \mathrm{softmax}(Q \times K^T / \sqrt{d_k}) \times V$$
 
 softmax是把一个向量进行指数归一化，使其所有维度的总和为1。当softmax一个矩阵的时候，是每行独立归一的。
 
 $d_k$是key向量的维度。由于softmax是指数归一化，而指数对绝对数值比较敏感，所以在softmax前先除以$\sqrt{d_k}$，防止点积结果过大，导致softmax函数的梯度消失。
 
-$Q^{(l)} \times (K^{(l)})^T$ 相当于对Q和K的每行两两点积，求出每两行之间的相关度。第i行表示Q的第i行跟K的每行之间的相关度。每行独立进行softmax之后，再乘$V^{(l)}$，得到的结果里，第i行相当于是根据Q的第i行跟K的每行的相关度，对V的行做加权求和得到的值。也就是说，跟Q的第i行关系更密切的V的行在结果中的权重更高。
+$Q \times K^T$ 相当于对Q和K的每行两两点积，求出每两行之间的相关度。第i行表示Q的第i行跟K的每行之间的相关度。每行独立进行softmax之后，再乘$V$，得到的结果里，第i行相当于是根据Q的第i行跟K的每行的相关度，对V的行做加权求和得到的值。也就是说，跟Q的第i行关系更密切的V的行在结果中的权重更高。
 
 值得注意的是，在训练过程中为了防止看到未来的信息，需要用到掩码自注意力机制。不过我们这里只关注推理过程，所以不管这个。
 
