@@ -1,5 +1,5 @@
 ---
-title: Transformer的个人理解
+title: 对Transformer的个人理解
 date: 2025-09-18 22:37:40
 tags:
 ---
