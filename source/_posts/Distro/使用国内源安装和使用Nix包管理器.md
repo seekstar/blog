@@ -130,6 +130,12 @@ nix-env -u
 -d (--delete-old) deletes  all  old  generations of all profiles in /nix/var/nix/profiles by invoking nix-env --delete-generations old on all profiles (of course, this makes rollbacks to previous configurations impossible)
 ```
 
+一些`nix-channel`的选项：
+
+- `--list`: 列出所有channel
+
+- `--remove channel名`: 移除指定channel
+
 参考：[Nix 详解（一） 像传统包管理器一样使用 Nix](https://www.rectcircle.cn/posts/nix-1-package-manager/)
 
 ## 加入`XDG_DATA_DIRS`
