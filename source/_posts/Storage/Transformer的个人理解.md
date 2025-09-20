@@ -194,3 +194,13 @@ $$\mathrm{Attention}(Q, K, V) = \mathrm{softmax}(Q \times K^T / \sqrt{d_k} + M) 
 ## Batch
 
 计算一段prompt的K和V时，如果prompt比较短，那么可能不能充分利用GPU的并行度。因此现代推理系统普遍采用动态批处理技术，将差不多时间到达的请求中长度相近的进行padding，让它们等长，然后凑成batch。现代深度学习框架对这种batch的矩阵运算进行了高度优化，从而可以更高效地利用GPU资源。
+
+## NanoFlow
+
+论文：<https://arxiv.org/pdf/2408.12757>
+
+GitHub: <https://github.com/efeslab/Nanoflow>
+
+这篇论文注意到Prefill的过程是计算密集型的，但是推理的过程却是memory-bound的，因为推理的时候很多向量乘以矩阵的操作，实际上相当于把矩阵读了一遍，而每次产生一个新的token都要把模型里的矩阵都读一遍，因此会消耗很多显存带宽。
+
+因此这篇论文旨在想办法让memory-bound的过程跟compute-bound的过程在时间上overlap，从而可以充分利用GPU的资源。
