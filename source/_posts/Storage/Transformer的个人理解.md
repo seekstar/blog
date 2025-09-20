@@ -12,7 +12,7 @@ tags:
 
 文本进来之后，首先经过Tokenizer（分词器）分割成很多个token。每个token都会赋予一个从0开始的ID，用于后续索引。
 
-然后通过一个embedding层，将token转换成一个多维向量，也叫做embedding。这个embedding层实际上是一个矩阵，大小是 `token总个数` * `隐藏层维度`。隐藏层维度就是embedding向量的长度。假如一个token的ID是233，那么就把这个矩阵的第233行拿出来作为这个token的embedding向量。这个embedding矩阵最开始是初始化成随机数（微调场景除外），在训练过程中通过反向传播之类的算法不断更新和调整。最终相似的token在向量空间中的距离会比较近。
+然后通过一个embedding层，将token转换成一个多维向量，也叫做embedding。这个embedding层实际上是一个矩阵，大小是 `token总个数` * `隐藏层维度`。隐藏层维度就是embedding向量的长度。假如一个token的ID是233，那么就把这个矩阵的第233行拿出来作为这个token的embedding向量。这个embedding矩阵在训练开始时通常随机初始化（但在微调场景下，会加载预训练模型的权重作为初始值），在训练过程中通过反向传播之类的算法不断更新和调整。最终相似的token在向量空间中的距离会比较近。
 
 通过embedding矩阵拿到token embedding之后，还要加上位置编码，这样模型才知道这个token跟其他token的相对位置。方便起见，我们仍然称加上了位置编码的向量为embedding。
 
@@ -23,8 +23,8 @@ tags:
 为了防止层数过多时原始信息丢失，进而导致梯度消失的问题，现代模型通常采用残差连接的技术来连接各层以及子层。一个完整的Transformer解码层的大致流程如下。
 
 ```text
-# 有些模型是Post-Layer Normalization (Post-LN)，先Attention再加，再LayerNorm。
-# 不过现代Transformer一般用Pre-LN。所以下面展示的是Pre-LN
+# 有些模型是Post-Layer Normalization (Post-LN)，先Attention，再残差连接，再LayerNorm。
+# 不过现代模型一般用Pre-LN。所以下面展示的是Pre-LN
 
 X: 输入矩阵
 
@@ -97,7 +97,7 @@ $\mathrm{FFN}(x) = \text{ReLU}(X \times W_1 + b_1)\times W_2 + b_2$
 
 ### 输出next token
 
-在经过所有的解码层之后，会得到一个跟原始输入矩阵大小相同的矩阵。我们只关注最后一行，将它取出，记为`hidden_states`。然后经过一个线性层：
+在经过所有的解码层之后，会得到一个跟原始输入矩阵大小相同的矩阵。我们只关注最后一行，将它取出，记为`hidden_states`。然后经过一个线性层（语言模型头，LM Head）：
 
 logits = hidden_states $\times$ W_projection + b
 
@@ -189,4 +189,8 @@ $$\mathrm{Attention}(Q, K, V) = \mathrm{softmax}(Q \times K^T / \sqrt{d_k} + M) 
 
 考虑这样一个情形：用户给出prompt，然后模型在后面进行next token的预测。根据我们上面的分析，我们只需要得到prompt的K和V即可开始预测。而这个得到prompt的K和V的过程就叫做prefill。
 
-如果是没见过的prompt，那么我们就用矩阵乘法逐层算出K和V。这个过程是非常消耗算力的。所以如果一个prompt经常被使用，那么我们可以考虑把它的K和V存下来，下次看到了就可以直接把对应的K和V读出来用。
+如果是没见过的prompt，那么我们就要依照完整的transformer算法逐层算出K和V。需要注意的是，除了最后一层，前面的层不仅要算K和V，还要计算Q和自注意力，这样才能得到下一层的完整输入用来算出下一层的K和V。这个过程非常消耗算力，复杂度是 $O(n^2)$。所以如果一个prompt经常被使用，那么我们可以考虑把它的K和V存下来，下次看到了就可以直接把对应的K和V读出来用。
+
+## Batch
+
+计算一段prompt的K和V时，如果prompt比较短，那么可能不能充分利用GPU的并行度。因此现代推理系统普遍采用动态批处理技术，将差不多时间到达的请求中长度相近的进行padding，让它们等长，然后凑成batch。现代深度学习框架对这种batch的矩阵运算进行了高度优化，从而可以更高效地利用GPU资源。
