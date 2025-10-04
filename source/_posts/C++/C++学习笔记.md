@@ -259,12 +259,9 @@ C字符串是以`\0`结尾的`const char *`。
 文档：<https://en.cppreference.com/w/cpp/string/byte/atoi>
 
 ```c
-int       atoi( const char* str );
-	(1)
-long      atol( const char* str );
-	(2)
-long long atoll( const char* str );
-	(3) 	(since C++11)
+int       atoi( const char* str );		(1)
+long      atol( const char* str );		(2)
+long long atoll( const char* str );		(3) 	(since C++11)
 ```
 
 ```cpp
