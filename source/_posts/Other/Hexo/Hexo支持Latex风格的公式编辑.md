@@ -75,7 +75,7 @@ pandoc:
     '--mathjax',
     # -smart: 不把引号渲染成带方向的引号。
     # +backtick_code_blocks: 代码块
-    # +implicit_figures: 防止在图片后面将方括号里的东西作为caption。<https://github.com/wzpan/hexo-renderer-pandoc/issues/34>
+    # -implicit_figures: 防止在图片后面将方括号里的东西作为caption。<https://github.com/wzpan/hexo-renderer-pandoc/issues/34>
     # +gfm_auto_identifiers: 用github的方式生成header之类的identifier
     # +intraword_underscores: 不把下划线用来强调。强调用星号。
     # +hard_line_breaks: 两行之间就算没有额外的空行也显示成两行，而不是像Latex那样显示成一行。
