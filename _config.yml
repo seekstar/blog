@@ -70,8 +70,9 @@ meta_generator: true
 ## http://momentjs.com/docs/#/displaying/format/
 date_format: YYYY-MM-DD
 time_format: HH:mm:ss
-## updated_option supports 'mtime', 'date', 'empty'
-updated_option: 'mtime'
+
+# If no "updated" in front-matter, then leave post.updated undefined.
+updated_option: 'empty'
 
 # Pagination
 ## Set per_page to 0 to disable pagination

@@ -329,6 +329,31 @@ npm install
 
 <https://seekstar.github.io/2021/11/16/hexo-tree%E4%B8%BB%E9%A2%98%E8%AE%A9%E6%96%87%E7%AB%A0%E7%9A%84url%E4%B8%AD%E4%B8%8D%E5%90%AB%E7%9B%AE%E5%BD%95/>
 
+## Sitemap
+
+给网站添加sitemap有利于搜索引擎收录。这里主要介绍如何生成sitemap。
+
+```shell
+npm install hexo-generator-sitemap --save
+```
+
+然后在`_config.xml`里：
+
+```xml
+sitemap:
+path: sitemap.xml
+```
+
+然后`hexo d -g`，sitemap就会生成在`xxx.github.io/sitemap.xml`。然后在google search console里的indexing -> Sitemaps -> Add a new sitemap，会有`https://xxx.github.io/ Enter sitemap URL`，在`Enter sitemap URL`里填入`sitemap.xml`即可。
+
+可能会提示`couldn't fetch`。可能其实是pending，多等几天可能就好了。
+
+需要注意的是，`sitemap.xml`里的`lastmod`默认被置为`post.updated`，而如果front-matter里没有显式指定`updated`时间，`post.updated`默认又会被置为`.md`文件的修改时间。而在另一台机器上clone之后`.md`文件的修改时间通常会被设置为clone的时间，从而导致`sitemap.xml`里的`lastmod`全部变成clone的时间，而且条目的顺序也会乱掉。考虑到sitemap.xml一般是用git管理的，这会导致git history里有很多无用的更改。
+
+可以用`hexo-filter-updated-from-git`解决这个问题：<https://github.com/seekstar/hexo-filter-updated-from-git>
+
+原理是在front-matter里没有显式指定`updated`时间时，让hexo不设置`post.updated`。然后弄一个`before_post_render`的filter，在发现`post.updated`未定义的时候将其设为对应的`.md`文件的最后一个commit的author time。
+
 ## 升级
 
 ### 升级某个包的版本

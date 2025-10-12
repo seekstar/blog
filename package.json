@@ -16,6 +16,7 @@
     "hexo-asset-image-fixed": "^0.0.6",
     "hexo-deployer-git": "^4.0.0",
     "hexo-filter-mathjax": "^0.9.1",
+    "hexo-filter-updated-from-git": "^1.0.0",
     "hexo-generator-archive": "^2.0.0",
     "hexo-generator-category": "^2.0.0",
     "hexo-generator-index": "^4.0.0",
