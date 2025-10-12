@@ -40,14 +40,14 @@ make -j$(nproc)
 在终端中执行以下命令
 
 ```shell
-sudo apt-get install -y texstudio perl-tk 
 sudo apt-get install -y texlive-xetex
-#Install chinese font package
+# Install chinese font package
 sudo apt-get install -y latex-cjk-all
-#Install fonts such as consolas
+# Install fonts such as consolas
 sudo apt-get install -y texlive-fonts-extra
-#也许可以不要？
+# 也许可以不要？
 sudo apt-get install -y texlive-lang-english texlive-lang-chinese
+sudo apt-get install -y texstudio perl-tk
 ```
 
 安装时间较长。安装完后就可以使用vim或vscode或texstudio编写latex了。
