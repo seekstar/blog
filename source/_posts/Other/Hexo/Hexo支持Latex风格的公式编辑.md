@@ -66,28 +66,25 @@ $\underset{theta}{\bowtie}$
 
 $N^+ = \{x | x\in N \wedge x \ne 0\}$
 
-但是默认的markdown语法跟github的markdown语法不一样。
-
-这篇文章提供了一个workaround：<https://blog.rule55.com/hexo/>，即在`_config.yml`里加入
+然后给pandoc传入这些参数：
 
 ```yml
-# Configure pandoc to use all github markdown format extensions
-# extensions as of 2018 is an undocumented feature of hexo-renderer-pandoc
-# Adding all extensions for github so we don't have to change index.js of
-# hexo-renderer-pandoc.
 pandoc:
-  extensions:
-    - -implicit_figures # 防止在图片后面将方括号里的东西作为caption。
-    - +gfm_auto_identifiers+angle_brackets_escapable # Not available in pandoc 1.16
-    - +pipe_tables+raw_html+fenced_code_blocks
-    - -ascii_identifiers+backtick_code_blocks+autolink_bare_uris
-    - +intraword_underscores+strikeout+hard_line_breaks+emoji
-    - +shortcut_reference_links
+  args: [
+    # I don't know why but mathjax won't work without hexo-filter-mathjax or --mathjax
+    '--mathjax',
+    # -smart: 不把引号渲染成带方向的引号。
+    # +backtick_code_blocks: 代码块
+    # +implicit_figures: 防止在图片后面将方括号里的东西作为caption。<https://github.com/wzpan/hexo-renderer-pandoc/issues/34>
+    # +gfm_auto_identifiers: 用github的方式生成header之类的identifier
+    # +intraword_underscores: 不把下划线用来强调。强调用星号。
+    # +hard_line_breaks: 两行之间就算没有额外的空行也显示成两行，而不是像Latex那样显示成一行。
+    # +autolink_bare_uris: Makes all absolute URIs into links, even when not surrounded by pointy braces <...>
+    '--from', 'markdown-smart+backtick_code_blocks-implicit_figures+gfm_auto_identifiers+intraword_underscores+hard_line_breaks+autolink_bare_uris',
+  ]
 ```
 
-其中`-implicit_figures`的来源：<https://github.com/wzpan/hexo-renderer-pandoc/issues/34>
-
-但是感觉这样还是不太优雅。要是可以直接像其他渲染器那样直接传进一个`gfm`就好了。好像pandoc是有这个参数的，但是我在插件里的`index.js`里把`markdown-smart`改成`gfm`，并且改了后面的`register`之后没反应，不知道为什么。
+也可以试试直接传入`gfm`。但我没试过。
 
 ### 方案二：hexo-renderer-markdown
 
