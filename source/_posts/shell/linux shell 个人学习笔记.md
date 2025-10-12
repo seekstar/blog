@@ -995,7 +995,7 @@ sort -u txt -o txt1
 
 ## 其他
 
-{ post_link shell/'zsh使用笔记' }
+{% post_link shell/'zsh使用笔记' %}
 
 [linux中怎么用shell显示文件某一行或几行内容](https://blog.csdn.net/mydriverc2/article/details/82623778)
 
