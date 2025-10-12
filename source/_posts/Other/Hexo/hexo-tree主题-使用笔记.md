@@ -27,7 +27,7 @@ tags:
 
 ## 新建代码仓库
 
-最好建立两个代码仓库，一个存放网站，一个存放生成网站的博客源码。存放网站的代码仓库可以自动同时push到gitee和github上。博客源码的代码仓库只能手动push，所以最好只放到一个代码托管平台上（非得写脚本一起push当我没说）。由于gitee国内访问比较稳定，所以我选择把博客源码放到gitee上。
+最好建立两个代码仓库，一个存放网站，一个存放生成网站的博客源码。存放网站的代码仓库可以自动同时push到gitee和github上。博客源码的代码仓库只能手动push，所以最好只放到一个代码托管平台上。
 
 ### gitee
 
@@ -53,7 +53,7 @@ npm install hexo-cli -g
 hexo init
 ```
 
-就初始化了目录结构。然后才能`git init`，把gitee上的remote加上去。
+就初始化了目录结构。然后才能`git init`，把remote加上去。
 
 ## 预览
 
@@ -271,7 +271,15 @@ npm install hexo-renderer-pandoc --save
 更换渲染器之后要在`_config.yml`中把默认的highlight关掉，才能使用新的渲染器提供的highlight：
 
 ```yml
+# https://hexo.io/docs/syntax-highlight#Disabled
+
+# 如果你的hexo版本是v7.0.0以上（含）
+syntax_highlighter: # empty
+
+# 如果你的hexo版本不到v7.0.0
 highlight:
+  enable: false
+prismjs:
   enable: false
 ```
 
@@ -302,11 +310,11 @@ npm install hexo-cli -g
 pip3 install panflute
 ```
 
-然后把gitee上的博客源码仓库clone下来，再把网站的仓库clone到源码仓库的`.deploy_git`下。然后`npm install`，然后就可以正常`hexo g && hexo s`预览和`hexo d -g`部署了。比如我的：
+然后把博客源码仓库clone下来，再把网站的仓库clone到源码仓库的`.deploy_git`下。然后`npm install`，然后就可以正常`hexo g && hexo s`预览和`hexo d -g`部署了。比如我的：
 
 ```shell
 # 源码
-git clone --recursive git@gitee.com:searchstar/blog.git
+git clone --recursive git@github.com:seekstar/blog.git
 cd blog
 # 网站
 git clone git@github.com:seekstar/seekstar.github.io.git .deploy_git
@@ -367,8 +375,9 @@ npm i
 
 ```yaml
 pandoc:
-  extra:
-    - preserve-tabs:  # note this colon!!
+  args: [
+    '--preserve-tabs',
+  ]
 ```
 
 然后`hexo clean && hexo g`使其生效。
