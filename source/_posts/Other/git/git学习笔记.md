@@ -211,7 +211,8 @@ git cherry-pick 开始^..结束
 ## 变基
 
 ```shell
-git rebase --onto <newbase> <oldbase>
+# 如果不填oldbase，就默认从分岔点开始rebase
+git rebase --onto <newbase> [oldbase]
 ```
 
 相当于先保存当前的HEAD为`oldhead`，然后`reset --hard`到`newbase`，然后将从`oldbase`开始（不含）到`oldhead`（含）的所有commit给逐个cherry-pick过来。
