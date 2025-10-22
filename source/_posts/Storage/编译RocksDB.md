@@ -25,7 +25,7 @@ make -j$(nproc) shared_lib
 ```shell
 mkdir build
 cd build
-cmake .. -DCMAKE_BUILD_TYPE=Release -DUSE_RTTI=true
+cmake .. -DCMAKE_BUILD_TYPE=Release -DUSE_RTTI=true -DFAIL_ON_WARNINGS=OFF
 # 全部编译
 make -j$(nproc)
 # 只编译静态库
@@ -39,3 +39,22 @@ make -j$(nproc) rocksdb-shared
 {% post_link Storage/'undefined-reference-to-typeinfo-for-rocksdb-Customizable' %}
 
 [C++ RTTI 实现原理详解](https://blog.csdn.net/xiangbaohui/article/details/109231333)
+
+### Asynchronous IO
+
+官方文档：<https://github.com/facebook/rocksdb/wiki/Asynchronous-IO>
+
+先编译安装folly: {% post_link Storage/'编译folly' %}
+
+这里假设folly安装到了`$workspace/deps`。
+
+```shell
+sudo apt install -y liburing-dev
+
+cd build
+# -DPORTABLE=ON: 因为folly编译的时候没有-march=native，所以rocksdb编译的时候也不要-march-native
+cmake .. -DCMAKE_BUILD_TYPE=Release -DUSE_RTTI=true -DFAIL_ON_WARNINGS=OFF -DUSE_COROUTINES=true -DROCKSDB_BUILD_SHARED=OFF -DPORTABLE=ON
+make -j$(nproc)
+```
+
+然后就可以在`ReadOptions`里开`async_io`了。
