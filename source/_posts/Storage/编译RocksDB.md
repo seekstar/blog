@@ -53,7 +53,8 @@ sudo apt install -y liburing-dev
 
 cd build
 # -DPORTABLE=ON: 因为folly编译的时候没有-march=native，所以rocksdb编译的时候也不要-march-native
-cmake .. -DCMAKE_BUILD_TYPE=Release -DUSE_RTTI=true -DFAIL_ON_WARNINGS=OFF -DUSE_COROUTINES=true -DROCKSDB_BUILD_SHARED=OFF -DPORTABLE=ON
+# -DWITH_LIBURING=OFF: 不知道为什么，如果WITH_LIBURING=ON，db_bench执行完成之后reader不知道为什么会卡住没法返回
+cmake .. -DCMAKE_BUILD_TYPE=Release -DUSE_RTTI=true -DFAIL_ON_WARNINGS=OFF -DUSE_COROUTINES=true -DROCKSDB_BUILD_SHARED=OFF -DPORTABLE=ON -DWITH_LIBURING=OFF
 make -j$(nproc)
 ```
 

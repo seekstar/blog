@@ -57,6 +57,31 @@ ln -s /usr/bin/g++-13 ~/.venvs/folly/bin/g++
 ln -s /usr/bin/gcc-13 ~/.venvs/folly/bin/gcc
 ```
 
+## liburing >= 2.10
+
+根据 <https://github.com/microsoft/vcpkg/pull/44232>，从`v2025.02.24.00`开始，folly要求liburing >= 2.10，不然会报这个错：
+
+```text
+error: ‘io_uring_zcrx_cqe’ does not name a type
+```
+
+Debian 13的liburing是2.9，不满足要求。可以卸载liburing-dev：
+
+```shell
+sudo apt remove liburing-dev
+```
+
+也可以手动编译安装新版本liburing。在这里选择要安装的版本：<https://github.com/axboe/liburing/releases>
+
+```shell
+version=2.12
+wget https://github.com/axboe/liburing/archive/refs/tags/liburing-$version.tar.gz
+tar xzf liburing-$version.tar.gz
+cd liburing-liburing-$version
+./configure --prefix=$workspace/deps
+make -j$(nproc) install
+```
+
 ## numpy 1.0
 
 不兼容`numpy 2.0`，会报错：
@@ -68,7 +93,7 @@ libs/python/src/numpy/dtype.cpp:101:83: error: ‘PyArray_Descr’ has no member
       |                                                                                   ^~~~~~
 ```
 
-需要安装`numpy 1.0`
+可以把numpy卸载再编译。或者安装`numpy 1.0`：
 
 ```shell
 # 可以在虚拟环境里安装
@@ -76,7 +101,7 @@ pip3 install numpy~=1.0
 # 要编译一段时间
 ```
 
-Update: 好像把numpy卸掉也行？
+numpy 1.x 在2025年9月就EOL了：<https://www.herodevs.com/blog-posts/numpy-version-1-x-end-of-life-what-you-need-to-know>。2023年8月11日发布的boost 1.83依赖numpy 1.x无可厚非。但现在folly应该考虑处理这个问题了。
 
 ## 安装其他依赖
 
@@ -92,6 +117,7 @@ sudo apt install -y libssl-dev
 # 根据自己的系统选择。Debian 12是python3.11。Debian 13是python3.13
 python=python3.13
 CPLUS_INCLUDE_PATH=/usr/include/x86_64-linux-gnu/$python/:/usr/include/$python/:$CPLUS_INCLUDE_PATH python3 ./build/fbcode_builder/getdeps.py --scratch-path=$workspace/build --install-prefix=$workspace/deps build
+# 官方文档里加了--allow-system-packages，但是系统里安装的库不一定跟folly兼容，所以这里不加--allow-system-packages，让folly自己下载编译跟自己兼容的库。
 ```
 
 然后就安装到了`$workspace/deps`。
