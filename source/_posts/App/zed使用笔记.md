@@ -33,7 +33,6 @@ sudo pacman -S zed
 ### Nix
 
 ```shell
-# 目前只有unstable channel有
 nix-channel --update
 nix-env -iA nixpkgs.zed-editor
 ```

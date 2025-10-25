@@ -4,7 +4,9 @@ date: 2025-10-21 17:19:14
 tags:
 ---
 
-在这里选择要安装的版本：<https://github.com/facebook/folly/releases>
+由于folly没有兼容性保证，所以系统一般是依赖某一个特定版本的folly。编译folly的时候应该checkout到目标系统依赖的folly版本。如果是你自己开发的系统，可以自由选择依赖的folly版本，可以在这里查看最新版本：<https://github.com/facebook/folly/releases>
+
+这里以`v2025.10.20.00`为例：
 
 ```shell
 git clone https://github.com/facebook/folly
