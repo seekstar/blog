@@ -26,6 +26,36 @@ tags:
 }
 ```
 
+## Debug: 连接到gdbserver
+
+安装插件：`WebFreak`的`Native Debug`
+
+```shell
+gdbserver :2345 /path/to/executable args...
+```
+
+在`.vscode/launch.json`里：
+
+```json
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "Attach to port",
+			"type": "gdb",
+			"request": "attach",
+			"executable": "/path/to/executable",
+			"target": ":2345",
+			"cwd": "${workspaceRoot}",
+			"remote": true,
+			// "stopAtConnect": true,
+		}
+	],
+}
+```
+
+然后按`F5`即可连接到gdbserver。
+
 ## 只对特定语言开启保存时自动格式化
 
 例如只对js开启保存时自动格式化：
