@@ -19,6 +19,12 @@ sudo apt install systemd-coredump
 
 然后再跑一遍程序，等它`Segmentation fault (core dumped)`之后，core dump就被systemd接收了。
 
+调试最新的core dump:
+
+```shell
+coredumpctl debug
+```
+
 列出所有core dump:
 
 ```shell
