@@ -104,6 +104,8 @@ pacman -Qo 相对路径或绝对路径
 pacman -Qm
 # 查找不是任何包的依赖的包
 pacman -Qqt
+# 手动安装的包. -e: --explicit, -t: top
+pacman -Qet
 ```
 
 这里面也包括用yay安装的包。
