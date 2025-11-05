@@ -152,3 +152,27 @@ sudo mv armbian-config.list /root/armbian-config.list-$(date +%s%N)
 sudo apt update
 sudo apt dist-upgrade
 ```
+
+## 升级Debian 12到Debian 13
+
+`/etc/apt/sources.list`:
+
+```text
+deb http://mirrors.tuna.tsinghua.edu.cn/debian trixie main contrib non-free non-free-firmware
+deb http://mirrors.tuna.tsinghua.edu.cn/debian trixie-updates main contrib non-free non-free-firmware
+deb http://mirrors.tuna.tsinghua.edu.cn/debian trixie-backports main contrib non-free non-free-firmware
+deb https://mirrors.tuna.tsinghua.edu.cn/debian-security trixie-security main contrib non-free non-free-firmware
+```
+
+`/etc/apt/sources.list.d/armbian.list`:
+
+```text
+deb https://mirrors.tuna.tsinghua.edu.cn/armbian trixie main trixie-utils trixie-desktop
+```
+
+然后就可以更新了（可能会断网，最好在tmux里跑）：
+
+```shell
+sudo apt update
+sudo apt dist-upgrade
+```
