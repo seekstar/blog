@@ -56,7 +56,7 @@ Sat Dec 10 11:54:20 2022
 
 ```shell
 sudo pacman -S --needed linyaps
-sudo ll-cli install com.seafile-gui.linyaps
+sudo ll-cli install com.seafile-gui
 ```
 
 注销再重新登录就可以在启动器里看到了seafile了。

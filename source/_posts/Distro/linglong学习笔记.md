@@ -36,7 +36,7 @@ ll-cli run 包名
 ### Seafile
 
 ```shell
-ll-cli install com.seafile-gui.linyaps
+ll-cli install com.seafile-gui
 ```
 
 ### WPS
