@@ -25,6 +25,8 @@ ll-cli search xxx
 ll-cli install 包名
 # 列出所有已安装的包
 ll-cli list
+# 更新某包
+ll-cli upgrade 包名
 # 卸载某包
 ll-cli uninstall 包名
 # 运行某包
