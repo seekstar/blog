@@ -389,6 +389,7 @@ parser.add_argument('-a')
 parser.add_argument('-s', type=int)
 parser.add_argument('-k', type=float, required=True)
 parser.add_argument('-R', type=int, required=True)
+parser.add_argument('--policy', choices=['leveling', 'tiering'], required=True)
 parser.add_argument('--print-a', action='store_true')
 # Long argument with optional value
 parser.add_argument('--export-policy', nargs='?', default=False)
