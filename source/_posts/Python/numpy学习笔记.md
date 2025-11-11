@@ -45,11 +45,25 @@ array([1, 2, 3, 4, 5, 6])
 
 ### 等差数列
 
-文档：<https://numpy.org/doc/stable/reference/generated/numpy.linspace.html>
+#### [numpy.linspace](https://numpy.org/doc/stable/reference/generated/numpy.linspace.html)
+
+指定个数
 
 ```py
 numpy.linspace(start, stop, num=50, endpoint=True, retstep=False, dtype=None, axis=0)
 ```
+
+#### [numpy.arange](https://numpy.org/doc/stable/reference/generated/numpy.arange.html)
+
+指定差
+
+```py
+numpy.arange([start,] stop, [step,] *)
+```
+
+start: default 0
+
+step: default 1
 
 ### 二分搜索
 
