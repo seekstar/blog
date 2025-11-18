@@ -51,6 +51,7 @@ session is restarted.
 flatpak search xxx
 flatpak install xxx
 flatpak uninstall xxx
+flatpak update xxx
 # 删除没有被任何application使用的runtime和extension
 flatpak uninstall --unused
 # 列出已安装的包
