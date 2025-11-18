@@ -340,8 +340,13 @@ plt.show()
 常用：
 
 ```py
-figure = plt.figure(dpi = 300, figsize = (xx, xx), constrained_layout=True)
-gs = gridspec.GridSpec(1, 3, figure=figure)
+fig = plt.figure(dpi = 300, figsize = (xx, xx), constrained_layout=True)
+# 1x2
+gs = gridspec.GridSpec(1, 2, figure=fig)
+subfig = plt.subplot(gs[0, 0])
+...
+subfig = plt.subplot(gs[0, 1])
+...
 ```
 
 其中`constrained_layout`比`tight_layout`更好。
