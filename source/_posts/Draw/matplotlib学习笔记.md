@@ -392,6 +392,30 @@ ax.yaxis.set_minor_locator(LogLocator(base=10, subs=np.arange(2, 10) * 0.1, numt
 ax.tick_params(axis='y', which='major', pad=0.1)
 ```
 
+## 双Y轴
+
+```py
+# 手动控制颜色，不然两个ax上画出的线会出现相同颜色
+color_list = plt.rcParams['axes.prop_cycle'].by_key()['color']
+color_index = 0
+
+ax1 = plt.gca()
+ax1.set_ylabel('ylabel1', fontsize=8)
+ax1.plot(x, y, label='legend1', color=color_list[color_index])
+color_index += 1
+
+ax2 = ax1.twinx()
+ax2.set_ylabel('ylabel2', fontsize=8)
+ax2.plot(x, y, label='legend2', color=color_list[color_index])
+color_index += 1
+
+lines1, labels1 = ax1.get_legend_handles_labels()
+lines2, labels2 = ax2.get_legend_handles_labels()
+ax1.legend(lines1 + lines2, labels1 + labels2, fontsize=8)
+
+plt.show()
+```
+
 ## 疑难杂症
 
 ### `Matplotlib is currently using agg, which is a non-GUI backend, so cannot show the figure.`
