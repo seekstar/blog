@@ -92,11 +92,11 @@ for line in legend.get_lines():
 
 可以微调高度
 
-### [text](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.text.html)
+### [plt.text](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.text.html)
 
 Positional, required:
 
-- `x, y`: float
+- `x, y`: float。坐标默认是左下角的坐标。
 
 - `s`: str
 
@@ -109,6 +109,10 @@ Optional:
 The default transform specifies that text is in data coords.
 
 `transform=ax.transAxes`: in axis coords. (0, 0) is lower-left and (1, 1) is upper-right.
+
+其他参数：
+
+- `ha`, `va`: 控制锚点的位置。默认是左下角，也就是说上面的`x`和`y`默认是左下角的坐标。如果想指定文本中心的坐标：`ha='center', va='center'`
 
 ### [tight_layout](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.tight_layout.html)
 
@@ -340,6 +344,8 @@ plt.show()
 常用：
 
 ```py
+from matplotlib import gridspec
+
 fig = plt.figure(dpi = 300, figsize = (xx, xx), constrained_layout=True)
 # 1x2
 gs = gridspec.GridSpec(1, 2, figure=fig)
