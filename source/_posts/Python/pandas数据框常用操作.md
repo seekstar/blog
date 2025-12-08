@@ -89,6 +89,8 @@ test = pd.DataFrame({'col1': range(0, 10), 'col2': range(10, 20)})
 test.iloc[1:4]
 # 取出最后一行
 test.iloc[-1]
+# 取出最后两行
+test.iloc[-2:]
 ```
 
 ## 取出满足条件的行

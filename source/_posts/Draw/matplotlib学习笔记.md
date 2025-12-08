@@ -170,6 +170,8 @@ Positional, required: `ticks`
 
 Optional: `labels` (list-like)
 
+用[tick_params](#tick_params)调labelsize。
+
 ### [set_xlabel](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.set_xlabel.html)
 
 跟`plt.xlabel`一样。
