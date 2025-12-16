@@ -805,6 +805,8 @@ less -N 文件路径
 
 来源：[Linux之Less命令跳转到特定的行号](https://blog.csdn.net/lovedingd/article/details/120885183)
 
+刷新：`shift+R`
+
 ### locate
 
 ```shell
