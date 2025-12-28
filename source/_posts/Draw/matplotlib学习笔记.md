@@ -72,6 +72,14 @@ The pad between the legend handle and text, in font-size units.
 
 The spacing between columns, in font-size units.
 
+- `labelspacing`: float, default: `0.5`
+
+The vertical space between the legend entries, in font-size units.
+
+- `borderaxespad`: float, default: `0.5`
+
+The pad between the Axes and legend border, in font-size units.
+
 #### 增加线宽
 
 ```py
