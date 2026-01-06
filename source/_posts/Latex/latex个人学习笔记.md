@@ -975,6 +975,46 @@ Bibliography里URL不要用`url = {https://xxx}`的形式，要用`note = {\url{
 
 参考：<https://tex.stackexchange.com/a/150206/256676>
 
+## algorithm2e
+
+- {% post_link Latex/'algorithm2e包参数' %}
+
+- {% post_link Latex/'algorithm2e无限循环' %}
+
+```tex
+\usepackage[linesnumbered, ruled, vlined]{algorithm2e}
+
+\begin{algorithm}
+\caption{xxx}\label{alg:xxx}
+\DontPrintSemicolon
+\SetKw{Continue}{continue}
+\SetKw{And}{and}
+\SetKw{True}{true}
+\For{xxx}{
+    \textcolor{gray}{// 注释} \;
+    \If {条件1 \And 条件2} {
+        \Continue \;
+    }
+	% https://tex.stackexchange.com/a/281240
+    \uIf {条件} {
+        xxx \;
+    } \uElseIf {条件} {
+        xxx \;
+    } \Else {
+        xxx \;
+    }
+}
+\While{条件}{
+    \eIf {条件} {
+        xxx \;
+    } {
+        xxx \;
+    }
+}
+\Return \True \;
+\end{algorithm}
+```
+
 ## 其他
 
 `\ \par`可以避免换行时underfull warning
