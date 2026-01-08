@@ -376,19 +376,6 @@ trap 命令 事件
 - `INT`: SIGINT，可以由ctrl+c触发
 - `TERM`: SIGTERM
 
-例子：
-
-```shell
-# a.sh
-trap 'exit 1' INT
-trap 'echo cleanup' EXIT
-sleep 3
-```
-
-`sh a.sh`，然后`ctrl+c`，`INT`事件被触发，从而调用`exit 1`，进而触发`EXIT`事件，从而调用`echo cleanup`，然后屏幕上会打印一行`cleanup`。
-
-来源：<https://newbe.dev/exit-trap-in-dash-vs-ksh-and-bash>
-
 但是要注意的是，如果脚本正在执行一个外部命令，比如`sleep`，这时脚本里的`trap`是不会被调用的。因此在需要进行信号处理的脚本中如果需要执行时间很长的命令，那么要把这个命令放到子进程里跑，然后在主进程里wait。例如`test.sh`：
 
 ```sh
@@ -404,28 +391,7 @@ sleep 1
 kill -TERM $pid
 ```
 
-这时候这个进程是杀不死的，因为`sleep 1000000`阻塞了脚本，所以`trap`没有执行。但我们可以把`sleep`放到子进程里：
-
-```sh
-#!/usr/bin/env sh
-sleep 100000 &
-pid=$!
-trap "kill -TERM $pid; echo exit 1; exit 1" TERM
-wait
-```
-
-再执行上面的命令，这个脚本就可以被顺利杀死了。
-
-如果是pipeline命令，直接将其放入后台的话，`$!`只是pipeline里的最后进程，将其杀掉只会导致pipeline前面的进程变成孤儿进程。为了一次性将整个pipeline杀死，可以用`setsid`将其放入一个单独的进程组里，然后向整个进程组发信号：
-
-```sh
-#!/usr/bin/env sh
-setsid sh -c "sleep 10 | sleep 10" &
-trap "kill -TERM -$!; echo exit 1; exit 1" TERM
-wait
-```
-
-详情请参考：{% post_link Linux/Process/'Linux-shell向进程组发信号' %}
+这时候这个进程是杀不死的，因为`sleep 1000000`阻塞了脚本，所以`trap`没有执行。
 
 ## `wait`
 
@@ -434,74 +400,6 @@ wait
 也可以等待一个特定进程：`wait <PID>`
 
 bash中可以`wait -n`来等待任意一个后台任务完成，但POSIX标准中没有这个。
-
-在POSIX shell中如果要等待多个任务中的任意一个完成，然后把其他的杀掉，可以这样：
-
-```sh
-#!/usr/bin/env sh
-# "wait -n" is not available in POSIX
-trap "exit 1" CHLD
-trap "pkill -P $$; exit 1" EXIT
-sleep 10 &
-sleep 3 &
-wait
-```
-
-其中`$$`是当前shell的PID，`pkill -P $$`表示把父进程是当前shell的所有进程杀掉。
-
-来源：<https://unix.stackexchange.com/a/231678>
-
-如果是带pipeline的复杂命令，需要这样：
-
-```sh
-#!/usr/bin/env sh
-# "wait -n" is not available in POSIX
-trap "exit 1" CHLD
-trap "pkill -P $$; exit 1" EXIT
-(
-    setsid sh -c "sleep 10 | sleep 10" &
-    trap "kill -TERM -$!" TERM
-    wait
-) &
-sleep 3 &
-wait
-```
-
-但是需要注意的是，`$$`在subshell中会被展开为shell的PID，而不是subshell的PID。因此如果在subshell中，需要这样：
-
-```sh
-#!/usr/bin/env sh
-(
-	# https://unix.stackexchange.com/a/484464
-	pid=$(exec sh -c 'echo "$PPID"')
-	# "wait -n" is not available in POSIX
-	trap "exit 1" CHLD
-	trap "pkill -P $pid; exit 1" EXIT
-	(
-		setsid sh -c "sleep 10 | sleep 10" &
-		trap "kill -TERM -$!" TERM
-		wait
-	) &
-	sleep 3 &
-	wait
-)
-```
-
-{% spoiler （不推荐）把它们都放进一个process group里，最后一起杀掉 %}
-
-```sh
-#!/usr/bin/env sh
-setsid sh -c "
-	sleep 10 &
-	sleep 3 &
-	trap \"kill -TERM -\$\$\" CHLD
-	wait
-"
-```
-
-但是这个方法因为会把自己杀掉，所以会打印一行`Terminated`。
-
-{% endspoiler %}
 
 ## `case`
 
