@@ -11,7 +11,11 @@ date: 2021-09-20 10:38:42
 
 ### 安装依赖
 
-可以用nix安装，不需要root权限：
+```shell
+sudo apt install bison
+```
+
+也可以用nix安装，不需要root权限：
 
 ```shell
 nix-env -iA nixpkgs.bison
@@ -23,13 +27,16 @@ Nix包管理器安装和使用教程：{% post_link Distro/'使用国内源安�
 
 glibc每六个月发布类似于2.31这样的minor version，然后在这里fork出这个minor version的branch，比如`release/2.31/master`，以后的bug fix都commit到这个branch上，不再单独发布bug fix version。因此我们可以先clone glibc的repo，然后checkout到目标minor version的branch即可。
 
-debian 12上glibc版本是`2.36-9+deb12u7`，所以应该获取`2.36`的源码。
-debian 11上glibc版本是`2.31-13+deb11u7`，应该获取`2.31`的源码。
+| OS | glibc版本 | 推荐版本 |
+| ---- | ---- | ---- |
+| Debian 13 | 2.41-12 | 2.41 |
+| Debian 12 | 2.36-9+deb12u7 | 2.36 |
+| Debian 11 | 2.31-13+deb11u7 | 2.31 |
 
 ```shell
 git clone https://mirrors.tuna.tsinghua.edu.cn/git/glibc.git
 cd glibc
-git checkout release/2.36/master
+git checkout release/2.41/master
 ```
 
 ### 编译
@@ -62,11 +69,14 @@ libpthread.so.0
 
 gcc的功能更新会更新major version，后面的minor version都是bug fix version，官方文档：<https://gcc.gnu.org/develop.html>
 
-debian 12 上的gcc版本是`12.2.0-14`，这里应该编译安装它的最新bug fix版本`12.4.0`。
-debian 11 上的gcc版本是`10.2.1`，这里应该编译安装它的最新bug fix版本`10.5.0`。
+| OS | GCC版本 | 推荐版本 |
+| ---- | ---- | ---- |
+| Debian 13 | 14.2.0 | 14.3.0 |
+| Debian 12 | 12.2.0-14 | 12.4.0 |
+| Debian 11 | 10.2.1 | 10.5.0 |
 
 ```shell
-version=12.4.0
+version=14.3.0
 wget https://mirrors.tuna.tsinghua.edu.cn/gnu/gcc/gcc-$version/gcc-$version.tar.gz
 tar xzf gcc-$version.tar.gz
 cd gcc-$version
@@ -120,6 +130,7 @@ export CXX=$INSTALL_ROOT/bin/g++
 export CFLAGS="-O2 -fno-omit-frame-pointer"
 export CXXFLAGS=$CFLAGS
 export LDFLAGS="-Wl,-rpath=$INSTALL_ROOT/lib -Wl,-rpath=$INSTALL_ROOT/lib64 -Wl,--dynamic-linker=$INSTALL_ROOT/lib/ld-linux-x86-64.so.2"
+export CMAKE_PREFIX_PATH="$HOME/no-omit-frame-pointer:$CMAKE_PREFIX_PATH"
 unset LD_LIBRARY_PATH
 ```
 
@@ -216,12 +227,16 @@ cd ..
 
 ### `liburing`
 
-Debian 12上的版本是`2.3-3`，所以应该安装`2.3`。
+| OS | 版本 | 推荐版本 |
+| ---- | ---- | ---- |
+| Debian 13 | 2.9-1 | 2.9 |
+| Debian 12 | 2.3-3 | 2.3 |
 
 ```shell
-wget https://git.kernel.dk/cgit/liburing/snapshot/liburing-2.3.tar.bz2
-tar xjf liburing-2.3.tar.bz2
-cd liburing-2.3/
+version=2.9
+wget https://github.com/axboe/liburing/archive/refs/tags/liburing-$version.tar.gz
+tar xzf liburing-2.9.tar.gz
+cd liburing-liburing-$version
 ./configure --prefix=$INSTALL_ROOT
 make -j$(nproc)
 make install
@@ -239,7 +254,7 @@ cd build
 cmake .. -DCMAKE_INSTALL_PREFIX=$INSTALL_ROOT -DTBB_TEST=OFF
 make -j$(nproc)
 make install
-cd ..
+cd ../..
 ```
 
 ### `libfmt`
