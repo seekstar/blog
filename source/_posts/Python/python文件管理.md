@@ -42,6 +42,13 @@ import os, shutil
 `os.makedirs`，相当于shell里的`mkdir -p`，但是如果已经存在则会报错。
 `os.makedirs(dirname, exist_ok=True)`使得即使目录存在也不报错。
 
+## 删除目录
+
+```shell
+# 递归删除
+shutil.rmtree(dir)
+```
+
 ## 复制文件
 
 `shutil.copyfile`
