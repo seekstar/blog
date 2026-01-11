@@ -303,9 +303,31 @@ factorial(10)
 
 <https://docs.python.org/3/library/re.html>
 
-### 执行命令
+### [subprocess](https://docs.python.org/3/library/subprocess.html)
 
-#### 简单执行命令
+一般用来运行可执行文件。
+
+#### [subprocess.run](https://docs.python.org/3/library/subprocess.html#subprocess.run)
+
+阻塞式执行。
+
+```py
+import subprocess
+# 如果不需要拿到输出
+subprocess.run(['/path/to/executable', arg1, arg2])
+# 如果只需要拿到stdout
+subprocess.run(['/path/to/executable', arg1, arg2], stdout=subprocess.PIPE, text=True).stdout
+```
+
+#### [subprocess.Popen](https://docs.python.org/3/library/subprocess.html#popen-constructor)
+
+后台执行。可以kill。
+
+教程：<https://stackoverflow.com/questions/43322201/how-to-kill-process-which-created-by-python-os-system>
+
+### 执行shell命令
+
+#### os.system
 
 ```py
 os.system('命令 参数...')
@@ -315,22 +337,9 @@ os.system('命令 参数...')
 
 可以用[os.waitstatus_to_exitcode](https://docs.python.org/3/library/os.html#os.waitstatus_to_exitcode)来将返回值变成exit code。如果正常退出，exit code就是0。
 
-#### 带参数命令
+#### os.popen
 
-```py
-import subprocess
-subprocess.run(['./executable', arg1, arg2])
-```
-
-文档：<https://docs.python.org/3/library/subprocess.html#subprocess.run>
-
-#### 可kill的命令
-
-用`subprocess.Popen`: <https://stackoverflow.com/questions/43322201/how-to-kill-process-which-created-by-python-os-system>
-
-文档：<https://docs.python.org/3/library/subprocess.html#popen-constructor>
-
-#### 获取命令输出
+可以获取命令输出。
 
 [python的popen函数](https://blog.csdn.net/Z_Stand/article/details/89375589)
 
