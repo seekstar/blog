@@ -249,6 +249,12 @@ $$\mathop{\bowtie}\limits_{theta}$$
 \usepackage[labelfont=normalfont,textfont=normalfont]{subcaption}
 ```
 
+子图caption字号默认要小一号。如果要让字号跟正文一样，可以在包参数里加上`font=normalsize`：
+
+```tex
+\usepackage[font=normalsize,labelfont=normalfont,textfont=normalfont]{subcaption}
+```
+
 让子图的caption偏移指定距离：
 
 ```tex
