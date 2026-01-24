@@ -77,17 +77,21 @@ rm ~/.cache/matplotlib -rf
 
 ## 取色
 
-### xcolor
+### gcolor3
 
-点击需要取色的像素之后RBG色号会自动复制到剪切板上。不支持wayland。
+在启动器里叫Color Picker
 
-### Gpick
+点滴管图标，然后点屏幕上要取色的地方。
 
-点`Pick color`然后取色即可。不支持wayland。
+### 只支持X11的
 
-### 其他不支持wayland的
+#### xcolor
 
-- gcolor3
+点击需要取色的像素之后RBG色号会自动复制到剪切板上。
+
+#### Gpick
+
+点`Pick color`然后取色即可。不支持wayland，会段错误。
 
 ### 失败的尝试
 
