@@ -999,6 +999,8 @@ sort -u txt -o txt1
 
 {% post_link shell/'zsh使用笔记' %}
 
+[How to temporarily disable sudo credentials timestamp timeout?](https://unix.stackexchange.com/questions/513411/how-to-temporarily-disable-sudo-credentials-timestamp-timeout/803716#803716)
+
 [linux中怎么用shell显示文件某一行或几行内容](https://blog.csdn.net/mydriverc2/article/details/82623778)
 
 [linux shell 将多行文件转换为一行](https://blog.csdn.net/hjxhjh/article/details/17264739)

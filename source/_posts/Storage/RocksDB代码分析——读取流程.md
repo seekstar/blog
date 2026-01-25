@@ -26,7 +26,7 @@ Table默认是`BlockBasedTable`，所以这里的`TableReader`应该是`BlockBas
 class BlockBasedTable : public TableReader {
 ```
 
-`BlockBasedTable::Get`中，调用`BlockBasedTable::NewIndexIterator`获得block index的iterator，然后遍历key range包含目标key的data block。对每个遍历到的data block，调用`BlockBasedTable::NewDataBlockIterator`构造`DataBlockIter biter`，然后seek next在里面查找key。
+`BlockBasedTable::Get`中，先检查filter，如果返回negative就可以直接返回了。如果filter返回positive，就调用`BlockBasedTable::NewIndexIterator`获得block index的iterator，然后遍历key range包含目标key的data block。对每个遍历到的data block，调用`BlockBasedTable::NewDataBlockIterator`构造`DataBlockIter biter`，然后seek next在里面查找key。
 
 `BlockBasedTable::NewDataBlockIterator`中，调用`BlockBasedTable::RetrieveBlock`，将块存入`CachableEntry<Block> block`。
 
