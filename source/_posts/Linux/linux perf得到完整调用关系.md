@@ -367,6 +367,23 @@ perf record --call-graph=fp 命令 参数...
 
 <https://stackoverflow.com/questions/57430338/what-do-the-perf-record-choices-of-lbr-vs-dwarf-vs-fp-do>
 
+## 内核符号
+
+如果内核栈部分显示`[kernel.kallsyms]`而不是正常符号，可以尝试安装内核debug symbol：
+
+```shell
+sudo apt install linux-image-$(uname -r)-dbg
+sudo apt-mark auto linux-image-$(uname -r)-dbg
+```
+
+如果想要以后安装新内核的时候都安装对应的debug symbol:
+
+```shell
+sudo apt install linux-image-amd64-dbg
+```
+
+不太清楚要不要重新`perf record`。我这边是重新`perf record`再`perf script`画火焰图，图里内核符号就正常了。
+
 ## 相关
 
 [Consider not omitting frame pointers by default on targets with many registers](https://gcc.gnu.org/bugzilla//show_bug.cgi?id=100811)
