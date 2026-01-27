@@ -163,6 +163,8 @@ hatch默认是黑色的。改变hatch的颜色：`Extensions > Colour > Replace 
 
 [Markers / Arrow Heads don't use stroke gradient](https://gitlab.com/inkscape/inbox/-/issues/6730)
 
+只能调节行距，不能调节段落间距：<https://alpha.inkscape.org/vectors/www.inkscapeforum.com/viewtopic046a.html?t=12633>
+
 ## 参考文献
 
 [Inkscape操作指南](https://www.ycproject.cn/inkscape/inkscape.html)
