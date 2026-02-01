@@ -20,6 +20,13 @@ tags:
 
 - [Python -- Matplotlib：画一条水平线或竖直线](https://blog.csdn.net/math_gao/article/details/109592302)
 
+如果要用`plt.show()`的话，需要额外安装一些依赖：
+
+```shell
+# https://stackoverflow.com/a/77644828/13688160
+pip3 install PyQt6
+```
+
 ## pyplot
 
 ```python
