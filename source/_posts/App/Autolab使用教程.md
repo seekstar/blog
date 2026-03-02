@@ -16,6 +16,20 @@ tags:
 
 可以在`Configuration Testing`里试试配置对不对：在`From`里填入助教邮箱，在`To`里填入要接收邮件的邮箱（可以跟`From`一样），然后点击`SEND TEST EMAIL`，如果能收到邮件说明成功了。
 
+SMTP的配置网上有很多教程。这里主要分享一些坑点。
+
+- gmail
+
+绑定手机号开启两步验证，然后就可以创建app password了。
+
+- Amazon SES
+
+一定要申请production mode。sandbox模式下只能发信给指定地址。只有production mode才能发信给任意地址：<https://repost.aws/knowledge-center/ses-554-400-message-rejected-error>
+
+- (不推荐) sendgrid
+
+不知道为什么注册不了。而且帐号过一段时间不用就不能再用了：<https://stackoverflow.com/questions/68056093/sendgrid-mails-are-always-in-pending-status>
+
 ## 添加管理员
 
 `Manage Autolab` -> `Manage Users`，点击要设置为管理员的用户，`EDIT INFORMATION`，勾上`Administrator`，`SAVE CHANGES`即可。

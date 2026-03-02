@@ -57,20 +57,6 @@ server {
 
 注意：不要把autolab配置成不使用ssl的同时在外面套一层SSL，因为这样tango和autolab之间的通信会出问题。可能是因为tango往autolab发消息仍然使用的http，然后被外面的nginx拒绝。
 
-## 发送邮件
-
-### gmail
-
-绑定手机号开启两步验证，然后就可以创建app password了。
-
-### Amazon SES
-
-一定要申请production mode。sandbox模式下只能发信给指定地址。只有production mode才能发信给任意地址：<https://repost.aws/knowledge-center/ses-554-400-message-rejected-error>
-
-### (不推荐) sendgrid
-
-不知道为什么注册不了。而且帐号过一段时间不用就不能再用了：<https://stackoverflow.com/questions/68056093/sendgrid-mails-are-always-in-pending-status>
-
 ## autograder要安装pkill
 
 需要在Dockerfile里`apt install -y procps`
