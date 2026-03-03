@@ -382,7 +382,7 @@ sudo apt-mark auto linux-image-$(uname -r)-dbg
 sudo apt install linux-image-amd64-dbg
 ```
 
-不太清楚要不要重新`perf record`。我这边是重新`perf record`再`perf script`画火焰图，图里内核符号就正常了。
+然后不用重新`perf record`，直接`perf script`重画火焰图，图里内核符号就正常了。
 
 ## 相关
 
