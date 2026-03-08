@@ -259,6 +259,12 @@ Built-in Exceptions: <https://docs.python.org/3/library/exceptions.html>
 bisect.bisect_left(a, x, lo=0, hi=len(a), *, key=None)
 ```
 
+#### `insort_left`, `insort_right` (arr, x)
+
+都是把元素插入数组并且保持数组有序。如果数组里有相同的元素，`insort_left`插入到它们的左边，而`insort_right`插入到它们的右边。
+
+`insort`是`insort_right`的alias。
+
 #### 坑点：`pandas.Series`不能用`bisect`
 
 `pandas.Series`重载了`[]`运算符，所以不能用`bisect`二分：<https://stackoverflow.com/questions/73757757/python-bisect-and-pandas-dataframe-keyerror>
