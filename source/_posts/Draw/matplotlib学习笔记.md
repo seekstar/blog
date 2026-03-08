@@ -45,6 +45,10 @@ yscale: <https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.yscale.html
 
 #### marker
 
+完整列表：<https://matplotlib.org/stable/api/markers_api.html>
+
+常用：
+
 `o`: 圆圈
 
 `s`: square, 正方形
