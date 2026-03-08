@@ -43,6 +43,24 @@ yscale: <https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.yscale.html
 
 交互式散点图：<https://mpld3.github.io/examples/scatter_tooltip.html>
 
+#### marker
+
+`o`: 圆圈
+
+`s`: square, 正方形
+
+`D`: diamond, 菱形
+
+`^`: 上三角
+
+`v`: 下三角
+
+`<`: 左三角
+
+`>`: 右三角
+
+默认是圆角的。如果不想要圆角效果，可以设置`linewidth=0`。
+
 #### legend
 
 要用`Line2D`画: <https://stackoverflow.com/questions/47391702/how-to-make-a-colored-markers-legend-from-scratch>
@@ -56,6 +74,12 @@ yscale: <https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.yscale.html
 ### 折线图 [plt.plot](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.plot.html)
 
 `plt.plot(y)`的横坐标是从0开始的数组下标。
+
+#### marker
+
+一般可以用`marker`, `markersize`, `markerfacecolor`, `markevery`。
+
+但是如果要手动指定哪些数据点需要marker，还是得用scatter。需要加上参数`zorder=2`手动把层级顺序调成跟线条一样，不然会出现后画的marker在先画的线条下面。
 
 ### [`plt.legend`](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.legend.html)
 
