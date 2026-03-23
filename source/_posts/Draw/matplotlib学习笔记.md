@@ -79,6 +79,10 @@ yscale: <https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.yscale.html
 
 `plt.plot(y)`的横坐标是从0开始的数组下标。
 
+常用参数：
+
+`linestyle`: '-' or 'solid', '--' or 'dashed', '-.' or 'dashdot', ':' or 'dotted'。完整列表：<https://matplotlib.org/stable/api/_as_gen/matplotlib.lines.Line2D.html#matplotlib.lines.Line2D.set_linestyle>
+
 #### marker
 
 一般可以用`marker`, `markersize`, `markerfacecolor`, `markevery`。
