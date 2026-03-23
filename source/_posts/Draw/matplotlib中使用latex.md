@@ -21,6 +21,20 @@ r'Get $\times$ 16KiB'
 如果使用pdflatex，就`\usepackage{textcomb}`
 然后text模式下的`\textperthousand`就是`千分之`符号了。
 
+### 安装Latex
+
+```shell
+# Debian
+# pdflatex
+sudo apt install -y texlive-latex-base
+# type1cm.sty
+sudo apt install -y texlive-latex-extra
+# type1ec.sty
+sudo apt install -y cm-super-minimal
+# dvipng
+sudo apt install -y dvipng
+```
+
 ### import
 
 ```py
@@ -35,24 +49,24 @@ import matplotlib as mpl
 参考：
 <https://stackoverflow.com/questions/41453109/how-to-write-your-own-latex-preamble-in-matplotlib>
 <https://stackoverflow.com/questions/32725483/matplotllib-and-xelatex>
-如果使用pdflatex的话，就这样
 
 ```py
 mpl.rcParams.update({
     'text.usetex': True,
-    'pgf.preamble': r'\usepackage{textcomb}'
+    'pgf.preamble': r'\usepackage{textcomb}',
 })
 ```
 
-如果使用xelatex的话，就这样
+默认是pdflatex。如果要使用xelatex的话，加上`'pgf.texsystem': 'xelatex',`即可。
+
+如果要使用`Linux Libertine`:
 
 ```py
-## TeX preamble
 mpl.rcParams.update({
+    'font.family': 'serif',
+    'font.serif': ['Linux Libertine O'],
     'text.usetex': True,
-    'pgf.texsystem': 'xelatex',
-    #'pgf.preamble': r'\usepackage{amsmath} `...'
-    'pgf.preamble': r'\usepackage{amsmath}'
+    'text.latex.preamble': r'\usepackage{amsmath} \usepackage{libertine}',
 })
 ```
 
@@ -62,14 +76,6 @@ mpl.rcParams.update({
 
 ```py
 plt.ylabel(r"DRAM consumption(\textperthousand)")
-```
-
-### LaTeX Error: File `type1ec.sty' not found.
-
-<https://stackoverflow.com/questions/11354149/python-unable-to-render-tex-in-matplotlib>
-
-```shell
-sudo apt install cm-super
 ```
 
 ### legend消失
