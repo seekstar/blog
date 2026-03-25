@@ -250,12 +250,12 @@ public:
 		alpha_(1 / (1 - theta)),
 		zeta2_(1 + pow(2.0, -theta))
 	{
-		assert(n > 2);
+		assert(n_ > 2);
 		zetan_ = zeta2_;
-		for (size_t i = 3; i <= n; ++i) {
+		for (size_t i = 3; i <= n_; ++i) {
 			zetan_ += pow((double)i, -theta);
 		}
-		eta_ = (1 - pow(2.0 / n, 1 - theta)) / (1 - zeta2_ / zetan_);
+		eta_ = (1 - pow(2.0 / n_, 1 - theta)) / (1 - zeta2_ / zetan_);
 	}
 	template <typename E>
 	size_t operator()(E &e) {
