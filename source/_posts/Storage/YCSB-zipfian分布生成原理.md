@@ -250,6 +250,8 @@ public:
 		alpha_(1 / (1 - theta)),
 		zeta2_(1 + pow(2.0, -theta))
 	{
+		// theta >= 1 is not supported by this implementation
+		assert(theta < 1);
 		assert(n_ > 2);
 		zetan_ = zeta2_;
 		for (size_t i = 3; i <= n_; ++i) {
