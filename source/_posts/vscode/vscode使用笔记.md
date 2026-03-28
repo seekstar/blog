@@ -68,13 +68,18 @@ gdbserver :2345 /path/to/executable args...
 
 Language Identifiers: <https://code.visualstudio.com/docs/languages/identifiers>
 
-补充：
+常用：
 
 | Language Identifier | 含义 |
 | ---- | ---- |
+| bibtex | BibTeX |
 | cmake | `CMakeLists.txt` |
+| cpp | C++ |
+| javascript | JavaScript |
 | jsonc | JSON with Comments |
 | markdown | Markdown |
+| python | Python |
+| rust | Rust |
 
 来源：<https://stackoverflow.com/questions/44831313/how-to-exclude-file-extensions-and-languages-from-format-on-save-in-vscode>
 
