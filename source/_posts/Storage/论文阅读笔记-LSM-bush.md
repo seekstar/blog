@@ -21,6 +21,7 @@ tags:
 | L | number of levels | |
 | M | 所有bloom filter的平均bits per bit | bits |
 | p | sum of FPRs across all Bloom filters | |
+| $r_i$ | capacity ratio between Levels $i$ and $i-1$ | |
 | $p_i$ | Bloom filter FPR at Level $i$ | |
 | T | base capacity ratio | |
 | X | ratio growth exponential | |
@@ -138,8 +139,12 @@ $$
 
 我们可以发现，增加某层的sorted run个数时，这一层的bits per entry是对数增大的，然而由于每层的数据量是指数增大的，所以增加上面的层的sorted run个数对平均bits per entry影响很小，而且还可以降低写放大。因此我们考虑从底层到最上层让sorted run个数指数增大。
 
-$i < L$时，LSM-bush令第i层的sorted run个数$r_i = T^{X^{L-i-1}}$，论文里取的$X=2$。论文附录C里把每层的bloom filter的bit数算出来了，似乎跟Monkey的不太一样。
+$i < L$时，LSM-bush令第i层的sorted run个数$r_i = T^{X^{L-i-1}}$，论文里取的$X=2$。论文附录C里把每层的bloom filter的false positive rate $p_i$ 算出来了，似乎跟Monkey的不太一样：
 
-假设最后一层的size ratio是C，那么写放大等于$C + L - 1$。由于层数$L = O(\log_X \log_T \frac{N}{F})$，其中N是数据量，F是write buffer的大小，所以写放大等于$O(C + O(\log_X \log_T \frac{N}{F}))$。
+$$p_i = p_L \frac{a_L}{a_i} \frac{1}{C} (\frac{T}{r_i})^{\frac{1}{X-1}} \frac{r_i-1}{r_i}$$
+
+其中p_L是最后一层的false positive rate。$a_i$是每层最多允许的sorted run个数。$a_i = r_i - 1, i < L$. $a_L = 1$. $C$是最后一层跟前面所有层的总大小的比例。
+
+写放大$\approx C + L - 1$。由于层数$L = O(\log_X \log_T \frac{N}{F})$，其中N是数据量，F是write buffer的大小，所以写放大等于$O(C + O(\log_X \log_T \frac{N}{F}))$。
 
 论文里给出的point read的I/O复杂度是$O(1)$。
