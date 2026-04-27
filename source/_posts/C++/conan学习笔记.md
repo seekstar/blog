@@ -270,7 +270,7 @@ conan build .
 ## 打包并添加到local cache
 
 ```shell
-conan create .
+conan create . --build missing
 ```
 
 如果之前没有执行`conan build .`的话会自动执行之。
@@ -278,7 +278,7 @@ conan create .
 Debug版本：
 
 ```shell
-conan create . -s build_type=Debug
+conan create . -s build_type=Debug --build missing
 ```
 
 从local cache删除：
