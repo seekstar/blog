@@ -8,14 +8,15 @@ date: 2020-04-03 23:33:34
 ```yaml
 # <https://clang.llvm.org/docs/ClangFormatStyleOptions.html>
 
+AllowShortIfStatementsOnASingleLine: Never
+AlignEscapedNewlines: DontAlign
+AlignAfterOpenBracket: DontAlign
+
 IndentWidth: 4
 UseTab: Always
 TabWidth: 4
 IndentAccessModifiers: false
 AccessModifierOffset: -4
-AllowShortIfStatementsOnASingleLine: Never
-
-AlignAfterOpenBracket: DontAlign
 ContinuationIndentWidth: 8
 ConstructorInitializerIndentWidth: 4
 ...

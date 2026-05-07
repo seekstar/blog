@@ -52,9 +52,11 @@ ClassA(
 ```yaml
 # <https://clang.llvm.org/docs/ClangFormatStyleOptions.html>
 
+AllowShortIfStatementsOnASingleLine: Never
+AlignEscapedNewlines: DontAlign
+
 AlwaysBreakTemplateDeclarations: Yes
 
-AllowShortIfStatementsOnASingleLine: Never
 AllowShortLoopsOnASingleLine: false
 IndentWidth: 4
 UseTab: Always
