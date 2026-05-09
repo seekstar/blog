@@ -13,3 +13,7 @@ tags:
 默认是alt对应Option，win键对应Meta，跟Mac的键位不一样。可以改成alt对应Meta，win对应Option：
 
 系统设置 -> 键盘 -> 键盘快捷键 -> 修饰键，把`Option键`设置成`Command键`，把`Command键`设置成`Option键`。
+
+## 外置显示器字小
+
+MacOS不支持调整外置显示器上的缩放比，所以好像只能把分辨率调低了。
