@@ -88,3 +88,12 @@ RocksDB的snapshot相当于对当时的DB状态做一个快照。在take snapsho
 rocksdb::RateLimiter *rate_limiter = rocksdb::NewGenericRateLimiter(load_phase_rate_limit);
 options.rate_limiter.reset(rate_limiter);
 ```
+
+## ldb
+
+### manifest_dump
+
+```shell
+# 也可以用--path=/path/to/manifest/file，但是如果column family开了timestamp就会报错。
+./ldb manifest_dump --db=/path/to/db
+```
