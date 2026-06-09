@@ -144,6 +144,8 @@ tar -cvf name.tar -C dir1 . -C ../dir2 .
 
 参考网站：https://blog.csdn.net/zdx1515888659/article/details/82841100
 
+缺点是不能多线程解压。
+
 ### 单线程解压
 
 ```shell
@@ -215,12 +217,14 @@ https://zhidao.baidu.com/question/9844116.html
 
 也可以使用一条命令完成解压或压缩。
 
+缺点是不能多线程解压。
+
 ### 单线程解压
 
 - 解压到当前目录
 
 ```shell
-tar -zxvf FileName.tar.gz
+tar -xzf FileName.tar.gz
 ```
 
 z表示gz
@@ -228,13 +232,13 @@ z表示gz
 - 解压到指定目录
 
 ```shell
-tar -zxvf FileName.tar.gz -C path
+tar -xzf FileName.tar.gz -C path
 ```
 
 ### 单线程压缩
 
 ```shell
-tar -zcvf FileName.tar.gz files
+tar -czf FileName.tar.gz files
 ```
 
 其中files可以是文件夹名，也可以是表示文件的正则表达式（如*.jpg）
@@ -450,6 +454,20 @@ zstdmt path/FileName1 path/FileName2
 ```
 
 会压缩为`path/FileName1.zst`和`path/FileName2.zst`。
+
+## .tar.zst
+
+### 多线程解压
+
+```shell
+nice zstd -d -T0 FileName.tar.zst --stdout | tar -xvf -
+```
+
+### 多线程压缩
+
+```shell
+tar -cf - 文件或目录 | nice zstd -T0 > FileName.tar.zst
+```
 
 ## 参考文献
 
