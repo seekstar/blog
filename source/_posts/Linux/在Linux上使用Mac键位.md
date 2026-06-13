@@ -109,9 +109,39 @@ tags:
     },
 ```
 
+## 终端
+
+konsole的快捷键不知道为什么老是自己重置。建议使用ghostty。像Mac一样，要在`~/.ssh/config`里加上：
+
+```text
+Host *
+        SetEnv TERM=xterm-256color
+```
+
+不然ssh之后会有一些诡异的事情。
+
+配置文件：`~/.config/ghostty/config.ghostty`
+
+文档：<https://ghostty.org/docs/config/keybind/reference>
+
+常用：
+
+```text
+keybind = alt+c=copy_to_clipboard
+keybind = alt+v=paste_from_clipboard
+```
+
+## 文本编辑器
+
+建议用kate，直接继承KDE的快捷键设置。
+
+gedit不支持改快捷键。
+
 ## Firefox
 
 在地址栏输入`about:keyboard`，回车，在里面就可以改快捷键了。不过`alt+t`会打开菜单。要解决这个问题，在地址栏输入`about:config`，回车，然后在搜索框里输入`ui.key.menuAccessKey`，把18（代表alt）改成0，这样菜单就不会被触发了。需要使用菜单的时候再改回18即可。反正菜单用的少，应该没什么问题。
+
+不过复制和粘贴不知道为什么还是不work，还得用`ctrl+c/v`。
 
 参考：
 
