@@ -55,6 +55,12 @@ opencode -s <sessionID>
 opencode session delete <sessionID>
 ```
 
+如果想让AI自动读某个自定义AGENTS.md，可以在`~/.config/opencode/opencode.jsonc`里加一行：
+
+```json
+  "instructions": ["~/path/to/your/AGENTS.md"]
+```
+
 ## Codex
 
 感觉对第三方的模型提供商的支持不太好。最好还是买一个Chatgpt Plus订阅。
@@ -79,6 +85,8 @@ codex resume --last
 
 `/status`: 查看剩余额度。
 
+会自动读取`~/.codex/AGENTS.md`。
+
 存在的问题：
 
 - 不能撤回之前的消息
@@ -97,7 +105,13 @@ codex resume --last
 curl -fsSL https://code.kimi.com/kimi-code/install.sh | bash
 ```
 
-目前bug好像比较多，时不时会报错然后goal就停了，需要手动`/goal resume`。
+会自动读取`~/.kimi-code/AGENTS.md`
+
+存在的问题：
+
+- 不能删除session：<https://github.com/MoonshotAI/kimi-cli/issues/1783>
+
+目前（0.14.2）bug好像比较多，时不时会报错然后goal就停了，需要手动`/goal resume`。
 
 Update: 遇到这个报错，怎么都resume不了，弃坑了。
 
