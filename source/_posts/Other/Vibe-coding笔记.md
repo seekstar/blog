@@ -55,9 +55,39 @@ opencode -s <sessionID>
 opencode session delete <sessionID>
 ```
 
-## Kimi code
+## Codex
 
-好像不能设置允许访问的目录。要么忍受及其繁琐的审批，要么就`/auto`全自动。好处是可以立刻使用Kimi最新发布的模型。
+感觉对第三方的模型提供商的支持不太好。最好还是买一个Chatgpt Plus订阅。
+
+官方文档：<https://developers.openai.com/codex/cli>
+
+```shell
+# 升级和安装都是这个
+npm install -g @openai/codex
+```
+
+如果是买的Chatgpt Plus订阅，好像得用登录的方式。一般在服务器上用的话得选device code的方式。如果用API key的话会提示没有额度。
+
+```shell
+# 列出以前的session，选一个resume
+codex resume
+# 直接resume到上一个session
+codex resume --last
+```
+
+`/permissions`: 默认是`Ask for approval`，很烦。建议设置成`Approve for me`。
+
+`/status`: 查看剩余额度。
+
+存在的问题：
+
+- 不能撤回之前的消息
+
+## 失败的尝试
+
+### Kimi code
+
+好处是可以立刻使用Kimi最新发布的模型。体验也比较现代。但好像不能设置允许访问的目录，要么忍受及其繁琐的审批，要么就`/auto`全自动。
 
 官网：<https://www.kimi.com/code>
 
@@ -66,3 +96,21 @@ opencode session delete <sessionID>
 ```shell
 curl -fsSL https://code.kimi.com/kimi-code/install.sh | bash
 ```
+
+目前bug好像比较多，时不时会报错然后goal就停了，需要手动`/goal resume`。
+
+Update: 遇到这个报错，怎么都resume不了，弃坑了。
+
+```text
+   Error: [provider.api_error] 400 Invalid request: an assistant message with 'tool_calls' must be
+ followed by tool messages responding to each 'tool_call_id'. The following tool_call_ids did not
+ have response messages: TaskOutput:96
+```
+
+会话导出为`.md`，可以让其他agent看了之后继续工作：`/export-md`
+
+卸载：`rm -r ~/.kimi-code`
+
+### Google Antigravity
+
+好像不能设置代理。
