@@ -63,13 +63,17 @@ opencode session delete <sessionID>
 
 ## Codex
 
+可以在后台运行长时任务并且周期性监测。
+
 感觉对第三方的模型提供商的支持不太好。最好还是买一个Chatgpt Plus订阅。
 
 官方文档：<https://developers.openai.com/codex/cli>
 
 ```shell
-# 升级和安装都是这个
+# 安装。如果已经是最新版也会重新安装
 npm install -g @openai/codex
+# 升级
+npm update -g @openai/codex
 ```
 
 如果是买的Chatgpt Plus订阅，好像得用登录的方式。一般在服务器上用的话得选device code的方式。如果用API key的话会提示没有额度。
