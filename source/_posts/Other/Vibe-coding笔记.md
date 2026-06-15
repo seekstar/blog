@@ -61,6 +61,12 @@ opencode session delete <sessionID>
   "instructions": ["~/path/to/your/AGENTS.md"]
 ```
 
+存在的问题：
+
+- CPU占用很高。
+
+- 似乎没有原生支持在后台运行长时间任务。
+
 ## Codex
 
 可以在后台运行长时任务并且周期性监测。
