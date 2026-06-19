@@ -4,6 +4,8 @@ date: 2026-06-09 23:19:34
 tags:
 ---
 
+不要让AI写脚本跑实验，会变得不幸。
+
 ## zellij
 
 一般agent没有detach之后后台运行的功能。可以在zellij session里跑agent，这样可以随时detach，让agent在后台跑。
