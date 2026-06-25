@@ -124,12 +124,23 @@ Host *
 
 文档：<https://ghostty.org/docs/config/keybind/reference>
 
+可以`ghostty +list-keybinds --default`列出默认的快捷键，然后到配置文件里改。
+
 常用：
 
 ```text
 keybind = alt+c=copy_to_clipboard
 keybind = alt+v=paste_from_clipboard
+keybind = alt+==increase_font_size:1
+keybind = alt+-=decrease_font_size:1
+
+# Jump to the end of a word (forward)
+keybind = super+right=esc:f
+# Jump to the beginning of a word (backward)
+keybind = super+left=esc:b
 ```
+
+改完在终端右键 -> 配置 -> 重新加载配置 即可生效。
 
 ## 文本编辑器
 
