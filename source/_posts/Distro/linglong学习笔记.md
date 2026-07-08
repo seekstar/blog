@@ -29,6 +29,8 @@ ll-cli list
 ll-cli upgrade 包名
 # 卸载某包
 ll-cli uninstall 包名
+# 移除未使用的依赖
+ll-cli prune
 # 运行某包
 ll-cli run 包名
 ```

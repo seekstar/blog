@@ -121,7 +121,6 @@ EOF
 
 flatpak的版本经常会显示一片空白，可能GPU的兼容性有问题。可以用linglong安装：
 
-
 ```shell
 sudo pacman -S --needed linyaps
 sudo ll-cli install linux.qq.com
