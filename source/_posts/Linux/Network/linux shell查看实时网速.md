@@ -10,9 +10,15 @@ sudo apt install jnettop
 jnettop
 ```
 
-# nethogs
+# iftop
 
-这个在centos上也可以用。
+```shell
+sudo dnf install iftop
+```
+
+可以看跟哪些IP的流量最多。
+
+# nethogs
 
 ```shell
 sudo yum install epel-release
