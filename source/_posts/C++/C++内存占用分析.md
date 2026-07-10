@@ -353,6 +353,43 @@ google-pprof --svg --lines 可执行文件的路径 profile/profile.xxxx.heap > 
 
 跑得很慢。这里说libtcmalloc开了heap profiling之后会让程序慢5倍以上：<https://www.brendangregg.com/FlameGraphs/memoryflamegraphs.html>
 
+## jemalloc
+
+```shell
+MALLOC_CONF=prof:true,prof_active:true,lg_prof_interval:<N>,prof_prefix:/path/to/dir/jeprof ./xxx
+```
+
+- `prof:true`: free的时候，如果相应的地址被采样了，就记录这个地址已经free了。
+- `prof_active:true`: 开启采样。默认每分配512KiB，就对一个内存分配进行采样。
+- `lg_prof_interval:<N>`: 每 2^N 字节分配活动dump一次 .heap 文件到磁盘。比如`lg_prof_interval:30`就是每 1GiB (2^30字节) dump一次。
+- `prof_prefix:/path/to/dir/jeprof`: dump到`/path/to/dir/jeprof.xxx.heap`。
+
+安装`jeprof`:
+
+```shell
+dnf install jemalloc-devel
+```
+
+查看哪些内存分配点分配了最多内存：
+
+```shell
+jeprof --text --lines 可执行文件 heap文件
+```
+
+`--text`: Generate text report
+`--lines`：打印`文件名:行号`。
+
+生成调用图：
+
+```shell
+# 安装dot
+sudo dnf install graphviz
+```
+
+```shell
+jeprof --svg 可执行文件 heap文件 > jeprof.svg
+```
+
 ## 没试过
 
 ### MTuner
