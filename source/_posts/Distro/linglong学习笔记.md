@@ -16,6 +16,12 @@ sudo pacman -S --needed linyaps
 
 之后`ll-cli install`的时候要加`sudo`。
 
+### Nix包管理器
+
+```shell
+nix-env -iA nixpkgs.linyaps
+```
+
 ## 常用的命令
 
 ```shell
@@ -37,20 +43,26 @@ ll-cli run 包名
 
 ## 常用软件
 
+### QQ
+
+```shell
+sudo ll-cli install linux.qq.com
+```
+
 ### Seafile
 
 ```shell
-ll-cli install com.seafile-gui
+sudo ll-cli install com.seafile-gui
 ```
 
 ### WPS
 
 ```shell
-ll-cli install cn.wps.wps-office
+sudo ll-cli install cn.wps.wps-office
 ```
 
 ### 网易云音乐
 
 ```shell
-ll-cli install com.163.music
+sudo ll-cli install com.163.music
 ```
