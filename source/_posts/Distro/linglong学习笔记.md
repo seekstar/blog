@@ -16,12 +16,6 @@ sudo pacman -S --needed linyaps
 
 之后`ll-cli install`的时候要加`sudo`。
 
-### Nix包管理器
-
-```shell
-nix-env -iA nixpkgs.linyaps
-```
-
 ## 常用的命令
 
 ```shell
