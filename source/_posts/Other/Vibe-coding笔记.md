@@ -82,6 +82,8 @@ opencode session delete <sessionID>
 npm install -g @openai/codex
 # 升级
 npm update -g @openai/codex
+# 卸载
+npm un -g @openai/codex
 ```
 
 如果是买的Chatgpt Plus订阅，好像得用登录的方式。一般在服务器上用的话得选device code的方式。如果用API key的话会提示没有额度。
