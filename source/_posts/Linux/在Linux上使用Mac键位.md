@@ -109,6 +109,13 @@ tags:
     },
 ```
 
+一定要把菜单的助记符关掉，不然`alt+v`的时候会打开菜单。在设置里把下面两项都关掉：
+
+```text
+Window: Enable Menu Bar Mnemonics
+Terminal › Integrated: Allow Mnemonics
+```
+
 ## 终端
 
 konsole的快捷键不知道为什么老是自己重置。建议使用ghostty。像Mac一样，要在`~/.ssh/config`里加上：
