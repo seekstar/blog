@@ -52,7 +52,15 @@ Sat Dec 10 11:54:20 2022
 
 ### Seafile
 
-可以使用linglong安装：
+#### flatpak
+
+```shell
+flatpak install com.seafile.Client
+# 开机自启
+ln -s /var/lib/flatpak/exports/share/applications/com.seafile.Client.desktop ~/.config/autostart/
+```
+
+#### linglong
 
 ```shell
 sudo pacman -S --needed linyaps
