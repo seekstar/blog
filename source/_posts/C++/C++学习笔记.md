@@ -13,7 +13,7 @@ date: 2020-04-03 23:33:34
 ---
 Checks: |
   -*,
-  bugprone-*
+  bugprone-*,
   -bugprone-easily-swappable-parameters,
   -bugprone-macro-parentheses,
   -bugprone-multi-level-implicit-pointer-conversion,
@@ -34,6 +34,7 @@ Checks: |
   -readability-function-cognitive-complexity,
   -readability-identifier-length,
   -readability-magic-numbers,
+  -readability-make-member-function-const,
 ```
 
 一定要开的检查：
