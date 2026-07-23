@@ -3,6 +3,62 @@ title: C++学习笔记
 date: 2020-04-03 23:33:34
 ---
 
+## `.clang-tidy`
+
+完整列表：<https://clang.llvm.org/extra/clang-tidy/checks/list.html>
+
+有些检查会在有合理应用场景的时候警告，建议关闭：
+
+```text
+---
+Checks: |
+  -*,
+  bugprone-*
+  -bugprone-easily-swappable-parameters,
+  -bugprone-macro-parentheses,
+  -bugprone-multi-level-implicit-pointer-conversion,
+  -bugprone-random-generator-seed,
+  -bugprone-sizeof-container,
+  -bugprone-sizeof-expression,
+  -bugprone-suspicious-stringview-data-usage,
+  misc-*,
+  -misc-include-cleaner,
+  -misc-no-recursion,
+  -misc-non-private-member-variables-in-classes,
+  -misc-use-anonymous-namespace,
+  modernize-*,
+  -modernize-use-nodiscard,
+  -modernize-use-trailing-return-type,
+  performance-*,
+  readability-*,
+  -readability-function-cognitive-complexity,
+  -readability-identifier-length,
+  -readability-magic-numbers,
+```
+
+一定要开的检查：
+
+- bugprone-use-after-move
+
+个人比较喜欢的检查：
+
+- bugprone-inc-dec-in-conditions: 禁止在条件里自增自减。
+
+个人觉得没必要的检查：
+
+- bugprone-sizeof-container: 可能有时候就是想知道container本身占多少字节
+- bugprone-sizeof-expression
+
+个人不喜欢的检查：
+
+- bugprone-multi-level-implicit-pointer-conversion: 会禁止隐式转`void *`，代码看起来会很臃肿。
+
+不建议开启的检查：
+
+- bugprone-easily-swappable-parameters: 相邻参数类型一样会warning。很烦人。
+- bugprone-macro-parentheses: 虽然建议宏参数使用的时候加括号，但在宏里声明变量的时候给变量名加括号会导致warning。所以还是把这个检查关掉吧。宏的水还是太深了，少用，用的时候细心一点。
+- bugprone-random-generator-seed: 有时候就是想要确定性的随机数序列，比如测试的时候。
+
 ## `.clang-format`
 
 ```yaml
@@ -589,12 +645,6 @@ int main() {
 	return 0;
 }
 ```
-
-### vscode clang-tidy静态检查
-
-比如检查是否使用了moved value：`bugprone-use-after-move`
-
-教程：{% post_link vscode/'vscode-clang-tidy' %}
 
 ### 迭代器
 
