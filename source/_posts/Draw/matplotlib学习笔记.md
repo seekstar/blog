@@ -390,11 +390,13 @@ plt.show()
 
 官方例子：<https://matplotlib.org/stable/gallery/subplots_axes_and_figures/align_labels_demo.html#sphx-glr-gallery-subplots-axes-and-figures-align-labels-demo-py>
 
-常用：
+例子：
 
 ```py
 from matplotlib import gridspec
 
+# https://matplotlib.org/stable/api/figure_api.html#matplotlib.figure.Figure
+# `constrained_layout`比`tight_layout`更好。
 fig = plt.figure(dpi = 300, figsize = (xx, xx), constrained_layout=True)
 # 1x2
 gs = gridspec.GridSpec(1, 2, figure=fig)
@@ -404,9 +406,17 @@ subfig = plt.subplot(gs[0, 1])
 ...
 ```
 
-其中`constrained_layout`比`tight_layout`更好。
+参数：
 
-`plt.figure`参数：<https://matplotlib.org/stable/api/figure_api.html#matplotlib.figure.Figure>
+- `figure`: Figure, optional
+
+- `wspace`: float, optional
+
+The amount of width reserved for space between subplots, expressed as a fraction of the average axis width.
+
+- `hspace`: float, optional
+
+The amount of height reserved for space between subplots, expressed as a fraction of the average axis height.
 
 ### `plt.subplot`
 
