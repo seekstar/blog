@@ -245,6 +245,8 @@ ax.set_ylim(bottom=0)
 
 ```py
 ax.set_yscale('log')
+# 对数坐标有时候副刻度会显示label，看着很挤，可以强制不显示副刻度的label
+ax_sa.tick_params(axis='y', which='minor', labelleft=False)
 ```
 
 ### [annotate](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.annotate.html) 画箭头
