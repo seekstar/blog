@@ -89,46 +89,6 @@ yscale: <https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.yscale.html
 
 但是如果要手动指定哪些数据点需要marker，还是得用scatter。需要加上参数`zorder=2`手动把层级顺序调成跟线条一样，不然会出现后画的marker在先画的线条下面。
 
-### [`plt.legend`](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.legend.html)
-
-- {% post_link Draw/'matplotlib设置legend坐标' %}
-
-- [Matplotlib 放置legend(bbox_to_anchor)](https://blog.csdn.net/chichoxian/article/details/101058046)
-
-- `frameon`: bool, default: rcParams["legend.frameon"] (default: True)
-
-Whether the legend should be drawn on a patch (frame).
-
-- `handlelength`: float, default: `2.0`
-
-The length of the legend handles, in font-size units.
-
-- `handletextpad`: float, default: `0.8`
-
-The pad between the legend handle and text, in font-size units.
-
-- `columnspacing`: float, default: `2.0`
-
-The spacing between columns, in font-size units.
-
-- `labelspacing`: float, default: `0.5`
-
-The vertical space between the legend entries, in font-size units.
-
-- `borderaxespad`: float, default: `0.5`
-
-The pad between the Axes and legend border, in font-size units.
-
-#### 增加线宽
-
-```py
-legend = plt.legend()
-for line in legend.get_lines():
-    line.set_linewidth(1.0)
-```
-
-来源：<https://stackoverflow.com/a/48296983/13688160>
-
 ### ['plt.ylabel'](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.ylabel.html)
 
 - `loc`: {'bottom', 'center', 'top'}, default: `center`
@@ -188,6 +148,62 @@ PDF可用metadata: <https://matplotlib.org/stable/api/backend_pdf_api.html#matpl
 [PDF file generation is not deterministic - results in different outputs on the same input](https://github.com/matplotlib/matplotlib/issues/6317/)
 
 <https://matplotlib.org/2.1.1/users/whats_new.html#reproducible-ps-pdf-and-svg-output>
+
+## Figure
+
+### [`plt.legend`](https://matplotlib.org/stable/api/_as_gen/matplotlib.figure.Figure.legend.html#matplotlib.figure.Figure.legend)
+
+- [Matplotlib 放置legend(bbox_to_anchor)](https://blog.csdn.net/chichoxian/article/details/101058046)
+
+- `loc`: str or pair of floats, default: `best`
+
+The location of the legend.
+
+```text
++--------------+--------------+---------------+
+| 'upper left' |'upper center'| 'upper right' |
++--------------+--------------+---------------+
+|'center left' |   'center'   |'center right' |
++--------------+--------------+---------------+
+| 'lower left' |'lower center'| 'lower right' |
++--------------+--------------+---------------+
+```
+
+如果用了constrained layout，可以加`outside`前缀，比如`outside upper center`可以把legend放到图表的上面的中间。
+
+- `frameon`: bool, default: rcParams["legend.frameon"] (default: True)
+
+Whether the legend should be drawn on a patch (frame).
+
+- `handlelength`: float, default: `2.0`
+
+The length of the legend handles, in font-size units.
+
+- `handletextpad`: float, default: `0.8`
+
+The pad between the legend handle and text, in font-size units.
+
+- `columnspacing`: float, default: `2.0`
+
+The spacing between columns, in font-size units.
+
+- `labelspacing`: float, default: `0.5`
+
+The vertical space between the legend entries, in font-size units.
+
+- `borderaxespad`: float, default: `0.5`
+
+The pad between the Axes and legend border, in font-size units.
+
+#### 增加线宽
+
+```py
+legend = plt.legend()
+for line in legend.get_lines():
+    line.set_linewidth(1.0)
+```
+
+来源：<https://stackoverflow.com/a/48296983/13688160>
 
 ## Axes
 
