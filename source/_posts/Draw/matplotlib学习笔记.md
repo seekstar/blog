@@ -408,7 +408,7 @@ subfig = plt.subplot(gs[0, 1])
 ...
 ```
 
-参数：
+`GridSpec`的参数：
 
 - `figure`: Figure, optional
 
@@ -419,6 +419,19 @@ The amount of width reserved for space between subplots, expressed as a fraction
 - `hspace`: float, optional
 
 The amount of height reserved for space between subplots, expressed as a fraction of the average axis height.
+
+如果是嵌套的子图，比如外面是3行2列，每个子图又是3个小子图，可以用`GridSpecFromSubplotSpec`：
+
+```py
+fig = plt.figure(dpi=300, figsize=(7, 4), constrained_layout=True)
+outer_grid = gridspec.GridSpec(3, 2, figure=fig_main, hspace=0.4, wspace=0.2, left=0, right=0.93, bottom=0, top=0.92)
+for row in range(3):
+    for col in range(2):
+        inner_grid = gridspec.GridSpecFromSubplotSpec(1, 3, subplot_spec=outer_grid[row, col], wspace=0.4)
+        for i in range(3):
+            ax = fig.add_subplot(inner_grid[i])
+            ...
+```
 
 ### `plt.subplot`
 
