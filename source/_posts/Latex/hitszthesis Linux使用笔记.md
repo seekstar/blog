@@ -8,11 +8,11 @@ date: 2021-02-09 16:51:20
 在Deepin上测试通过：
 
 ```shell
+# texlive-xetex: xelatex
+# texlive-lang-chinese: ctex.sty
 # texlive-extra-utils: texdef
-# latex-cjk-all: Chinese font package
 # texlive-fonts-extra: Fonts such as consolas
-# evince: PDF reader
-sudo apt install -y texstudio texlive-xetex texlive-extra-utils latex-cjk-all texlive-fonts-extra evince
+sudo apt install -y texlive-xetex texlive-lang-chinese texlive-extra-utils texlive-fonts-extra
 
 # https://techoverflow.net/2019/07/30/how-to-fix-latex-error-file-siunitx-sty-not-found-on-ubuntu/
 # texlive-science: siunitx.sty
