@@ -191,6 +191,10 @@ The spacing between columns, in font-size units.
 
 The vertical space between the legend entries, in font-size units.
 
+- `borderpad`: float, default: `0.4`
+
+The fractional whitespace inside the legend border, in font-size units.
+
 - `borderaxespad`: float, default: `0.5`
 
 The pad between the Axes and legend border, in font-size units.
