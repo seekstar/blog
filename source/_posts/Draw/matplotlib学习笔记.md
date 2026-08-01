@@ -452,13 +452,27 @@ plt.show()
 from matplotlib import gridspec
 
 # https://matplotlib.org/stable/api/figure_api.html#matplotlib.figure.Figure
-fig = plt.figure(dpi = 300, figsize = (xx, xx), constrained_layout=True)
+fig = plt.figure(dpi=300, figsize=(xx, xx), constrained_layout=True)
+fig_sa_max.get_layout_engine().set(
+    # 上下的padding
+    h_pad=0.01,
+    # 左右的padding
+    w_pad=0.01,
+    # 左，下，宽，高。一般上面预留出来放legend。
+    rect=(0, 0, 1, 0.74),
+)
 # 1行2列
 gs = gridspec.GridSpec(1, 2, figure=fig)
-subfig = plt.subplot(gs[0, 0])
-...
-subfig = plt.subplot(gs[0, 1])
-...
+for col in range(2):
+    ax = plt.subplot(gs[0, col])
+    ...
+fig.legend(
+    loc='upper center',
+    # 精确定位
+    bbox_to_anchor=(0.53, 1.04),
+    ...
+)
+fig.savefig(pdf_path, metadata={'CreationDate': None})
 ```
 
 ### 多行多列
@@ -466,7 +480,7 @@ subfig = plt.subplot(gs[0, 1])
 ```py
 from matplotlib import gridspec
 
-fig = plt.figure(dpi = 300, figsize = (xx, xx), constrained_layout=True)
+fig = plt.figure(dpi=300, figsize=(xx, xx), constrained_layout=True)
 # 2行3列
 gs = gridspec.GridSpec(2, 3, figure=fig)
 # https://matplotlib.org/stable/api/layout_engine_api.html#matplotlib.layout_engine.ConstrainedLayoutEngine.set
