@@ -288,6 +288,18 @@ The position (x, y) to place the text at. The coordinate system is determined by
 | `subfigure fraction` | Fraction of subfigure from lower left |
 | `axes fraction` | Fraction of axes from lower left |
 
+- `arrowprops`: dict, optional
+
+<https://matplotlib.org/stable/api/_as_gen/matplotlib.patches.FancyArrowPatch.html#matplotlib.patches.FancyArrowPatch>
+
+| Key | Description |
+| ---- | ---- |
+| `arrowstyle` | 默认`simple`，一般填 `->`，这样能用的选项更多 |
+| `relpos` | 起点相对文本框位置。默认(0.5, 0.5)，即文本框中心 |
+| `shrinkA` | 箭头起点收缩的距离。Default is 2 points |
+| `shrinkB` | 箭头终点收缩的距离。Default is 2 points |
+| `linewidth` | 调节箭头线宽 |
+
 其他参数传给了Text。常用的：
 
 - `fontsize`
@@ -440,7 +452,7 @@ The amount of height reserved for space between subplots, expressed as a fractio
 
 ```py
 fig = plt.figure(dpi=300, figsize=(7, 4), constrained_layout=True)
-outer_grid = gridspec.GridSpec(3, 2, figure=fig_main, hspace=0.4, wspace=0.2, left=0, right=0.93, bottom=0, top=0.92)
+outer_grid = gridspec.GridSpec(3, 2, figure=fig, hspace=0.4, wspace=0.2, left=0, right=0.93, bottom=0, top=0.92)
 for row in range(3):
     for col in range(2):
         inner_grid = gridspec.GridSpecFromSubplotSpec(1, 3, subplot_spec=outer_grid[row, col], wspace=0.4)
