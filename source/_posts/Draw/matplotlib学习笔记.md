@@ -121,14 +121,6 @@ The default transform specifies that text is in data coords.
 
 - `ha`, `va`: 控制锚点的位置。默认是左下角，也就是说上面的`x`和`y`默认是左下角的坐标。如果想指定文本中心的坐标：`ha='center', va='center'`
 
-### [tight_layout](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.tight_layout.html)
-
-- `pad`: float, default: 1.08.
-
-- `h_pad, w_padfloat`: default: pad
-
-Padding (height/width) between edges of adjacent subplots, as a fraction of the font size.
-
 ### [savefig](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.savefig.html)
 
 Positional, required:
@@ -150,6 +142,36 @@ PDF可用metadata: <https://matplotlib.org/stable/api/backend_pdf_api.html#matpl
 <https://matplotlib.org/2.1.1/users/whats_new.html#reproducible-ps-pdf-and-svg-output>
 
 ## Figure
+
+### `Figure.get_layout_engine()`
+
+一般这样用：
+
+```py
+fig.get_layout_engine().set(...)
+```
+
+文档：<https://matplotlib.org/stable/api/layout_engine_api.html#matplotlib.layout_engine.ConstrainedLayoutEngine.set>
+
+常用参数：
+
+- `h_pad`: optional, float，单位英寸
+
+图片上下边缘的padding。默认`0.04167`
+
+- `w_pad`: optional, float, 单位英寸
+
+图片左右边缘的padding。默认`0.04167`
+
+- `hspace`, `wspace`: optional, float. default: 0.02
+
+Fraction of the figure to dedicate to space between the axes. These are evenly spread between the gaps between the Axes. A value of 0.2 for a three-column layout would have a space of 0.1 of the figure width between each column.
+
+`hspace`是纵向间距。`wspace`是横向间距。
+
+- `rect`: optional, (float, float, float, float)
+
+Rectangle in figure coordinates to perform constrained layout in (left, bottom, width, height), each from 0-1.
 
 ### [`plt.legend`](https://matplotlib.org/stable/api/_as_gen/matplotlib.figure.Figure.legend.html#matplotlib.figure.Figure.legend)
 
@@ -430,25 +452,13 @@ plt.show()
 
 官方例子：<https://matplotlib.org/stable/gallery/subplots_axes_and_figures/align_labels_demo.html#sphx-glr-gallery-subplots-axes-and-figures-align-labels-demo-py>
 
-例子：
-
-```py
-from matplotlib import gridspec
-
-# https://matplotlib.org/stable/api/figure_api.html#matplotlib.figure.Figure
-# `constrained_layout`比`tight_layout`更好。
-fig = plt.figure(dpi = 300, figsize = (xx, xx), constrained_layout=True)
-# 1x2
-gs = gridspec.GridSpec(1, 2, figure=fig)
-subfig = plt.subplot(gs[0, 0])
-...
-subfig = plt.subplot(gs[0, 1])
-...
-```
-
 `GridSpec`的参数：
 
 - `figure`: Figure, optional
+
+- `left`, `right`, `top`, `bottom`: float, optional
+
+Extent of the subplots as a fraction of figure width or height. Left cannot be larger than right, and bottom cannot be larger than top.
 
 - `wspace`: float, optional
 
@@ -457,6 +467,57 @@ The amount of width reserved for space between subplots, expressed as a fraction
 - `hspace`: float, optional
 
 The amount of height reserved for space between subplots, expressed as a fraction of the average axis height.
+
+#### 一行多列
+
+```py
+from matplotlib import gridspec
+
+# https://matplotlib.org/stable/api/figure_api.html#matplotlib.figure.Figure
+fig = plt.figure(dpi = 300, figsize = (xx, xx), constrained_layout=True)
+# 1行2列
+gs = gridspec.GridSpec(1, 2, figure=fig)
+subfig = plt.subplot(gs[0, 0])
+...
+subfig = plt.subplot(gs[0, 1])
+...
+```
+
+#### 多行多列
+
+```py
+from matplotlib import gridspec
+
+fig = plt.figure(dpi = 300, figsize = (xx, xx), constrained_layout=True)
+# 2行3列
+gs = gridspec.GridSpec(2, 3, figure=fig)
+# https://matplotlib.org/stable/api/layout_engine_api.html#matplotlib.layout_engine.ConstrainedLayoutEngine.set
+fig.get_layout_engine().set(
+    # 左右的padding
+    w_pad=0.01,
+    # 子图纵向间距，可以用来放子图title。
+    hspace=0.13,
+    # 左，下，宽，高。一般下面预留出来放子图title。上面预留出来放legend。
+    rect=(0, 0.05, 1, 0.85),
+)
+for row in range(2):
+    for col in range(3):
+        ax = plt.subplot(gs[row, col])
+        ...
+    # 放title一般用fig.text
+    fig.text(x, y, title, ...)
+fig.legend(
+    loc='upper center',
+    # 精确定位
+    bbox_to_anchor=(0.54, 1.0),
+    # 跟图片上沿的距离
+    borderaxespad=0.01,
+    ...
+)
+...
+```
+
+#### 嵌套子图
 
 如果是嵌套的子图，比如外面是3行2列，每个子图又是3个小子图，可以用`GridSpecFromSubplotSpec`：
 
