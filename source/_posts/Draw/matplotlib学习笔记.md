@@ -446,29 +446,7 @@ plt.show()
 
 ## 子图
 
-### gridspec
-
-官方文档：<https://matplotlib.org/stable/api/_as_gen/matplotlib.gridspec.GridSpec.html>
-
-官方例子：<https://matplotlib.org/stable/gallery/subplots_axes_and_figures/align_labels_demo.html#sphx-glr-gallery-subplots-axes-and-figures-align-labels-demo-py>
-
-`GridSpec`的参数：
-
-- `figure`: Figure, optional
-
-- `left`, `right`, `top`, `bottom`: float, optional
-
-Extent of the subplots as a fraction of figure width or height. Left cannot be larger than right, and bottom cannot be larger than top.
-
-- `wspace`: float, optional
-
-The amount of width reserved for space between subplots, expressed as a fraction of the average axis width.
-
-- `hspace`: float, optional
-
-The amount of height reserved for space between subplots, expressed as a fraction of the average axis height.
-
-#### 一行多列
+### 一行多列
 
 ```py
 from matplotlib import gridspec
@@ -483,7 +461,7 @@ subfig = plt.subplot(gs[0, 1])
 ...
 ```
 
-#### 多行多列
+### 多行多列
 
 ```py
 from matplotlib import gridspec
@@ -515,26 +493,50 @@ fig.legend(
     ...
 )
 ...
+fig.savefig(pdf_path, metadata={'CreationDate': None})
 ```
 
-#### 嵌套子图
+### 嵌套子图
 
-如果是嵌套的子图，比如外面是3行2列，每个子图又是3个小子图，可以用`GridSpecFromSubplotSpec`：
+如果是嵌套的子图，比如外面是2行2列，每个子图又是3个小子图，可以用`GridSpecFromSubplotSpec`。如果要求子图坐标轴对齐的话，就不能用`constrained_layout`了。这里我们手动配置layout。
 
 ```py
-fig = plt.figure(dpi=300, figsize=(7, 4), constrained_layout=True)
-outer_grid = gridspec.GridSpec(3, 2, figure=fig, hspace=0.4, wspace=0.2, left=0, right=0.93, bottom=0, top=0.92)
-for row in range(3):
+fig = plt.figure(dpi=300, figsize=(7, 2.8))
+# 外面是2行2列的大子图
+# https://matplotlib.org/stable/api/_as_gen/matplotlib.gridspec.GridSpec.html
+outer_grid = gridspec.GridSpec(2, 2, figure=fig,
+    # 左边距
+    left=0.06,
+    # 下边距
+    bottom=0.12,
+    # 右边距
+    right=0.998,
+    # 上边距
+    top=0.93,
+    # 子图横向距离
+    wspace=0.2,
+    # 子图纵向距离
+    hspace=0.4,
+)
+for row in range(2):
     for col in range(2):
+        # 每个子图又分为1行3列的小子图
         inner_grid = gridspec.GridSpecFromSubplotSpec(1, 3, subplot_spec=outer_grid[row, col], wspace=0.4)
         for i in range(3):
             ax = fig.add_subplot(inner_grid[i])
             ...
+        # 给每个大子图加title可以这样加
+        bbox = outer_grid[row, col].get_position(fig)
+        fig.text(bbox.x0 + bbox.width/2, bbox.y0 - 0.07, title, ha='center', va='top')
+...
+fig.legend(
+    loc='upper center',
+    # 精确定位
+    bbox_to_anchor=(0.5, 1.02),
+    ...
+)
+fig.savefig(pdf_path, metadata={'CreationDate': None})
 ```
-
-### `plt.subplot`
-
-共用坐标轴：[Shared axis](https://matplotlib.org/stable/gallery/subplots_axes_and_figures/shared_axis_demo.html)
 
 ## 调整坐标轴label与tick label之间的空隙
 
