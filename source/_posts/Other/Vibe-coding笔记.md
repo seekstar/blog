@@ -55,6 +55,10 @@ opencode session list
 opencode -s <sessionID>
 # 删除session
 opencode session delete <sessionID>
+# 列出所有已添加API key的provider
+opencode auth list
+# 删除某provider的API key
+opencode auth logout --provider "xxx"
 ```
 
 如果想让AI自动读某个自定义AGENTS.md，可以在`~/.config/opencode/opencode.jsonc`里加一行：
