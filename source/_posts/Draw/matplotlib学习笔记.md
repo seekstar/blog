@@ -27,6 +27,23 @@ tags:
 pip3 install PyQt6
 ```
 
+## hatch style
+
+文档：<https://matplotlib.org/stable/gallery/shapes_and_collections/hatch_style_reference.html>
+
+个人常用：
+
+- '///'
+- '\\\\\\'
+- 'XX'
+- '---'
+- '--//'
+- '--\\\\'
+- '--XX'
+- '//////'
+- '\\\\\\\\\\\\'
+- 'XXXX'
+
 ## pyplot
 
 ```python
@@ -233,13 +250,12 @@ for line in legend.get_lines():
 
 ## Axes
 
-```python
-ax = plt.gca()
-```
-
 文档：<https://matplotlib.org/stable/api/axes_api.html>
 
-来源：<https://stackoverflow.com/questions/15067668/how-to-get-a-matplotlib-axes-instance>
+```python
+# https://stackoverflow.com/questions/15067668/how-to-get-a-matplotlib-axes-instance
+ax = plt.gca()
+```
 
 ### [tick_params](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.tick_params.html)
 
