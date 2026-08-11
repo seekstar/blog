@@ -38,6 +38,15 @@ MacOS不支持调整外置显示器上的缩放比，所以好像只能把分辨
 
 ## 第三方应用
 
+### Ghostty
+
+```shell
+brew install ghostty
+echo -e "Host *\n\tSetEnv TERM=xterm-256color" >> ~/.ssh/config
+```
+
+设置快捷键打开：打开应用`快捷指令` -> `所有快捷指令` -> 右上角加号，新建快捷指令 -> 在右边的App里找到Ghostty，选中，然后在下面双击选中`New Terminal` -> 在右上角点击圆圈里一个i的图标，点击`添加键盘快捷键`。一般跟linux一致，设为`ctrl+cmd+t`。然后按`ctrl+cmd+t`就能打开ghostty了。
+
 ### AltTab
 
 ```shell
