@@ -35,7 +35,9 @@ zellij a session名字
 zellij da
 ```
 
-## opencode
+## Agent
+
+### opencode
 
 比较知名的开源agent。大部分模型应该都支持。
 
@@ -73,7 +75,7 @@ opencode auth logout --provider "xxx"
 
 - 似乎没有原生支持在后台运行长时间任务。
 
-## Codex
+### Codex
 
 可以在后台运行长时任务并且周期性监测。
 
@@ -109,9 +111,9 @@ codex resume --last
 
 - 不能撤回之前的消息
 
-## 失败的尝试
+### 失败的尝试
 
-### Kimi code
+#### Kimi code
 
 好处是可以立刻使用Kimi最新发布的模型。体验也比较现代。但好像不能设置允许访问的目录，要么忍受及其繁琐的审批，要么就`/auto`全自动。
 
@@ -143,7 +145,7 @@ Update: 遇到这个报错，怎么都resume不了，弃坑了。
 
 卸载：`rm -r ~/.kimi-code`
 
-### Google Antigravity
+#### Google Antigravity
 
 好像不能设置代理。
 
@@ -152,6 +154,7 @@ Update: 遇到这个报错，怎么都resume不了，弃坑了。
 - GLM 5.2: 感觉指令遵循不行，不尊重AGENTS.md里的指令。智谱平台发票只能逐月开，报销回血太慢了。
 
 - GPT 5.6 luna, terra: 感觉对用户指令的理解能力比较差，在指令说得比较清楚的情况下仍然不理解意图。sol就能正确理解意图。
+  - GPT 5.6 terra 感觉后训练有问题，在监控长期实验的时候有时候会自己停住。
 
 - Opus 4.7: 
   - 把一个stash里的一部分单独提出来之后更新stash漏掉了不少东西。Opus 4.8解决得很好，教会了我通过比较diff的方式无遗漏地rebase stash。
