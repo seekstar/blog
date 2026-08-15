@@ -110,9 +110,13 @@ pet dog
 
 ## 类
 
+python的类默认其实是一个dict，维护field名到field数据的映射。好处是可以动态往类里添加field，坏处是多了dict的开销。如果不想要dict的开销，可以设置slots，只允许指定的field。
+
+可以用dataclass定义类，会自动生成构造函数`__init__`, 表示方法`__repr__`用于打印，判等`__eq__`。例子：
+
 ```py
 from dataclasses import dataclass
-@dataclass
+@dataclass(slots=True)
 class A:
     a: int
     b: str
