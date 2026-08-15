@@ -66,7 +66,12 @@ mpl.rcParams.update({
     'font.family': 'serif',
     'font.serif': ['Linux Libertine O'],
     'text.usetex': True,
-    'text.latex.preamble': r'\usepackage{amsmath} \usepackage{libertine}',
+    'text.latex.preamble': r'''
+        \usepackage{amsmath}
+        \usepackage{libertine}
+        # 让数学公式也使用 Libertine
+        \usepackage[libertine]{newtxmath}
+    ''',
 })
 ```
 
