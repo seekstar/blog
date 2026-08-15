@@ -463,6 +463,21 @@ plt.show()
 
 ## 子图
 
+### 一行一列
+
+```py
+fig = plt.figure(dpi=300, figsize=(common.single_col_inch, 1), constrained_layout=True)
+fig.get_layout_engine().set(
+    # 上下的padding
+    h_pad=0.01,
+    # 左右的padding
+    w_pad=0.01,
+)
+ax = plt.gca()
+...
+fig.savefig(pdf_path, metadata={"CreationDate": None})
+```
+
 ### 一行多列
 
 ```py
@@ -470,7 +485,7 @@ from matplotlib import gridspec
 
 # https://matplotlib.org/stable/api/figure_api.html#matplotlib.figure.Figure
 fig = plt.figure(dpi=300, figsize=(xx, xx), constrained_layout=True)
-fig_sa_max.get_layout_engine().set(
+fig.get_layout_engine().set(
     # 上下的padding
     h_pad=0.01,
     # 左右的padding
