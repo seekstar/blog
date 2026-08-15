@@ -113,6 +113,21 @@ git stash pop
 git stash drop stash@{0}
 ```
 
+导出stash（好像是2.51开始）:
+
+```shell
+# 导出全部到ref
+git stash export --to-ref refs/backup/stash
+# 导出某一个到ref
+git stash export --to-ref refs/backup/stash stash@{0}
+
+# 打包。排除已经在main分支上的commit，防止打包之后体积太大。
+git bundle create /path/to/xxx refs/backup/stash ^main
+
+# 删除ref
+git update-ref -d refs/backup/stash
+```
+
 查看指定stash:
 
 ```shell
