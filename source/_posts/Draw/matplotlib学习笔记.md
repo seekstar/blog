@@ -490,6 +490,8 @@ fig.get_layout_engine().set(
     h_pad=0.01,
     # 左右的padding
     w_pad=0.01,
+    # 子图横向距离
+    wspace=0.1,
     # 左，下，宽，高。一般上面预留出来放legend。
     rect=(0, 0, 1, 0.74),
 )
