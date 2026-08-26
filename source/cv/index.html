@@ -30,6 +30,13 @@
     .row time {
       flex-shrink: 0;
     }
+    .publications {
+      margin: 0;
+      padding-left: 2em;
+    }
+    .publications li::marker {
+      content: "[" counter(list-item) "] ";
+    }
     @page {
       size: A4;
       margin: 30mm;
@@ -82,7 +89,9 @@
   </ol>
 
   <h2>Publications</h2>
-  <div id="atc2025hotrap">[1] <strong>Jiansheng Qiu</strong>, Fangzhou Yuan, Mingyu Gao, and Huanchen Zhang. HotRAP: Hot Record Retention and Promotion for LSM-trees with Tiered Storage. In <em>2025 USENIX Annual Technical Conference (USENIX ATC 25)</em>, 2025.</div>
-  <div id="atc2023lightdedup">[2] <strong>Jiansheng Qiu</strong>, Yanqi Pan, Wen Xia, Xiaojia Huang, Wenjun Wu, Xiangyu Zou, Shiyi Li, and Yu Hua. Light-Dedup: A Light-weight Inline Deduplication Framework for Non-Volatile Memory File Systems. In <em>2023 USENIX Annual Technical Conference (USENIX ATC 23)</em>, 2023.</div>
+  <ol class="publications">
+    <li id="atc2025hotrap"><strong>Jiansheng Qiu</strong>, Fangzhou Yuan, Mingyu Gao, and Huanchen Zhang. HotRAP: Hot Record Retention and Promotion for LSM-trees with Tiered Storage. In <em>2025 USENIX Annual Technical Conference (USENIX ATC 25)</em>, 2025.</li>
+    <li id="atc2023lightdedup"><strong>Jiansheng Qiu</strong>, Yanqi Pan, Wen Xia, Xiaojia Huang, Wenjun Wu, Xiangyu Zou, Shiyi Li, and Yu Hua. Light-Dedup: A Light-weight Inline Deduplication Framework for Non-Volatile Memory File Systems. In <em>2023 USENIX Annual Technical Conference (USENIX ATC 23)</em>, 2023.</li>
+  </ol>
 </body>
 </html>
