@@ -45,6 +45,10 @@ zellij da
 
 ```shell
 npm i -g opencode-ai
+
+# 如果没有npm
+curl -fsSL https://opencode.ai/install | bash
+echo 'export PATH=$HOME/.opencode/bin:$PATH' >> ~/.profile
 ```
 
 关闭一个session：`ctrl+c`
@@ -90,6 +94,9 @@ npm install -g @openai/codex
 npm update -g @openai/codex
 # 卸载
 npm un -g @openai/codex
+
+# 如果没有npm
+curl -fsSL https://chatgpt.com/codex/install.sh | sh
 ```
 
 如果是买的Chatgpt Plus订阅，好像得用登录的方式。一般在服务器上用的话得选device code的方式。如果用API key的话会提示没有额度。
