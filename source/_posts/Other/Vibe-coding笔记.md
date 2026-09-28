@@ -56,6 +56,7 @@ echo 'export PATH=$HOME/.opencode/bin:$PATH' >> ~/.profile
 ```shell
 # 创建并进入一个session
 opencode
+# 列出所有session
 opencode session list
 # attach到session
 opencode -s <sessionID>
