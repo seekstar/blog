@@ -94,7 +94,15 @@ sudo bash -c "echo \"Server = https://mirrors.tuna.tsinghua.edu.cn/archlinux/\\\
 sudo cfdisk /dev/sda
 #efidev=/dev/sda1
 #rootdev=/dev/sda3
+
+# 如果EFI分区是新建的，要格式化成FAT32
+# sudo mkfs.fat -F 32 $efidev
+
 sudo mkfs.ext4 $rootdev
+# 如果在U盘上安装，可以用Btrfs，默认开启数据校验，如果数据损坏可以发现。
+# -m dup开启元数据冗余，可以防止文件系统整个坏掉。
+# sudo mkfs.btrfs -m dup $rootdev
+
 sudo mount $rootdev /mnt
 sudo mkdir /mnt/efi
 sudo mount $efidev /mnt/efi
