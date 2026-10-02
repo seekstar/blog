@@ -4,6 +4,12 @@ date: 2022-07-11 10:16:47
 tags:
 ---
 
+## 删除锁文件
+
+```shell
+sudo rm /var/lib/pacman/db.lck
+```
+
 ## 重装所有包
 
 pacman升级时断电可能会导致一些文件甚至是内核变成0长度。可以让pacman重装所有包来解决问题：
