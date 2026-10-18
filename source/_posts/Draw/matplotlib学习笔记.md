@@ -27,6 +27,14 @@ tags:
 pip3 install PyQt6
 ```
 
+禁止 Type 3 字体：
+
+```py
+mpl.rcParams.update({
+    'pdf.fonttype': 42,
+})
+```
+
 ## hatch style
 
 文档：<https://matplotlib.org/stable/gallery/shapes_and_collections/hatch_style_reference.html>
