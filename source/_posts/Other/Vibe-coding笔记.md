@@ -8,7 +8,7 @@ tags:
 
 ## zellij
 
-一般agent没有detach之后后台运行的功能。可以在zellij session里跑agent，这样可以随时detach，让agent在后台跑。
+有的agent没有detach之后后台运行的功能。可以在zellij session里跑agent，这样可以随时detach，让agent在后台跑。
 
 安装：
 
@@ -44,18 +44,20 @@ zellij da
 安装：<https://opencode.ai/download>
 
 ```shell
-npm i -g opencode-ai
+npm install -g @opencode/cli
 
 # 如果没有npm
-curl -fsSL https://opencode.ai/install | bash
+curl -fsSL https://opencode.ai/v2/install | bash
 echo 'export PATH=$HOME/.opencode/bin:$PATH' >> ~/.profile
 ```
 
-关闭一个session：`ctrl+c`
+退出TUI：`ctrl+c`。v2是client-server架构，session由后台service持有，所以关闭TUI之后agent会继续在后台运行，不需要zellij保活。
 
 ```shell
 # 创建并进入一个session
 opencode
+# 恢复当前目录下的最近一个session
+opencode -c
 # 列出所有session
 opencode session list
 # attach到session
@@ -65,7 +67,7 @@ opencode session delete <sessionID>
 # 列出所有已添加API key的provider
 opencode auth list
 # 删除某provider的API key
-opencode auth logout --provider "xxx"
+opencode auth logout <provider名字>
 ```
 
 如果想让AI自动读某个自定义AGENTS.md，可以在`~/.config/opencode/opencode.jsonc`里加一行：
@@ -74,11 +76,11 @@ opencode auth logout --provider "xxx"
   "instructions": ["~/path/to/your/AGENTS.md"]
 ```
 
-存在的问题：
+v2已解决的问题：
 
 - CPU占用很高。
 
-- 似乎没有原生支持在后台运行长时间任务。
+- 没有原生支持在后台运行长时间任务。
 
 ### Codex
 
