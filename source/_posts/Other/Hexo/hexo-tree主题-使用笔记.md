@@ -337,13 +337,6 @@ npm install
 npm install hexo-generator-sitemap --save
 ```
 
-然后在`_config.xml`里：
-
-```xml
-sitemap:
-path: sitemap.xml
-```
-
 然后`hexo d -g`，sitemap就会生成在`xxx.github.io/sitemap.xml`。然后在google search console里的indexing -> Sitemaps -> Add a new sitemap，会有`https://xxx.github.io/ Enter sitemap URL`，在`Enter sitemap URL`里填入`sitemap.xml`即可。
 
 可能会提示`couldn't fetch`。可能其实是pending，多等几天可能就好了。
