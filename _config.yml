@@ -112,8 +112,8 @@ pandoc:
   #   - +shortcut_reference_links
   args: [
     '--preserve-tabs',
-    # I don't know why but mathjax won't work without hexo-filter-mathjax or --mathjax
-    '--mathjax',
+    # I don't know why but mathjax won't work without hexo-filter-mathjax or --math-method=mathjax
+    '--math-method=mathjax',
     # -smart: 不把引号渲染成带方向的引号。
     # +backtick_code_blocks: 代码块
     # -implicit_figures: 防止在图片后面将方括号里的东西作为caption。<https://github.com/wzpan/hexo-renderer-pandoc/issues/34>
