@@ -21,21 +21,10 @@ giscus:
   theme: "preferred_color_scheme"
   lang: "zh-CN"
 
-# 可选, valine
-valine:
-  # 评论
-  enableComment: false
-  # 阅读量
-  enableCounter: true
-  # valine appID
-  appID: zLsL74hgrlCBA3xJu74xOken-gzGzoHsz
-  # valine appKey
-  appKey: RwHHvgzlLCMew6ViBVMX2YVO
-  placeholder: 请输入评论
-  avatar: retro
-
-# 是否开启“不蒜子”统计访问量，可选
-busuanzi: true
+goatcounter:
+  site_code: seekstar
+  site_counter: true
+  post_counter: true
 
 # 底部版权开始年份，不配置默认为今年
 siteStartYear: 2021
@@ -57,7 +46,5 @@ about: true
 sidebar:
   # usePostTitle 为 ture 用文章名，不填或为 false 用文件名
   usePostTitle: true
-  # HTML element. Default: '<i class="fa fa-circle" aria-hidden="true"></i>'
-  # headerPrefix: '<span>#</span>'
   # No header prefix
-  headerPrefix: '<span></span>'
+  headerPrefix: ''
