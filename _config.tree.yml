@@ -11,10 +11,10 @@ links:
 # 这里配置 https://giscus.app/zh-CN，将生成好的填在下面
 # enable 为 true 时， 填自己的 repo、repo_id、category_id
 giscus:
-  enable: false
-  repo:
-  repo_id:
-  category_id:
+  enable: true
+  repo: seekstar/seekstar.github.io
+  repo_id: MDEwOlJlcG9zaXRvcnkzNDMwMjc3ODI=
+  category_id: DIC_kwDOFHIwRs4DKDOE
   reactions_enabled: "1"
   emit_metadata: "0"
   input_position: "top"
@@ -24,7 +24,7 @@ giscus:
 # 可选, valine
 valine:
   # 评论
-  enableComment: true 
+  enableComment: false
   # 阅读量
   enableCounter: true
   # valine appID
