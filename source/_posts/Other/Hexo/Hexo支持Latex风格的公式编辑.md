@@ -53,6 +53,9 @@ mathjax: true
 ```yml
 mathjax:
   every_page: true
+  # ams 提供的 cases、aligned、matrix 等环境和 \binom、\tag，不显式加载会报 Unknown environment
+  # 不要写 tags: 'ams'，它也会加载 ams，但会顺带打开公式编号
+  packages: ['ams']
 ```
 
 这样所有博客都会自动使用MathJax。然后就可以像在Latex里面一样编辑公式了：

@@ -102,6 +102,9 @@ deploy:
 
 mathjax:
   every_page: true
+  # 默认只加载 require + autoload，ams 提供的环境（cases、aligned、matrix 等）
+  # 和 \binom、\tag 需要显式加载
+  packages: ['ams']
 
 pandoc:
   # extensions:
