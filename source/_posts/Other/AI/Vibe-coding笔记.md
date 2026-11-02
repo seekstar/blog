@@ -44,6 +44,9 @@ zellij da
 安装：<https://opencode.ai/download>
 
 ```shell
+# 新版npm需要显式允许运行包里自带的安装脚本
+npm config set allow-scripts=@opencode/cli --location=user
+
 npm install -g @opencode/cli
 
 # 如果没有npm
