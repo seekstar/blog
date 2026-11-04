@@ -115,7 +115,7 @@ hexo d -g
 缺点也很明显：
 
 - 手机版上`标签`和`分类`入口所在的header过短，不能智能收成一个目录，所以header不能放太多东西。
-- 访问量和评论的key是博客url，若url改变则访问量和评论全部会清空。
+- 评论和阅读量都不以文章id为key：giscus认的是文章标题（og:title），GoatCounter认的是URL，改标题或URL会让评论对不上、阅读量清零。
 
 ## 更换主题
 
@@ -196,51 +196,27 @@ layout: "tags"
 
 ## 开启评论，统计访问量
 
-已经默认开启了“不蒜子”，可以统计PV(Page View)和UV(Unique Visitor)并在页面下方显示，但是评论和单篇文章访问量却不适合用“不蒜子”。tree主题使用`leancloud`来存储评论以及访问量。
+评论用 giscus，阅读量用 GoatCounter，配置写在主题配置文件里（本博客是 `_config.tree.yml`）。各字段的含义见[主题 readme 的“评论与访问统计”一节](https://github.com/wujun234/hexo-theme-tree#3-评论与访问统计)，这里只做补充。
 
-注册一下`leancloud`：<https://www.leancloud.cn/>
-点击免费试用，然后注册就好了。有一定的免费额度。
+### giscus
 
-登陆进去之后可以切换中文，然后`创建应用`，应用名称随便，我的是`blog`，类别选`开发版`，创建好了之后点进去，点击左边`设置`里的`应用keys`，把AppID和AppKey放到`_config.tree.yml`里，并且把`enableComment`和`enableCounter`都设置成`true`
+giscus 把评论存进 GitHub Discussions，靠 GitHub 登录挡机器人，不需要服务器和数据库。
 
-```yml
-# valine 
-valine:
-    # 评论
-    enableComment: true 
-    # 阅读量
-    enableCounter: true
-    # valine appID
-    appID: xxxxxxxxxxxxxxxxxxxxxxxx-xxxxxxxx
-    # valine appKey
-    appKey: xxxxxxxxxxxxxxxxxxxxxxxx
-    placeholder: 请输入评论
-    avatar: retro
-```
+主题里 `data-category` 写死成 `Announcements`，`data-mapping` 是 `og:title`，`data-strict` 是 `1`，所以建类目和生成配置时都得按这三个值来。
 
-然后预览一下，可以看到每篇文章下面多出了评论输入框，文章开头多了访问量
+- 仓库必须是公开的。在仓库的 `Settings` → `General` → `Features` 里勾上 `Discussions`，建一个 `Announcements` 类型的类目，giscus 推荐这个类型，这样只有维护者和 giscus 能新建 discussion。
+- 安装 giscus App：<https://github.com/apps/giscus>，选中这个仓库。
+- 打开 <https://giscus.app/zh-CN>，填入仓库，映射方式选“Discussion 的标题包含页面的 `og:title`”，勾上“使用严格的标题匹配”，类目选 `Announcements`。
 
-注意，评论和访问量都是以博客的url作为key的，所以如果博客的url变了（如重命名），那评论和访问量都会清空。要是可以在创建博文的时候生成一个类似uuid的东西，然后以uuid作为key就好了（我为什么这么菜）。
+把生成的配置填进 `_config.tree.yml` 的 `giscus` 段并打开 `enable`，预览一下就能看到文章底部的评论区。第一次有人评论时，giscus 会自动建一个标题为文章标题的 discussion。
 
-## 邮件提醒
+严格匹配模式下，giscus 是拿映射值的 SHA-1 去 discussion 正文里匹配的，正文末尾有一行 `<!-- sha1: ... -->` 注释。所以以后如果改了文章标题，要把新标题的 hash 补进对应 discussion 的正文，否则评论会对不上。
 
-官方文档：<https://valine.js.org/notify.html>
+giscus 的提醒直接走 GitHub 的通知。在仓库上点 `Watch`，选 `All Activity`，新的 discussion 和评论就会有通知。
 
-但是官方文档里推荐的<https://github.com/zhaojun1998/Valine-Admin>看起来已经无人维护了，部署会出错：
+### GoatCounter
 
-```text
-build failed: npm WARN deprecated request@2.88.2: request has been deprecated, see https://github.com/request/request/issues/3142 npm WARN deprecated superagent@3.8.3: Please upgrade to v9.0.0+ as we have fixed a public vulnerability with formidable dependency. Note that v9.0.0+ requires Node.js v14.18.0+. See https://github.com/ladjs/superagent/pull/1800 for insight. This project is supported and maintained by the team at Forward Email @ https://forwardemail.net npm WARN deprecated formidable@1
-```
-
-而且这个repo连issue都没有。
-
-修复方法：<https://github.com/DesertsP/Valine-Admin/issues/151>
-
-也可以直接用这个：<https://github.com/Druadach/Valine-Admin>
-
-按照readme里的步骤部署即可。
-
-环境变量里可以指定`TO_EMAIL`，提醒邮件就会发送给这个邮箱。如果不指定`TO_EMAIL`，提醒邮件是发送给`SMTP_USER`。
+GoatCounter 的注册和配置见 readme。默认按 visit 计；想按页面浏览（PV）计，去 GoatCounter 的 `Settings` → `Data collection` → `Sessions` 里关掉 sessions。
 
 ## 修改底部版权开始年份
 
